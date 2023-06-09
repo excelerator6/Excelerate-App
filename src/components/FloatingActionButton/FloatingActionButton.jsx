@@ -75,7 +75,10 @@ export default function FloatingActionButton() {
           helperText="Please select your skills"
         ></TextField>
         {/* text fields that auto field with the XP they get */}
-
+        <TextField
+            box
+            label='XP'
+          />
         {/*  Source text field */}
           <TextField
             autoFocus
