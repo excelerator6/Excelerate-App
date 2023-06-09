@@ -10,14 +10,14 @@ CREATE TABLE "user" (
 	username VARCHAR NOT NULL,
 	password VARCHAR NOT NULL,
 	email VARCHAR NOT NULL,
-	ocupation VARCHAR NOT NULL,
+	occupation VARCHAR NOT NULL,
 	is_admin BOOLEAN NOT NULL DEFAULT FALSE,
-	user_avatar_path VARCHAR NOT NULL
+	user_avatar_path VARCHAR NOT NULL DEFAULT 'test path'
 );
 
 -- Starter data for "user"
 INSERT INTO "user"
-	(username, password, email, ocupation, is_admin, user_avatar_path)
+	(username, password, email, occupation, is_admin, user_avatar_path)
 VALUES
 	-- username: test1
 	-- password: test1
@@ -38,6 +38,7 @@ CREATE TABLE activities_chart (
 	xp_value INTEGER NOT NULL
 );
 
+-- Starter data for activities_chart
 INSERT INTO activities_chart
 	(activity, xp_value)
 VALUES
