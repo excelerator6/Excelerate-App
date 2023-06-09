@@ -14,6 +14,8 @@ import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 //text field import
 import MenuItem from '@mui/material/MenuItem';
+//date and calendar imports
+import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 
 export default function FloatingActionButton() {
 
@@ -58,8 +60,8 @@ export default function FloatingActionButton() {
         <DialogTitle>Add New Log</DialogTitle>
         <DialogContent>
           
-          {/* Date */}
-
+        {/* Date */}
+        <DatePicker />
           {/* Activities Select Field */}
           <TextField
           select
@@ -103,6 +105,9 @@ export default function FloatingActionButton() {
     </div>
   );
 }
+
+
+
 
 
 

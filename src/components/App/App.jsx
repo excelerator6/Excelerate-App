@@ -22,6 +22,9 @@ import RegisterPage from '../RegisterPage/RegisterPage';
 
 //importing floatingActionButton
 import FloatingActionButton from '../FloatingActionButton/FloatingActionButton';
+//importing to wrap app for the date picker
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 
 import './App.css';
 
@@ -35,6 +38,7 @@ function App() {
   }, [dispatch]);
 
   return (
+    <LocalizationProvider dateAdapter={AdapterDayjs}>
     <Router>
       <div>
         <Nav />
@@ -122,6 +126,7 @@ function App() {
         <Footer />
       </div>
     </Router>
+    </LocalizationProvider>
   );
 }
 
