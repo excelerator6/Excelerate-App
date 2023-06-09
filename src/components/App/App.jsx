@@ -20,6 +20,9 @@ import LandingPage from '../LandingPage/LandingPage';
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
 
+//importing floatingActionButton
+import FloatingActionButton from '../FloatingActionButton/FloatingActionButton';
+
 import './App.css';
 
 function App() {
@@ -115,6 +118,7 @@ function App() {
             <h1>404</h1>
           </Route>
         </Switch>
+        <FloatingActionButton />
         <Footer />
       </div>
     </Router>
