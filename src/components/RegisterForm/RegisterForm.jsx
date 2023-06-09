@@ -34,6 +34,30 @@ function RegisterForm() {
           {errors.registrationMessage}
         </h3>
       )}
+            <div>
+        <label htmlFor="email">
+          Email:
+          <input
+            type="email"
+            name="email"
+            value={email}
+            required
+            onChange={(event) => setEmail(event.target.value)}
+          />
+        </label>
+      </div>
+      <div>
+        <label htmlFor="occupation">
+          Occupation:
+          <input
+            type="text"
+            name="occupation"
+            value={occupation}
+            required
+            onChange={(event) => setOccupation(event.target.value)}
+          />
+        </label>
+      </div>
       <div>
         <label htmlFor="username">
           Username:
@@ -55,30 +79,6 @@ function RegisterForm() {
             value={password}
             required
             onChange={(event) => setPassword(event.target.value)}
-          />
-        </label>
-      </div>
-      <div>
-        <label htmlFor="email">
-          Email:
-          <input
-            type="email"
-            name="email"
-            value={email}
-            required
-            onChange={(event) => setEmail(event.target.value)}
-          />
-        </label>
-      </div>
-      <div>
-        <label htmlFor="occupation">
-          Occupation:
-          <input
-            type="text"
-            name="occupation"
-            value={occupation}
-            required
-            onChange={(event) => setOccupation(event.target.value)}
           />
         </label>
       </div>
