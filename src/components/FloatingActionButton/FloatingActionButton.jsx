@@ -16,9 +16,40 @@ import DialogTitle from '@mui/material/DialogTitle';
 import MenuItem from '@mui/material/MenuItem';
 //date and calendar imports
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+//import for states
+import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+
 
 export default function FloatingActionButton() {
 
+    //local state 
+    const [date, setDate] = useState('');
+    const [activities, setActivities] = useState('');
+    const [skills, setSkills] = useState('');
+    const [xp, setXp] = useState('');
+    const [source, setSource] = useState('');
+    const [takeaways, setTakeaways] = useState('');
+    //dummy data for the select boxes
+    const currencies = [
+      {
+        value: 'USD',
+        label: '$',
+      },
+      {
+        value: 'EUR',
+        label: '€',
+      },
+      {
+        value: 'BTC',
+        label: '฿',
+      },
+      {
+        value: 'JPY',
+        label: '¥',
+      },
+    ];
+    
     //handle opening of dialog box
     const [open, setOpen] = React.useState(false);
 
@@ -29,7 +60,11 @@ export default function FloatingActionButton() {
     const handleClose = () => {
         setOpen(false);
     };
-
+    
+    function handleSubmit(){
+      console.log('activities, skills, xp, source, takeaways', date, activities, skills, xp, source, takeaways);
+      handleClose();
+    }
   return (
     <div>
       <Box sx={{ '& > :not(style)': { m: 1 } }} onClick={handleClickOpen}>
@@ -61,23 +96,45 @@ export default function FloatingActionButton() {
         <DialogContent>
           
         {/* Date */}
-        <DatePicker />
+        <DatePicker 
+        value={date}
+        onChange={(newValue)=>{setDate(newValue)}}
+        />
           {/* Activities Select Field */}
           <TextField
           select
           label="Activities"
-          helperText="Please select your activities"
-        ></TextField>
+          helperText="Please select your Activities"
+          value = {activities}
+          onChange={(event)=>{setActivities(event.target.value)}}
+        >
+          {currencies.map((option) => (
+                      <MenuItem key={option.value} value={option.value}>
+                        {option.label}
+                      </MenuItem>
+                    ))}
+        </TextField>
+        
         {/* Skills Select Field */}
         <TextField
           select
           label="Skills"
-          helperText="Please select your skills"
-        ></TextField>
+          helperText="Please select your Skills"
+          value = {skills}
+          onChange={(event)=>{setSkills(event.target.value)}}
+        >
+          {currencies.map((option) => (
+            <MenuItem key={option.value} value={option.value}>
+              {option.label}
+            </MenuItem>
+          ))}
+        </TextField>
         {/* text fields that auto field with the XP they get */}
         <TextField
-            box
+            box = 'true'
             label='XP'
+            value = {xp}
+            onChange={(event)=>{setXp(event.target.value)}}
           />
         {/*  Source text field */}
           <TextField
@@ -88,6 +145,8 @@ export default function FloatingActionButton() {
             type="email"
             fullWidth
             variant="standard"
+            value = {source}
+            onChange={(event)=>{setSource(event.target.value)}}
           />
           {/* Takeaways text field */}
           <TextField
@@ -98,11 +157,13 @@ export default function FloatingActionButton() {
             type="email"
             fullWidth
             variant="standard"
+            value = {takeaways}
+            onChange={(event)=>{setTakeaways(event.target.value)}}
           />
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Cancel</Button>
-          <Button onClick={handleClose}>Submit</Button>
+          <Button onClick={handleSubmit}>Submit</Button>
         </DialogActions>
       </Dialog>
     </div>
