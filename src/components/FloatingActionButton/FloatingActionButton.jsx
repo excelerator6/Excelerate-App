@@ -64,13 +64,10 @@ export default function FloatingActionButton() {
     };
     
     function handleSubmit(){
-      // Do we want to send this through Redux and all that, or should we send it directly to the server?
-      // * use Redux. That's what it's for lol
-      // * QUESTION: How do we want to format the submission dates? Do we want the timestamp? Probably not, but we can change it later on if we wish.
       dispatch({
         type: 'LOG_ACTIVITY',
         payload:{
-          date: date.$,
+          date: date.format('DD-MMM-YYYY'), // * <--- this formats the date as a string like so: 25-DEC-2023
           activity: activities,
           skill: skills,
           xp: xp,
@@ -78,8 +75,6 @@ export default function FloatingActionButton() {
           takeaway: takeaways
         }
       })
-      let d = date;
-      console.log('date, activities, skills, xp, source, takeaways', d, activities, skills, xp, source, takeaways);
       handleClose();
     }
   return (
