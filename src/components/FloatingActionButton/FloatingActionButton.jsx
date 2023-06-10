@@ -19,12 +19,14 @@ import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 //import for states
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import dayjs from 'dayjs';
 
 
 export default function FloatingActionButton() {
+    const dispatch = useDispatch();
 
     //local state 
-    const [date, setDate] = useState('');
+    const [date, setDate] = useState(dayjs());
     const [activities, setActivities] = useState('');
     const [skills, setSkills] = useState('');
     const [xp, setXp] = useState('');
@@ -62,7 +64,22 @@ export default function FloatingActionButton() {
     };
     
     function handleSubmit(){
-      console.log('activities, skills, xp, source, takeaways', date, activities, skills, xp, source, takeaways);
+      // Do we want to send this through Redux and all that, or should we send it directly to the server?
+      // * use Redux. That's what it's for lol
+      // * QUESTION: How do we want to format the submission dates? Do we want the timestamp? Probably not, but we can change it later on if we wish.
+      dispatch({
+        type: 'LOG_ACTIVITY',
+        payload:{
+          date: date.$,
+          activity: activities,
+          skill: skills,
+          xp: xp,
+          source: source,
+          takeaway: takeaways
+        }
+      })
+      let d = date;
+      console.log('date, activities, skills, xp, source, takeaways', d, activities, skills, xp, source, takeaways);
       handleClose();
     }
   return (
