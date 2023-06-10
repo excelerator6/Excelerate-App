@@ -5,7 +5,8 @@ function* logActivity(action) {
     try {
         console.log("Successfully received ativity in activityLog saga", action.payload);
 
-        const res = axios.put('/api/')
+        const res = yield axios.post('/api/activity/log', action.payload);
+        console.log('Successfully sent activity log to the server', res);
     } catch (error) {
         console.log("Error communicating with server, couldn't log Activity", error)
     }
