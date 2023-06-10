@@ -32,6 +32,11 @@ export default function FloatingActionButton() {
     const [xp, setXp] = useState('');
     const [source, setSource] = useState('');
     const [takeaways, setTakeaways] = useState('');
+
+    // useEffect for getting the activities
+    useEffect(() => {
+      dispatch({type:'GET_ACTIVITY_LIST'})
+    },[])
     //dummy data for the select boxes
     const currencies = [
       {
