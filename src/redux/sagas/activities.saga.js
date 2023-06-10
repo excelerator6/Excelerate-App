@@ -14,8 +14,12 @@ function* logActivity(action) {
 
 function* getActivities(){
     try {
+        // get the list of activites from the DB
         const res = yield axios.get('/api/activity/getList');
-        console.log('Succesfully got our activities list:', res.data)
+
+        // store those activites in a reducer
+        yield put({type: "REDUCER/STORE_ACTIVITES_LIST", payload: res.data});
+
     } catch (error) {
         console.log("Error communicating with the server:", error);
     }
