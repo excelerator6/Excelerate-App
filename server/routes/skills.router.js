@@ -15,10 +15,10 @@ router.get('/getSkills', async (req, res) => {
 
     // get the general skills
     // * Do we need to rename the skills.id for both tables in order to differentiate them from the other table?
-    const response = await pool.query('SELECT skills_enterprise.id AS enterprise_id, skills_enterprise.skill_name AS enterprise_skill_name FROM "skills_enterprise";');
+    const response = await pool.query('SELECT skills_enterprise.id AS enterprise_id, skill_name FROM "skills_enterprise";');
 
     // get the user's specific skills
-    const response2 = await pool.query(`SELECT skills_user.id AS user_skill_id, skills_user.skill_name AS user_skill_name FROM "skills_user" WHERE skills_user.user_id = $1;`, [userID]);
+    const response2 = await pool.query(`SELECT skills_user.id AS user_skill_id, skill_name FROM "skills_user" WHERE skills_user.user_id = $1;`, [userID]);
 
     // push both table responses into singular array, then flatten that array to send client-side
     arr.push(response.rows, response2.rows);
