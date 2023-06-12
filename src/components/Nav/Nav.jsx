@@ -9,13 +9,11 @@ import CssBaseline from '@mui/material/CssBaseline';
 import Divider from '@mui/material/Divider';
 import Drawer from '@mui/material/Drawer';
 import IconButton from '@mui/material/IconButton';
-import InboxIcon from '@mui/icons-material/MoveToInbox';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import MailIcon from '@mui/icons-material/Mail';
 import MenuIcon from '@mui/icons-material/Menu';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
@@ -25,6 +23,7 @@ const drawerWidth = 200;
 function Nav(props) {
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
+  const user = useSelector((store) => store.user);
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
@@ -35,49 +34,94 @@ function Nav(props) {
       <Toolbar />
       <Divider />
       <List>
+
         <ListItem disablePadding>
-          <ListItemButton component="a" href="#/">
+          <ListItemButton component="a" href="#/about">
             <ListItemIcon>
             </ListItemIcon>
-            <ListItemText primary="Home" />
+            <ListItemText primary="About" />
           </ListItemButton>
         </ListItem>
 
-
-        <ListItem disablePadding>
-          <ListItemButton component="a" href="#/info">
-            <ListItemIcon>
-            </ListItemIcon>
-            <ListItemText primary="info Page" />
-          </ListItemButton>
-        </ListItem>
+        {/* If no user is logged in, show these links */}
+        {!user.id && (
+          // If there's no user, show login/registration links
 
 
-        <LogOutButton className="navLink" />
+          <ListItem disablePadding>
+            <ListItemButton component="a" href="#/login">
+              <ListItemIcon>
+              </ListItemIcon>
+              <ListItemText primary="Login" />
+            </ListItemButton>
+          </ListItem>
+
+        )}
+
+
+
+        {user.id && (
+          //If a user is logged in, show these links
+          <>
+            <ListItem disablePadding>
+              <ListItemButton component="a" href="#/">
+                <ListItemIcon>
+                </ListItemIcon>
+                <ListItemText primary="Home" />
+              </ListItemButton>
+            </ListItem>
+
+            <ListItem disablePadding>
+              <ListItemButton component="a" href="#/user">
+                <ListItemIcon>
+                </ListItemIcon>
+                <ListItemText primary="User" />
+              </ListItemButton>
+            </ListItem>
+
+            <ListItem disablePadding>
+              <ListItemButton component="a" href="#/info">
+                <ListItemIcon>
+                </ListItemIcon>
+                <ListItemText primary="Info Page" />
+              </ListItemButton>
+            </ListItem>
+
+
+            <Box
+              m={1}
+              display="flex"
+              justifyContent="center"
+              alignItems="center"
+              position='fixed'
+              bottom='0'
+              margin='50px'
+
+            >
+              <LogOutButton className="btn" />
+            </Box>
+          </>
+        )}
 
 
       </List>
 
-      {/* <Divider />
-      <List>
-        {['All mail', 'Trash', 'Spam'].map((text, index) => (
-          <ListItem key={text} disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-              </ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItemButton>
-          </ListItem>
-        ))}
-      </List> */}
+
     </div>
   );
 
   const container = window !== undefined ? () => window().document.body : undefined;
 
   return (
+
     <div className="drawerRoot">
+      {/* If no user is logged in, show these links */}
+      {!user.id && (
+        // If there's no user, show login/registration links
+        <Link className="navLink" to="/login">
+          Login / Register
+        </Link>
+      )}
       <Box sx={{ display: 'flex' }}>
         <CssBaseline />
         <AppBar
