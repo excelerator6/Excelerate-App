@@ -26,7 +26,7 @@ import dayjs from 'dayjs';
 export default function FloatingActionButton() {
     const dispatch = useDispatch();
     const activitiesList = useSelector(store => store.activities);
-    console.log('activities', activitiesList[0])
+    console.log('activities', activitiesList)
     //local state 
     const [date, setDate] = useState(dayjs()); //dayjs() is basically Date.now();
     const [activities, setActivities] = useState('');
@@ -39,6 +39,7 @@ export default function FloatingActionButton() {
     useEffect(() => {
       dispatch({type:'GET_ACTIVITY_LIST'})
     },[])
+
     //dummy data for the select boxes
     const currencies = [
       {
@@ -83,6 +84,8 @@ export default function FloatingActionButton() {
       })
       handleClose();
     }
+
+  if(activitiesList.length > 0){
   return (
     <div>
       <Box sx={{ '& > :not(style)': { m: 1 } }} onClick={handleClickOpen}>
@@ -118,23 +121,23 @@ export default function FloatingActionButton() {
         value={date}
         onChange={(newValue)=>{setDate(newValue)}}
         />
-          {/* Activities Select Field */}
-          <TextField
-            select
-            label='Activities'
-            helperText='Pick an activity'
-            value={activities}
-            onChange={(event) => setActivities(event.target.value)}
-          >
-            {
-              activitiesList ? activitiesList[0].map((item, index) => {
+        {/* Activities Select Field */}
+        <TextField
+          select
+          label='Activities'
+          helperText='Pick an activity'
+          value={activities}
+          onChange={(event) => setActivities(event.target.value)}
+        >
+          {
+            activitiesList.map((item, index) => {
+              return (
                 <MenuItem key={index} value={item.activity}>
                   {item.activity}
                 </MenuItem>
-                }) : <p>nothing</p>
-            }
-          </TextField>
-
+              )})
+          }
+        </TextField>
         
         {/* Skills Select Field */}
         <TextField
@@ -150,6 +153,7 @@ export default function FloatingActionButton() {
             </MenuItem>
           ))}
         </TextField>
+
         {/* text fields that auto field with the XP they get */}
         <TextField
             box = 'true'
@@ -157,6 +161,7 @@ export default function FloatingActionButton() {
             value = {xp}
             onChange={(event)=>{setXp(event.target.value)}}
           />
+
         {/*  Source text field */}
           <TextField
             autoFocus
@@ -169,6 +174,7 @@ export default function FloatingActionButton() {
             value = {source}
             onChange={(event)=>{setSource(event.target.value)}}
           />
+          
           {/* Takeaways text field */}
           <TextField
             autoFocus
@@ -189,6 +195,9 @@ export default function FloatingActionButton() {
       </Dialog>
     </div>
   );
+          } else {
+            return <p></p>
+          }
 }
 
 
