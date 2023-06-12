@@ -39,6 +39,7 @@ export default function FloatingActionButton() {
     // useEffect for getting the activities
     useEffect(() => {
       dispatch({type:'GET_ACTIVITY_LIST'})
+      dispatch({type:'GET_SKILLS_LIST'})
     },[])
 
     //dummy data for the select boxes
@@ -144,6 +145,7 @@ export default function FloatingActionButton() {
               </MenuItem>
             ))}
           </TextField>
+          <br></br>
 
           {/* Activities Select Field */}
           <TextField
