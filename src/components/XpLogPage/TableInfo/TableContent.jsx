@@ -12,6 +12,12 @@ export default function TableContent() {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(3)
 
+  const handleRequestSort = (event, property) => {
+    const isAscending = (valueToOrderBy === property && orderDirection === 'asc')
+    setValueToOrderBy(property)
+    setOrderDirection(isAscending ? 'desc' : 'asc')
+  }
+
   if (userActivities && userActivities.length > 0) {
     return (
       <TableContainer>
@@ -19,6 +25,7 @@ export default function TableContent() {
           <TableHeader
             valueToOrderBy={valueToOrderBy}
             orderDirection={orderDirection}
+            handleRequestSort={handleRequestSort}
           />
         </Table>
       </TableContainer>

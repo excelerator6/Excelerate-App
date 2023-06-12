@@ -1,7 +1,11 @@
 import React from "react";
 import { TableCell, TableHead, TableRow, TableSortLabel } from "@mui/material";
 
-export default function TableHeader({valueToOrderBy, orderDirection}) {
+export default function TableHeader({valueToOrderBy, orderDirection, handleRequestSort}) {
+
+  const createSortHandler = (property) => (event) => {
+    handleRequestSort(event, property)
+  }
 
   return (
     <TableHead>
@@ -12,7 +16,7 @@ export default function TableHeader({valueToOrderBy, orderDirection}) {
           <TableSortLabel
             active={valueToOrderBy === 'date'}
             direction={valueToOrderBy === 'date' ? orderDirection:'asc'}
-            // onClick={createSortHandler('date')}
+            onClick={createSortHandler('date')}
           >
             Date
           </TableSortLabel>
@@ -24,7 +28,7 @@ export default function TableHeader({valueToOrderBy, orderDirection}) {
           <TableSortLabel
             active={valueToOrderBy === 'skill'}
             direction={valueToOrderBy === 'skill' ? orderDirection:'asc'}
-            // onClick={createSortHandler('skill')}
+            onClick={createSortHandler('skill')}
           >
             Skill
           </TableSortLabel>
@@ -36,7 +40,7 @@ export default function TableHeader({valueToOrderBy, orderDirection}) {
           <TableSortLabel
             active={valueToOrderBy === 'activity'}
             direction={valueToOrderBy === 'activity' ? orderDirection:'asc'}
-            // onClick={createSortHandler('activity')}
+            onClick={createSortHandler('activity')}
           >
             Activity
           </TableSortLabel>
@@ -48,7 +52,7 @@ export default function TableHeader({valueToOrderBy, orderDirection}) {
           <TableSortLabel
             active={valueToOrderBy === 'xp'}
             direction={valueToOrderBy === 'xp' ? orderDirection:'asc'}
-            // onClick={createSortHandler('xp')}
+            onClick={createSortHandler('xp')}
           >
             XP
           </TableSortLabel>
@@ -60,7 +64,7 @@ export default function TableHeader({valueToOrderBy, orderDirection}) {
           <TableSortLabel
             active={valueToOrderBy === 'source'}
             direction={valueToOrderBy === 'source' ? orderDirection:'asc'}
-            // onClick={createSortHandler('source')}
+            onClick={createSortHandler('source')}
           >
             Source
           </TableSortLabel>
@@ -72,7 +76,7 @@ export default function TableHeader({valueToOrderBy, orderDirection}) {
           <TableSortLabel
             active={valueToOrderBy === 'key-takeaways'}
             direction={valueToOrderBy === 'key-takeaways' ? orderDirection:'asc'}
-            // onClick={createSortHandler('key-takeaways')}
+            onClick={createSortHandler('key-takeaways')}
           >
             Key Takeaways
           </TableSortLabel>
