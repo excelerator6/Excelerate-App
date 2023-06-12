@@ -23,10 +23,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import dayjs from 'dayjs';
 
 
+//  * Should be refactored out to components, + needs to be formatted nicely
 export default function FloatingActionButton() {
     const dispatch = useDispatch();
     const activitiesList = useSelector(store => store.activities);
-    console.log('activities', activitiesList)
+    
     //local state 
     const [date, setDate] = useState(dayjs()); //dayjs() is basically Date.now();
     const [activities, setActivities] = useState('');
@@ -85,6 +86,13 @@ export default function FloatingActionButton() {
       handleClose();
     }
 
+    const handleActivitySelect = (event) => {
+      const activityId = event.target.value;
+      setActivities(activityId);
+      
+      setXp(activitiesList[activityId-1].xp_value)
+    }
+
   if(activitiesList.length > 0){
   return (
     <div>
@@ -116,53 +124,59 @@ export default function FloatingActionButton() {
         <DialogTitle>Add New Log</DialogTitle>
         <DialogContent>
           
-        {/* Date */}
-        <DatePicker 
-        value={date}
-        onChange={(newValue)=>{setDate(newValue)}}
-        />
-        {/* Activities Select Field */}
-        <TextField
-          select
-          label='Activities'
-          helperText='Pick an activity'
-          value={activities}
-          onChange={(event) => setActivities(event.target.value)}
-        >
-          {
-            activitiesList.map((item, index) => {
+          {/* Date */}
+          <DatePicker 
+          value={date}
+          onChange={(newValue)=>{setDate(newValue)}}
+          />
+
+          {/* Skills Select Field */}
+          <TextField
+            select
+            label="Skills"
+            helperText="Please select your Skills"
+            value = {skills}
+            onChange={(event)=>{setSkills(event.target.value)}}
+          >
+            {currencies.map((option) => (
+              <MenuItem key={option.value} value={option.value}>
+                {option.label}
+              </MenuItem>
+            ))}
+          </TextField>
+
+          {/* Activities Select Field */}
+          <TextField
+            select
+            label='Activities'
+            helperText='Pick an activity'
+            value={activities}
+            onChange={handleActivitySelect}
+          >
+            {
+              activitiesList.map((item, index) => {
               return (
-                <MenuItem key={index} value={item.activity}>
+                <MenuItem key={index} value={item.id}>
                   {item.activity}
                 </MenuItem>
               )})
-          }
-        </TextField>
-        
-        {/* Skills Select Field */}
-        <TextField
-          select
-          label="Skills"
-          helperText="Please select your Skills"
-          value = {skills}
-          onChange={(event)=>{setSkills(event.target.value)}}
-        >
-          {currencies.map((option) => (
-            <MenuItem key={option.value} value={option.value}>
-              {option.label}
-            </MenuItem>
-          ))}
-        </TextField>
+            }
+          </TextField>
 
-        {/* text fields that auto field with the XP they get */}
-        <TextField
+          {/* text fields that auto field with the XP they get */}
+          <TextField
+            // disabled makes the box unselectable, since a user will not
+            // have the option to change the associated xp value
+            //  However this does grey out the box currently. May need
+            //  to adjust the className so that it doesn't show grey...
+            disabled
             box = 'true'
             label='XP'
             value = {xp}
-            onChange={(event)=>{setXp(event.target.value)}}
+            variant='standard'
           />
 
-        {/*  Source text field */}
+          {/*  Source text field */}
           <TextField
             autoFocus
             margin="dense"
@@ -174,7 +188,7 @@ export default function FloatingActionButton() {
             value = {source}
             onChange={(event)=>{setSource(event.target.value)}}
           />
-          
+
           {/* Takeaways text field */}
           <TextField
             autoFocus
