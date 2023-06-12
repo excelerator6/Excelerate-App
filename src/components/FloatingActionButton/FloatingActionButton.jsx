@@ -42,26 +42,6 @@ export default function FloatingActionButton() {
       dispatch({type:'GET_ACTIVITY_LIST'})
       getSkills();
     },[])
-
-    //dummy data for the select boxes
-    const currencies = [
-      {
-        value: 'USD',
-        label: '$',
-      },
-      {
-        value: 'EUR',
-        label: '€',
-      },
-      {
-        value: 'BTC',
-        label: '฿',
-      },
-      {
-        value: 'JPY',
-        label: '¥',
-      },
-    ];
     
     //handle opening of dialog box
     const [open, setOpen] = React.useState(false);
@@ -74,17 +54,36 @@ export default function FloatingActionButton() {
     
     // Function to handle activity submission ===> sending that to the DB
     function handleSubmit(){
+
+      // create activity log object
+      const newActivity = {
+        date: date.format('DD-MMM-YYYY'), // * <--- this formats the date as a string like so: 25-DEC-2023
+        activity: activities,
+        xp: xp,
+        source: source,
+        takeaway: takeaways
+      }
+
+      // conditionally set new key=value pair of newActivity object, based on
+      // whether the skill came from the skills_enterprise table
+      // or the skills_user table
+      for (let skill of skillsList) {
+        if (skill.skill_name === skills){
+          if (skill.user_skill_id) {
+            newActivity.skillUserId = skill.user_skill_id
+          }
+          else if (skill.enterprise_id) {
+            newActivity.enterpriseId = skill.enterprise_id
+          }
+        }
+      }
+
+      // send that log object to the DB
       dispatch({
         type: 'LOG_ACTIVITY',
-        payload:{
-          date: date.format('DD-MMM-YYYY'), // * <--- this formats the date as a string like so: 25-DEC-2023
-          activity: activities,
-          skill: skills,
-          xp: xp,
-          source: source,
-          takeaway: takeaways
-        }
+        payload: newActivity
       })
+      // clear input fields
       setActivities('');
       setSkills('');
       setXp('');
@@ -97,14 +96,13 @@ export default function FloatingActionButton() {
     const getSkills = () => {
       dispatch({type:'GET_SKILLS_LIST'})
     }
+    // function for handling activity Select menu
     const handleActivitySelect = (event) => {
       const activityId = event.target.value;
       setActivities(activityId);
       
+      // autofill the XP field with the XP amount associated with the activity
       setXp(activitiesList[activityId-1].xp_value)
-    }
-    const handleSkillSubmit = (event) => {
-      setSkills(event.target.value);
     }
 
   if(activitiesList.length > 0 && skillsList.length > 0){
@@ -150,7 +148,7 @@ export default function FloatingActionButton() {
             label="Skills"
             helperText="Please select your Skills"
             value = {skills}
-            onChange={handleSkillSubmit}
+            onChange={(event) => setSkills(event.target.value)}
           >
             {
               skillsList.map((skill, index) => {
