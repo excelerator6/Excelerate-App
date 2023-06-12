@@ -19,12 +19,14 @@ import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 //import for states
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import dayjs from 'dayjs';
 
 
 export default function FloatingActionButton() {
+    const dispatch = useDispatch();
 
     //local state 
-    const [date, setDate] = useState('');
+    const [date, setDate] = useState(dayjs());
     const [activities, setActivities] = useState('');
     const [skills, setSkills] = useState('');
     const [xp, setXp] = useState('');
@@ -62,7 +64,17 @@ export default function FloatingActionButton() {
     };
     
     function handleSubmit(){
-      console.log('activities, skills, xp, source, takeaways', date, activities, skills, xp, source, takeaways);
+      dispatch({
+        type: 'LOG_ACTIVITY',
+        payload:{
+          date: date.format('DD-MMM-YYYY'), // * <--- this formats the date as a string like so: 25-DEC-2023
+          activity: activities,
+          skill: skills,
+          xp: xp,
+          source: source,
+          takeaway: takeaways
+        }
+      })
       handleClose();
     }
   return (
