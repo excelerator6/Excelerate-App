@@ -11,7 +11,6 @@ const {
 router.get('/getList', (req, res) => {
     pool.query('SELECT * FROM "activities_chart";')
         .then(dbRes => {
-          console.log("Got the list from the DB:", dbRes.rows);
           res.send(dbRes.rows);
         }).catch(dbErr => {
           console.log("Error connecting to DB:", dbErr);

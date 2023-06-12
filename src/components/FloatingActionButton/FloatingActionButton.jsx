@@ -12,6 +12,7 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
+import { Select } from '@mui/material';
 //text field import
 import MenuItem from '@mui/material/MenuItem';
 //date and calendar imports
@@ -24,9 +25,10 @@ import dayjs from 'dayjs';
 
 export default function FloatingActionButton() {
     const dispatch = useDispatch();
-
+    const activitiesList = useSelector(store => store.activities);
+    console.log('activities', activitiesList[0])
     //local state 
-    const [date, setDate] = useState(dayjs());
+    const [date, setDate] = useState(dayjs()); //dayjs() is basically Date.now();
     const [activities, setActivities] = useState('');
     const [skills, setSkills] = useState('');
     const [xp, setXp] = useState('');
@@ -59,15 +61,14 @@ export default function FloatingActionButton() {
     
     //handle opening of dialog box
     const [open, setOpen] = React.useState(false);
-
     const handleClickOpen = () => {
         setOpen(true);
     };
-
     const handleClose = () => {
         setOpen(false);
     };
     
+    // Function to handle activity submission ===> sending that to the DB
     function handleSubmit(){
       dispatch({
         type: 'LOG_ACTIVITY',
@@ -119,18 +120,21 @@ export default function FloatingActionButton() {
         />
           {/* Activities Select Field */}
           <TextField
-          select
-          label="Activities"
-          helperText="Please select your Activities"
-          value = {activities}
-          onChange={(event)=>{setActivities(event.target.value)}}
-        >
-          {currencies.map((option) => (
-                      <MenuItem key={option.value} value={option.value}>
-                        {option.label}
-                      </MenuItem>
-                    ))}
-        </TextField>
+            select
+            label='Activities'
+            helperText='Pick an activity'
+            value={activities}
+            onChange={(event) => setActivities(event.target.value)}
+          >
+            {
+              activitiesList ? activitiesList[0].map((item, index) => {
+                <MenuItem key={index} value={item.activity}>
+                  {item.activity}
+                </MenuItem>
+                }) : <p>nothing</p>
+            }
+          </TextField>
+
         
         {/* Skills Select Field */}
         <TextField
