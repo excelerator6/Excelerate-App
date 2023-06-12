@@ -1,5 +1,10 @@
-const skills = (state=[], action) => {
+const getSkills = (state=[], action) => {
     switch (action.type) {
-        case ''
+        case 'SET_SKILLS_LIST':
+            return action.payload;
+        default:
+            return state;
     }
 }
+
+export default getSkills;
