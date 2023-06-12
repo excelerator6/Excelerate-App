@@ -2,7 +2,7 @@
 
 ----------------------------------------------------------------
 ----------------------------------------------------------------
-	-- Build "user" table --
+	-- Build "user" table with starter data --
 ----------------------------------------------------------------
 ----------------------------------------------------------------
 CREATE TABLE "user" (
@@ -69,7 +69,7 @@ VALUES
 
 ----------------------------------------------------------------
 ----------------------------------------------------------------
-	-- Build skills_user table --
+	-- Build skills_user table with starter data --
 ----------------------------------------------------------------
 ----------------------------------------------------------------
 CREATE TABLE skills_user (
@@ -78,10 +78,19 @@ CREATE TABLE skills_user (
 	user_id INTEGER REFERENCES "user"(id) ON DELETE CASCADE NOT NULL
 );
 
+-- Starter info for skills_user
+INSERT INTO skills_user
+    (skill_name, user_id)
+VALUES
+    ('Communication', 1), ('Leadership', 1), ('Decision-Making', 1), ('Entrepreneurship', 1),
+    ('Sales/Marketing', 1), ('Effectiveness', 1), ('Problem-Solving', 1), ('Self-Discovery', 1),
+    ('Technology', 1), ('Process Improvement', 1), ('Mindfulness', 1), ('Creativity', 1),
+    ('Discipline', 1), ('Confidence', 1);
+
 
 ----------------------------------------------------------------
 ----------------------------------------------------------------
-	-- Build skills_enterprise table --
+	-- Build skills_enterprise table with starter data --
 ----------------------------------------------------------------
 ----------------------------------------------------------------
 CREATE TABLE skills_enterprise (
@@ -89,10 +98,20 @@ CREATE TABLE skills_enterprise (
 	skill_name VARCHAR NOT NULL
 );
 
+-- Starter data for skills_enterprise
+INSERT INTO skills_enterprise
+	(skill_name)
+VALUES
+    ('Technology'),
+    ('Process Improvement'),
+    ('Mindfulness'),
+    ('Creativity'),
+    ('Discipline');
+
 
 ----------------------------------------------------------------
 ----------------------------------------------------------------
-	-- Build user_activities table --
+	-- Build user_activities table with starter data --
 ----------------------------------------------------------------
 ----------------------------------------------------------------
 CREATE TABLE user_activities (
@@ -105,3 +124,46 @@ CREATE TABLE user_activities (
 	source VARCHAR NOT NULL,
 	key_takeaways VARCHAR
 );
+
+-- Starter data using skill_id
+INSERT INTO user_activities
+    (date_completed, skill_id, user_id, activity_id, source)
+VALUES
+    ('3/1/2023', 1, 1, 8, 'Robin Roberts - Effective and Authentic Communication | Masterclass'),
+    ('3/1/2023', 2, 1, 8, 'Leadership and Influence - Coursera'),
+    ('3/2/2023', 1, 1, 8, 'Verbal Communication - Workday Learning'),
+    ('3/2/2023', 3, 1, 8, 'Decision-Making Course - Workday Learning'),
+    ('3/2/2023', 1, 1, 8, 'Difficult Conversations - Workday Learning'),
+    ('3/4/2023', 1, 1, 29, 'Smart Brevity'),
+    ('3/5/2023', 3, 1, 14, 'Improve decision making template and take notes on ChatGPT recommendation'),
+    ('3/5/2023', 4, 1, 8, 'LinkedIn Course'),
+    ('3/5/2023', 3, 1, 17, 'Decision-Making Course - LinkedIn Learning'),
+    ('3/5/2023', 2, 1, 20, ''),
+    ('3/6/2023', 5, 1, 17, 'Do People Buy From People They Trust? - Advanced Selling Podcast'),
+    ('3/6/2023', 6, 1, 20, ''),
+    ('3/6/2023', 2, 1, 14, 'Yes AND...'),
+    ('3/6/2023', 1, 1, 27, 'Improv Class'),
+    ('3/7/2023', 7, 1, 17, 'The Art of Possibility - What You Will Learn Podcast'),
+    ('3/8/2023', 1, 1, 17, 'Mindset Mentor - Mastering Communication'),
+    ('3/8/2023', 8, 1, 16, 'Meeting with Glen'),
+    ('3/9/2023', 14, 1, 17, 'Entreleadership - How to have confidence');
+    
+-- Starter data using skill_enterprise_id
+INSERT INTO user_activities
+    (date_completed, skill_enterprise_id, user_id, activity_id, source)
+VALUES
+    ('3/14/2023', 1, 1, 17, 'ChatGPT pod'),
+    ('3/15/2023', 1, 1, 17, 'ChatGPT pod'),
+    ('3/20/2023', 2, 1, 23, 'Life of Focus Course'),
+    ('3/21/2023', 3, 1, 23, 'The practice of groundedness - Brad Stulberg | Blinkist'),
+    ('3/21/2023', 4, 1, 23, 'Creativity - Nihaly Csikszentmihaly | Blinkist'),
+    ('3/21/2023', 4, 1, 23, 'Deep Creativity - Deborah Ann Quibell | Blinkist'),
+    ('3/21/2023', 5, 1, 23, 'No Excuses! - Brian Tracy | Blinkist');
+
+
+----------------------------------------------------------------
+----------------------------------------------------------------
+	-- End build tables --
+----------------------------------------------------------------
+----------------------------------------------------------------
+
