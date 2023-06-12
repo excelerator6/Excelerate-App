@@ -27,6 +27,7 @@ import dayjs from 'dayjs';
 export default function FloatingActionButton() {
     const dispatch = useDispatch();
     const activitiesList = useSelector(store => store.activities);
+    const skillsList = useSelector(store => store.skills);
     
     //local state 
     const [date, setDate] = useState(dayjs()); //dayjs() is basically Date.now();
@@ -39,7 +40,7 @@ export default function FloatingActionButton() {
     // useEffect for getting the activities
     useEffect(() => {
       dispatch({type:'GET_ACTIVITY_LIST'})
-      dispatch({type:'GET_SKILLS_LIST'})
+      getSkills();
     },[])
 
     //dummy data for the select boxes
@@ -84,17 +85,29 @@ export default function FloatingActionButton() {
           takeaway: takeaways
         }
       })
+      setActivities('');
+      setSkills('');
+      setXp('');
+      setSource('');
+      setTakeaways('');
       handleClose();
     }
 
+    // We'll need to call this function again when the user creates a new skill
+    const getSkills = () => {
+      dispatch({type:'GET_SKILLS_LIST'})
+    }
     const handleActivitySelect = (event) => {
       const activityId = event.target.value;
       setActivities(activityId);
       
       setXp(activitiesList[activityId-1].xp_value)
     }
+    const handleSkillSubmit = (event) => {
+      setSkills(event.target.value);
+    }
 
-  if(activitiesList.length > 0){
+  if(activitiesList.length > 0 && skillsList.length > 0){
   return (
     <div>
       <Box sx={{ '& > :not(style)': { m: 1 } }} onClick={handleClickOpen}>
@@ -137,13 +150,17 @@ export default function FloatingActionButton() {
             label="Skills"
             helperText="Please select your Skills"
             value = {skills}
-            onChange={(event)=>{setSkills(event.target.value)}}
+            onChange={handleSkillSubmit}
           >
-            {currencies.map((option) => (
-              <MenuItem key={option.value} value={option.value}>
-                {option.label}
-              </MenuItem>
-            ))}
+            {
+              skillsList.map((skill, index) => {
+                return (
+                  <MenuItem key={index} value={skill.skill_name}>
+                    {skill.skill_name}
+                 </MenuItem>
+                )
+              })
+            }
           </TextField>
           <br></br>
 
