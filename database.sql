@@ -117,17 +117,17 @@ VALUES
 CREATE TABLE user_activities (
 	id SERIAL PRIMARY KEY NOT NULL,
 	date_completed DATE NOT NULL,
-	skill_enterprise_id INTEGER REFERENCES skills_enterprise(id) ON DELETE CASCADE,
-	skill_id INTEGER REFERENCES skills_user(id) ON DELETE CASCADE,
+	skills_enterprise_id INTEGER REFERENCES skills_enterprise(id) ON DELETE CASCADE,
+	skills_user_id INTEGER REFERENCES skills_user(id) ON DELETE CASCADE,
 	user_id INTEGER REFERENCES "user"(id) ON DELETE CASCADE NOT NULL,
 	activity_id INTEGER REFERENCES activities_chart(id) ON DELETE CASCADE NOT NULL,
 	source VARCHAR NOT NULL,
 	key_takeaways VARCHAR
 );
 
--- Starter data using skill_id
+-- Starter data using skills_user_id
 INSERT INTO user_activities
-    (date_completed, skill_id, user_id, activity_id, source)
+    (date_completed, skills_user_id, user_id, activity_id, source)
 VALUES
     ('3/1/2023', 1, 1, 8, 'Robin Roberts - Effective and Authentic Communication | Masterclass'),
     ('3/1/2023', 2, 1, 8, 'Leadership and Influence - Coursera'),
@@ -148,9 +148,9 @@ VALUES
     ('3/8/2023', 8, 1, 16, 'Meeting with Glen'),
     ('3/9/2023', 14, 1, 17, 'Entreleadership - How to have confidence');
     
--- Starter data using skill_enterprise_id
+-- Starter data using skills_enterprise_id
 INSERT INTO user_activities
-    (date_completed, skill_enterprise_id, user_id, activity_id, source)
+    (date_completed, skills_enterprise_id, user_id, activity_id, source)
 VALUES
     ('3/14/2023', 1, 1, 17, 'ChatGPT pod'),
     ('3/15/2023', 1, 1, 17, 'ChatGPT pod'),
