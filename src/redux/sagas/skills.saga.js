@@ -3,10 +3,14 @@ import axios from 'axios';
 
 function* getSkills() {
     try {
-        console.log("in skills.saga");
+
         const res = yield axios.get('/api/skills/getSkills');
 
-        console.log('Got our skills:', res.data);
+        yield put({
+            type: 'SET_SKILLS_LIST',
+            payload: res.data
+        })
+
     } catch (error) {
         console.log("Error communicating with server:", error);
     }
