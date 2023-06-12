@@ -18,8 +18,9 @@ export default function TableContent() {
     setOrderDirection(isAscending ? 'desc' : 'asc')
   }
 
-  if (userActivities && userActivities.length > 0) {
+  // if (userActivities && userActivities.length > 0) {
     return (
+      <div>
       <TableContainer>
         <Table>
           <TableHeader
@@ -29,6 +30,7 @@ export default function TableContent() {
           />
         </Table>
       </TableContainer>
+      </div>
     )
-  }
+  // }
 }
