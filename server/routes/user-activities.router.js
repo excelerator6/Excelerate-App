@@ -10,7 +10,8 @@ router.get('/', rejectUnauthenticated, (req, res) => {
   const sqlQuery = `
     SELECT 
       user_activities.id AS id,
-      user_activities.date_completed AS date,
+      -- format the date as mm/dd/yyyy
+      TO_CHAR(user_activities.date_completed, 'mm/dd/yyyy') AS date,
       skills_enterprise.skill_name AS skills_enterprise_name,
       skills_user.skill_name AS skills_user_name,
       user_activities.user_id,

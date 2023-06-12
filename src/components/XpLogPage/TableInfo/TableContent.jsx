@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import TableHeader from "./TableHeader";
 import { Table, TableBody, TableRow, TableCell, TablePagination, TableContainer } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
@@ -11,6 +11,10 @@ export default function TableContent() {
   const [valueToOrderBy, setValueToOrderBy] = useState('date');
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(3)
+
+  useEffect(() => {
+    dispatch({type: 'FETCH_USER_ACTIVITIES'})
+  }, [])
 
   const handleRequestSort = (event, property) => {
     const isAscending = (valueToOrderBy === property && orderDirection === 'asc')
