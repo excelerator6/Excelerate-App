@@ -35,27 +35,23 @@ function Nav(props) {
       <Toolbar />
       <Divider />
       <List>
-        <Link to="/user">
-          <ListItem disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-              </ListItemIcon>
-              <ListItemText primary="Home" />
+        <ListItem disablePadding>
+          <ListItemButton component="a" href="#/">
+            <ListItemIcon>
+            </ListItemIcon>
+            <ListItemText primary="Home" />
+          </ListItemButton>
+        </ListItem>
 
-            </ListItemButton>
-          </ListItem>
-        </Link>
 
-        <Link to="/info">
-          <ListItem disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-              </ListItemIcon>
-              <ListItemText primary="info Page" />
+        <ListItem disablePadding>
+          <ListItemButton component="a" href="#/info">
+            <ListItemIcon>
+            </ListItemIcon>
+            <ListItemText primary="info Page" />
+          </ListItemButton>
+        </ListItem>
 
-            </ListItemButton>
-          </ListItem>
-        </Link>
 
         <LogOutButton className="navLink" />
 
