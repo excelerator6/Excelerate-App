@@ -15,8 +15,8 @@ router.get('/', rejectUnauthenticated, (req, res) => {
       skills_enterprise.skill_name AS skills_enterprise_name,
       skills_user.skill_name AS skills_user_name,
       user_activities.user_id,
-      activities_chart.activity AS activity_name,
-      activities_chart.xp_value AS xp_Value,
+      activities_chart.activity AS activity,
+      activities_chart.xp_value AS xp,
       user_activities.source AS source,
       user_activities.key_takeaways AS key_takeaways
     FROM user_activities
@@ -32,8 +32,32 @@ router.get('/', rejectUnauthenticated, (req, res) => {
   pool
     .query(sqlQuery, [userId])
     .then(dbRes => {
-      const userActivities = dbRes.rows
-      res.send(userActivities);
+      const unformattedUserActivities = dbRes.rows
+      // Create a formattedUserActivities list that only has a skill key/value pair
+      //  A skill will either be the skills_enterprise_name OR the skills_user_name
+      const formattedUserActivities = unformattedUserActivities.reduce((result, item) => {
+        const {
+          id, skills_enterprise_name, skills_user_name,
+        } = item
+        const key = id-1
+        if (skills_enterprise_name) {
+          result[key] = {
+            ...item,
+            skill: skills_enterprise_name
+          }
+        }
+        else {
+          result[key] = {
+            ...item,
+            skill: skills_user_name
+          }
+        }
+        delete result[key].skills_enterprise_name
+        delete result[key].skills_user_name
+        return result
+      }, [])
+      console.log('formattedUserActivities:', formattedUserActivities);
+      res.send(formattedUserActivities);
     }).catch(dbErr => {
       console.log("Error connecting to DB within GET user-activities:", dbErr);
       res.sendStatus(500);
