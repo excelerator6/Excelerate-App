@@ -9,6 +9,7 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
+import { LinearProgress } from "@mui/material";
 
 
         // How do we calculate the level, current XP / XP to next level, etc. 
@@ -37,7 +38,7 @@ function SkillTable() {
 
         // then we divide by 10 and round up to get the actual level,
         // since all levels are 10 XP 
-        return Math.ceil(totalXP / 10)
+        return Math.floor(totalXP / 10)
     }
     
     // need to calculate total XP
@@ -47,6 +48,7 @@ function SkillTable() {
         return totalXP;
     }
 
+    const normalise = (value) => ((value - 0) * 100) / (10 - 0)
     // need to calculate the xp needed to reach the next level;
     const calculateNextLevelXP = (skill) => {
         // call the calculateXP function to grab the total XP
@@ -81,7 +83,9 @@ function SkillTable() {
                                     >
                                         <TableCell>{skill.skill_name}</TableCell>
                                         <TableCell align='right'>{calculateLevel(skill)}</TableCell>
-                                        <TableCell align='right'>{calculateXP(skill)}</TableCell>
+                                        <TableCell align='right'>
+                                            <LinearProgress variant="determinate" value={normalise(calculateXP(skill))} valueBuffer={10}/>
+                                        </TableCell>
                                         <TableCell align='right'>{calculateNextLevelXP(skill)}</TableCell>
                                         <TableCell align='right'>🤘</TableCell>
                                 </TableRow>
