@@ -27,6 +27,7 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 
 import './App.css';
+import XpLogPage from '../XpLogPage/XpLogPage';
 
 function App() {
   const dispatch = useDispatch();
@@ -116,6 +117,13 @@ function App() {
               <LandingPage />
             }
           </Route>
+
+          <ProtectedRoute
+            exact
+            path='/xp-log'
+          >
+            <XpLogPage />
+          </ProtectedRoute>
 
           {/* If none of the other routes matched, we will show a 404. */}
           <Route>
