@@ -30,13 +30,21 @@ function SkillTable() {
     const calculateLevel = (skill) => {
         const actInstances = userActivities.filter(item => skill.skill_name === item.skills_enterprise_name || skill.skill_name === item.skills_user_name)
         const totalXP = actInstances.map(activity => activity.xp_value).reduce((acc, current) => acc + current, 0);
-        if(totalXP < 10){
-            return 1;
-        }else{
-            return 2;
-        }
+        return Math.ceil(totalXP / 10)
+    }
+    
+    // need to calculate total XP
+    const calculateXP = (skill) => {
+        const actInstances = userActivities.filter(item => skill.skill_name === item.skills_enterprise_name || skill.skill_name === item.skills_user_name)
+        const totalXP = actInstances.map(activity => activity.xp_value).reduce((acc, current) => acc + current, 0);
+        return totalXP;
     }
 
+    // need to calculate the xp needed to reach the next level;
+    const calculateNextLevelXP = (skill) => {
+        const totalXP = calculateXP(skill);
+        return 10 - (totalXP % 10);
+    }
 
     return(
         <div id="dboard-skill-table">
@@ -61,10 +69,10 @@ function SkillTable() {
                                     sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                                     >
                                         <TableCell>{skill.skill_name}</TableCell>
-                                        <TableCell>{calculateLevel(skill)}</TableCell>
-                                        <TableCell></TableCell>
-                                        <TableCell></TableCell>
-                                        <TableCell></TableCell>
+                                        <TableCell align='right'>{calculateLevel(skill)}</TableCell>
+                                        <TableCell align='right'>{calculateXP(skill)}</TableCell>
+                                        <TableCell align='right'>{calculateNextLevelXP(skill)}</TableCell>
+                                        <TableCell align='right'>🤘</TableCell>
                                 </TableRow>
                             )
                         })
