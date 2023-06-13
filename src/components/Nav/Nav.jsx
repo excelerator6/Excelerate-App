@@ -67,23 +67,23 @@ function Nav(props) {
               <ListItemButton component="a" href="#/">
                 <ListItemIcon>
                 </ListItemIcon>
-                <ListItemText primary="Home" />
+                <ListItemText primary="Dashboard" />
               </ListItemButton>
             </ListItem>
 
             <ListItem disablePadding>
-              <ListItemButton component="a" href="#/user">
+              <ListItemButton component="a" href="#/xp-log">
                 <ListItemIcon>
                 </ListItemIcon>
-                <ListItemText primary="User" />
+                <ListItemText primary="XP LOG" />
               </ListItemButton>
             </ListItem>
 
             <ListItem disablePadding>
-              <ListItemButton component="a" href="#/info">
+              <ListItemButton component="a" href="#/StatsPage">
                 <ListItemIcon>
                 </ListItemIcon>
-                <ListItemText primary="Info Page" />
+                <ListItemText primary="Stats" />
               </ListItemButton>
             </ListItem>
 
