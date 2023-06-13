@@ -35,7 +35,7 @@ export default function FloatingActionButton() {
     const [skills, setSkills] = useState('');
     const [xp, setXp] = useState('');
     const [source, setSource] = useState('');
-    const [takeaways, setTakeaways] = useState('');
+    const [takeaways, setTakeaways] = useState();
 
     // useEffect for getting the activities
     useEffect(() => {
@@ -55,9 +55,10 @@ export default function FloatingActionButton() {
     // Function to handle activity submission ===> sending that to the DB
     function handleSubmit(){
 
+      // * Need to add a check, if the user has supplied a source or other required input
       // create activity log object
-      const newActivity = {
-        date: date.format('DD-MMM-YYYY'), // * <--- this formats the date as a string like so: 25-DEC-2023
+      const newActivity = { 
+        date: date.format('MM/DD/YYYY'), // * <--- this formats the date as a string like so: 25-DEC-2023
         activity: activities,
         xp: xp,
         source: source,
@@ -87,8 +88,8 @@ export default function FloatingActionButton() {
       setActivities('');
       setSkills('');
       setXp('');
-      setSource('');
-      setTakeaways('');
+      setSource();
+      setTakeaways();
       handleClose();
     }
 
