@@ -1,12 +1,11 @@
-import TableContent from "./TableContent/TableContent.jsx"
-import EnhancedTable from "./MaterialUITable.jsx"
+import XpLogTable from "./XpLogTable/XpLogTable.jsx"
 
 
 export default function XpLogPage() {
   return (
     <div className="container">
       <h2>Inside XpLogPage</h2>
-      <EnhancedTable />
+      <XpLogTable />
     </div>
   )
 }
