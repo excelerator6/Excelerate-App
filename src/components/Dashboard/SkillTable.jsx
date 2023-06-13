@@ -9,6 +9,7 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 
+
  // * What does this component need to do?
     // * 1. It needs a "Skills" Header
     // * 2. It needs to map through and list each user skill
@@ -25,8 +26,24 @@ function SkillTable() {
 
     console.log("Skills", skills);
     return(
-        <div>
-            <p>Table Goes Here</p>
+        <div id="dboard-skill-table">
+            <h2>Skills</h2>
+            <TableContainer component={Paper}>
+                <Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
+                    <TableHead>
+                    <TableRow>
+                        <TableCell>Skill</TableCell>
+                        <TableCell align="right">Level</TableCell>
+                        <TableCell align="right">Total XP</TableCell>
+                        <TableCell align="right">XP Until Next Level</TableCell>
+                        <TableCell align="right">Badge</TableCell>
+                    </TableRow>
+                    </TableHead>
+                    <TableBody>
+                      {/* Here goes the skills */}
+                    </TableBody>
+                </Table>
+            </TableContainer>
         </div>
     )
 }
@@ -36,28 +53,15 @@ export default SkillTable;
       <Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
         <TableHead>
           <TableRow>
-            <TableCell>Dessert (100g serving)</TableCell>
-            <TableCell align="right">Calories</TableCell>
-            <TableCell align="right">Fat&nbsp;(g)</TableCell>
-            <TableCell align="right">Carbs&nbsp;(g)</TableCell>
-            <TableCell align="right">Protein&nbsp;(g)</TableCell>
+            <TableCell>Skill</TableCell>
+            <TableCell align="right">Level</TableCell>
+            <TableCell align="right">Total XP</TableCell>
+            <TableCell align="right">XP Until Next Level</TableCell>
+            <TableCell align="right">Badge</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((row) => (
-            <TableRow
-              key={row.name}
-              sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-            >
-              <TableCell component="th" scope="row">
-                {row.name}
-              </TableCell>
-              <TableCell align="right">{row.calories}</TableCell>
-              <TableCell align="right">{row.fat}</TableCell>
-              <TableCell align="right">{row.carbs}</TableCell>
-              <TableCell align="right">{row.protein}</TableCell>
-            </TableRow>
-          ))}
+        //   Here goes the skills
         </TableBody>
       </Table>
     </TableContainer> */}

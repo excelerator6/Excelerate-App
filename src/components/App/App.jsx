@@ -66,7 +66,7 @@ function App() {
               exact
               path="/user"
             >
-              {/* <Dashboard /> */}
+              <Dashboard />
             </ProtectedRoute>
 
             <ProtectedRoute
