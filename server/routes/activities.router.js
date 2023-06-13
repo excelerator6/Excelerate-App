@@ -8,7 +8,7 @@ const {
 /**
  * GET route template
  */
-router.get('/getList', (req, res) => {
+router.get('/getList', rejectUnauthenticated, (req, res) => {
     pool.query('SELECT * FROM "activities_chart";')
         .then(dbRes => {
           res.send(dbRes.rows);
@@ -17,15 +17,80 @@ router.get('/getList', (req, res) => {
         })
 });
 
-/**
- * POST route template
- */
+// Route for logging new activity
+// * WILL WANT TO REFACTOR USING ASYNC / AWAIT
 router.post('/log', rejectUnauthenticated, (req, res) => {
   console.log("Got our log:", req.body);
-    // * before submitting this info to the database, we gotta get our skills and activities to the client side.
-    // * Currently, we have placeholder dummy data using Currency symbols for our activities + skills,
-    // * not fit for sullying our DB with.
-  res.sendStatus(201);
+  const date = req.body.date; // * we need to format this date differently, don't we?
+  const activity = req.body.activity;
+  const source = req.body.source;
+  const takeaway = req.body.takeaway;
+  const userID = req.user.id;
+
+  // conditional to check whether or not the skill the user is levelling is an enterprise skill or personal user skill
+  if(req.body.enterpriseId){
+    // conditional to check whether or not the user supplied a takeaway
+    if(takeaway != undefined){
+        // this is if the user chose an enterprise skill + included a takeaway
+        let sqlText = `
+          INSERT INTO "user_activities" (date_completed, skills_enterprise_id, user_id, activity_id, source, key_takeaways)
+          VALUES ($1, $2, $3, $4, $5, $6);
+        `;
+        let sqlValues = [date, req.body.enterpriseId, userID, activity, source, takeaway];
+        pool.query(sqlText, sqlValues)
+            .then(dbRes => {
+              console.log("Successfully added activity to the DB:", dbRes);
+              res.sendStatus(201)
+            }).catch(dbErr => {
+              console.log("Error connecting to DB in activites.router /log:", dbErr);
+              res.sendStatus(500);
+            })
+    } else if(takeaway == undefined){
+        let sqlText = `
+        INSERT INTO "user_activities" (date_completed, skills_enterprise_id, user_id, activity_id, source)
+        VALUES ($1, $2, $3, $4, $5);
+        `;
+        let sqlValues = [date, req.body.enterpriseId, userID, activity, source];
+        pool.query(sqlText, sqlValues)
+            .then(dbRes => {
+              console.log("Successfully added activity to the DB:", dbRes);
+              res.sendStatus(201)
+            }).catch(dbErr => {
+              console.log("Error connecting to DB in activites.router /log:", dbErr);
+              res.sendStatus(500);
+            })
+    }
+  } else if (req.body.skillUserId) {
+    if(takeaway != undefined){
+        let sqlText = `
+        INSERT INTO "user_activities" (date_completed, skills_user_id, user_id, activity_id, source, key_takeaways)
+        VALUES ($1, $2, $3, $4, $5, $6);
+        `;
+        let sqlValues = [date, req.body.skillUserId, userID, activity, source, takeaway];
+        pool.query(sqlText, sqlValues)
+            .then(dbRes => {
+              console.log("Successfully added activity to the DB:", dbRes);
+              res.sendStatus(201)
+            }).catch(dbErr => {
+              console.log("Error connecting to DB in activites.router /log:", dbErr);
+              res.sendStatus(500);
+            })
+    } else if(takeaway == undefined){
+        let sqlText = `
+        INSERT INTO "user_activities" (date_completed, skills_user_id, user_id, activity_id, source)
+        VALUES ($1, $2, $3, $4, $5);
+        `;
+        let sqlValues = [date, req.body.skillUserId, userID, activity, source];
+        pool.query(sqlText, sqlValues)
+            .then(dbRes => {
+              console.log("Successfully added activity to the DB:", dbRes);
+              res.sendStatus(201)
+            }).catch(dbErr => {
+              console.log("Error connecting to DB in activites.router /log:", dbErr);
+              res.sendStatus(500);
+            })
+    }
+  }
 });
 
 module.exports = router;

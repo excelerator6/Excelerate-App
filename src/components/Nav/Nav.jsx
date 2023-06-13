@@ -64,7 +64,7 @@ function Nav(props) {
           //If a user is logged in, show these links
           <>
             <ListItem disablePadding>
-              <ListItemButton component="a" href="#/">
+              <ListItemButton component="a" href="#/dashboard">
                 <ListItemIcon>
                 </ListItemIcon>
                 <ListItemText primary="Dashboard" />
