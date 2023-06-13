@@ -72,7 +72,7 @@ function Nav(props) {
             </ListItem>
 
             <ListItem disablePadding>
-              <ListItemButton component="a" href="#/user">
+              <ListItemButton component="a" href="#/user-dashboard">
                 <ListItemIcon>
                 </ListItemIcon>
                 <ListItemText primary="User" />
