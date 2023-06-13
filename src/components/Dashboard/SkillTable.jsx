@@ -29,8 +29,12 @@ function SkillTable() {
     // need to calculate the user's skill levels 
     const calculateLevel = (skill) => {
         const actInstances = userActivities.filter(item => skill.skill_name === item.skills_enterprise_name || skill.skill_name === item.skills_user_name)
-        // console.log("Every instance of this thing", actInstances)
-        return actInstances.length;
+        const totalXP = actInstances.map(activity => activity.xp_value).reduce((acc, current) => acc + current, 0);
+        if(totalXP < 10){
+            return 1;
+        }else{
+            return 2;
+        }
     }
 
 
