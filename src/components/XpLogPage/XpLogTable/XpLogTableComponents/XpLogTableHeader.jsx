@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { TableCell, TableHead, TableRow, TableSortLabel } from '@mui/material';
+import { Box, TableCell, TableHead, TableRow, TableSortLabel } from '@mui/material';
 import { visuallyHidden } from '@mui/utils';
 
 export default function XpLogTableHeader(props) {
@@ -8,10 +8,9 @@ export default function XpLogTableHeader(props) {
     onRequestSort: PropTypes.func.isRequired,
     order: PropTypes.oneOf(['asc', 'desc']).isRequired,
     orderBy: PropTypes.string.isRequired,
-    rowCount: PropTypes.number.isRequired,
   };
 
-  const { order, orderBy, rowCount, onRequestSort } = props;
+  const { order, orderBy, onRequestSort } = props;
   const createSortHandler = (property) => (event) => {
     onRequestSort(event, property);
   };
