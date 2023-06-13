@@ -48,6 +48,7 @@ function SkillTable() {
         return totalXP;
     }
 
+    // might not need this, but I think it's here to set the boundaries of the leveling bar
     const normalise = (value) => ((value - 0) * 100) / (10 - 0)
     // need to calculate the xp needed to reach the next level;
     const calculateNextLevelXP = (skill) => {
