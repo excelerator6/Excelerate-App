@@ -17,7 +17,12 @@ import Paper from '@mui/material/Paper';
         // How do we calculate the level, current XP / XP to next level, etc. 
         // How do we do badges?
 function SkillTable() {
-    const skills = useSelector(store => store.skills)
+    // things needed from the store to calculate the user's skill levels
+    const skills = useSelector(store => store.skills);
+    const activities = useSelector(store => store.activites);
+    const userActivities = useSelector(store => store.userActivities);
+
+
     console.log("Skills", skills);
     return(
         <div>
