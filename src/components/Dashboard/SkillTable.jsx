@@ -28,8 +28,15 @@ function SkillTable() {
 
     // need to calculate the user's skill levels 
     const calculateLevel = (skill) => {
+        // use .filter to filter through the user's logged activites, returning any activity that used the same skill as the skill we're checking for.
+        // If it matches, it copies that into the actInstances
         const actInstances = userActivities.filter(item => skill.skill_name === item.skills_enterprise_name || skill.skill_name === item.skills_user_name)
+        // then, we loop through actInstances and extract ONLY the xp_value using .map
+        // then we use .reduce to add each XP amount to the last (acc + current) to get our total XP.
         const totalXP = actInstances.map(activity => activity.xp_value).reduce((acc, current) => acc + current, 0);
+
+        // then we divide by 10 and round up to get the actual level,
+        // since all levels are 10 XP 
         return Math.ceil(totalXP / 10)
     }
     
@@ -42,7 +49,11 @@ function SkillTable() {
 
     // need to calculate the xp needed to reach the next level;
     const calculateNextLevelXP = (skill) => {
+        // call the calculateXP function to grab the total XP
         const totalXP = calculateXP(skill);
+
+        // then we divide by 10 and grab the remainder, using modulo %
+        // finally, we take that and subtract it from 10 to get the amount needed until the next level
         return 10 - (totalXP % 10);
     }
 
