@@ -1,4 +1,5 @@
-import TableContent from "./TableInfo/TableContent.jsx"
+import TableContent from "./TableContent/TableContent.jsx"
+
 
 export default function XpLogPage() {
   return (
