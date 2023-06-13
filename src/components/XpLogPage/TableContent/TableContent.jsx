@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import TableHeader from "./TableComponents/TableHeader";
 // import { Table, TableBody, TableRow, TableCell, TablePagination, TableContainer, TableFooter } from "@mui/material";
-import { Table, TableBody, TableRow, TableCell, TableContainer, TableFooter } from "@mui/material";
+import { Table, TableHead, TableBody, TableRow, TableCell, TableContainer, TableFooter } from "@mui/material";
 import CustomTablePagination from "./TableComponents/CustomTablePagination";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -25,29 +25,31 @@ export default function TableContent() {
   }
 
   function descendingComparator(a, b, orderBy) {
-    if(b[orderBy] < a[orderBy]) {
-      return -1
+    if (b[orderBy] < a[orderBy]) {
+      return -1;
     }
-    if(b[orderBy] > a[orderBy]) {
-      return 1
+    if (b[orderBy] > a[orderBy]) {
+      return 1;
     }
-    return 0
+    return 0;
   }
-
+  
   function getComparator(order, orderBy) {
     return order === 'desc'
-      ? (a,b) => descendingComparator(a, b, orderBy)
-      : (a,b) => -descendingComparator(a, b, orderBy)
+      ? (a, b) => descendingComparator(a, b, orderBy)
+      : (a, b) => -descendingComparator(a, b, orderBy);
   }
 
-  const sortedUserActivities = (rowArray, comparator) => {
-    const stabilizeRowArray = rowArray.map((el, index) => [el, index])
-    stabilizeRowArray.sort((a,b) => {
-      const order = comparator(a[0], b[0])
-      if(order !== 0) return order
-      return a[1] - b[1]
+  const sortedUserActivities = (array, comparator) => {
+    const stabilizedArray = array.map((el, index) => [el, index]);
+    stabilizedArray.sort((a,b) => {
+      const order = comparator(a[0], b[0]);
+      if(order !== 0) {
+        return order;
+      }
+      return a[1] - b[1];
     })
-    return stabilizeRowArray.map((el) => el[0])
+    return stabilizedArray.map((el) => el[0]);
   }
 
   const handleChangePage = (event, newPage) => {
