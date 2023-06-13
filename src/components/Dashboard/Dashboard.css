@@ -2,7 +2,11 @@
     display: grid;
     grid-template-columns: 200, 200, 200, 200;
 }
-#dboard-skill-table{
+#skillTable{
     text-align: center;
-    grid-column: 1 / 2;
+    border: 1px solid rgb(101, 101, 101);
+    border-radius: 5px;
+}
+#skillTableHeader{
+    font-size: larger;
 }

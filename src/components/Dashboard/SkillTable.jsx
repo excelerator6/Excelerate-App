@@ -30,7 +30,7 @@ function SkillTable() {
             <h2>Skills</h2>
             <TableContainer component={Paper}>
                 <Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
-                    <TableHead>
+                    <TableHead id='skillTableHeader'>
                     <TableRow>
                         <TableCell>Skill</TableCell>
                         <TableCell align="right">Level</TableCell>
@@ -40,7 +40,22 @@ function SkillTable() {
                     </TableRow>
                     </TableHead>
                     <TableBody>
-                      {/* Here goes the skills */}
+                      {
+                        skills.map((skill, index) => {
+                            return(
+                                <TableRow 
+                                    key={index}
+                                    sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                                    >
+                                        <TableCell>{skill.skill_name}</TableCell>
+                                        <TableCell></TableCell>
+                                        <TableCell></TableCell>
+                                        <TableCell></TableCell>
+                                        <TableCell></TableCell>
+                                </TableRow>
+                            )
+                        })
+                      }
                     </TableBody>
                 </Table>
             </TableContainer>

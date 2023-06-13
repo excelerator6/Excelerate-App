@@ -17,10 +17,13 @@ function Dashboard() {
   // this component doesn't do much to start, just renders some user reducer info to the DOM
   const user = useSelector((store) => store.user);
   return (
+    
     <Box sx={{ flexGrow: 1 }}>
       <Grid container>
         <Grid item>
-          <SkillTable />
+          <div id='skillTable'>
+            <SkillTable />
+          </div>
         </Grid>
       </Grid>
     </Box>
