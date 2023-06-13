@@ -66,7 +66,7 @@ function App() {
               exact
               path="/user"
             >
-              <Dashboard />
+              {/* <Dashboard /> */}
             </ProtectedRoute>
 
             <ProtectedRoute
@@ -131,6 +131,13 @@ function App() {
               path='/StatsPage'
             >
               <StatsPage />
+            </ProtectedRoute>
+
+            <ProtectedRoute
+              exact
+              path='/Dashboard'
+            >
+              <Dashboard />
             </ProtectedRoute>
 
             {/* If none of the other routes matched, we will show a 404. */}
