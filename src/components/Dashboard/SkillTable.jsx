@@ -1,4 +1,5 @@
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { useEffect } from "react";
 
 // MUI Components
 import Table from '@mui/material/Table';
@@ -8,56 +9,94 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
+import { LinearProgress } from "@mui/material";
 
- // * What does this component need to do?
-    // * 1. It needs a "Skills" Header
-    // * 2. It needs to map through and list each user skill
-        // * a. Each skill needs it's current level, current XP, XP to next Level, and Badge
 
         // How do we calculate the level, current XP / XP to next level, etc. 
         // How do we do badges?
 function SkillTable() {
     // things needed from the store to calculate the user's skill levels
     const skills = useSelector(store => store.skills);
-    const activities = useSelector(store => store.activites);
+    const activities = useSelector(store => store.activities);
     const userActivities = useSelector(store => store.userActivities);
+    console.log("Activities, userActivities", activities, userActivities);
 
+    const dispatch = useDispatch();
 
-    console.log("Skills", skills);
+    useEffect(() => {
+        dispatch({type: 'FETCH_USER_ACTIVITIES'})
+    }, [])
+
+    // need to calculate the user's skill levels 
+    const calculateLevel = (skill) => {
+        // use .filter to filter through the user's logged activites, returning any activity that used the same skill as the skill we're checking for.
+        // If it matches, it copies that into the actInstances
+        const actInstances = userActivities.filter(item => skill.skill_name === item.skills_enterprise_name || skill.skill_name === item.skills_user_name)
+        // then, we loop through actInstances and extract ONLY the xp_value using .map
+        // then we use .reduce to add each XP amount to the last (acc + current) to get our total XP.
+        const totalXP = actInstances.map(activity => activity.xp_value).reduce((acc, current) => acc + current, 0);
+
+        // then we divide by 10 and round up to get the actual level,
+        // since all levels are 10 XP 
+        return Math.floor(totalXP / 10)
+    }
+    
+    // need to calculate total XP
+    const calculateXP = (skill) => {
+        const actInstances = userActivities.filter(item => skill.skill_name === item.skills_enterprise_name || skill.skill_name === item.skills_user_name)
+        const totalXP = actInstances.map(activity => activity.xp_value).reduce((acc, current) => acc + current, 0);
+        return totalXP;
+    }
+
+    // might not need this, but I think it's here to set the boundaries of the leveling bar
+    const normalise = (value) => ((value - 0) * 100) / (10 - 0)
+    // need to calculate the xp needed to reach the next level;
+    const calculateNextLevelXP = (skill) => {
+        // call the calculateXP function to grab the total XP
+        const totalXP = calculateXP(skill);
+
+        // then we divide by 10 and grab the remainder, using modulo %
+        // finally, we take that and subtract it from 10 to get the amount needed until the next level
+        return 10 - (totalXP % 10);
+    }
+
     return(
-        <div>
-            <p>Table Goes Here</p>
+        <div id="dboard-skill-table">
+            <h2>Skills</h2>
+            <TableContainer component={Paper}>
+                <Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
+                    <TableHead id='skillTableHeader'>
+                    <TableRow>
+                        <TableCell>Skill</TableCell>
+                        <TableCell align="right">Level</TableCell>
+                        <TableCell align="right">Total XP</TableCell>
+                        <TableCell align="right">XP Until Next Level</TableCell>
+                        <TableCell align="right">Badge</TableCell>
+                    </TableRow>
+                    </TableHead>
+                    <TableBody>
+                      {
+                        skills.map((skill, index) => {
+                            return(
+                                <TableRow 
+                                    key={index}
+                                    sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                                    >
+                                        <TableCell>{skill.skill_name}</TableCell>
+                                        <TableCell align='right'>{calculateLevel(skill)}</TableCell>
+                                        <TableCell align='right'>
+                                            <LinearProgress variant="determinate" value={normalise(calculateXP(skill))} valueBuffer={10}/>
+                                        </TableCell>
+                                        <TableCell align='right'>{calculateNextLevelXP(skill)}</TableCell>
+                                        <TableCell align='right'>🤘</TableCell>
+                                </TableRow>
+                            )
+                        })
+                      }
+                    </TableBody>
+                </Table>
+            </TableContainer>
         </div>
     )
 }
 export default SkillTable;
-
-{/* <TableContainer component={Paper}>
-      <Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
-        <TableHead>
-          <TableRow>
-            <TableCell>Dessert (100g serving)</TableCell>
-            <TableCell align="right">Calories</TableCell>
-            <TableCell align="right">Fat&nbsp;(g)</TableCell>
-            <TableCell align="right">Carbs&nbsp;(g)</TableCell>
-            <TableCell align="right">Protein&nbsp;(g)</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {rows.map((row) => (
-            <TableRow
-              key={row.name}
-              sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-            >
-              <TableCell component="th" scope="row">
-                {row.name}
-              </TableCell>
-              <TableCell align="right">{row.calories}</TableCell>
-              <TableCell align="right">{row.fat}</TableCell>
-              <TableCell align="right">{row.carbs}</TableCell>
-              <TableCell align="right">{row.protein}</TableCell>
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </TableContainer> */}

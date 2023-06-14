@@ -2,6 +2,14 @@ import React from 'react';
 import LogOutButton from '../LogOutButton/LogOutButton';
 import {useSelector} from 'react-redux';
 
+// material UI grid components
+import { styled } from '@mui/material/styles';
+import Box from '@mui/material/Box';
+import Paper from '@mui/material/Paper';
+import Grid from '@mui/material/Grid';
+
+import './Dashboard.css'
+
 // dashboard widget components
 import SkillTable from './SkillTable';
 
@@ -9,12 +17,16 @@ function Dashboard() {
   // this component doesn't do much to start, just renders some user reducer info to the DOM
   const user = useSelector((store) => store.user);
   return (
-    <div className="container">
-      <h2>Welcome, {user.username}!</h2>
-      <p>Your ID is: {user.id}</p>
-      <SkillTable />
-      <LogOutButton className="btn" />
-    </div>
+    
+    <Box sx={{ flexGrow: 1 }}>
+      <Grid container>
+        <Grid item>
+          <div id='skillTable'>
+            <SkillTable />
+          </div>
+        </Grid>
+      </Grid>
+    </Box>
   );
 }
 
