@@ -10,8 +10,10 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { LinearProgress } from "@mui/material";
+import Typography from '@mui/material/Typography';
 
 
+import './SkillTable.css'
         // How do we calculate the level, current XP / XP to next level, etc. 
         // How do we do badges?
 function SkillTable() {
@@ -46,7 +48,7 @@ function SkillTable() {
     const calculateXP = (skill) => {
         const actInstances = userActivities.filter(item => skill.skill_name === item.skill)
         const totalXP = actInstances.map(activity => activity.xp).reduce((acc, current) => acc + current, 0);
-        return totalXP;
+        return totalXP % 10;
     }
 
     // might not need this, but I think it's here to set the boundaries of the leveling bar
@@ -86,8 +88,28 @@ function SkillTable() {
                                         <TableCell>{skill.skill_name}</TableCell>
                                         <TableCell align='right'>{calculateLevel(skill)}</TableCell>
                                         <TableCell align='right'>
-                                            <LinearProgress variant="determinate" value={normalise(calculateXP(skill))} valueBuffer={10}/>
-                                        </TableCell>
+
+                                            <box className="progressBarContainer" >
+                                                <box className='overlay'>
+                                                    <Typography 
+                                                    justifyContent='center' 
+                                                    alignItems='center'
+                                                    position='flex'
+                                                    >
+                                                        {calculateXP(skill)} / 10
+                                                    </Typography>
+                                                </box>
+                                                <box className='box'>
+                                                <LinearProgress
+                                                    className = 'progressBar' 
+                                                    variant="determinate" 
+                                                    value={normalise(calculateXP(skill))} 
+                                                    valueBuffer={10}
+                                                />
+                                                </box>
+                                            </box>   
+
+                                  </TableCell>
                                         <TableCell align='right'>{calculateNextLevelXP(skill)}</TableCell>
                                         <TableCell align='right'>🤘</TableCell>
                                 </TableRow>
