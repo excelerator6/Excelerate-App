@@ -13,6 +13,7 @@ import './Dashboard.css'
 // dashboard widget components
 import SkillTable from './SkillTable';
 import Overall from './Overall';
+import HeatmapChart from '../HeatmapChart/HeatmapChart';
 
 function Dashboard() {
   // this component doesn't do much to start, just renders some user reducer info to the DOM
@@ -33,7 +34,7 @@ function Dashboard() {
         </Grid>
         <Grid item  xs={8} sm={8} md={5}>
           {/* Heatmap and Total Content Consumed go here */}
-          <p>something else goes here</p> 
+          <HeatmapChart />
         </Grid>
       </Grid>
     </Box>
