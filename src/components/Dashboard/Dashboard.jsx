@@ -12,6 +12,7 @@ import './Dashboard.css'
 
 // dashboard widget components
 import SkillTable from './SkillTable';
+import Overall from './Overall';
 
 function Dashboard() {
   // this component doesn't do much to start, just renders some user reducer info to the DOM
