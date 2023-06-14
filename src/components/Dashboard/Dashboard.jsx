@@ -20,11 +20,19 @@ function Dashboard() {
   return (
     
     <Box sx={{ flexGrow: 1 }}>
-      <Grid container>
-        <Grid item>
-          <div id='skillTable'>
+      <Grid container spacing={2} direction="row" justifyContent='center' alignItems='left'>
+        <Grid item xs={12} sm={12} md={10}>
+          <Paper>
+            <Overall />
+          </Paper>
+        </Grid>
+        <Grid item xs={8} sm={12} md={8}>
+          <Paper  id="dboard-skill-table">
             <SkillTable />
-          </div>
+          </Paper>
+        </Grid>
+        <Grid item  xs={8} sm={8} md={3}>
+          <p>something else goes here</p>
         </Grid>
       </Grid>
     </Box>
