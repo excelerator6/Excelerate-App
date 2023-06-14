@@ -15,10 +15,10 @@ router.get('/', rejectUnauthenticated, (req, res) => {
       skills_enterprise.skill_name AS skills_enterprise_name,
       skills_user.skill_name AS skills_user_name,
       user_activities.user_id,
-      activities_chart.activity AS activity_name,
-      activities_chart.xp_value AS xp_Value,
+      activities_chart.activity AS activity,
+      activities_chart.xp_value AS xp,
       user_activities.source AS source,
-      user_activities.key_takeaways AS key_takeaways
+      user_activities.key_takeaways AS takeaways
     FROM user_activities
       LEFT JOIN skills_enterprise
         ON user_activities.skills_enterprise_id = skills_enterprise.id
