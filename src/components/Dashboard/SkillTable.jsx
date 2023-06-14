@@ -31,11 +31,12 @@ function SkillTable() {
     const calculateLevel = (skill) => {
         // use .filter to filter through the user's logged activites, returning any activity that used the same skill as the skill we're checking for.
         // If it matches, it copies that into the actInstances
-        const actInstances = userActivities.filter(item => skill.skill_name === item.skills_enterprise_name || skill.skill_name === item.skills_user_name)
+        const actInstances = userActivities.filter(item => skill.skill_name === item.skill)
         // then, we loop through actInstances and extract ONLY the xp_value using .map
         // then we use .reduce to add each XP amount to the last (acc + current) to get our total XP.
-        const totalXP = actInstances.map(activity => activity.xp_value).reduce((acc, current) => acc + current, 0);
+        const totalXP = actInstances.map(activity => activity.xp).reduce((acc, current) => acc + current, 0);
 
+        console.log("What's happening?:", totalXP)
         // then we divide by 10 and round up to get the actual level,
         // since all levels are 10 XP 
         return Math.floor(totalXP / 10)
@@ -43,8 +44,8 @@ function SkillTable() {
     
     // need to calculate total XP
     const calculateXP = (skill) => {
-        const actInstances = userActivities.filter(item => skill.skill_name === item.skills_enterprise_name || skill.skill_name === item.skills_user_name)
-        const totalXP = actInstances.map(activity => activity.xp_value).reduce((acc, current) => acc + current, 0);
+        const actInstances = userActivities.filter(item => skill.skill_name === item.skill)
+        const totalXP = actInstances.map(activity => activity.xp).reduce((acc, current) => acc + current, 0);
         return totalXP;
     }
 
