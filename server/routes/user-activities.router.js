@@ -2,8 +2,8 @@ const express = require('express');
 const pool = require('../modules/pool');
 const router = express.Router();
 const {
-    rejectUnauthenticated,
-  } = require('../modules/authentication-middleware');
+  rejectUnauthenticated,
+} = require('../modules/authentication-middleware');
 
 router.get('/', rejectUnauthenticated, (req, res) => {
   const userId = req.user.id
@@ -60,6 +60,26 @@ router.get('/', rejectUnauthenticated, (req, res) => {
       res.send(formattedUserActivities);
     }).catch(dbErr => {
       console.log("Error connecting to DB within GET user-activities:", dbErr);
+      res.sendStatus(500);
+    })
+});
+
+router.get('/userActivityLog', rejectUnauthenticated, (req, res) => {
+  const userId = req.user.id
+  const sqlQuery = `
+  SELECT DATE(date_completed), COUNT(1) AS count
+  FROM user_activities
+  WHERE user_id = $1
+  GROUP BY DATE(date_completed);
+  `;
+
+  pool
+    .query(sqlQuery, [userId])
+    .then(dbRes => {
+      const userActivityLog = dbRes.rows
+      res.send(userActivityLog);
+    }).catch(dbErr => {
+      console.log("Error connecting to DB within GET user activity Log:", dbErr);
       res.sendStatus(500);
     })
 });
