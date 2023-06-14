@@ -18,7 +18,7 @@ router.get('/', rejectUnauthenticated, (req, res) => {
       activities_chart.activity AS activity,
       activities_chart.xp_value AS xp,
       user_activities.source AS source,
-      user_activities.key_takeaways AS key_takeaways
+      user_activities.key_takeaways AS takeaways
     FROM user_activities
       LEFT JOIN skills_enterprise
         ON user_activities.skills_enterprise_id = skills_enterprise.id

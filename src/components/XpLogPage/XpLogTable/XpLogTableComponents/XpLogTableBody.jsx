@@ -1,12 +1,13 @@
 import { TableBody, TableCell, TableRow } from '@mui/material'
 import { useMemo } from 'react';
+import { useSelector } from 'react-redux';
 
 export default function XpLogTableBody(props) {
+  const userActivities = useSelector(store => store.userActivities);
 
   const {
     page, dense, order,
     orderBy, rowsPerPage,
-    userActivities
   } = props
 
   function stableSort(array, comparator) {
@@ -52,6 +53,7 @@ export default function XpLogTableBody(props) {
   return (
     <TableBody>
       {sortedUserActivities.map((event) => {
+        console.log(event);
         return (
           <TableRow
             hover
@@ -62,7 +64,8 @@ export default function XpLogTableBody(props) {
             <TableCell align="left">{event.activity}</TableCell>
             <TableCell align="right">{event.xp}</TableCell>
             <TableCell align="left">{event.source}</TableCell>
-            <TableCell align="left">{event.key_takeaways}</TableCell>
+            <TableCell align="left">{event.takeaways}</TableCell>
+            <TableCell align="left">{event.id}</TableCell>
           </TableRow>
         );
       })}
