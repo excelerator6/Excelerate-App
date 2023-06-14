@@ -34,9 +34,6 @@ router.get('/', rejectUnauthenticated, (req, res) => {
     .query(sqlQuery, [userId])
     .then(dbRes => {
       const unformattedUserActivities = dbRes.rows
-      console.log('*****');
-      console.log('*****');
-      console.log('unformattedUserActivities:', unformattedUserActivities);
       // Create a formattedUserActivities list that only has a skill key/value pair
       //  A skill will either be the skills_enterprise_name OR the skills_user_name
       let formattedUserActivities = unformattedUserActivities.reduce((result, item) => {
@@ -60,9 +57,6 @@ router.get('/', rejectUnauthenticated, (req, res) => {
         delete result[key].skills_user_name
         return result
       }, []).sort((a,b) => (a.date > b.date) ? -1 : 1)
-      console.log('*****');
-      console.log('*****');
-      console.log('formattedUserActivities:', formattedUserActivities);
       res.send(formattedUserActivities);
     }).catch(dbErr => {
       console.log("Error connecting to DB within GET user-activities:", dbErr);

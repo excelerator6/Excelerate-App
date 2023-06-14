@@ -7,39 +7,57 @@ const columns = [
   // { field: 'id', headerName: 'ID', width: 90 },
   {
     field: 'date',
-    headerName: 'Date',
-    width: 150,
+    renderHeader: () => (
+      <strong>{'Date'}</strong>
+    ),
+    minWidth: 100,
+    flex: .4,
     editable: true,
   },
   {
     field: 'skill',
-    headerName: 'Skill',
-    width: 150,
+    renderHeader: () => (
+      <strong>{'Skill'}</strong>
+    ),
+    minWidth: 120,
+    flex: .8,
     editable: false,
   },
   {
     field: 'activity',
-    headerName: 'Activity',
-    width: 110,
+    renderHeader: () => (
+      <strong>{'Activity'}</strong>
+    ),
+    minWidth: 130,
+    flex: 1,
     editable: false,
   },
   {
     field: 'xp',
-    headerName: 'XP',
+    renderHeader: () => (
+      <strong>{'XP'}</strong>
+    ),
     numer: true,
-    width: 110,
+    minWidth: 30,
+    flex: .2,
     editable: false,
   },
   {
     field: 'source',
-    headerName: 'Source',
-    width: 110,
+    renderHeader: () => (
+      <strong>{'Source'}</strong>
+    ),
+    minWidth: 130,
+    flex: 1,
     editable: false,
   },
   {
     field: 'takeaways',
-    headerName: 'Key Takeaways',
-    width: 110,
+    renderHeader: () => (
+      <strong>{'Key Takeaways'}</strong>
+    ),
+    minWidth: 130,
+    flex: 1,
     editable: false,
   },
 ];
@@ -48,10 +66,11 @@ export default function XpLogDataGrid() {
   const userActivities = useSelector(store => store.userActivities);
   console.log(userActivities);
   return (
-    <Box sx={{ height: 400, width: '100%' }}>
+    <Box sx={{ height: 540, width: '100%' }}>
       <DataGrid
         rows={userActivities}
         columns={columns}
+        getRowHeight={() => 'auto'}
         initialState={{
           pagination: {
             paginationModel: {
@@ -59,7 +78,7 @@ export default function XpLogDataGrid() {
             },
           },
         }}
-        pageSizeOptions={[5]}
+        pageSizeOptions={[5, 10, 25, 50]}
         checkboxSelection
         disableRowSelectionOnClick
       />
