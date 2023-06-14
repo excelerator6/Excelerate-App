@@ -61,14 +61,14 @@ function SkillTable() {
 
     return(
         <div>
-            <h2>Skills</h2>
+            <h2>skills</h2>
             <TableContainer component={Paper}>
                 <Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
                     <TableHead id='skillTableHeader'>
                     <TableRow>
-                        <TableCell>Skill</TableCell>
-                        <TableCell align="right">Level</TableCell>
-                        <TableCell align="center">Total XP</TableCell>
+                        <TableCell align="center">Skill</TableCell>
+                        <TableCell align="left">Level</TableCell>
+                        <TableCell align="center">Total XP This Level</TableCell>
                         <TableCell align="right">XP Until Next Level</TableCell>
                         <TableCell align="right">Badge</TableCell>
                     </TableRow>
@@ -81,12 +81,12 @@ function SkillTable() {
                                     key={index}
                                     sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                                     >
-                                        <TableCell>{skill.skill_name}</TableCell>
-                                        <TableCell align='right'>{calculateLevel(skill)}</TableCell>
-                                        <TableCell align='right'>
+                                        <TableCell align="center" width='250'>{skill.skill_name}</TableCell>
+                                        <TableCell align='left' width='100'>{calculateLevel(skill)}</TableCell>
+                                        <TableCell align='right' width='250'>
                                             <LinearProgress variant="determinate" value={normalise(calculateXP(skill))} valueBuffer={10}/>
                                         </TableCell>
-                                        <TableCell align='right'>{calculateNextLevelXP(skill)}</TableCell>
+                                        <TableCell align='right' width='200'>{calculateNextLevelXP(skill)}</TableCell>
                                         <TableCell align='right'>🤘</TableCell>
                                 </TableRow>
                             )

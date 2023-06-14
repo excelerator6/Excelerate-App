@@ -26,12 +26,12 @@ function Dashboard() {
             <Overall />
           </Paper>
         </Grid>
-        <Grid item xs={8} sm={12} md={8}>
+        <Grid item xs={8} sm={12} md={7}>
           <Paper  id="dboard-skill-table">
             <SkillTable />
           </Paper>
         </Grid>
-        <Grid item  xs={8} sm={8} md={3}>
+        <Grid item  xs={8} sm={8} md={5}>
           <p>something else goes here</p>
         </Grid>
       </Grid>

@@ -11,13 +11,14 @@ import Paper from '@mui/material/Paper';
 
 //  * What does this component do?
     // * Displays: 
-        // * Total XP earned* 
-        // * Total number of entries 
+        // * Total XP earned* (dunno if we should have this stat
+        // * Total number of entries (userActivities.length)
         // * Total levels achieved acoss all skills
         // * Total achievements met (STRETCH GOAL)
-        // * Latest entry by date
-        // * Total number of skills
-        // * Number of Levels that are Maxed out (lvl 50) 
+        // * Latest entry by date (array.sort somehow?)
+        // * Total number of skills (skills.length)
+        // * Number of Levels that are Maxed out (lvl 50) (conditional render)
+
 function Overall() {
     const skills = useSelector(store => store.skills);
     const activities = useSelector(store => store.activities);
@@ -48,57 +49,33 @@ function Overall() {
     const totalXpEarned = skills.map(skill => calculateXP(skill)).reduce((acc, current) => acc + current, 0); // * Total XP Earned Variable
     
 
-    // might not need this, but I think it's here to set the boundaries of the leveling bar
-    const normalise = (value) => ((value - 0) * 100) / (10 - 0)
-    // need to calculate the xp needed to reach the next level;
-    const calculateNextLevelXP = (skill) => {
-        // call the calculateXP function to grab the total XP
-        const totalXP = calculateXP(skill);
-
-        // then we divide by 10 and grab the remainder, using modulo %
-        // finally, we take that and subtract it from 10 to get the amount needed until the next level
-        return 10 - (totalXP % 10);
-    }
-
     // * Will want to add a condition to this render -- If user has any skill maxed out, render Total Maxed Levels column
     return(
-        <>
-            <h2>Totals</h2>
+        <Paper id="overallTable">
+            <h2 id="overallHeader">totals</h2>
              <TableContainer component={Paper}>
                 <Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
                     <TableHead id='skillTableHeader'>
                     <TableRow>
-                        <TableCell>XP Earned</TableCell>
-                        <TableCell align="right"># of Entries</TableCell>
+                        <TableCell align="center">XP Earned</TableCell>
+                        <TableCell align="center"># of Entries</TableCell>
                         <TableCell align="center"># of Levels</TableCell>
-                        <TableCell align="right"># of Skills</TableCell>
-                        <TableCell align="right">Badge</TableCell>
+                        <TableCell align="center"># of Skills</TableCell>
+                        <TableCell align="center">Badge</TableCell>
                     </TableRow>
                     </TableHead>
                     <TableBody>
-                      
+                        <TableRow>
+                            <TableCell align="center">{totalXpEarned}</TableCell>
+                            <TableCell align="center">{userActivities.length}</TableCell>
+                            <TableCell align="center">{totalLevels}</TableCell>
+                            <TableCell align="center">{skills.length}</TableCell>
+                            <TableCell align="center"></TableCell>
+                        </TableRow>
                     </TableBody>
                 </Table>
             </TableContainer> 
-        </>
+        </Paper>
     )
 }
 export default Overall;
-
-
-{/* <TableContainer component={Paper}>
-                <Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
-                    <TableHead id='skillTableHeader'>
-                    <TableRow>
-                        <TableCell>Skill</TableCell>
-                        <TableCell align="right">Level</TableCell>
-                        <TableCell align="center">Total XP</TableCell>
-                        <TableCell align="right">XP Until Next Level</TableCell>
-                        <TableCell align="right">Badge</TableCell>
-                    </TableRow>
-                    </TableHead>
-                    <TableBody>
-                      
-                    </TableBody>
-                </Table>
-            </TableContainer> */}
