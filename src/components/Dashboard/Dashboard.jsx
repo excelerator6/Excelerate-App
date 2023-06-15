@@ -12,9 +12,10 @@ import Grid from '@mui/material/Grid';
 import './Dashboard.css'
 
 // dashboard widget components
-import SkillTable from './SkillTable';
-import Overall from './Overall';
-import HeatmapChart from '../HeatmapChart/HeatmapChart';
+import SkillTable from './DashboardWidgets/SkillTable';
+import Overall from './DashboardWidgets/Overall';
+import HeatmapChart from './DashboardWidgets/HeatmapChart/HeatmapChart';
+import ConsumedContent from './DashboardWidgets/ConsumedContent';
 
 function Dashboard() {
   const dispatch = useDispatch();
@@ -44,7 +45,9 @@ function Dashboard() {
           <Paper>
             <HeatmapChart />
           </Paper>
-          <p>something else goes here</p>
+          <Paper>
+            <ConsumedContent />
+          </Paper>
         </Grid>
       </Grid>
     </Box>

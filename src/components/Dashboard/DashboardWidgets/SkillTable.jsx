@@ -58,13 +58,13 @@ function SkillTable() {
             <TableContainer component={Paper}>
                 <Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
                     <TableHead id='skillTableHeader'>
-                    <TableRow>
-                        <TableCell align="center">Skill</TableCell>
-                        <TableCell align="left">Level</TableCell>
-                        <TableCell align="center">Total XP This Level</TableCell>
-                        <TableCell align="right">XP Until Next Level</TableCell>
-                        <TableCell align="right">Badge</TableCell>
-                    </TableRow>
+                        <TableRow>
+                            <TableCell align="center">Skill</TableCell>
+                            <TableCell align="left">Level</TableCell>
+                            <TableCell align="center">Total XP This Level</TableCell>
+                            <TableCell align="right">XP Until Next Level</TableCell>
+                            <TableCell align="right">Badge</TableCell>
+                        </TableRow>
                     </TableHead>
                     <TableBody>
                       {
