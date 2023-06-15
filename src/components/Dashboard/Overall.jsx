@@ -50,15 +50,17 @@ function Overall() {
 
         return (totalXP);
     }
+    // just a sum total using the calculate XP function.
     const totalXpEarned = skills.map(skill => calculateXP(skill)).reduce((acc, current) => acc + current, 0); // * Total XP Earned Variable
     
+    // function to check if the total XP of a skill is greater than or equal to 500, the xp cap
     const checkForMax = (skill) => {
         if(calculateXP(skill) >= 500){
             setAnythingMaxed(true);
             return skill;
         }
     }
-    const maxedLevels = skills.filter(skill => checkForMax(skill))
+    const maxedLevels = skills.filter(skill => checkForMax(skill)) //* Variable for storing every Max Level skill
 
 
     return(
