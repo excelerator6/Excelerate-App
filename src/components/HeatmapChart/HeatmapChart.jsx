@@ -9,14 +9,6 @@ import './HeatmapChart.css';
 // component name TemplateFunction with the name for the new component.
 function HeatmapChart(props) {
 
-    const dispatch = useDispatch();
-
-    //fetch the user activity and looks like 
-    // {date: '2023-03-01T06:00:00.000Z', count: '2'}
-    useEffect(() => {
-        dispatch({ type: 'FETCH_USER_ACTIVITY_LOG' })
-    }, [])
-
     //Set the users activity array to be mapped below
     const userActivity = useSelector((store) => store.userActivities)
 

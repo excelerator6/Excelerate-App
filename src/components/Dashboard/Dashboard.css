@@ -2,10 +2,18 @@
     display: grid;
     grid-template-columns: 200, 200, 200, 200;
 }
-#skillTable{
+#dboard-skill-table{
     text-align: center;
-    border: 1px solid rgb(101, 101, 101);
-    border-radius: 5px;
+    /* border: 1px solid rgb(101, 101, 101);
+    border-radius: 5px; */
+    margin: 1rem;
+}
+#overallTable{
+    text-align: center;
+}
+h2{
+    margin-bottom: -2px;
+    font-variant: small-caps;
 }
 #skillTableHeader{
     font-size: larger;

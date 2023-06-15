@@ -1,6 +1,7 @@
 import React from 'react';
 import LogOutButton from '../LogOutButton/LogOutButton';
-import {useSelector} from 'react-redux';
+import {useSelector, useDispatch} from 'react-redux';
+import { useEffect } from 'react';
 
 // material UI grid components
 import { styled } from '@mui/material/styles';
@@ -13,18 +14,37 @@ import './Dashboard.css'
 // dashboard widget components
 import SkillTable from './SkillTable';
 import Overall from './Overall';
+import HeatmapChart from '../HeatmapChart/HeatmapChart';
 
 function Dashboard() {
-  // this component doesn't do much to start, just renders some user reducer info to the DOM
+  const dispatch = useDispatch();
   const user = useSelector((store) => store.user);
+
+    useEffect(() => {
+        dispatch({type: 'FETCH_USER_ACTIVITIES'})
+    }, [])
+
+    
   return (
     
     <Box sx={{ flexGrow: 1 }}>
-      <Grid container>
-        <Grid item>
-          <div id='skillTable'>
+      <Grid container spacing={2} direction="row" justifyContent='center' alignItems='left'>
+        <Grid item xs={12} sm={12} md={10}>
+          <Paper>
+            <Overall />
+          </Paper>
+        </Grid>
+        <Grid item xs={12} sm={12} md={7}>
+          <Paper  id="dboard-skill-table">
             <SkillTable />
-          </div>
+          </Paper>
+        </Grid>
+        <Grid item  xs={8} sm={8} md={4} mr={1}>
+          {/* Heatmap and Total Content Consumed go here */}
+          <Paper>
+            <HeatmapChart />
+          </Paper>
+          <p>something else goes here</p>
         </Grid>
       </Grid>
     </Box>

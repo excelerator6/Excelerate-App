@@ -3,6 +3,7 @@ body,
 #react-root {
   height: 100%;
   margin-left: 100px;
+  /* font-variant: small-caps; */
 }
 
 body {
