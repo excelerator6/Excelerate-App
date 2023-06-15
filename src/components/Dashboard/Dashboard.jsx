@@ -35,12 +35,12 @@ function Dashboard() {
             <Overall />
           </Paper>
         </Grid>
-        <Grid item xs={12} sm={12} md={7}>
+        <Grid item xs={12} sm={12} md={7} mt={4}>
           <Paper  id="dboard-skill-table">
             <SkillTable />
           </Paper>
         </Grid>
-        <Grid item  xs={8} sm={8} md={4} mr={1}>
+        <Grid item  xs={8} sm={8} md={4} mr={1} mt={-2}>
           {/* Heatmap and Total Content Consumed go here */}
           <Paper>
             <HeatmapChart />
