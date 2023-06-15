@@ -43,7 +43,7 @@ function Dashboard() {
         <Grid item  xs={8} sm={8} md={4} mr={1} mt={-2}>
           {/* Heatmap and Total Content Consumed go here */}
           <Paper>
-            <HeatmapChart />
+            <HeatmapChart/>
           </Paper>
           <Paper>
             <ConsumedContent />
