@@ -1,10 +1,83 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Box from '@mui/material/Box';
 import { DataGrid } from '@mui/x-data-grid';
 import { useDispatch, useSelector } from "react-redux";
+import { Link, Paper, Popover } from '@mui/material';
+
+
 
 export default function XpLogDataGrid() {
   const userActivities = useSelector(store => store.userActivities);
+
+  const RenderExpandSource = (props) => {
+    const [anchorEl, setAnchorEl] = useState(null);
+    const [isCurrentlyOverflown, setCurrentlyOverflown] = useState(null)
+    const cellValueRef = useRef(null)
+    // Set width for the Popover
+    const width = 200
+
+    // useEffect(() => {
+    //   setCurrentlyOverflown(isOverflowed(cellValueRef));
+    // }, [isCurrentlyOverflown, props.value]);
+    
+    // function isOverflowed(element) {
+    //   return (
+    //     element.scrollHeight > element.clientHeight ||
+    //     element.scrollWidth > element.clientWidth
+    //   );
+    // }
+
+    const handleClick = (event) => {
+      setAnchorEl(event.currentTarget);
+      console.log('props:', props);
+      return;
+    };
+  
+    const handleClose = () => {
+      setAnchorEl(null);
+    };
+  
+    const open = Boolean(anchorEl);
+    const id = open ? 'simple-popover' : undefined;
+
+    return (
+      <div>
+        <div ref={cellValueRef}>
+          {props.value}
+        </div>
+        {/* {isCurrentlyOverflown && ( */}
+          <>
+            <Link
+              href='/#/xp-log'
+              onClick={handleClick}
+            >
+              View All
+            </Link>
+            <Popover
+              id={id}
+              open={open}
+              anchorEl={anchorEl}
+              onClose={handleClose}
+              anchorOrigin={{
+                vertical: 'bottom',
+                horizontal: 'left',
+              }}
+            >
+              <Paper elevation={1}>
+                <Box 
+                  width={width}
+                  p={2}
+                >
+                  {props.value}
+                </Box>
+              </Paper>
+            </Popover>
+          </>
+        {/* )} */}
+
+      </div>
+    )
+  }
   const columns = [
     // { field: 'id', headerName: 'ID', width: 90 },
     {
@@ -14,7 +87,8 @@ export default function XpLogDataGrid() {
       ),
       minWidth: 100,
       flex: .4,
-      editable: true,
+      editable: false,
+      
     },
     {
       field: 'skill',
@@ -52,6 +126,7 @@ export default function XpLogDataGrid() {
       minWidth: 130,
       flex: 1,
       editable: false,
+      renderCell: RenderExpandSource
     },
     {
       field: 'takeaways',
@@ -69,7 +144,6 @@ export default function XpLogDataGrid() {
     console.log('ids to delete', selectedIds);
   }
 
-  // console.log(userActivities);
   return (
     <Box sx={{ height: 540, width: '100%' }}>
       <DataGrid
