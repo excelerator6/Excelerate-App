@@ -11,21 +11,21 @@ export default function XpLogDataGrid() {
 
   const RenderExpandSource = (props) => {
     const [anchorEl, setAnchorEl] = useState(null);
-    const [isCurrentlyOverflown, setCurrentlyOverflown] = useState(null)
+    const [isCurrentlyOverflown, setCurrentlyOverflown] = useState(false)
     const cellValueRef = useRef(null)
     // Set width for the Popover
     const width = 200
 
-    // useEffect(() => {
-    //   setCurrentlyOverflown(isOverflowed(cellValueRef));
-    // }, [isCurrentlyOverflown, props.value]);
+    useEffect(() => {
+      setCurrentlyOverflown(isOverflown(cellValueRef));
+    }, [isCurrentlyOverflown, props.value]);
     
-    // function isOverflowed(element) {
-    //   return (
-    //     element.scrollHeight > element.clientHeight ||
-    //     element.scrollWidth > element.clientWidth
-    //   );
-    // }
+    function isOverflown(element) {
+      return (
+        element.scrollHeight > element.clientHeight ||
+        element.scrollWidth > element.clientWidth
+      );
+    }
 
     const handleClick = (event) => {
       setAnchorEl(event.currentTarget);
@@ -42,9 +42,13 @@ export default function XpLogDataGrid() {
 
     return (
       <div>
-        <div ref={cellValueRef}>
+        <Box
+          ref={cellValueRef}
+          overflow={'hidden'}
+          textOverflow={'ellipsis'}
+        >
           {props.value}
-        </div>
+        </Box>
         {/* {isCurrentlyOverflown && ( */}
           <>
             <Link
