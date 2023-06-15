@@ -53,7 +53,7 @@ function Overall() {
     const totalXpEarned = skills.map(skill => calculateXP(skill)).reduce((acc, current) => acc + current, 0); // * Total XP Earned Variable
     
     const checkForMax = (skill) => {
-        if(calculateXP(skill) == 500){
+        if(calculateXP(skill) >= 500){
             setAnythingMaxed(true);
             return skill;
         }
