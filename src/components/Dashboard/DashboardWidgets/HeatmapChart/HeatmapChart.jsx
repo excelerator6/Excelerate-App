@@ -33,7 +33,7 @@ function HeatmapChart(props) {
 
     return (
         <div>
-            <h1>YOUR ACTIVITY</h1>
+            <h2>your activity</h2>
             <p></p>
             <CalendarHeatmap
                 startDate={shiftDate(today, -150)}
