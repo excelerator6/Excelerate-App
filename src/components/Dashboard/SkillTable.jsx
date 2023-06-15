@@ -17,14 +17,7 @@ import { LinearProgress } from "@mui/material";
 function SkillTable() {
     // things needed from the store to calculate the user's skill levels
     const skills = useSelector(store => store.skills);
-    const activities = useSelector(store => store.activities);
     const userActivities = useSelector(store => store.userActivities);
-
-    const dispatch = useDispatch();
-
-    useEffect(() => {
-        dispatch({type: 'FETCH_USER_ACTIVITIES'})
-    }, [])
 
     // need to calculate the user's skill levels 
     const calculateLevel = (skill) => {

@@ -1,4 +1,5 @@
 import { useSelector, useDispatch } from "react-redux";
+import { useState } from "react";
 // MUI components
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -21,10 +22,13 @@ import Paper from '@mui/material/Paper';
 
 function Overall() {
     const skills = useSelector(store => store.skills);
-    const activities = useSelector(store => store.activities);
     const userActivities = useSelector(store => store.userActivities);
 
-    // function to calculate total levels of a specific skill
+    // boolean State used for rendering # of Levels Maxed column
+    const [anythingMaxed, setAnythingMaxed] = useState(false)
+
+
+        // function to calculate total levels of a specific skill
     const calculateLevel = (skill) => {
         // use .filter to filter through the user's logged activites, returning any activity that used the same skill as the skill we're checking for.
         // If it matches, it copies that into the actInstances
@@ -38,7 +42,7 @@ function Overall() {
         return Math.floor(totalXP / 10)
     }
     const totalLevels = skills.map(skill => calculateLevel(skill)).reduce((acc, current) => acc + current, 0); // * Total Levels variable
-
+    
     // need to calculate total XP
     const calculateXP = (skill) => {
         const actInstances = userActivities.filter(item => skill.skill_name === item.skill)
@@ -48,12 +52,19 @@ function Overall() {
     }
     const totalXpEarned = skills.map(skill => calculateXP(skill)).reduce((acc, current) => acc + current, 0); // * Total XP Earned Variable
     
+    const checkForMax = (skill) => {
+        if(calculateXP(skill) == 500){
+            setAnythingMaxed(true);
+            return skill;
+        }
+    }
+    const maxedLevels = skills.filter(skill => checkForMax(skill))
 
-    // * Will want to add a condition to this render -- If user has any skill maxed out, render Total Maxed Levels column
+
     return(
         <Paper id="overallTable">
             <h2 id="overallHeader">totals</h2>
-             <TableContainer component={Paper}>
+                <TableContainer component={Paper}>
                 <Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
                     <TableHead id='skillTableHeader'>
                     <TableRow>
@@ -61,7 +72,10 @@ function Overall() {
                         <TableCell align="center"># of Entries</TableCell>
                         <TableCell align="center"># of Levels</TableCell>
                         <TableCell align="center"># of Skills</TableCell>
-                        <TableCell align="center">Badge</TableCell>
+                        {
+                            // if there are any maxed levels, then render this column
+                            anythingMaxed ? <TableCell align="center"># of Maxed Levels</TableCell> : <></>
+                        }
                     </TableRow>
                     </TableHead>
                     <TableBody>
@@ -70,12 +84,16 @@ function Overall() {
                             <TableCell align="center">{userActivities.length}</TableCell>
                             <TableCell align="center">{totalLevels}</TableCell>
                             <TableCell align="center">{skills.length}</TableCell>
-                            <TableCell align="center"></TableCell>
+                            {
+                                // if there are any maxed levels, then render this column
+                                anythingMaxed ? <TableCell align="center">{maxedLevels.length}</TableCell> : <></>
+                            }
                         </TableRow>
                     </TableBody>
                 </Table>
             </TableContainer> 
         </Paper>
     )
+
 }
 export default Overall;
