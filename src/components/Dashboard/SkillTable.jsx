@@ -9,9 +9,10 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import { LinearProgress } from "@mui/material";
+import LinearProgress, { linearProgressClasses } from '@mui/material/LinearProgress';
 import Typography from '@mui/material/Typography';
-
+import Box from '@mui/material/Box';
+import { styled } from '@mui/material/styles';
 
 import './SkillTable.css'
         // How do we calculate the level, current XP / XP to next level, etc. 
@@ -63,6 +64,18 @@ function SkillTable() {
         return 10 - (totalXP % 10);
     }
 
+    const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
+        height: 8,
+        borderRadius: 10,
+        [`&.${linearProgressClasses.colorPrimary}`]: {
+          backgroundColor: theme.palette.grey[theme.palette.mode === 'light' ? 200 : 800],
+        },
+        [`& .${linearProgressClasses.bar}`]: {
+          borderRadius: 10,
+          backgroundColor: theme.palette.mode === 'light' ? '#1a90ff' : '#308fe8',
+        },
+      }));
+
     return(
         <div id="dboard-skill-table">
             <h2>Skills</h2>
@@ -88,26 +101,27 @@ function SkillTable() {
                                         <TableCell>{skill.skill_name}</TableCell>
                                         <TableCell align='right'>{calculateLevel(skill)}</TableCell>
                                         <TableCell align='right'>
-
-                                            <box className="progressBarContainer" >
-                                                <box className='overlay'>
-                                                    <Typography 
-                                                    justifyContent='center' 
-                                                    alignItems='center'
-                                                    position='flex'
-                                                    >
-                                                        {calculateXP(skill)} / 10
-                                                    </Typography>
-                                                </box>
-                                                <box className='box'>
-                                                <LinearProgress
-                                                    className = 'progressBar' 
-                                                    variant="determinate" 
-                                                    value={normalise(calculateXP(skill))} 
-                                                    valueBuffer={10}
-                                                />
-                                                </box>
-                                            </box>   
+                                        
+                                        <Box className="progressBarContainer" sx={{ display: 'flex', alignItems: 'center' }}>
+                                            <Box className='progressBar' sx={{width: '200%'}}>
+                                                <BorderLinearProgress 
+                                                variant="determinate" 
+                                                value={normalise(calculateXP(skill))}
+                                                valueBuffer={10}
+                                                
+                                                
+                                                 />
+                                            <Box className='progressText' container="span" sx={{}}>
+                                                <Typography
+                                                variant="body1"
+                                                >
+                                                {calculateXP(skill)} / 10
+                                                </Typography>
+                                            </Box>
+                                            </Box>
+                                            
+                                        </Box>
+                                           
 
                                   </TableCell>
                                         <TableCell align='right'>{calculateNextLevelXP(skill)}</TableCell>

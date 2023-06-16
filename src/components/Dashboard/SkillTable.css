@@ -1,22 +1,22 @@
 .progressBarContainer {
-    /* width: 150px;
-    height: 150px; */
-    position: relative;
-    /* margin: 30px; */
-  }
-  
-  .box {
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    top: 0;
-    left: 0;
+    width: 150%;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
     
     
   }
   
-  .overlay {
-    z-index: 9;
-    margin: 300px;
+  .progressBar {
+   
     
+    
+    
+  }
+  
+  .progressText {
+    display:flex;
+    justify-content: center;
+    
+
   }
