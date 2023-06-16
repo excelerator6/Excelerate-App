@@ -76,7 +76,7 @@ function SkillTable() {
                         <TableRow>
                             <TableCell align="center">Skill</TableCell>
                             <TableCell align="center">Level</TableCell>
-                            <TableCell align="center">Until Next Level</TableCell>
+                            <TableCell align="center">Current XP</TableCell>
                             <TableCell align="center">Badge</TableCell>
                         </TableRow>
                     </TableHead>
