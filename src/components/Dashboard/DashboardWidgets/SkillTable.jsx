@@ -20,15 +20,7 @@ import './SkillTable.css'
 function SkillTable() {
     // things needed from the store to calculate the user's skill levels
     const skills = useSelector(store => store.skills);
-    const activities = useSelector(store => store.activities);
     const userActivities = useSelector(store => store.userActivities);
-    console.log("Activities, userActivities", activities, userActivities);
-
-    const dispatch = useDispatch();
-
-    useEffect(() => {
-        dispatch({type: 'FETCH_USER_ACTIVITIES'})
-    }, [])
 
     // need to calculate the user's skill levels 
     const calculateLevel = (skill) => {
@@ -38,8 +30,6 @@ function SkillTable() {
         // then, we loop through actInstances and extract ONLY the xp_value using .map
         // then we use .reduce to add each XP amount to the last (acc + current) to get our total XP.
         const totalXP = actInstances.map(activity => activity.xp).reduce((acc, current) => acc + current, 0);
-
-        console.log("What's happening?:", totalXP)
         // then we divide by 10 and round up to get the actual level,
         // since all levels are 10 XP 
         return Math.floor(totalXP / 10)
@@ -49,7 +39,8 @@ function SkillTable() {
     const calculateXP = (skill) => {
         const actInstances = userActivities.filter(item => skill.skill_name === item.skill)
         const totalXP = actInstances.map(activity => activity.xp).reduce((acc, current) => acc + current, 0);
-        return totalXP % 10;
+
+        return (totalXP % 10);
     }
 
     // might not need this, but I think it's here to set the boundaries of the leveling bar
@@ -77,18 +68,18 @@ function SkillTable() {
       }));
 
     return(
-        <div id="dboard-skill-table">
-            <h2>Skills</h2>
+        <div>
+            <h2>skills</h2>
             <TableContainer component={Paper}>
                 <Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
                     <TableHead id='skillTableHeader'>
-                    <TableRow>
-                        <TableCell>Skill</TableCell>
-                        <TableCell align="right">Level</TableCell>
-                        <TableCell align="right">Total XP</TableCell>
-                        <TableCell align="right">XP Until Next Level</TableCell>
-                        <TableCell align="right">Badge</TableCell>
-                    </TableRow>
+                        <TableRow>
+                            <TableCell align="center">Skill</TableCell>
+                            <TableCell align="left">Level</TableCell>
+                            <TableCell align="center">Total XP This Level</TableCell>
+                            <TableCell align="right">XP Until Next Level</TableCell>
+                            <TableCell align="right">Badge</TableCell>
+                        </TableRow>
                     </TableHead>
                     <TableBody>
                       {

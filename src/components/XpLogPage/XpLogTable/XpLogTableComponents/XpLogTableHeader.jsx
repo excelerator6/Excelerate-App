@@ -47,7 +47,7 @@ export default function XpLogTableHeader(props) {
       label: 'Source',
     },
     {
-      id: 'key-takeaways',
+      id: 'takeaways',
       numeric: false,
       disablePadding: false,
       label: 'Key Takeaways',

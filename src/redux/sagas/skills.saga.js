@@ -1,4 +1,4 @@
-import {put, takeLatest} from 'redux-saga/effects';
+import { put, takeLatest } from 'redux-saga/effects';
 import axios from 'axios';
 
 function* getSkills() {
@@ -17,6 +17,6 @@ function* getSkills() {
 }
 
 function* skillsSaga() {
-    yield takeLatest('GET_SKILLS_LIST', getSkills)
+    yield takeLatest('GET_SKILLS_LIST', getSkills);
 }
 export default skillsSaga;
