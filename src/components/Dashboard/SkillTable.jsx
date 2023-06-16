@@ -65,7 +65,7 @@ function SkillTable() {
     }
 
     const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
-        height: 8,
+        height: 10,
         borderRadius: 10,
         [`&.${linearProgressClasses.colorPrimary}`]: {
           backgroundColor: theme.palette.grey[theme.palette.mode === 'light' ? 200 : 800],
@@ -103,26 +103,21 @@ function SkillTable() {
                                         <TableCell align='right'>
                                         
                                         <Box className="progressBarContainer" sx={{ display: 'flex', alignItems: 'center' }}>
-                                            <Box className='progressBar' sx={{width: '200%'}}>
+                                            <Box className='progressBar' container="span">
                                                 <BorderLinearProgress 
-                                                variant="determinate" 
-                                                value={normalise(calculateXP(skill))}
-                                                valueBuffer={10}
-                                                
-                                                
+                                                    variant="determinate" 
+                                                    value={normalise(calculateXP(skill))}
+                                                    valueBuffer={10}                                              
                                                  />
-                                            <Box className='progressText' container="span" sx={{}}>
+                                            <Box className='progressText' container="span">
                                                 <Typography
-                                                variant="body1"
+                                                    variant="body1"
                                                 >
-                                                {calculateXP(skill)} / 10
+                                                    {calculateXP(skill)} / 10
                                                 </Typography>
                                             </Box>
-                                            </Box>
-                                            
+                                            </Box>  
                                         </Box>
-                                           
-
                                   </TableCell>
                                         <TableCell align='right'>{calculateNextLevelXP(skill)}</TableCell>
                                         <TableCell align='right'>🤘</TableCell>
