@@ -8,6 +8,7 @@ export default function AchievementsPage() {
 
   useEffect(() => {
     dispatch({type: 'FETCH_USER_ACTIVITIES'})
+    dispatch({type: 'FETCH_ACHIEVEMENTS_COUNT'})
   }, [])
 
   return (

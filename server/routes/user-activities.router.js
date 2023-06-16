@@ -69,10 +69,10 @@ router.get('/', rejectUnauthenticated, (req, res) => {
 router.get('/userActivityLog', rejectUnauthenticated, (req, res) => {
   const userId = req.user.id
   const sqlQuery = `
-  SELECT DATE(date_completed), COUNT(1) AS count
-  FROM user_activities
-  WHERE user_id = $1
-  GROUP BY DATE(date_completed);
+    SELECT DATE(date_completed), COUNT(1) AS count
+    FROM user_activities
+    WHERE user_id = $1
+    GROUP BY DATE(date_completed);
   `;
 
   pool

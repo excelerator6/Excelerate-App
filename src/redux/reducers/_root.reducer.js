@@ -4,6 +4,7 @@ import user from './user.reducer';
 import activities from './activities.reducer';
 import skills from './skills.reducer'
 import userActivities from './user-activities.reducer';
+import userAchievements from './user-achievements.reduer';
 
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
@@ -17,6 +18,7 @@ const rootReducer = combineReducers({
   activities, // the list of activities the user can pick from (different than the SKILLS they are trying level)
   skills, //list of the skills the user will be leveling up.
   userActivities, // The list of activites/events associated with the user
+  userAchievements, // The list of achievements (counts of different activities) associated with the user
 });
 
 export default rootReducer;
