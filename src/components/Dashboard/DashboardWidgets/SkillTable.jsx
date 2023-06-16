@@ -108,7 +108,6 @@ function SkillTable() {
                                                 </Box>  
                                             </Box>
                                         </TableCell>
-                                        <TableCell align='right'>{calculateNextLevelXP(skill)}</TableCell>
                                         <TableCell align='right'>🤘</TableCell>
                                 </TableRow>
                             )
