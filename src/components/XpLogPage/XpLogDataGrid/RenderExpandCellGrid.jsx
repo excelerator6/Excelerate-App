@@ -191,8 +191,21 @@ const columns = [
 export default function RenderExpandCellGrid() {
   const userActivities = useSelector(store => store.userActivities)
   return (
-    <div style={{ height: 300, width: '100%' }}>
-      <DataGrid rows={userActivities} columns={columns} />
-    </div>
+    <Box sx={{ height: 601, width: '100%' }}>
+      <DataGrid
+        rows={userActivities}
+        columns={columns}
+        rowHeight={49}
+        initialState={{
+          pagination: {
+            paginationModel: {
+              pageSize: 10,
+            },
+          },
+        }}
+        pageSizeOptions={[5, 10, 25, 50]}
+        disableRowSelectionOnClick
+      />
+    </Box>
   );
 }
