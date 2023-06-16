@@ -14,6 +14,7 @@ export default function XpLogToolbar() {
         variant="h6"
         id="tableTitle"
         component="div"
+        // flex={true}
       >
         XP Log
       </Typography>

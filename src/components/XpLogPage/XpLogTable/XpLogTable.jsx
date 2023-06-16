@@ -68,12 +68,11 @@ export default function XpLogTable() {
                 order={order}
                 orderBy={orderBy}
                 rowsPerPage={rowsPerPage}
-                userActivities={userActivities}
               />
             </Table>
           </TableContainer>
           <TablePagination
-            rowsPerPageOptions={[5, 10, {label: 'All', value: -1}]}
+            rowsPerPageOptions={[5, 10, {label: 'All', value: userActivities.length}]}
             component="div"
             count={userActivities.length}
             rowsPerPage={rowsPerPage}
