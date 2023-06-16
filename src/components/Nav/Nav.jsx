@@ -87,6 +87,14 @@ function Nav(props) {
               </ListItemButton>
             </ListItem>
 
+            <ListItem disablePadding>
+              <ListItemButton component="a" href="#/Achievements">
+                <ListItemIcon>
+                </ListItemIcon>
+                <ListItemText primary="Achievements" />
+              </ListItemButton>
+            </ListItem>
+
 
             <Box
               m={1}
