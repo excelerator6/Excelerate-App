@@ -7,6 +7,10 @@ import { DataGrid } from '@mui/x-data-grid';
 import { useSelector } from 'react-redux';
 import { Link } from '@mui/material';
 
+/**
+ * Function to check if the current "element's" contents are wider than allowed
+ * @param {*} element What is being checked
+ */
 function isOverflown(element) {
   return (
     element.scrollHeight > element.clientHeight ||
@@ -14,6 +18,11 @@ function isOverflown(element) {
   );
 }
 
+/**
+ * Allows the cell to display an ellipsis if it is wider than the current
+ * computedWidth of that column. It will then allow the user to expand out that
+ * column to view all of the information associated with that cell.
+ */
 const GridCellExpand = React.memo(function GridCellExpand(props) {
   const { width, value } = props;
   const wrapper = React.useRef(null);
@@ -23,7 +32,7 @@ const GridCellExpand = React.memo(function GridCellExpand(props) {
   const [showFullCell, setShowFullCell] = React.useState(false);
   const [showPopper, setShowPopper] = React.useState(false);
 
-  const handleMouseEnter = () => {
+  const handleCellClick = () => {
     const isCurrentlyOverflown = isOverflown(cellValue.current);
     setShowPopper(isCurrentlyOverflown);
     setAnchorEl(cellDiv.current);
@@ -62,7 +71,7 @@ const GridCellExpand = React.memo(function GridCellExpand(props) {
   return (
     <Box
       ref={wrapper}
-      onClick={handleMouseEnter}
+      onClick={handleCellClick}
       onMouseLeave={handleMouseLeave}
       sx={{
         alignItems: 'center',
@@ -117,14 +126,20 @@ const GridCellExpand = React.memo(function GridCellExpand(props) {
   );
 });
 
+/**
+ * @param {*} params The information being passed down to each column's cell.
+ */
 function renderCellExpand(params) {
   return (
     <GridCellExpand value={params.value || ''} width={params.colDef.computedWidth} />
   );
 }
 
+/**
+ * The header columns for the MUI DataGrid displaying the XpLog information
+ * - This is an array of objects.
+ */
 const columns = [
-  // { field: 'id', headerName: 'ID', width: 90 },
   {
     field: 'date',
     renderHeader: () => (
@@ -188,6 +203,9 @@ const columns = [
   },
 ];
 
+/**
+ * @returns MUI DataGrid containing the XpLog information
+ */
 export default function RenderExpandCellGrid() {
   const userActivities = useSelector(store => store.userActivities)
   return (
