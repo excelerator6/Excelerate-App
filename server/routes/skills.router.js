@@ -23,7 +23,6 @@ router.get('/getSkills', async (req, res) => {
     // push both table responses into singular array, then flatten that array to send client-side
     arr.push(response.rows, response2.rows);
     arr = arr.flat();
-    console.log(arr);
     res.send(arr)
   } catch (error) {
     console.log("Error connecting to DB in getSkills:", error);
