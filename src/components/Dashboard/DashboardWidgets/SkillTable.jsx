@@ -71,47 +71,44 @@ function SkillTable() {
         <div>
             <h2>skills</h2>
             <TableContainer component={Paper}>
-                <Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
+                <Table size="small" aria-label="a dense table">
                     <TableHead id='skillTableHeader'>
                         <TableRow>
                             <TableCell align="center">Skill</TableCell>
-                            <TableCell align="left">Level</TableCell>
-                            <TableCell align="center">Total XP This Level</TableCell>
-                            <TableCell align="right">XP Until Next Level</TableCell>
-                            <TableCell align="right">Badge</TableCell>
+                            <TableCell align="center">Level</TableCell>
+                            <TableCell align="center">Until Next Level</TableCell>
+                            <TableCell align="center">Badge</TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
                       {
                         skills.map((skill, index) => {
                             return(
-                                <TableRow 
+                                <TableRow
                                     key={index}
                                     sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                                     >
-                                        <TableCell>{skill.skill_name}</TableCell>
-                                        <TableCell align='right'>{calculateLevel(skill)}</TableCell>
-                                        <TableCell align='right'>
-                                        
-                                        <Box className="progressBarContainer" sx={{ display: 'flex', alignItems: 'center' }}>
-                                            <Box className='progressBar' container="span">
-                                                <BorderLinearProgress 
-                                                    variant="determinate" 
-                                                    value={normalise(calculateXP(skill))}
-                                                    valueBuffer={10}                                              
-                                                 />
-                                            <Box className='progressText' container="span">
-                                                <Typography
-                                                    variant="body1"
-                                                >
-                                                    {calculateXP(skill)} / 10
-                                                </Typography>
+                                        <TableCell align='center'>{skill.skill_name}</TableCell>
+                                        <TableCell align='center'>{calculateLevel(skill)}</TableCell>
+                                        <TableCell align='center'>
+                                            <Box className="progressBarContainer" sx={{ display: 'flex' }}>
+                                                <Box className='progressBar' container="span">
+                                                    <BorderLinearProgress 
+                                                        variant="determinate" 
+                                                        value={normalise(calculateXP(skill))}
+                                                        valueBuffer={10}                                              
+                                                    />
+                                                    <Box className='progressText' container="span">
+                                                        <Typography
+                                                            variant="body1"
+                                                        >
+                                                            {calculateXP(skill)} / 10
+                                                        </Typography>
+                                                    </Box>
+                                                </Box>  
                                             </Box>
-                                            </Box>  
-                                        </Box>
-                                  </TableCell>
-                                        <TableCell align='right'>{calculateNextLevelXP(skill)}</TableCell>
-                                        <TableCell align='right'>🤘</TableCell>
+                                        </TableCell>
+                                        <TableCell align='center'>🤘</TableCell>
                                 </TableRow>
                             )
                         })
