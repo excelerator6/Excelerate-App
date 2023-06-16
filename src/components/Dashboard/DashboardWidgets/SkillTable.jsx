@@ -76,8 +76,7 @@ function SkillTable() {
                         <TableRow>
                             <TableCell align="center">Skill</TableCell>
                             <TableCell align="left">Level</TableCell>
-                            <TableCell align="center">Total XP This Level</TableCell>
-                            <TableCell align="right">XP Until Next Level</TableCell>
+                            <TableCell align="center">Until Next Level</TableCell>
                             <TableCell align="right">Badge</TableCell>
                         </TableRow>
                     </TableHead>
@@ -90,26 +89,25 @@ function SkillTable() {
                                     sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                                     >
                                         <TableCell>{skill.skill_name}</TableCell>
-                                        <TableCell align='right'>{calculateLevel(skill)}</TableCell>
-                                        <TableCell align='right'>
-                                        
-                                        <Box className="progressBarContainer" sx={{ display: 'flex', alignItems: 'center' }}>
-                                            <Box className='progressBar' container="span">
-                                                <BorderLinearProgress 
-                                                    variant="determinate" 
-                                                    value={normalise(calculateXP(skill))}
-                                                    valueBuffer={10}                                              
-                                                 />
-                                            <Box className='progressText' container="span">
-                                                <Typography
-                                                    variant="body1"
-                                                >
-                                                    {calculateXP(skill)} / 10
-                                                </Typography>
+                                        <TableCell align='center'>{calculateLevel(skill)}</TableCell>
+                                        <TableCell align='center'>
+                                            <Box className="progressBarContainer" sx={{ display: 'flex' }}>
+                                                <Box className='progressBar' container="span">
+                                                    <BorderLinearProgress 
+                                                        variant="determinate" 
+                                                        value={normalise(calculateXP(skill))}
+                                                        valueBuffer={10}                                              
+                                                    />
+                                                    <Box className='progressText' container="span">
+                                                        <Typography
+                                                            variant="body1"
+                                                        >
+                                                            {calculateXP(skill)} / 10
+                                                        </Typography>
+                                                    </Box>
+                                                </Box>  
                                             </Box>
-                                            </Box>  
-                                        </Box>
-                                  </TableCell>
+                                        </TableCell>
                                         <TableCell align='right'>{calculateNextLevelXP(skill)}</TableCell>
                                         <TableCell align='right'>🤘</TableCell>
                                 </TableRow>

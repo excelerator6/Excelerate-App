@@ -1,14 +1,14 @@
 .progressBarContainer {
-    width: 175%;
+    width: 75%;
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
-    
+    justify-content: center;
     
   }
   
   .progressBar {
-    width: 175%
+    width: 100%
   }
   
   .progressText {
