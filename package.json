@@ -17,6 +17,7 @@
     "@mui/x-date-pickers": "^6.7.0",
     "axios": "^0.21.1",
     "bcryptjs": "^2.4.3",
+    "boring-avatars": "^1.10.1",
     "cookie-session": "^2.0.0",
     "dayjs": "^1.11.8",
     "dotenv": "^16.0.3",

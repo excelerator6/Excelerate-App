@@ -26,7 +26,11 @@ import FloatingActionButton from '../FloatingActionButton/FloatingActionButton';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 
+//import app css file
 import './App.css';
+//import avatars 
+import Avatars from '../Avatars/Avatars';
+
 import XpLogPage from '../XpLogPage/XpLogPage';
 import StatsPage from '../StatsPage/StatsPage';
 
