@@ -71,24 +71,24 @@ function SkillTable() {
         <div>
             <h2>skills</h2>
             <TableContainer component={Paper}>
-                <Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
+                <Table size="small" aria-label="a dense table">
                     <TableHead id='skillTableHeader'>
                         <TableRow>
                             <TableCell align="center">Skill</TableCell>
-                            <TableCell align="left">Level</TableCell>
+                            <TableCell align="center">Level</TableCell>
                             <TableCell align="center">Until Next Level</TableCell>
-                            <TableCell align="right">Badge</TableCell>
+                            <TableCell align="center">Badge</TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
                       {
                         skills.map((skill, index) => {
                             return(
-                                <TableRow 
+                                <TableRow
                                     key={index}
                                     sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                                     >
-                                        <TableCell>{skill.skill_name}</TableCell>
+                                        <TableCell align='center'>{skill.skill_name}</TableCell>
                                         <TableCell align='center'>{calculateLevel(skill)}</TableCell>
                                         <TableCell align='center'>
                                             <Box className="progressBarContainer" sx={{ display: 'flex' }}>
@@ -108,7 +108,7 @@ function SkillTable() {
                                                 </Box>  
                                             </Box>
                                         </TableCell>
-                                        <TableCell align='right'>🤘</TableCell>
+                                        <TableCell align='center'>🤘</TableCell>
                                 </TableRow>
                             )
                         })
