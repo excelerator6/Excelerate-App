@@ -4,9 +4,7 @@ import CalendarHeatmap from 'react-calendar-heatmap';
 import { Tooltip as ReactTooltip } from 'react-tooltip'
 import './HeatmapChart.css';
 
-// Basic functional component structure for React with default state
-// value setup. When making a new component be sure to replace the
-// component name TemplateFunction with the name for the new component.
+
 function HeatmapChart(props) {
 
     //Set the users activity array to be mapped below
@@ -31,6 +29,7 @@ function HeatmapChart(props) {
     // }
 
 
+    // * the problem is that the activities are undefined for some reason
     return (
         <div>
             <h2>your activity</h2>
@@ -42,21 +41,24 @@ function HeatmapChart(props) {
                 classForValue={value => {
                     if (!value) {
                         return 'color-empty';
+                    } else {
+                        const count = userActivity.filter(item => item.date === value.date);
+                        return `color-gitlab-${count.length}`;
                     }
-                    return `color-gitlab-${value.count}`;
                 }}
                 tooltipDataAttrs={value => {
+                    const count = userActivity.filter(item => item.date === value.date);
                     return {
                         // 'data-tip': `${value.date.toISOString().slice(0, 10)} has count: ${value.count
                         //     }`,
-                        'data-tip': `${value.date} has count: ${value.count
-                            }`,
+                        'data-tip': `${value.date} has count: ${count.length}`,
                     };
                 }}
                 showWeekdayLabels={true}
                 onClick={value => {
                     if (value) {
-                        return alert(`You logged ${value.count} activities on ${value.date}`)
+                        const count = userActivity.filter(item => item.date === value.date);
+                        return alert(`You logged ${count.length} activities on ${value.date}`)
                     }
                 }
                 }
