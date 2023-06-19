@@ -16,7 +16,6 @@ import { Paper } from '@mui/material';
 // * Need to loop through the user's activities, figure out which activities relate to which content, and sum the up
 function ConsumedContent() {
     const userActivities = useSelector(store => store.userActivities)
-    // console.log(userActivities);
 
     // functions that find which activities the user has logged apply to that type of content
     const podcasts = userActivities.filter(item => {
@@ -68,8 +67,6 @@ function ConsumedContent() {
     const thisYear = (arr) => {
         const doneThisYear = arr.filter(item => {
             const formattedDate = item.date.slice(6);
-            // console.log("item.date formatted:", formattedDate)
-            // console.log("Current year:", new Date().getFullYear())
             if(formattedDate ==  new Date().getFullYear()){
                 return item;
             }

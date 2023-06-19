@@ -56,7 +56,6 @@ router.get('/', rejectUnauthenticated, (req, res) => {
         delete result.skills_user_name
         return result
       }, []).sort((a,b) => (a.date > b.date) ? -1 : 1)
-      // *Something with the above function is causing there to be NULL items being sent to the client. 
       // console.log(formattedUserActivities)
       res.send(formattedUserActivities);
     }).catch(dbErr => {
