@@ -43,7 +43,7 @@ function HeatmapChart(props) {
                         return 'color-empty';
                     } else {
                         const count = userActivity.filter(item => item.date === value.date);
-                        return `color-gitlab-${count.length}`;
+                        return `color-excelerator-${count.length}`;
                     }
                 }}
                 tooltipDataAttrs={value => {

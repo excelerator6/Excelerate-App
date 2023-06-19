@@ -63,7 +63,7 @@
     fill: #ededed;
 }
 
-.react-calendar-heatmap .color-gitlab-1 {
+/* .react-calendar-heatmap .color-gitlab-1 {
     fill: #acd5f2;
 }
 
@@ -76,5 +76,29 @@
 }
 
 .react-calendar-heatmap .color-gitlab-4 {
-    fill: #254e77;
+    fill: #254e77; */
+/* } */
+
+/* 
+    * Excelerator color scale
+*/
+
+.react-calendar-heatmap .color-excelerator-0 {
+    fill: #c3e3eb ;
+}
+
+.react-calendar-heatmap .color-excelerator-1 {
+    fill: #c3e3eb;
+}
+
+.react-calendar-heatmap .color-excelerator-2 {
+    fill: #6d787f;
+}
+
+.react-calendar-heatmap .color-excelerator-3 {
+    fill: #36454f ;
+}
+
+.react-calendar-heatmap .color-excelerator-4 {
+    fill: #303841;
 }
