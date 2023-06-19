@@ -1,0 +1,19 @@
+#avatarContainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  flex-direction: column;
+  margin-top: 5%;
+}
+
+#avatar {
+  display: flex;
+  justify-content: center;
+}
+
+#username {
+  display: flex;
+  justify-content: center;
+  margin-top: 5%;
+  font-size: 30px;
+}
