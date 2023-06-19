@@ -15,7 +15,14 @@ function Avatars() {
           name={userName.username}
           variant="beam"
           // color scheme
-          colors={["#92A1C6", "#146A7C", "#F0AB3D", "#C271B4", "#C20D90"]}
+          colors={[
+            "c9cbcd",
+            "#90ee90",
+            "#c3e3eb",
+            "#061e45",
+            "#3645f",
+            "#303841",
+          ]}
         />
       </div>
       <div id="username">{userName.username}</div>
