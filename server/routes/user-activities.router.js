@@ -56,7 +56,6 @@ router.get('/', rejectUnauthenticated, (req, res) => {
         delete result.skills_user_name
         return result
       }, []).sort((a,b) => (a.date > b.date) ? -1 : 1)
-      // console.log(formattedUserActivities)
       res.send(formattedUserActivities);
     }).catch(dbErr => {
       console.log("Error connecting to DB within GET user-activities:", dbErr);
