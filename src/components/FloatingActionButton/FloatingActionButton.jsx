@@ -35,7 +35,7 @@ export default function FloatingActionButton() {
     const [skills, setSkills] = useState('');
     const [xp, setXp] = useState('');
     const [source, setSource] = useState('');
-    const [takeaways, setTakeaways] = useState();
+    const [takeaways, setTakeaways] = useState('');
 
     // useEffect for getting the activities
     useEffect(() => {
@@ -88,9 +88,9 @@ export default function FloatingActionButton() {
       setActivities('');
       setSkills('');
       setXp('');
-      setSource();
-      setTakeaways();
-      handleClose();
+      setSource('');
+      setTakeaways('');
+      handleClose('');
     }
 
     // We'll need to call this function again when the user creates a new skill
