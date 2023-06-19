@@ -65,7 +65,7 @@ router.get('/', rejectUnauthenticated, async (req, res) => {
       achievement_name AS achievement,
       achievement_category AS category
     FROM achievements
-    ORDER BY achievement_category;
+    ORDER BY id;
   `;
 
   ////////////////////////////////////////////////
@@ -78,22 +78,21 @@ router.get('/', rejectUnauthenticated, async (req, res) => {
     const { rows: skillLevels } = await connection.query( skillLevelsQuery, [ userId ]  )
     const { rows: completedActivitiesCount } = await connection.query( completedActivitiesQuery, [ userId ]  )
     const { rows: completedAchievements } = await connection.query( completedAchievementsQuery, [ userId ] )
-    const { rows: allAchievements } = await connection.query( allAchievementsQuery )
+    const { rows: allAchievementsUnformatted } = await connection.query( allAchievementsQuery )
 
-    const allAchievementsFormatted = allAchievements.reduce( ( result, item ) => {
+    console.log('allAchievementsUnformatted:', allAchievementsUnformatted);
+
+    let allAchievementsFormatted = allAchievementsUnformatted.reduce( ( result, item ) => {
       let { achievement, category } = item
       category =  category.charAt(0).toLowerCase() + category.replace(' ', '').slice(1)
-      if (result[category]) {
-        result[category].achievements.push(achievement)
+      if (!result[category]) {
+        result[category] = [achievement]
       }
       else {
-        result[category] = {
-          achievements: [achievement]
-        }
+        result[category].push(achievement)
       }
       return result
-    })
-    console.log(allAchievementsFormatted);
+    }, {})
 
     let totalSkillLevels = 0;
     skillLevels.map(skill => {
@@ -101,7 +100,7 @@ router.get('/', rejectUnauthenticated, async (req, res) => {
     })
 
     const achievementsData = {
-      allAchievements,
+      allAchievements: allAchievementsFormatted,
       userAchievements: {
         totalXp,
         totalSkillLevels,

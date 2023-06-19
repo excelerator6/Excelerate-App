@@ -216,13 +216,14 @@ VALUES
 	('Read 25 Book Summaries', 'Book Summaries'), ('Read 50 Book Summaries', 'Book Summaries'), ('Read 75 Book Summaries', 'Book Summaries'),
 	('Read 100 Book Summaries', 'Book Summaries'), ('Read 200 Book Summaries', 'Book Summaries'),
 	-- Articles Read
-	('Read 10 Articles', 'Articles Read'), ('Read 5 Articles', 'Articles Read'), ('Read 10 Articles', 'Articles Read'),
+	('Read 10 Articles', 'Articles Read'), ('Read 25 Articles', 'Articles Read'), ('Read 50 Articles', 'Articles Read'),
 	('Read 75 Articles', 'Articles Read'), ('Read 100 Articles', 'Articles Read'), ('Read 150 Articles', 'Articles Read'),
 	('Read 200 Articles', 'Articles Read'), ('Read 250 Articles', 'Articles Read'),
 	-- Courses Completed
 	('Complete 2 Courses', 'Courses Completed'), ('Complete 5 Courses', 'Courses Completed'), ('Complete 10 Courses', 'Courses Completed'),
 	('Complete 25 Courses', 'Courses Completed'), ('Complete 50 Courses', 'Courses Completed'), ('Complete 75 Courses', 'Courses Completed'),
 	('Complete 100 Courses', 'Courses Completed'), ('Complete 125 Courses', 'Courses Completed');
+	
 
 ----------------------------------------------------------------
 ----------------------------------------------------------------
