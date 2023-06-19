@@ -149,10 +149,13 @@ export default function FloatingActionButton() {
             />
             {/* Skills Select Field */}
             <TextField
-              sx={{ p: 1, mt: 1 }}
+              sx={{
+                p: 1,
+                mt: 1,
+              }}
               select
               label="Skills"
-              helperText="Please select your Skills"
+              helperText="Please select your Skill"
               value={skills}
               onChange={(event) => setSkills(event.target.value)}
             >
@@ -166,10 +169,13 @@ export default function FloatingActionButton() {
             </TextField>
             {/* Activities Select Field */}
             <TextField
-              sx={{ p: 1, mt: 1 }}
+              sx={{
+                p: 1,
+                mt: 1,
+              }}
               select
               label="Activities"
-              helperText="Pick an activity"
+              helperText="Please select your Activity"
               value={activities}
               onChange={handleActivitySelect}
             >
@@ -182,32 +188,29 @@ export default function FloatingActionButton() {
               })}
             </TextField>
             {/* text fields that auto field with the XP they get */}
-
             <TextField
               sx={{
                 p: 1,
                 mt: 1,
                 width: "8%",
-                textAlign: "center",
-                transformOrigin: "center",
-                "&.Mui-focused": {
-                  transformOrigin: "center",
-                },
+                typography: "body1",
               }}
               // disabled makes the box unselectable, since a user will not
               // have the option to change the associated xp value
               //  However this does grey out the box currently. May need
               //  to adjust the className so that it doesn't show grey...
               disabled
-              // box="true"
+              box="true"
               label="XP"
               value={xp}
-              // variant="standard"
             />
 
             {/*  Source text field */}
             <TextField
-              sx={{ p: 1 }}
+              sx={{
+                p: 1,
+                textAlign: "center",
+              }}
               autoFocus
               margin="dense"
               id="name"
