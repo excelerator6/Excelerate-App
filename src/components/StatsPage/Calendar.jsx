@@ -27,7 +27,7 @@ function Calendar(){
         }
     }) 
 
-    console.log(userActivities)
+    // console.log(userActivities)
     return(
         <div id='fullCalendar'>
             <Paper>

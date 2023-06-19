@@ -38,9 +38,8 @@ router.get('/', rejectUnauthenticated, (req, res) => {
       //  A skill will either be the skills_enterprise_name OR the skills_user_name
       let formattedUserActivities = unformattedUserActivities.map((result) => {
         const {
-          id, skills_enterprise_name, skills_user_name,
+          skills_enterprise_name, skills_user_name,
         } = result
-        // const key = id-1
         if (skills_enterprise_name) {
           result = {
             ...result,

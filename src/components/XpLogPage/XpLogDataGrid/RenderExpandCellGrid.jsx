@@ -209,7 +209,7 @@ const columns = [
 export default function RenderExpandCellGrid() {
   const userActivities = useSelector(store => store.userActivities)
   return (
-    <Box sx={{ height: 601, width: '100%' }}>
+    <Box sx={{ height: '74vh', width: '100%' }}>
       <DataGrid
         rows={userActivities}
         columns={columns}

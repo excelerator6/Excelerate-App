@@ -163,6 +163,71 @@ VALUES
 
 ----------------------------------------------------------------
 ----------------------------------------------------------------
+	-- Build achievements table with starter data --
+----------------------------------------------------------------
+----------------------------------------------------------------
+CREATE TABLE achievements (
+	id SERIAL PRIMARY KEY NOT NULL,
+	achievement_name VARCHAR NOT NULL,
+	achievement_category VARCHAR NOT NULL
+);
+
+-- Starter data using for achievements
+INSERT INTO achievements
+	(achievement_name, achievement_category)
+VALUES
+	-- XP Earned
+	('Earn 1000 XP', 'XP Earned'), ('Earn 1250 XP', 'XP Earned'), ('Earn 1500 XP', 'XP Earned'),
+	('Earn 1750 XP', 'XP Earned'), ('Earn 2000 XP', 'XP Earned'), ('Earn 2250 XP', 'XP Earned'),
+	('Earn 2500 XP', 'XP Earned'), ('Earn 2750 XP', 'XP Earned'),
+	-- Levels Obtained
+	('Obtain 1 Level', 'Levels Obtained'), ('Obtain Levels', 'Levels Obtained'), ('Obtain 10 Levels', 'Levels Obtained'),
+	('Obtain 25 Levels', 'Levels Obtained'), ('Obtain 50 Levels', 'Levels Obtained'), ('Obtain 100 Levels', 'Levels Obtained'),
+	('Obtain 200 Level', 'Levels Obtained'), ('Obtain 500 Levels', 'Levels Obtained'),
+	-- Videos Watched
+	('Watch 10 Videos', 'Videos Watched'), ('Watch 25 Videos', 'Videos Watched'), ('Watch 50 Videos', 'Videos Watched'),
+	('Watch 75 Videos', 'Videos Watched'), ('Watch 100 Videos', 'Videos Watched'), ('Watch 150 Videos', 'Videos Watched'),
+	('Watch 200 Videos', 'Videos Watched'), ('Watch 250 Videos', 'Videos Watched'),
+	-- Podcasts
+	('Listen to 25 Podcasts', 'Podcasts'), ('Listen to 50 Podcasts', 'Podcasts'), ('Listen to 75 Podcasts', 'Podcasts'),
+	('Listen to 100 Podcasts', 'Podcasts'), ('Listen to 150 Podcasts', 'Podcasts'), ('Listen to 200 Podcasts', 'Podcasts'),
+	('Listen to 250 Podcasts', 'Podcasts'), ('Listen to 500 Podcasts', 'Podcasts'),
+	-- Audiobooks
+	('Listen to 2 Audiobooks', 'Audiobooks'), ('Listen to 5 Audiobooks', 'Audiobooks'), ('Listen to 10 Audiobooks', 'Audiobooks'),
+	('Listen to 15 Audiobooks', 'Audiobooks'), ('Listen to 20 Audiobooks', 'Audiobooks'), ('Listen to 25 Audiobooks', 'Audiobooks'),
+	('Listen to 35 Audiobooks', 'Audiobooks'), ('Listen to 50 Audiobooks', 'Audiobooks'),
+	-- Books Read
+	('Read 2 Books', 'Books Read'), ('Read 5 Books', 'Books Read'), ('Read 10 Books', 'Books Read'),
+	('Read 15 Books', 'Books Read'), ('Read 20 Books', 'Books Read'), ('Read 25 Books', 'Books Read'),
+	('Read 30 Books', 'Books Read'), ('Read 35 Books', 'Books Read'),
+	-- Book Summaries
+	('Read 2 Book Summaries', 'Books Summaries'), ('Read 5 Book Summaries', 'Books Summaries'), ('Read 10 Book Summaries', 'Books Summaries'),
+	('Read 25 Book Summaries', 'Books Summaries'), ('Read 50 Book Summaries', 'Books Summaries'), ('Read 75 Book Summaries', 'Books Summaries'),
+	('Read 100 Book Summaries', 'Books Summaries'), ('Read 200 Book Summaries', 'Books Summaries'),
+	-- Articles Read
+	('Read 10 Articles', 'Articles Read'), ('Read 5 Articles', 'Articles Read'), ('Read 10 Articles', 'Articles Read'),
+	('Read 75 Articles', 'Articles Read'), ('Read 100 Articles', 'Articles Read'), ('Read 150 Articles', 'Articles Read'),
+	('Read 200 Articles', 'Articles Read'), ('Read 250 Articles', 'Articles Read'),
+	-- Courses Completed
+	('Complete 2 Courses', 'Courses Completed'), ('Complete 5 Courses', 'Courses Completed'), ('Complete 10 Courses', 'Courses Completed'),
+	('Complete 25 Courses', 'Courses Completed'), ('Complete 50 Courses', 'Courses Completed'), ('Complete 75 Courses', 'Courses Completed'),
+	('Complete 100 Courses', 'Courses Completed'), ('Complete 125 Courses', 'Courses Completed');
+
+----------------------------------------------------------------
+----------------------------------------------------------------
+	-- Build user_achievements table --
+----------------------------------------------------------------
+----------------------------------------------------------------
+CREATE TABLE user_achievements (
+	id SERIAL PRIMARY KEY NOT NULL,
+	user_id INTEGER REFERENCES "user"(id) ON DELETE CASCADE NOT NULL,
+	achievement_id INTEGER REFERENCES achievements(id) ON DELETE CASCADE NOT NULL,
+	date_achieved DATE NOT NULL DEFAULT CURRENT_DATE
+);
+
+
+----------------------------------------------------------------
+----------------------------------------------------------------
 	-- End build tables --
 ----------------------------------------------------------------
 ----------------------------------------------------------------
