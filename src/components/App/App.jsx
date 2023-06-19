@@ -29,6 +29,7 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import './App.css';
 import XpLogPage from '../XpLogPage/XpLogPage';
 import StatsPage from '../StatsPage/StatsPage';
+import AchievementsPage from '../AchievementsPage/AchievementsPage';
 
 function App() {
   const dispatch = useDispatch();
@@ -138,6 +139,13 @@ function App() {
               path='/Dashboard'
             >
               <Dashboard />
+            </ProtectedRoute>
+
+            <ProtectedRoute
+              exact
+              path='/Achievements'
+            >
+              <AchievementsPage />
             </ProtectedRoute>
 
             {/* If none of the other routes matched, we will show a 404. */}
