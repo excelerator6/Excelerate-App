@@ -84,8 +84,7 @@ INSERT INTO skills_user
 VALUES
     ('Communication', 1), ('Leadership', 1), ('Decision-Making', 1), ('Entrepreneurship', 1),
     ('Sales/Marketing', 1), ('Effectiveness', 1), ('Problem-Solving', 1), ('Self-Discovery', 1),
-    ('Technology', 1), ('Process Improvement', 1), ('Mindfulness', 1), ('Creativity', 1),
-    ('Discipline', 1), ('Confidence', 1);
+    ('Confidence', 1);
 
 
 ----------------------------------------------------------------
@@ -146,7 +145,7 @@ VALUES
     ('3/7/2023', 7, 1, 17, 'The Art of Possibility - What You Will Learn Podcast'),
     ('3/8/2023', 1, 1, 17, 'Mindset Mentor - Mastering Communication'),
     ('3/8/2023', 8, 1, 16, 'Meeting with Glen'),
-    ('3/9/2023', 14, 1, 17, 'Entreleadership - How to have confidence');
+    ('3/9/2023', 9, 1, 17, 'Entreleadership - How to have confidence');
     
 -- Starter data using skills_enterprise_id
 INSERT INTO user_activities
@@ -159,7 +158,19 @@ VALUES
     ('3/21/2023', 4, 1, 23, 'Creativity - Nihaly Csikszentmihaly | Blinkist'),
     ('3/21/2023', 4, 1, 23, 'Deep Creativity - Deborah Ann Quibell | Blinkist'),
     ('3/21/2023', 5, 1, 23, 'No Excuses! - Brian Tracy | Blinkist');
-
+    
+-- Starter data using skills_enterprise_id and key takeaway
+INSERT INTO user_activities
+    (date_completed, skills_enterprise_id, user_id, activity_id, source)
+VALUES
+    ('3/14/2023', 1, 1, 17, 'ChatGPT pod'),
+    ('3/15/2023', 1, 1, 17, 'ChatGPT pod'),
+    ('3/20/2023', 2, 1, 23, 'Life of Focus Course'),
+    ('3/21/2023', 3, 1, 23, 'The practice of groundedness - Brad Stulberg | Blinkist'),
+    ('3/21/2023', 4, 1, 23, 'Creativity - Nihaly Csikszentmihaly | Blinkist'),
+    ('3/21/2023', 4, 1, 23, 'Deep Creativity - Deborah Ann Quibell | Blinkist'),
+    ('3/21/2023', 5, 1, 23, 'No Excuses! - Brian Tracy | Blinkist');
+    
 
 ----------------------------------------------------------------
 ----------------------------------------------------------------
@@ -181,7 +192,7 @@ VALUES
 	('Earn 1750 XP', 'XP Earned'), ('Earn 2000 XP', 'XP Earned'), ('Earn 2250 XP', 'XP Earned'),
 	('Earn 2500 XP', 'XP Earned'), ('Earn 2750 XP', 'XP Earned'),
 	-- Levels Obtained
-	('Obtain 1 Level', 'Levels Obtained'), ('Obtain Levels', 'Levels Obtained'), ('Obtain 10 Levels', 'Levels Obtained'),
+	('Obtain 1 Level', 'Levels Obtained'), ('Obtain 5 Levels', 'Levels Obtained'), ('Obtain 10 Levels', 'Levels Obtained'),
 	('Obtain 25 Levels', 'Levels Obtained'), ('Obtain 50 Levels', 'Levels Obtained'), ('Obtain 100 Levels', 'Levels Obtained'),
 	('Obtain 200 Level', 'Levels Obtained'), ('Obtain 500 Levels', 'Levels Obtained'),
 	-- Videos Watched
@@ -215,7 +226,7 @@ VALUES
 
 ----------------------------------------------------------------
 ----------------------------------------------------------------
-	-- Build user_achievements table --
+	-- Build user_achievements table with starter data--
 ----------------------------------------------------------------
 ----------------------------------------------------------------
 CREATE TABLE user_achievements (
@@ -224,6 +235,14 @@ CREATE TABLE user_achievements (
 	achievement_id INTEGER REFERENCES achievements(id) ON DELETE CASCADE NOT NULL,
 	date_achieved DATE NOT NULL DEFAULT CURRENT_DATE
 );
+
+-- Starter data using for achievements
+INSERT INTO user_achievements
+	(user_id, achievement_id)
+VALUES
+	(1, 9), -- Obtain 1 Level
+	(1, 10), -- Obtain 5 Levels
+	(1, 50); -- Read 5 Book Summaries
 
 
 ----------------------------------------------------------------

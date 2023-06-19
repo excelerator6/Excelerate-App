@@ -47,15 +47,28 @@ router.get('/', rejectUnauthenticated, async (req, res) => {
     GROUP BY activity;
   `;
 
+  // GET the achievements already completed by the user
+  const completedAchievementsQuery = `
+    SELECT
+      achievements.achievement_name AS achievement,
+      achievements.achievement_category AS category,
+      date_achieved AS date
+    FROM user_achievements
+      LEFT JOIN achievements
+        ON user_achievements.achievement_id = achievements.id
+    WHERE user_id = $1; 
+  `;
+
   ////////////////////////////////////////////////
   // EXECUTE THE SQL TRANSACTION
   ////////////////////////////////////////////////
   const connection = await pool.connect();
   try {
-    let {rows: totalXp} = await connection.query( totalXpQuery, [ userId ] )
-    totalXp = Number(totalXp[0].totalXp)
-    const {rows: skillLevels} = await connection.query ( skillLevelsQuery, [ userId ]  )
-    const {rows: completedActivitiesCount} = await connection.query ( completedActivitiesQuery, [ userId ]  )
+    let { rows: totalXp } = await connection.query( totalXpQuery, [ userId ] )
+    totalXp = Number( totalXp[0].totalXp )
+    const { rows: skillLevels } = await connection.query( skillLevelsQuery, [ userId ]  )
+    const { rows: completedActivitiesCount } = await connection.query( completedActivitiesQuery, [ userId ]  )
+    const { rows: completedAchievements } = await connection.query( completedAchievementsQuery, [ userId ] )
 
     let totalSkillLevels = 0;
     skillLevels.map(skill => {
@@ -66,6 +79,7 @@ router.get('/', rejectUnauthenticated, async (req, res) => {
       totalXp,
       totalSkillLevels,
       completedActivitiesCount,
+      completedAchievements,
     }
 
     res.send( achievements )
