@@ -10,6 +10,11 @@ function HeatmapChart(props) {
     //Set the users activity array to be mapped below
     const userActivity = useSelector((store) => store.userActivities)
 
+    //   if (value) {
+    //     const count = userActivity.filter(item => item.date === value.date);
+    //     return alert(`You logged ${count.length} activities on ${value.date}`)
+    // }
+
     const today = new Date();
 
 
@@ -57,11 +62,9 @@ function HeatmapChart(props) {
                 showWeekdayLabels={true}
                 onClick={value => {
                     if (value) {
-                        const count = userActivity.filter(item => item.date === value.date);
-                        return alert(`You logged ${count.length} activities on ${value.date}`)
+                        return alert(`You logged ${value.count} activities on ${value.date}`)
                     }
-                }
-                }
+                }}
             />
             <ReactTooltip />
         </div>
