@@ -59,6 +59,15 @@ router.get('/', rejectUnauthenticated, async (req, res) => {
     WHERE user_id = $1; 
   `;
 
+  // GET ALL info from the achievements table
+  const allAchievementsQuery = `
+    SELECT
+      achievement_name AS achievement,
+      achievement_category AS category
+    FROM achievements
+    ORDER BY achievement_category;
+  `;
+
   ////////////////////////////////////////////////
   // EXECUTE THE SQL TRANSACTION
   ////////////////////////////////////////////////
@@ -69,20 +78,39 @@ router.get('/', rejectUnauthenticated, async (req, res) => {
     const { rows: skillLevels } = await connection.query( skillLevelsQuery, [ userId ]  )
     const { rows: completedActivitiesCount } = await connection.query( completedActivitiesQuery, [ userId ]  )
     const { rows: completedAchievements } = await connection.query( completedAchievementsQuery, [ userId ] )
+    const { rows: allAchievements } = await connection.query( allAchievementsQuery )
+
+    const allAchievementsFormatted = allAchievements.reduce( ( result, item ) => {
+      let { achievement, category } = item
+      category =  category.charAt(0).toLowerCase() + category.replace(' ', '').slice(1)
+      if (result[category]) {
+        result[category].achievements.push(achievement)
+      }
+      else {
+        result[category] = {
+          achievements: [achievement]
+        }
+      }
+      return result
+    })
+    console.log(allAchievementsFormatted);
 
     let totalSkillLevels = 0;
     skillLevels.map(skill => {
       totalSkillLevels += Number(skill.skillLevels)
     })
 
-    const achievements = {
-      totalXp,
-      totalSkillLevels,
-      completedActivitiesCount,
-      completedAchievements,
+    const achievementsData = {
+      allAchievements,
+      userAchievements: {
+        totalXp,
+        totalSkillLevels,
+        completedActivitiesCount,
+        completedAchievements,
+      },
     }
 
-    res.send( achievements )
+    res.send( achievementsData )
   } catch ( dbErr ) {
     console.log( 'Error in GET achievements:', dbErr );
     res.sendStatus( 500 )

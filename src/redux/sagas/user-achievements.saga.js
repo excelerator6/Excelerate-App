@@ -10,8 +10,9 @@ function* fetchAchievements() {
   }
 }
 
+
 function* userAchievementsSaga() {
-  yield takeLatest('FETCH_ACHIEVEMENTS_COUNT', fetchAchievements);
+  yield takeLatest('FETCH_ACHIEVEMENTS', fetchAchievements)
 }
 
 export default userAchievementsSaga;

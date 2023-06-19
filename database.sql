@@ -188,9 +188,9 @@ INSERT INTO achievements
 	(achievement_name, achievement_category)
 VALUES
 	-- XP Earned
-	('Earn 1000 XP', 'XP Earned'), ('Earn 1250 XP', 'XP Earned'), ('Earn 1500 XP', 'XP Earned'),
-	('Earn 1750 XP', 'XP Earned'), ('Earn 2000 XP', 'XP Earned'), ('Earn 2250 XP', 'XP Earned'),
-	('Earn 2500 XP', 'XP Earned'), ('Earn 2750 XP', 'XP Earned'),
+	('Earn 1000 XP', 'Xp Earned'), ('Earn 1250 XP', 'Xp Earned'), ('Earn 1500 XP', 'Xp Earned'),
+	('Earn 1750 XP', 'Xp Earned'), ('Earn 2000 XP', 'Xp Earned'), ('Earn 2250 XP', 'Xp Earned'),
+	('Earn 2500 XP', 'Xp Earned'), ('Earn 2750 XP', 'Xp Earned'),
 	-- Levels Obtained
 	('Obtain 1 Level', 'Levels Obtained'), ('Obtain 5 Levels', 'Levels Obtained'), ('Obtain 10 Levels', 'Levels Obtained'),
 	('Obtain 25 Levels', 'Levels Obtained'), ('Obtain 50 Levels', 'Levels Obtained'), ('Obtain 100 Levels', 'Levels Obtained'),
