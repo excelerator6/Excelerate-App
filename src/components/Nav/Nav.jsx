@@ -35,7 +35,6 @@ function Nav(props) {
   const drawer = (
     <div>
       <Avatars />
-      <Toolbar />
       <Divider />
       <List>
         <ListItem disablePadding>
