@@ -88,8 +88,8 @@ export default function FloatingActionButton() {
       setActivities('');
       setSkills('');
       setXp('');
-      setSource();
-      setTakeaways();
+      setSource('');
+      setTakeaways('');
       handleClose();
     }
 
