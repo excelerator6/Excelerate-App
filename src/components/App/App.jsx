@@ -47,6 +47,7 @@ function App() {
     <LocalizationProvider dateAdapter={AdapterDayjs}>
       <Router>
         <div>
+          <Avatars />
           <Nav />
           <Switch>
             {/* Visiting localhost:3000 will redirect to localhost:3000/home */}
@@ -60,14 +61,7 @@ function App() {
             >
               <AboutPage />
             </Route>
-            {/* avatars page */}
-            <ProtectedRoute
-              // logged in shows UserPage else shows LoginPage
-              exact
-              path="/avatars"
-            >
-              <Avatars />
-            </ProtectedRoute>
+
             {/* For protected routes, the view could show one of several things on the same route.
             Visiting localhost:3000/user will show the UserPage if the user is logged in.
             If the user is not logged in, the ProtectedRoute will show the LoginPage (component).
