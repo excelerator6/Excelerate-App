@@ -199,22 +199,22 @@ VALUES
 	('Watch 10 Videos', 'Videos Watched'), ('Watch 25 Videos', 'Videos Watched'), ('Watch 50 Videos', 'Videos Watched'),
 	('Watch 75 Videos', 'Videos Watched'), ('Watch 100 Videos', 'Videos Watched'), ('Watch 150 Videos', 'Videos Watched'),
 	('Watch 200 Videos', 'Videos Watched'), ('Watch 250 Videos', 'Videos Watched'),
-	-- Podcasts
-	('Listen to 25 Podcasts', 'Podcasts'), ('Listen to 50 Podcasts', 'Podcasts'), ('Listen to 75 Podcasts', 'Podcasts'),
-	('Listen to 100 Podcasts', 'Podcasts'), ('Listen to 150 Podcasts', 'Podcasts'), ('Listen to 200 Podcasts', 'Podcasts'),
-	('Listen to 250 Podcasts', 'Podcasts'), ('Listen to 500 Podcasts', 'Podcasts'),
-	-- Audiobooks
-	('Listen to 2 Audiobooks', 'Audiobooks'), ('Listen to 5 Audiobooks', 'Audiobooks'), ('Listen to 10 Audiobooks', 'Audiobooks'),
-	('Listen to 15 Audiobooks', 'Audiobooks'), ('Listen to 20 Audiobooks', 'Audiobooks'), ('Listen to 25 Audiobooks', 'Audiobooks'),
-	('Listen to 35 Audiobooks', 'Audiobooks'), ('Listen to 50 Audiobooks', 'Audiobooks'),
+	-- Podcasts Finished
+	('Listen to 25 Podcasts', 'Podcasts Finished'), ('Listen to 50 Podcasts', 'Podcasts Finished'), ('Listen to 75 Podcasts', 'Podcasts Finished'),
+	('Listen to 100 Podcasts', 'Podcasts Finished'), ('Listen to 150 Podcasts', 'Podcasts Finished'), ('Listen to 200 Podcasts', 'Podcasts Finished'),
+	('Listen to 250 Podcasts', 'Podcasts Finished'), ('Listen to 500 Podcasts', 'Podcasts Finished'),
+	-- Audiobooks Read
+	('Listen to 2 Audiobooks', 'Audiobooks Read'), ('Listen to 5 Audiobooks', 'Audiobooks Read'), ('Listen to 10 Audiobooks', 'Audiobooks Read'),
+	('Listen to 15 Audiobooks', 'Audiobooks Read'), ('Listen to 20 Audiobooks', 'Audiobooks Read'), ('Listen to 25 Audiobooks', 'Audiobooks Read'),
+	('Listen to 35 Audiobooks', 'Audiobooks Read'), ('Listen to 50 Audiobooks', 'Audiobooks Read'),
 	-- Books Read
 	('Read 2 Books', 'Books Read'), ('Read 5 Books', 'Books Read'), ('Read 10 Books', 'Books Read'),
 	('Read 15 Books', 'Books Read'), ('Read 20 Books', 'Books Read'), ('Read 25 Books', 'Books Read'),
 	('Read 30 Books', 'Books Read'), ('Read 35 Books', 'Books Read'),
 	-- Book Summaries
-	('Read 2 Book Summaries', 'Books Summaries'), ('Read 5 Book Summaries', 'Books Summaries'), ('Read 10 Book Summaries', 'Books Summaries'),
-	('Read 25 Book Summaries', 'Books Summaries'), ('Read 50 Book Summaries', 'Books Summaries'), ('Read 75 Book Summaries', 'Books Summaries'),
-	('Read 100 Book Summaries', 'Books Summaries'), ('Read 200 Book Summaries', 'Books Summaries'),
+	('Read 2 Book Summaries', 'Book Summaries'), ('Read 5 Book Summaries', 'Book Summaries'), ('Read 10 Book Summaries', 'Book Summaries'),
+	('Read 25 Book Summaries', 'Book Summaries'), ('Read 50 Book Summaries', 'Book Summaries'), ('Read 75 Book Summaries', 'Book Summaries'),
+	('Read 100 Book Summaries', 'Book Summaries'), ('Read 200 Book Summaries', 'Book Summaries'),
 	-- Articles Read
 	('Read 10 Articles', 'Articles Read'), ('Read 5 Articles', 'Articles Read'), ('Read 10 Articles', 'Articles Read'),
 	('Read 75 Articles', 'Articles Read'), ('Read 100 Articles', 'Articles Read'), ('Read 150 Articles', 'Articles Read'),
@@ -250,4 +250,3 @@ VALUES
 	-- End build tables --
 ----------------------------------------------------------------
 ----------------------------------------------------------------
-
