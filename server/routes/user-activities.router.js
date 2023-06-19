@@ -36,25 +36,25 @@ router.get('/', rejectUnauthenticated, (req, res) => {
       const unformattedUserActivities = dbRes.rows
       // Create a formattedUserActivities list that only has a skill key/value pair
       //  A skill will either be the skills_enterprise_name OR the skills_user_name
-      let formattedUserActivities = unformattedUserActivities.reduce((result, item) => {
+      let formattedUserActivities = unformattedUserActivities.map((result) => {
         const {
           id, skills_enterprise_name, skills_user_name,
-        } = item
-        const key = id-1
+        } = result
+        // const key = id-1
         if (skills_enterprise_name) {
-          result[key] = {
-            ...item,
+          result = {
+            ...result,
             skill: skills_enterprise_name
           }
         }
         else {
-          result[key] = {
-            ...item,
+          result = {
+            ...result,
             skill: skills_user_name
           }
         }
-        delete result[key].skills_enterprise_name
-        delete result[key].skills_user_name
+        delete result.skills_enterprise_name
+        delete result.skills_user_name
         return result
       }, []).sort((a,b) => (a.date > b.date) ? -1 : 1)
       res.send(formattedUserActivities);
@@ -67,10 +67,10 @@ router.get('/', rejectUnauthenticated, (req, res) => {
 router.get('/userActivityLog', rejectUnauthenticated, (req, res) => {
   const userId = req.user.id
   const sqlQuery = `
-  SELECT DATE(date_completed), COUNT(1) AS count
-  FROM user_activities
-  WHERE user_id = $1
-  GROUP BY DATE(date_completed);
+    SELECT DATE(date_completed), COUNT(1) AS count
+    FROM user_activities
+    WHERE user_id = $1
+    GROUP BY DATE(date_completed);
   `;
 
   pool

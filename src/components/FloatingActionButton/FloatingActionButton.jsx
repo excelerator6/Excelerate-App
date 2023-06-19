@@ -90,7 +90,7 @@ export default function FloatingActionButton() {
       setXp('');
       setSource('');
       setTakeaways('');
-      handleClose('');
+      handleClose();
     }
 
     // We'll need to call this function again when the user creates a new skill
