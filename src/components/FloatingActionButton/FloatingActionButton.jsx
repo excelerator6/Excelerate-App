@@ -21,8 +21,8 @@ import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import dayjs from "dayjs";
-//import themes from material ui for spacing
-import { createTheme } from "@mui/material/styles";
+//import spacing from material ui
+import { spacing } from "@mui/system";
 //  * Should be refactored out to components, + needs to be formatted nicely
 export default function FloatingActionButton() {
   const dispatch = useDispatch();
@@ -103,9 +103,6 @@ export default function FloatingActionButton() {
     // autofill the XP field with the XP amount associated with the activity
     setXp(activitiesList[activityId - 1].xp_value);
   };
-  //theme from material ui to create spacing
-  const theme = createTheme();
-  theme.spacing(2);
 
   if (activitiesList.length > 0 && skillsList.length > 0) {
     return (
@@ -138,9 +135,13 @@ export default function FloatingActionButton() {
           onClose={handleClose}
         >
           <DialogTitle>Add New Log</DialogTitle>
-          <DialogContent>
+          <DialogContent sx={{ p: 1, m: 1, textAlign: "center" }}>
             {/* Date */}
             <DatePicker
+              sx={{
+                p: 1,
+                mt: 1,
+              }}
               value={date}
               onChange={(newValue) => {
                 setDate(newValue);
@@ -148,6 +149,7 @@ export default function FloatingActionButton() {
             />
             {/* Skills Select Field */}
             <TextField
+              sx={{ p: 1, mt: 1 }}
               select
               label="Skills"
               helperText="Please select your Skills"
@@ -164,6 +166,7 @@ export default function FloatingActionButton() {
             </TextField>
             {/* Activities Select Field */}
             <TextField
+              sx={{ p: 1, mt: 1 }}
               select
               label="Activities"
               helperText="Pick an activity"
@@ -179,19 +182,32 @@ export default function FloatingActionButton() {
               })}
             </TextField>
             {/* text fields that auto field with the XP they get */}
+
             <TextField
+              sx={{
+                p: 1,
+                mt: 1,
+                width: "8%",
+                textAlign: "center",
+                transformOrigin: "center",
+                "&.Mui-focused": {
+                  transformOrigin: "center",
+                },
+              }}
               // disabled makes the box unselectable, since a user will not
               // have the option to change the associated xp value
               //  However this does grey out the box currently. May need
               //  to adjust the className so that it doesn't show grey...
               disabled
-              box="true"
+              // box="true"
               label="XP"
               value={xp}
-              variant="standard"
+              // variant="standard"
             />
+
             {/*  Source text field */}
             <TextField
+              sx={{ p: 1 }}
               autoFocus
               margin="dense"
               id="name"
@@ -205,7 +221,9 @@ export default function FloatingActionButton() {
               }}
             />
             {/* Takeaways text field */}
+
             <TextField
+              sx={{ p: 1 }}
               autoFocus
               margin="dense"
               id="name"
