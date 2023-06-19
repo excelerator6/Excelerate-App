@@ -28,8 +28,6 @@ import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 
 //import app css file
 import "./App.css";
-//import avatars
-import Avatars from "../Avatars/Avatars";
 
 import XpLogPage from "../XpLogPage/XpLogPage";
 import StatsPage from "../StatsPage/StatsPage";
@@ -47,7 +45,6 @@ function App() {
     <LocalizationProvider dateAdapter={AdapterDayjs}>
       <Router>
         <div>
-          <Avatars />
           <Nav />
           <Switch>
             {/* Visiting localhost:3000 will redirect to localhost:3000/home */}

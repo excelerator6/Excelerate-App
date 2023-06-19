@@ -18,6 +18,9 @@ import MenuIcon from "@mui/icons-material/Menu";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 
+//import Avatars
+import Avatars from "../Avatars/Avatars";
+
 const drawerWidth = 200;
 
 function Nav(props) {
@@ -31,6 +34,7 @@ function Nav(props) {
 
   const drawer = (
     <div>
+      <Avatars />
       <Toolbar />
       <Divider />
       <List>
@@ -106,6 +110,7 @@ function Nav(props) {
           Login / Register
         </Link>
       )}
+
       <Box sx={{ display: "flex" }}>
         <CssBaseline />
         <AppBar

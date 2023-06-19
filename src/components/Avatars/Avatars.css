@@ -1,4 +1,16 @@
-div {
-  position: relative;
-  top: 10px;
+#avatarContainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  flex-direction: column;
+}
+
+#avatar {
+  display: flex;
+  justify-content: center;
+}
+
+#username {
+  display: flex;
+  justify-content: center;
 }
