@@ -18,7 +18,7 @@ import Calendar from './Calendar';
 function StatsPage(props) {
     const dispatch = useDispatch();
 
-    const [value, setValue] = useState(0);
+    const [value, setValue] = useState('0');
 
     const handleChange = (event, newValue) => {
         setValue(newValue);
@@ -36,15 +36,16 @@ function StatsPage(props) {
             <TabContext value={value}>
                 <Box sx={{ borderBottom: 1, borderColor: 'divider'}}>
                 <TabList onChange={handleChange} aria-label="lab API tabs example" centered>
-                    <Tab label="Item One" value={0} />
-                    <Tab label="Item Two" value={1} />
+                    <Tab label="Item One" value='0' />
+                    <Tab label="Item Two" value='1' />
                 </TabList>
                 </Box>
-                <TabPanel value={0}>
+                <TabPanel value='0'>
                     <Calendar />
                 </TabPanel>
                 <TabPanel>
                     {/* Bar Graph Goes Here */}
+                    <p>Hello There</p>
                 </TabPanel>
             </TabContext>
         </Box>
