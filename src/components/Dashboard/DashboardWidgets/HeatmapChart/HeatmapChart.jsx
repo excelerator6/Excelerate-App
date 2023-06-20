@@ -27,7 +27,12 @@ function HeatmapChart(props) {
 
     // function that takes a date and calculates how many activities were logged on that date, returning length of that array
     const countActivities = (date) => {
-        return userActivity.filter(item => item.date === date).length;  
+        const values = userActivity.filter(item => item.date === date).length;  
+        if(values > 0){
+            return values;
+        } else {
+            return 0;
+        }
     }
 
     function shiftDate(date, numDays) {
@@ -44,22 +49,21 @@ function HeatmapChart(props) {
     //     return Math.floor(Math.random() * (max - min + 1)) + min;
     // }
 
-    const openPopover = (value) => {
-        // const clickX = e.clientX;
-        // setClickPosition()
+    const openPopover = (el, value) => {
         // * Need to find a way to get the position of the mouse click, and have the popover spring from there
-        console.log()
-        setAnchorEl(anchorEl);
-        if (value) {
+        console.log("Our values:", value)
+        setAnchorEl(el);
+        if (value && countActivities(value.date) > 0) {
+            console.log("Got to if statement in openPopover")
             if(countActivities(value.date)===1){
-                // setPopupText(`You logged ${countActivities(value.date)} activity on ${value.date}`)
-                alert(`You logged ${countActivities(value.date)} activity on ${value.date}`)
-            } else {
-                // setPopupText(`You logged ${countActivities(value.date)} activities on ${value.date}`)
-                alert(`You logged ${countActivities(value.date)} activities on ${value.date}`)
-            }
+                setPopupText(`You logged ${countActivities(value.date)} activity on ${value.date}`)
+            } else if(countActivities(value.date) > 1){
+                setPopupText(`You logged ${countActivities(value.date)} activities on ${value.date}`)
+            } 
+        }else{
+            console.log("Got to else statement in openPopover")
+            setPopupText(`You logged 0 activities on this date.`)
         }
-        // setPopupText(text);
       };
 
     const handleClose = () => {
@@ -81,23 +85,22 @@ function HeatmapChart(props) {
                         return `color-excelerator-${countActivities(value.date)}`;
                     }
                 }}
-                tooltipDataAttrs={value => {
-                    return {
-                        // 'data-tip': `${value.date.toISOString().slice(0, 10)} has count: ${value.count
-                        //     }`,
-                        'data-tip': `${value.date} has count: ${countActivities(value.date)}`,
-                    };
-                }}
+                // tooltipDataAttrs={value => {
+                //     return {
+                //         // 'data-tip': `${value.date.toISOString().slice(0, 10)} has count: ${value.count
+                //         //     }`,
+                //         'data-tip': `${value.date} has count: ${countActivities(value.date)}`,
+                //     };
+                // }}
                 showWeekdayLabels={true}
-                onClick={value => openPopover(value)}
+                onClick={value => openPopover(event.target, value)}
             />
             <ReactTooltip />
             {
                 anchorEl ? <Popover
                 id={id}
                 open={open}
-                // anchorEl={anchorEl}
-                anchorPosition={clickPosition}
+                anchorEl={anchorEl}
                 onClose={handleClose}
                 anchorOrigin={{
                 vertical: 'bottom',
