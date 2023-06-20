@@ -29,7 +29,7 @@ export default function XpLogDataGrid() {
 
     const handleClick = (event) => {
       setAnchorEl(event.currentTarget);
-      console.log('props:', props);
+      // console.log('props:', props);
       return;
     };
   

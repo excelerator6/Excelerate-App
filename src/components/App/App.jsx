@@ -132,7 +132,11 @@ function App() {
               <h1>404</h1>
             </Route>
           </Switch>
-          <FloatingActionButton />
+          <>
+            {
+              user.id ? <FloatingActionButton /> : <></>
+            }
+          </>
           <Footer />
         </div>
       </Router>
