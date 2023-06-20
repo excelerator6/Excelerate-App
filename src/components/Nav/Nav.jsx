@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import LogOutButton from "../LogOutButton/LogOutButton";
-// import './Nav.css';
+import './Nav.css';
 import { useSelector } from "react-redux";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
@@ -17,6 +17,7 @@ import ListItemText from "@mui/material/ListItemText";
 import MenuIcon from "@mui/icons-material/Menu";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
+import ExceleratorLogo from './images/Excelerator_Logo.png'
 
 //import Avatars
 import Avatars from "../Avatars/Avatars";
@@ -136,9 +137,7 @@ function Nav(props) {
             >
               <MenuIcon />
             </IconButton>
-            <Typography variant="h6" noWrap component="div">
-              Excelerator
-            </Typography>
+            <img src={ExceleratorLogo} className="logo"/>
           </Toolbar>
         </AppBar>
         <Box
