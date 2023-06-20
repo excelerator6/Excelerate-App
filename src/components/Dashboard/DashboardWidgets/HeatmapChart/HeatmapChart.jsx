@@ -18,6 +18,10 @@ function HeatmapChart(props) {
     const today = new Date();
 
 
+    // function that takes a date and calculates how many activities were logged on that date, returning length of that array
+    const countActivities = (date) => {
+        return userActivity.filter(item => item.date === date).length;  
+    }
 
     function shiftDate(date, numDays) {
         const newDate = new Date(date);
@@ -33,8 +37,6 @@ function HeatmapChart(props) {
     //     return Math.floor(Math.random() * (max - min + 1)) + min;
     // }
 
-
-    // * the problem is that the activities are undefined for some reason
     return (
         <div>
             <h2>your activity</h2>
@@ -47,22 +49,24 @@ function HeatmapChart(props) {
                     if (!value) {
                         return 'color-empty';
                     } else {
-                        const count = userActivity.filter(item => item.date === value.date);
-                        return `color-excelerator-${count.length}`;
+                        return `color-excelerator-${countActivities(value.date)}`;
                     }
                 }}
                 tooltipDataAttrs={value => {
-                    const count = userActivity.filter(item => item.date === value.date);
                     return {
                         // 'data-tip': `${value.date.toISOString().slice(0, 10)} has count: ${value.count
                         //     }`,
-                        'data-tip': `${value.date} has count: ${count.length}`,
+                        'data-tip': `${value.date} has count: ${countActivities(value.date)}`,
                     };
                 }}
                 showWeekdayLabels={true}
                 onClick={value => {
                     if (value) {
-                        return alert(`You logged ${value.count} activities on ${value.date}`)
+                        if(countActivities(value.date)===1){
+                            return alert(`You logged ${countActivities(value.date)} activity on ${value.date}`)
+                        } else {
+                            return alert(`You logged ${countActivities(value.date)} activities on ${value.date}`)
+                        }
                     }
                 }}
             />
