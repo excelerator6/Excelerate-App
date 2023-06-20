@@ -4,14 +4,9 @@ import { useState } from 'react';
 // calendar plugins
 import FullCalendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
-import { Paper, Box, Popover, Typography } from '@mui/material';
-
-
-// * STRETCH GOAL: I'd like to have activities on the calendar be clickable,
-// * revealing a popup of more info about that specific event
+import { Paper, Box, Popover } from '@mui/material';
 
 function Calendar(){
-    const [activitiesReceived, setActivitiesReceived] = useState(false);
     const [anchorEl, setAnchorEl] = useState(null);
     const [popupText, setPopupText] = useState('');
 
@@ -37,7 +32,14 @@ function Calendar(){
 
     const openPopover = (event) => {
         setAnchorEl(event.el);
-        setPopupText(event.event.title);
+        const popupText = userActivities.filter(item => {
+            if(event.event._def.publicId == item.id){
+                return item;
+            }
+        });
+
+        const text = `Skill: ${popupText[0].skill} // Activity: ${popupText[0].activity}`;
+        setPopupText(text);
       };
     
     const handleClose = () => {
