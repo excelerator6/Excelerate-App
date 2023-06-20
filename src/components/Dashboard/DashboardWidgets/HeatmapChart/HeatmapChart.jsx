@@ -4,8 +4,15 @@ import CalendarHeatmap from 'react-calendar-heatmap';
 import { Tooltip as ReactTooltip } from 'react-tooltip'
 import './HeatmapChart.css';
 
+import { Paper, Box, Popover, Typography } from '@mui/material';
 
 function HeatmapChart(props) {
+    const [anchorEl, setAnchorEl] = useState(null);
+    const [popupText, setPopupText] = useState('');
+    const [clickPosition, setClickPosition] = useState(null);
+
+    const open = Boolean(anchorEl);
+    const id = open ? 'simple-popover' : undefined;
 
     //Set the users activity array to be mapped below
     const userActivity = useSelector((store) => store.userActivities)
@@ -37,6 +44,28 @@ function HeatmapChart(props) {
     //     return Math.floor(Math.random() * (max - min + 1)) + min;
     // }
 
+    const openPopover = (value) => {
+        // const clickX = e.clientX;
+        // setClickPosition()
+        // * Need to find a way to get the position of the mouse click, and have the popover spring from there
+        console.log()
+        setAnchorEl(anchorEl);
+        if (value) {
+            if(countActivities(value.date)===1){
+                // setPopupText(`You logged ${countActivities(value.date)} activity on ${value.date}`)
+                alert(`You logged ${countActivities(value.date)} activity on ${value.date}`)
+            } else {
+                // setPopupText(`You logged ${countActivities(value.date)} activities on ${value.date}`)
+                alert(`You logged ${countActivities(value.date)} activities on ${value.date}`)
+            }
+        }
+        // setPopupText(text);
+      };
+
+    const handleClose = () => {
+        setAnchorEl(null);
+    };
+
     return (
         <div>
             <h2>your activity</h2>
@@ -60,17 +89,31 @@ function HeatmapChart(props) {
                     };
                 }}
                 showWeekdayLabels={true}
-                onClick={value => {
-                    if (value) {
-                        if(countActivities(value.date)===1){
-                            return alert(`You logged ${countActivities(value.date)} activity on ${value.date}`)
-                        } else {
-                            return alert(`You logged ${countActivities(value.date)} activities on ${value.date}`)
-                        }
-                    }
-                }}
+                onClick={value => openPopover(value)}
             />
             <ReactTooltip />
+            {
+                anchorEl ? <Popover
+                id={id}
+                open={open}
+                // anchorEl={anchorEl}
+                anchorPosition={clickPosition}
+                onClose={handleClose}
+                anchorOrigin={{
+                vertical: 'bottom',
+                horizontal: 'left',
+                }}
+            >
+                <Paper elevation={1}>
+                    <Box 
+                        width={250}
+                        p={2}
+                        >
+                        {popupText}
+                    </Box>
+              </Paper>
+            </Popover> : <></>
+            }
         </div>
     );
 }

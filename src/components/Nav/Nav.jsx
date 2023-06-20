@@ -34,6 +34,7 @@ function Nav(props) {
 
   const drawer = (
     <div>
+      
       <Avatars />
         <Divider />
         <List>
@@ -45,8 +46,8 @@ function Nav(props) {
           </ListItem>
 
         {/* If no user is logged in, show these links */}
-        {!user.id && (
-          // If there's no user, show login/registration links
+        {/* {!user.id && ( */}
+          {/* // If there's no user, show login/registration links */}
 
           <ListItem disablePadding>
             <ListItemButton component="a" href="#/login">
@@ -54,10 +55,10 @@ function Nav(props) {
               <ListItemText primary="Login" />
             </ListItemButton>
           </ListItem>
-        )}
+        {/* // )} */}
 
-        {user.id && (
-          //If a user is logged in, show these links
+        {/* {user.id && ( */}
+          {/* //If a user is logged in, show these links */}
           <>
             <ListItem disablePadding>
               <ListItemButton component="a" href="#/dashboard">
@@ -99,13 +100,31 @@ function Nav(props) {
               <LogOutButton className="btn" />
             </Box>
           </>
-        )}
+        {/* // )} */}
       </List>
+      
     </div>
   );
 
   const container =
     window !== undefined ? () => window().document.body : undefined;
+
+
+    // functions to calculate width of App bar depending on whether or not the drawer is rendering, which is based upon if the user is logged in.
+  const appBarWidth = (width) => {
+    if(user.id){
+      return `calc(100% - ${width}px)`;
+    } else{
+      return '100%';
+    }
+  }
+  const appMargin = (width) => {
+    if(user.id){
+      return `${width}px`
+    } else{
+      return '100%';
+    }
+  }
 
   return (
     <div className="drawerRoot">
@@ -122,8 +141,8 @@ function Nav(props) {
         <AppBar
           position="fixed"
           sx={{
-            width: { sm: `calc(100% - ${drawerWidth}px)` },
-            ml: { sm: `${drawerWidth}px` },
+            width: { sm: appBarWidth(drawerWidth) },
+            ml: { sm: appMargin(drawerWidth) },
           }}
         >
           <Toolbar>
@@ -147,6 +166,9 @@ function Nav(props) {
           aria-label="mailbox folders"
         >
           {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
+          {
+            user.id ? 
+          <>
           <Drawer
             container={container}
             variant="temporary"
@@ -177,7 +199,8 @@ function Nav(props) {
             open
           >
             {drawer}
-          </Drawer>
+          </Drawer> </>: <></>
+          }
         </Box>
         <Box
           component="main"
