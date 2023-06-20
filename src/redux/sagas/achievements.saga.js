@@ -3,16 +3,16 @@ import axios from 'axios';
 
 function* fetchAchievements() {
   try {
-    const { data: userAchievements } = yield axios.get('/api/achievements');
-    yield put({ type: 'SET_USER_ACHIEVEMENTS', payload: userAchievements })
+    const { data: achievementsData } = yield axios.get('/api/achievements');
+    yield put({ type: 'SET_ACHIEVEMENTS', payload: achievementsData })
   } catch (error) {
     console.log('Error within fetchAchievements:', error);
   }
 }
 
 
-function* userAchievementsSaga() {
+function* achievementsSaga() {
   yield takeLatest('FETCH_ACHIEVEMENTS', fetchAchievements)
 }
 
-export default userAchievementsSaga;
+export default achievementsSaga;
