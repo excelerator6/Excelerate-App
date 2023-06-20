@@ -223,7 +223,7 @@ VALUES
 	('Complete 2 Courses', 'Courses Completed'), ('Complete 5 Courses', 'Courses Completed'), ('Complete 10 Courses', 'Courses Completed'),
 	('Complete 25 Courses', 'Courses Completed'), ('Complete 50 Courses', 'Courses Completed'), ('Complete 75 Courses', 'Courses Completed'),
 	('Complete 100 Courses', 'Courses Completed'), ('Complete 125 Courses', 'Courses Completed');
-	
+
 
 ----------------------------------------------------------------
 ----------------------------------------------------------------
@@ -241,9 +241,9 @@ CREATE TABLE user_achievements (
 INSERT INTO user_achievements
 	(user_id, achievement_id)
 VALUES
-	(1, 9), -- Obtain 1 Level
-	(1, 10), -- Obtain 5 Levels
-	(1, 50); -- Read 5 Book Summaries
+	(1, 9),	 -- Obtain 1 Level
+	(1, 50), -- Read 5 Book Summaries
+	(1, 51); -- Read 10 Book Summaries 
 
 
 ----------------------------------------------------------------
