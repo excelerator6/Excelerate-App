@@ -8,7 +8,7 @@ const router = express.Router();
  */
 router.get('/getSkills', async (req, res) => {
   // GET route code here
-  // * BUG HERE: When logging in, 
+
   const userID = req.user.id;
   try {
     // aggregate array of both skill tables
