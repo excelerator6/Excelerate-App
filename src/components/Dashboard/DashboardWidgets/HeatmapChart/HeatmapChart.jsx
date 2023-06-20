@@ -9,7 +9,6 @@ import { Paper, Box, Popover, Typography } from '@mui/material';
 function HeatmapChart(props) {
     const [anchorEl, setAnchorEl] = useState(null);
     const [popupText, setPopupText] = useState('');
-    const [clickPosition, setClickPosition] = useState(null);
 
     const open = Boolean(anchorEl);
     const id = open ? 'simple-popover' : undefined;
@@ -51,17 +50,14 @@ function HeatmapChart(props) {
 
     const openPopover = (el, value) => {
         // * Need to find a way to get the position of the mouse click, and have the popover spring from there
-        console.log("Our values:", value)
         setAnchorEl(el);
         if (value && countActivities(value.date) > 0) {
-            console.log("Got to if statement in openPopover")
             if(countActivities(value.date)===1){
                 setPopupText(`You logged ${countActivities(value.date)} activity on ${value.date}`)
             } else if(countActivities(value.date) > 1){
                 setPopupText(`You logged ${countActivities(value.date)} activities on ${value.date}`)
             } 
         }else{
-            console.log("Got to else statement in openPopover")
             setPopupText(`You logged 0 activities on this date.`)
         }
       };
@@ -85,13 +81,6 @@ function HeatmapChart(props) {
                         return `color-excelerator-${countActivities(value.date)}`;
                     }
                 }}
-                // tooltipDataAttrs={value => {
-                //     return {
-                //         // 'data-tip': `${value.date.toISOString().slice(0, 10)} has count: ${value.count
-                //         //     }`,
-                //         'data-tip': `${value.date} has count: ${countActivities(value.date)}`,
-                //     };
-                // }}
                 showWeekdayLabels={true}
                 onClick={value => openPopover(event.target, value)}
             />

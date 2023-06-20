@@ -45,19 +45,19 @@ function Nav(props) {
             </ListItemButton>
           </ListItem>
 
-        {/* If no user is logged in, show these links */}
-        {/* {!user.id && ( */}
           {/* // If there's no user, show login/registration links */}
-
-          <ListItem disablePadding>
+          {
+            user.id ? <></> : <ListItem disablePadding>
             <ListItemButton component="a" href="#/login">
               <ListItemIcon></ListItemIcon>
               <ListItemText primary="Login" />
             </ListItemButton>
           </ListItem>
-        {/* // )} */}
+          }
+          
 
-        {/* {user.id && ( */}
+
+
           {/* //If a user is logged in, show these links */}
           <>
             <ListItem disablePadding>
