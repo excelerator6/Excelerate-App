@@ -37,7 +37,16 @@ function Calendar(){
 
     const openPopover = (event) => {
         setAnchorEl(event.el);
-        setPopupText(event.event.title);
+        const popupText = userActivities.filter(item => {
+            if(event.event._def.publicId == item.id){
+                console.log("Our activity id:", item.id)
+                return item;
+            }
+        });
+        console.log(popupText[0]);
+        // *How should / can I format this popover to look nice?
+        const text = `Skill: ${popupText[0].skill} || Activity: ${popupText[0].activity} || Source: ${popupText[0].source} || Takeaway: ${popupText[0].takeaway}`
+        setPopupText(text);
       };
     
     const handleClose = () => {

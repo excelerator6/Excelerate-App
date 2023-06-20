@@ -35,14 +35,14 @@ function Nav(props) {
   const drawer = (
     <div>
       <Avatars />
-      <Divider />
-      <List>
-        <ListItem disablePadding>
-          <ListItemButton component="a" href="#/about">
-            <ListItemIcon></ListItemIcon>
-            <ListItemText primary="About" />
-          </ListItemButton>
-        </ListItem>
+        <Divider />
+        <List>
+          <ListItem disablePadding>
+            <ListItemButton component="a" href="#/about">
+              <ListItemIcon></ListItemIcon>
+              <ListItemText primary="About" />
+            </ListItemButton>
+          </ListItem>
 
         {/* If no user is logged in, show these links */}
         {!user.id && (
