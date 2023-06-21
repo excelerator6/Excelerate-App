@@ -32,7 +32,7 @@ function BarChart() {
         dispatch({ type: 'FETCH_USER_TOTAL_XP_POINTS' })
     }, [])
 
-    const userXpPoints = useSelector((store) => store.userActivities)
+    const userXpPoints = useSelector((store) => store.xpPoints)
 
     const options = {
         responsive: true,
