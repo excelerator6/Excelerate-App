@@ -13,8 +13,7 @@ function LandingPage() {
   const [heading, setHeading] = useState(`Let's EXCEL!`);
   const [showRegisterForm, setShowRegisterForm] = useState(false);
 
-  const history = useHistory();
-
+  // functions that tab between whether the login and register forms showing
   const showRegister = () => {
     setShowRegisterForm(true);
   };
@@ -22,6 +21,7 @@ function LandingPage() {
     setShowRegisterForm(false)
   }
 
+  // function to format the given props into the items for the carousel.
   function Item(props)
     {
         return (
@@ -45,11 +45,36 @@ function LandingPage() {
 
   return (
     <div className="container">
-      <h2>{heading}</h2>
 
       <div className="grid">
         <div className="grid-col grid-col_8" id='carousel'>
-          <Carousel>
+        <h2>{heading}</h2>
+          <Carousel
+            navButtonsProps={{          // Change the colors and radius of the actual buttons. THIS STYLES BOTH BUTTONS
+              style: {
+                  backgroundColor: '#90ee90',
+                  borderRadius: 17
+              }
+            }}
+            indicatorIconButtonProps={{
+              style: {
+                  padding: '5px',    // 1
+                  color: '#36454f'       // 3
+              }
+            }}
+            activeIndicatorIconButtonProps={{
+                style: {
+                    backgroundColor: '#c9cbcd' // 2
+                }
+            }}
+            indicatorContainerProps={{
+                style: {
+                    marginTop: '25px', // 5
+                    textAlign: 'center' // 4
+                }
+        
+            }}
+          >
               {items.map( (item, i) => <Item key={i} item={item} /> )}
           </Carousel>
         </div>
