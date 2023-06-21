@@ -4,6 +4,8 @@ const userActivitiesReducer = (state = [], action) => {
       return action.payload;
     case 'SET_USER_ACTIVITY_LOG':
       return action.payload;
+    case 'SET_USER_TOTAL_XP_POINTS':
+      return action.payload;
     default:
       return state;
   }

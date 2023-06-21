@@ -56,7 +56,7 @@ router.get('/', rejectUnauthenticated, (req, res) => {
         delete result.skills_enterprise_name
         delete result.skills_user_name
         return result
-      }, []).sort((a,b) => (a.date > b.date) ? -1 : 1)
+      }, []).sort((a, b) => (a.date > b.date) ? -1 : 1)
       res.send(formattedUserActivities);
     }).catch(dbErr => {
       console.log("Error connecting to DB within GET user-activities:", dbErr);
@@ -80,6 +80,36 @@ router.get('/userActivityLog', rejectUnauthenticated, (req, res) => {
       res.send(userActivityLog);
     }).catch(dbErr => {
       console.log("Error connecting to DB within GET user activity Log:", dbErr);
+      res.sendStatus(500);
+    })
+});
+
+
+
+router.get('/totalXpSkillsPoints', rejectUnauthenticated, (req, res) => {
+  const userId = req.user.id
+  const sqlQuery = `
+  SELECT 
+  CONCAT(skills_user.skill_name , skills_enterprise.skill_name) AS skill,
+  SUM(activities_chart.xp_value) AS xp_points
+  FROM user_activities
+    LEFT JOIN Skills_user
+    ON user_activities.skills_user_id = skills_user.id
+    LEFT JOIN skills_enterprise
+      ON user_activities.skills_enterprise_id = skills_enterprise.id
+      LEFT JOIN activities_chart
+      ON user_activities.activity_id = activities_chart.id
+  WHERE user_activities.user_id=$1
+  GROUP BY skills_user.skill_name,skills_enterprise.skill_name  ;
+  `;
+
+  pool
+    .query(sqlQuery, [userId])
+    .then(dbRes => {
+      const userTotalXpPoints = dbRes.rows
+      res.send(userTotalXpPoints);
+    }).catch(dbErr => {
+      console.log("Error connecting to DB within GET /totalXpSkillsPoints :", dbErr);
       res.sendStatus(500);
     })
 });
