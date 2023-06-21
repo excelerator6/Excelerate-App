@@ -1,65 +1,109 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import './LandingPage.css';
+import Carousel from 'react-material-ui-carousel';
+import { Paper, Button } from '@mui/material'
+// import '../../../public/LandingPageImages/Excelerator--XP Log.png'
 
 // CUSTOM COMPONENTS
 import RegisterForm from '../RegisterForm/RegisterForm';
+import LoginForm from '../LoginForm/LoginForm'
 
 function LandingPage() {
   const [heading, setHeading] = useState(`Let's EXCEL!`);
-  const history = useHistory();
+  const [showRegisterForm, setShowRegisterForm] = useState(false);
 
-  const onLogin = (event) => {
-    history.push('/login');
+  // functions that tab between whether the login and register forms showing
+  const showRegister = () => {
+    setShowRegisterForm(true);
   };
+  const showLogin = () => {
+    setShowRegisterForm(false)
+  }
+
+  // function to format the given props into the items for the carousel.
+  function Item(props)
+    {
+        return (
+            <Paper>
+                  <img src={props.item.src} id='carouselImages' />
+            </Paper>
+        )
+    }
+    // our carousel pictures
+  const items = [
+    {
+      src: '/LandingPageImages/Excelerator-Dashboard.png'
+    },
+    {
+      src: '/LandingPageImages/Excelerator--Stats.png'
+    },
+    {
+      src: '/LandingPageImages/Excelerator--XPLog.png'
+    }
+]
 
   return (
     <div className="container">
-      <h2>{heading}</h2>
 
       <div className="grid">
-        <div className="grid-col grid-col_8">
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur
-            id felis metus. Vestibulum et pulvinar tortor. Morbi pharetra lacus
-            ut ex molestie blandit. Etiam et turpis sit amet risus mollis
-            interdum. Suspendisse et justo vitae metus bibendum fringilla sed
-            sed justo. Aliquam sollicitudin dapibus lectus, vitae consequat odio
-            elementum eget. Praesent efficitur eros vitae nunc interdum, eu
-            interdum justo facilisis. Sed pulvinar nulla ac dignissim efficitur.
-            Quisque eget eros metus. Vestibulum bibendum fringilla nibh a
-            luctus. Duis a sapien metus.
-          </p>
-
-          <p>
-            Praesent consectetur orci dui, id elementum eros facilisis id. Sed
-            id dolor in augue porttitor faucibus eget sit amet ante. Nunc
-            consectetur placerat pharetra. Aenean gravida ex ut erat commodo, ut
-            finibus metus facilisis. Nullam eget lectus non urna rhoncus
-            accumsan quis id massa. Curabitur sit amet dolor nisl. Proin
-            euismod, augue at condimentum rhoncus, massa lorem semper lacus, sed
-            lobortis augue mi vel felis. Duis ultrices sapien at est convallis
-            congue.
-          </p>
-
-          <p>
-            Fusce porta diam ac tortor elementum, ut imperdiet metus volutpat.
-            Suspendisse posuere dapibus maximus. Aliquam vitae felis libero. In
-            vehicula sapien at semper ultrices. Vivamus sed feugiat libero. Sed
-            sagittis neque id diam euismod, ut egestas felis ultricies. Nullam
-            non fermentum mauris. Sed in enim ac turpis faucibus pretium in sit
-            amet nisi.
-          </p>
+        <div className="grid-col grid-col_8" id='carousel'>
+        <h2>{heading}</h2>
+          <Carousel
+            navButtonsProps={{          // Change the colors and radius of the actual buttons. THIS STYLES BOTH BUTTONS
+              style: {
+                  backgroundColor: '#90ee90',
+                  borderRadius: 17
+              }
+            }}
+            indicatorIconButtonProps={{
+              style: {
+                  padding: '5px',    // 1
+                  color: '#36454f'       // 3
+              }
+            }}
+            activeIndicatorIconButtonProps={{
+                style: {
+                    backgroundColor: '#c9cbcd' // 2
+                }
+            }}
+            indicatorContainerProps={{
+                style: {
+                    marginTop: '25px', // 5
+                    textAlign: 'center' // 4
+                }
+        
+            }}
+          >
+              {items.map( (item, i) => <Item key={i} item={item} /> )}
+          </Carousel>
         </div>
-        <div className="grid-col grid-col_4">
-          <RegisterForm />
-
-          <center>
-            <h4>Already a Member?</h4>
-            <button className="btn btn_sizeSm" onClick={onLogin}>
-              Login
-            </button>
-          </center>
+        <div className="grid-col grid-col_4" id='loginForm'>
+          {
+            !showRegisterForm ? 
+            <>
+              <LoginForm />
+              <center>
+                <h4>Not yet a Member?</h4>
+                <button className="btn btn_sizeSm" onClick={() => showRegister()}>
+                  Register
+                </button>
+              </center> 
+            </>
+            
+            : 
+            
+            <>
+              <RegisterForm />
+              <center>
+                <h4>Already a Member?</h4>
+                <button className="btn btn_sizeSm" onClick={() => showLogin()}>
+                  Login
+                </button>
+              </center>
+            </>
+          }
+         
         </div>
       </div>
     </div>
