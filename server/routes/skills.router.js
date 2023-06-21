@@ -8,13 +8,13 @@ const router = express.Router();
  */
 router.get('/getSkills', async (req, res) => {
   // GET route code here
+
   const userID = req.user.id;
   try {
     // aggregate array of both skill tables
     let arr = [];
 
     // get the general skills
-    // * Do we need to rename the skills.id for both tables in order to differentiate them from the other table?
     const response = await pool.query('SELECT skills_enterprise.id AS enterprise_id, skill_name FROM "skills_enterprise";');
 
     // get the user's specific skills

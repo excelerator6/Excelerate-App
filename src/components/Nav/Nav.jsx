@@ -1,22 +1,25 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import LogOutButton from '../LogOutButton/LogOutButton';
+import React from "react";
+import { Link } from "react-router-dom";
+import LogOutButton from "../LogOutButton/LogOutButton";
 // import './Nav.css';
-import { useSelector } from 'react-redux';
-import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
-import CssBaseline from '@mui/material/CssBaseline';
-import Divider from '@mui/material/Divider';
-import Drawer from '@mui/material/Drawer';
-import IconButton from '@mui/material/IconButton';
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import ListItemButton from '@mui/material/ListItemButton';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import ListItemText from '@mui/material/ListItemText';
-import MenuIcon from '@mui/icons-material/Menu';
-import Toolbar from '@mui/material/Toolbar';
-import Typography from '@mui/material/Typography';
+import { useSelector } from "react-redux";
+import AppBar from "@mui/material/AppBar";
+import Box from "@mui/material/Box";
+import CssBaseline from "@mui/material/CssBaseline";
+import Divider from "@mui/material/Divider";
+import Drawer from "@mui/material/Drawer";
+import IconButton from "@mui/material/IconButton";
+import List from "@mui/material/List";
+import ListItem from "@mui/material/ListItem";
+import ListItemButton from "@mui/material/ListItemButton";
+import ListItemIcon from "@mui/material/ListItemIcon";
+import ListItemText from "@mui/material/ListItemText";
+import MenuIcon from "@mui/icons-material/Menu";
+import Toolbar from "@mui/material/Toolbar";
+import Typography from "@mui/material/Typography";
+
+//import Avatars
+import Avatars from "../Avatars/Avatars";
 
 const drawerWidth = 200;
 
@@ -31,97 +34,99 @@ function Nav(props) {
 
   const drawer = (
     <div>
-      <Toolbar />
-      <Divider />
-      <List>
-
-        <ListItem disablePadding>
-          <ListItemButton component="a" href="#/about">
-            <ListItemIcon>
-            </ListItemIcon>
-            <ListItemText primary="About" />
-          </ListItemButton>
-        </ListItem>
-
-        {/* If no user is logged in, show these links */}
-        {!user.id && (
-          // If there's no user, show login/registration links
-
-
+      
+      <Avatars />
+        <Divider />
+        <List>
           <ListItem disablePadding>
-            <ListItemButton component="a" href="#/login">
-              <ListItemIcon>
-              </ListItemIcon>
-              <ListItemText primary="Login" />
+            <ListItemButton component="a" href="#/about">
+              <ListItemIcon></ListItemIcon>
+              <ListItemText primary="About" />
             </ListItemButton>
           </ListItem>
 
-        )}
+          {/* // If there's no user, show login/registration links */}
+          {
+            user.id ? <></> : <ListItem disablePadding>
+            <ListItemButton component="a" href="#/login">
+              <ListItemIcon></ListItemIcon>
+              <ListItemText primary="Login" />
+            </ListItemButton>
+          </ListItem>
+          }
+          
 
 
 
-        {user.id && (
-          //If a user is logged in, show these links
+          {/* //If a user is logged in, show these links */}
           <>
             <ListItem disablePadding>
               <ListItemButton component="a" href="#/dashboard">
-                <ListItemIcon>
-                </ListItemIcon>
+                <ListItemIcon></ListItemIcon>
                 <ListItemText primary="Dashboard" />
               </ListItemButton>
             </ListItem>
 
             <ListItem disablePadding>
               <ListItemButton component="a" href="#/xp-log">
-                <ListItemIcon>
-                </ListItemIcon>
+                <ListItemIcon></ListItemIcon>
                 <ListItemText primary="XP LOG" />
               </ListItemButton>
             </ListItem>
 
             <ListItem disablePadding>
               <ListItemButton component="a" href="#/StatsPage">
-                <ListItemIcon>
-                </ListItemIcon>
+                <ListItemIcon></ListItemIcon>
                 <ListItemText primary="Stats" />
               </ListItemButton>
             </ListItem>
 
             <ListItem disablePadding>
               <ListItemButton component="a" href="#/Achievements">
-                <ListItemIcon>
-                </ListItemIcon>
+                <ListItemIcon></ListItemIcon>
                 <ListItemText primary="Achievements" />
               </ListItemButton>
             </ListItem>
-
 
             <Box
               m={1}
               display="flex"
               justifyContent="center"
               alignItems="center"
-              position='fixed'
-              bottom='0'
-              margin='50px'
-
+              position="fixed"
+              bottom="0"
+              margin="50px"
             >
               <LogOutButton className="btn" />
             </Box>
           </>
-        )}
-
-
+        {/* // )} */}
       </List>
-
-
+      
     </div>
   );
 
-  const container = window !== undefined ? () => window().document.body : undefined;
+  const container =
+    window !== undefined ? () => window().document.body : undefined;
+
+
+    // functions to calculate width of App bar depending on whether or not the drawer is rendering, which is based upon if the user is logged in.
+  const appBarWidth = (width) => {
+    if(user.id){
+      return `calc(100% - ${width}px)`;
+    } else{
+      return '100%';
+    }
+  }
+  const appMargin = (width) => {
+    if(user.id){
+      return `${width}px`
+    } else{
+      return '100%';
+    }
+  }
 
   return (
-
     <div className="drawerRoot">
       {/* If no user is logged in, show these links */}
       {!user.id && (
@@ -130,13 +135,14 @@ function Nav(props) {
           Login / Register
         </Link>
       )}
-      <Box sx={{ display: 'flex' }}>
+
+      <Box sx={{ display: "flex" }}>
         <CssBaseline />
         <AppBar
           position="fixed"
           sx={{
-            width: { sm: `calc(100% - ${drawerWidth}px)` },
-            ml: { sm: `${drawerWidth}px` },
+            width: { sm: appBarWidth(drawerWidth) },
+            ml: { sm: appMargin(drawerWidth) },
           }}
         >
           <Toolbar>
@@ -145,7 +151,7 @@ function Nav(props) {
               aria-label="open drawer"
               edge="start"
               onClick={handleDrawerToggle}
-              sx={{ mr: 2, display: { sm: 'none' } }}
+              sx={{ mr: 2, display: { sm: "none" } }}
             >
               <MenuIcon />
             </IconButton>
@@ -160,6 +166,9 @@ function Nav(props) {
           aria-label="mailbox folders"
         >
           {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
+          {
+            user.id ? 
+          <>
           <Drawer
             container={container}
             variant="temporary"
@@ -169,8 +178,11 @@ function Nav(props) {
               keepMounted: true, // Better open performance on mobile.
             }}
             sx={{
-              display: { xs: 'block', sm: 'none' },
-              '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
+              display: { xs: "block", sm: "none" },
+              "& .MuiDrawer-paper": {
+                boxSizing: "border-box",
+                width: drawerWidth,
+              },
             }}
           >
             {drawer}
@@ -178,17 +190,25 @@ function Nav(props) {
           <Drawer
             variant="permanent"
             sx={{
-              display: { xs: 'none', sm: 'block' },
-              '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
+              display: { xs: "none", sm: "block" },
+              "& .MuiDrawer-paper": {
+                boxSizing: "border-box",
+                width: drawerWidth,
+              },
             }}
             open
           >
             {drawer}
-          </Drawer>
+          </Drawer> </>: <></>
+          }
         </Box>
         <Box
           component="main"
-          sx={{ flexGrow: 1, p: 3, width: { sm: `calc(100% - ${drawerWidth}px)` } }}
+          sx={{
+            flexGrow: 1,
+            p: 3,
+            width: { sm: `calc(100% - ${drawerWidth}px)` },
+          }}
         >
           {/* <Toolbar />
           <Typography paragraph>
@@ -199,7 +219,6 @@ function Nav(props) {
           {/* </Typography> */}
         </Box>
       </Box>
-
     </div>
   );
 }

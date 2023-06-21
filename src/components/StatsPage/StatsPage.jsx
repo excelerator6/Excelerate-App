@@ -20,7 +20,7 @@ import BarChartHorizontal from './BarChartHorizontal';
 function StatsPage(props) {
     const dispatch = useDispatch();
 
-    const [value, setValue] = useState(0);
+    const [value, setValue] = useState('0');
 
     const handleChange = (event, newValue) => {
         setValue(newValue);
@@ -43,7 +43,7 @@ function StatsPage(props) {
                         <Tab label="XP Points 2" value={2} />
                     </TabList>
                 </Box>
-                <TabPanel value={0}>
+                <TabPanel value='0'>
                     <Calendar />
                 </TabPanel>
                 <TabPanel value={1}>

@@ -84,8 +84,7 @@ INSERT INTO skills_user
 VALUES
     ('Communication', 1), ('Leadership', 1), ('Decision-Making', 1), ('Entrepreneurship', 1),
     ('Sales/Marketing', 1), ('Effectiveness', 1), ('Problem-Solving', 1), ('Self-Discovery', 1),
-    ('Technology', 1), ('Process Improvement', 1), ('Mindfulness', 1), ('Creativity', 1),
-    ('Discipline', 1), ('Confidence', 1);
+    ('Confidence', 1);
 
 
 ----------------------------------------------------------------
@@ -146,7 +145,7 @@ VALUES
     ('3/7/2023', 7, 1, 17, 'The Art of Possibility - What You Will Learn Podcast'),
     ('3/8/2023', 1, 1, 17, 'Mindset Mentor - Mastering Communication'),
     ('3/8/2023', 8, 1, 16, 'Meeting with Glen'),
-    ('3/9/2023', 14, 1, 17, 'Entreleadership - How to have confidence');
+    ('3/9/2023', 9, 1, 17, 'Entreleadership - How to have confidence');
     
 -- Starter data using skills_enterprise_id
 INSERT INTO user_activities
@@ -159,6 +158,92 @@ VALUES
     ('3/21/2023', 4, 1, 23, 'Creativity - Nihaly Csikszentmihaly | Blinkist'),
     ('3/21/2023', 4, 1, 23, 'Deep Creativity - Deborah Ann Quibell | Blinkist'),
     ('3/21/2023', 5, 1, 23, 'No Excuses! - Brian Tracy | Blinkist');
+    
+-- Starter data using skills_enterprise_id and key takeaway
+INSERT INTO user_activities
+    (date_completed, skills_enterprise_id, user_id, activity_id, source)
+VALUES
+    ('3/14/2023', 1, 1, 17, 'ChatGPT pod'),
+    ('3/15/2023', 1, 1, 17, 'ChatGPT pod'),
+    ('3/20/2023', 2, 1, 23, 'Life of Focus Course'),
+    ('3/21/2023', 3, 1, 23, 'The practice of groundedness - Brad Stulberg | Blinkist'),
+    ('3/21/2023', 4, 1, 23, 'Creativity - Nihaly Csikszentmihaly | Blinkist'),
+    ('3/21/2023', 4, 1, 23, 'Deep Creativity - Deborah Ann Quibell | Blinkist'),
+    ('3/21/2023', 5, 1, 23, 'No Excuses! - Brian Tracy | Blinkist');
+    
+
+----------------------------------------------------------------
+----------------------------------------------------------------
+	-- Build achievements table with starter data --
+----------------------------------------------------------------
+----------------------------------------------------------------
+CREATE TABLE achievements (
+	id SERIAL PRIMARY KEY NOT NULL,
+	achievement_name VARCHAR NOT NULL,
+	achievement_category VARCHAR NOT NULL
+);
+
+-- Starter data using for achievements
+INSERT INTO achievements
+	(achievement_name, achievement_category)
+VALUES
+	-- XP Earned
+	('Earn 1000 XP', 'Xp Earned'), ('Earn 1250 XP', 'Xp Earned'), ('Earn 1500 XP', 'Xp Earned'),
+	('Earn 1750 XP', 'Xp Earned'), ('Earn 2000 XP', 'Xp Earned'), ('Earn 2250 XP', 'Xp Earned'),
+	('Earn 2500 XP', 'Xp Earned'), ('Earn 2750 XP', 'Xp Earned'),
+	-- Levels Obtained
+	('Obtain 1 Level', 'Levels Obtained'), ('Obtain 5 Levels', 'Levels Obtained'), ('Obtain 10 Levels', 'Levels Obtained'),
+	('Obtain 25 Levels', 'Levels Obtained'), ('Obtain 50 Levels', 'Levels Obtained'), ('Obtain 100 Levels', 'Levels Obtained'),
+	('Obtain 200 Level', 'Levels Obtained'), ('Obtain 500 Levels', 'Levels Obtained'),
+	-- Videos Watched
+	('Watch 10 Videos', 'Videos Watched'), ('Watch 25 Videos', 'Videos Watched'), ('Watch 50 Videos', 'Videos Watched'),
+	('Watch 75 Videos', 'Videos Watched'), ('Watch 100 Videos', 'Videos Watched'), ('Watch 150 Videos', 'Videos Watched'),
+	('Watch 200 Videos', 'Videos Watched'), ('Watch 250 Videos', 'Videos Watched'),
+	-- Podcasts Finished
+	('Listen to 25 Podcasts', 'Podcasts Finished'), ('Listen to 50 Podcasts', 'Podcasts Finished'), ('Listen to 75 Podcasts', 'Podcasts Finished'),
+	('Listen to 100 Podcasts', 'Podcasts Finished'), ('Listen to 150 Podcasts', 'Podcasts Finished'), ('Listen to 200 Podcasts', 'Podcasts Finished'),
+	('Listen to 250 Podcasts', 'Podcasts Finished'), ('Listen to 500 Podcasts', 'Podcasts Finished'),
+	-- Audiobooks Read
+	('Listen to 2 Audiobooks', 'Audiobooks Read'), ('Listen to 5 Audiobooks', 'Audiobooks Read'), ('Listen to 10 Audiobooks', 'Audiobooks Read'),
+	('Listen to 15 Audiobooks', 'Audiobooks Read'), ('Listen to 20 Audiobooks', 'Audiobooks Read'), ('Listen to 25 Audiobooks', 'Audiobooks Read'),
+	('Listen to 35 Audiobooks', 'Audiobooks Read'), ('Listen to 50 Audiobooks', 'Audiobooks Read'),
+	-- Books Read
+	('Read 2 Books', 'Books Read'), ('Read 5 Books', 'Books Read'), ('Read 10 Books', 'Books Read'),
+	('Read 15 Books', 'Books Read'), ('Read 20 Books', 'Books Read'), ('Read 25 Books', 'Books Read'),
+	('Read 30 Books', 'Books Read'), ('Read 35 Books', 'Books Read'),
+	-- Book Summaries
+	('Read 2 Book Summaries', 'Book Summaries'), ('Read 5 Book Summaries', 'Book Summaries'), ('Read 10 Book Summaries', 'Book Summaries'),
+	('Read 25 Book Summaries', 'Book Summaries'), ('Read 50 Book Summaries', 'Book Summaries'), ('Read 75 Book Summaries', 'Book Summaries'),
+	('Read 100 Book Summaries', 'Book Summaries'), ('Read 200 Book Summaries', 'Book Summaries'),
+	-- Articles Read
+	('Read 10 Articles', 'Articles Read'), ('Read 25 Articles', 'Articles Read'), ('Read 50 Articles', 'Articles Read'),
+	('Read 75 Articles', 'Articles Read'), ('Read 100 Articles', 'Articles Read'), ('Read 150 Articles', 'Articles Read'),
+	('Read 200 Articles', 'Articles Read'), ('Read 250 Articles', 'Articles Read'),
+	-- Courses Completed
+	('Complete 2 Courses', 'Courses Completed'), ('Complete 5 Courses', 'Courses Completed'), ('Complete 10 Courses', 'Courses Completed'),
+	('Complete 25 Courses', 'Courses Completed'), ('Complete 50 Courses', 'Courses Completed'), ('Complete 75 Courses', 'Courses Completed'),
+	('Complete 100 Courses', 'Courses Completed'), ('Complete 125 Courses', 'Courses Completed');
+
+
+----------------------------------------------------------------
+----------------------------------------------------------------
+	-- Build user_achievements table with starter data--
+----------------------------------------------------------------
+----------------------------------------------------------------
+CREATE TABLE user_achievements (
+	id SERIAL PRIMARY KEY NOT NULL,
+	user_id INTEGER REFERENCES "user"(id) ON DELETE CASCADE NOT NULL,
+	achievement_id INTEGER REFERENCES achievements(id) ON DELETE CASCADE NOT NULL,
+	date_achieved DATE NOT NULL DEFAULT CURRENT_DATE
+);
+
+-- Starter data using for achievements
+INSERT INTO user_achievements
+	(user_id, achievement_id)
+VALUES
+	(1, 9),	 -- Obtain 1 Level
+	(1, 50), -- Read 5 Book Summaries
+	(1, 51); -- Read 10 Book Summaries 
 
 
 ----------------------------------------------------------------
@@ -166,4 +251,3 @@ VALUES
 	-- End build tables --
 ----------------------------------------------------------------
 ----------------------------------------------------------------
-

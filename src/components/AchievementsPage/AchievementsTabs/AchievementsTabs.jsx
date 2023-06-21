@@ -5,6 +5,17 @@ import Tab from '@mui/material/Tab';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 
+// Import the tab views
+import XpEarnedTab from './TabViews/XpEarnedTab';
+import LevelsObtainedTab from './TabViews/LevelsObtainedTab';
+import VideosWatchedTab from './TabViews/VideosWatchedTab';
+import PodcastsFinishedTab from './TabViews/PodcastsFinishedTab';
+import AudiobooksReadTab from './TabViews/AudiobooksReadTab';
+import BooksReadTab from './TabViews/BooksReadTab';
+import BooksSummariesTab from './TabViews/BookSummariesTab';
+import ArticlesReadTab from './TabViews/ArticlesReadTab';
+import CoursesCompletedTab from './TabViews/CoursesCompletedTab';
+
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
 
@@ -54,45 +65,43 @@ export default function AchievementsTabs() {
           aria-label="basic tabs example"
           variant='fullWidth'
         >
-          <Tab label="XP Earned" {...a11yProps(0)} />
-          <Tab label="Levels Achieved" {...a11yProps(1)} />
-          <Tab label="Videos" {...a11yProps(2)} />
-          <Tab label="Podcasts" {...a11yProps(3)} />
-          <Tab label="Audiobooks" {...a11yProps(4)} />
-          <Tab label="Books" {...a11yProps(5)} />
+          <Tab label="Experience (XP) Earned" {...a11yProps(0)} />
+          <Tab label="Levels Obtained" {...a11yProps(1)} />
+          <Tab label="Videos Watched" {...a11yProps(2)} />
+          <Tab label="Podcasts Finished" {...a11yProps(3)} />
+          <Tab label="Audiobooks Read" {...a11yProps(4)} />
+          <Tab label="Books Read" {...a11yProps(5)} />
           <Tab label="Book Summaries" {...a11yProps(6)} />
-          <Tab label="Articles" {...a11yProps(7)} />
-          <Tab label="Courses" {...a11yProps(8)} />
+          <Tab label="Articles Read" {...a11yProps(7)} />
+          <Tab label="Courses Completed" {...a11yProps(8)} />
         </Tabs>
       </Box>
       <TabPanel value={value} index={0}>
-        XP Earned Achievements go here
+        <XpEarnedTab />
       </TabPanel>
       <TabPanel value={value} index={1}>
-        Levels Achievements go here
+        <LevelsObtainedTab />
       </TabPanel>
       <TabPanel value={value} index={2}>
-        Video Achievements go here
-        <br />
-        <button>Test</button>
+        <VideosWatchedTab />
       </TabPanel>
       <TabPanel value={value} index={3}>
-        Podcast Achievements go here
+        <PodcastsFinishedTab />
       </TabPanel>
       <TabPanel value={value} index={4}>
-        Audiobook Achievements go here
+        <AudiobooksReadTab />
       </TabPanel>
       <TabPanel value={value} index={5}>
-        Book Achievements go here
+        <BooksReadTab />
       </TabPanel>
       <TabPanel value={value} index={6}>
-        Book Summary Achievements go here
+        <BooksSummariesTab />
       </TabPanel>
       <TabPanel value={value} index={7}>
-        Article Achievements go here
+        <ArticlesReadTab />
       </TabPanel>
       <TabPanel value={value} index={8}>
-        Course Achievements go here
+        <CoursesCompletedTab />
       </TabPanel>
     </Box>
   );
