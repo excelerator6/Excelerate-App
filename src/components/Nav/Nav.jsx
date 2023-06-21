@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import LogOutButton from "../LogOutButton/LogOutButton";
 // import './Nav.css';
 import { useSelector } from "react-redux";
+
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -17,6 +18,7 @@ import ListItemText from "@mui/material/ListItemText";
 import MenuIcon from "@mui/icons-material/Menu";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
+import { createTheme, ThemeProvider, Paper } from "@mui/material";
 
 //import Avatars
 import Avatars from "../Avatars/Avatars";
@@ -32,77 +34,98 @@ function Nav(props) {
     setMobileOpen(!mobileOpen);
   };
 
+
+  const navTheme = createTheme({
+    palette:{
+      type: 'light',
+      primary: {
+        main: '#303841',
+      },
+      secondary: {
+        main: '#90ee90',
+      },
+      success: {
+        main: '#ffe801',
+      },
+      background:{
+        default: '#303841'
+      }
+      // divider: 'rgba(255,255,255,0.12)',
+    }
+  })
   const drawer = (
     <div>
-      
-      <Avatars />
-        <Divider />
-        <List>
-          <ListItem disablePadding>
-            <ListItemButton component="a" href="#/about">
-              <ListItemIcon></ListItemIcon>
-              <ListItemText primary="About" />
-            </ListItemButton>
-          </ListItem>
-
-          {/* // If there's no user, show login/registration links */}
-          {
-            user.id ? <></> : <ListItem disablePadding>
-            <ListItemButton component="a" href="#/login">
-              <ListItemIcon></ListItemIcon>
-              <ListItemText primary="Login" />
-            </ListItemButton>
-          </ListItem>
-          }
-          
-
-
-
-          {/* //If a user is logged in, show these links */}
-          <>
+      <ThemeProvider theme={navTheme}>
+        {/* <Paper> */}
+        <Avatars />
+          <Divider />
+          <List>
             <ListItem disablePadding>
-              <ListItemButton component="a" href="#/dashboard">
+              <ListItemButton component="a" href="#/about">
                 <ListItemIcon></ListItemIcon>
-                <ListItemText primary="Dashboard" />
+                <ListItemText primary="About" />
               </ListItemButton>
             </ListItem>
 
-            <ListItem disablePadding>
-              <ListItemButton component="a" href="#/xp-log">
+            {/* // If there's no user, show login/registration links */}
+            {
+              user.id ? <></> : <ListItem disablePadding>
+              <ListItemButton component="a" href="#/login">
                 <ListItemIcon></ListItemIcon>
-                <ListItemText primary="XP LOG" />
+                <ListItemText primary="Login" />
               </ListItemButton>
             </ListItem>
+            }
+            
 
-            <ListItem disablePadding>
-              <ListItemButton component="a" href="#/StatsPage">
-                <ListItemIcon></ListItemIcon>
-                <ListItemText primary="Stats" />
-              </ListItemButton>
-            </ListItem>
 
-            <ListItem disablePadding>
-              <ListItemButton component="a" href="#/Achievements">
-                <ListItemIcon></ListItemIcon>
-                <ListItemText primary="Achievements" />
-              </ListItemButton>
-            </ListItem>
 
-            <Box
-              m={1}
-              display="flex"
-              justifyContent="center"
-              alignItems="center"
-              position="fixed"
-              bottom="0"
-              margin="50px"
-            >
-              <LogOutButton className="btn" />
-            </Box>
-          </>
-        {/* // )} */}
-      </List>
-      
+            {/* //If a user is logged in, show these links */}
+            <>
+              <ListItem disablePadding>
+                <ListItemButton component="a" href="#/dashboard">
+                  <ListItemIcon></ListItemIcon>
+                  <ListItemText primary="Dashboard" />
+                </ListItemButton>
+              </ListItem>
+
+              <ListItem disablePadding>
+                <ListItemButton component="a" href="#/xp-log">
+                  <ListItemIcon></ListItemIcon>
+                  <ListItemText primary="XP LOG" />
+                </ListItemButton>
+              </ListItem>
+
+              <ListItem disablePadding>
+                <ListItemButton component="a" href="#/StatsPage">
+                  <ListItemIcon></ListItemIcon>
+                  <ListItemText primary="Stats" />
+                </ListItemButton>
+              </ListItem>
+
+              <ListItem disablePadding>
+                <ListItemButton component="a" href="#/Achievements">
+                  <ListItemIcon></ListItemIcon>
+                  <ListItemText primary="Achievements" />
+                </ListItemButton>
+              </ListItem>
+
+              <Box
+                m={1}
+                display="flex"
+                justifyContent="center"
+                alignItems="center"
+                position="fixed"
+                bottom="0"
+                margin="50px"
+              >
+                <LogOutButton className="btn" />
+              </Box>
+            </>
+          {/* // )} */}
+        </List>
+        {/* </Paper> */}
+      </ThemeProvider>
     </div>
   );
 

@@ -18,12 +18,12 @@ const exceleratorTheme = createTheme({
     },
     success: {
       main: '#ffe801',
-    },
-    typography: {
-      fontFamily: []
-    },
+    }
     // divider: 'rgba(255,255,255,0.12)',
-  }
+  },
+  typography: {
+    fontFamily: []
+  },
 })
 
 
