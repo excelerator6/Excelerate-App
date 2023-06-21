@@ -12,7 +12,7 @@ function AvatarsPage(){
     
     return(
         <div id='AvatarsPage'>
-            <h3> Choose your Username</h3>
+            
             <AvatarsUsername />
             <h3> Choose New Avatar</h3>
             
