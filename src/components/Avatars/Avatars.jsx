@@ -8,14 +8,8 @@ import "./Avatars.css";
 
 function Avatars() {
 
-  const dispatch = useDispatch();
-
-  const username = useSelector((store) => store.user);
-  const avatarsUsername = useSelector((store) => store.avatars);
-
-//   useEffect(() => {
-//     dispatch ({ type: 'POST_AVATAR_NAME', payload: username.username });
-// }, []);
+  const userAvatar = useSelector((store) => store.user.user_avatar_path);
+  const username = useSelector((store) => store.user.username)
 
   return (
     <div id="avatarContainer">
@@ -23,21 +17,21 @@ function Avatars() {
       <Link to='/AvatarsPage'>
         <Avatar
           size={100}
-          name={avatarsUsername}
+          name={userAvatar}
           variant="beam"
           // color scheme
           colors={[
-            "c9cbcd",
+            "#c9cbcd",
             "#90ee90",
             "#c3e3eb",
             "#061e45",
-            "#3645f",
+            "#36454f",
             "#303841",
           ]}
         />
         </Link>
       </div>
-      <div id="username">{username.username}</div>
+      <div id="username">{username}</div>
     </div>
   );
 }
