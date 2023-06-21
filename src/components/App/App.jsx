@@ -31,6 +31,9 @@ import XpLogPage from "../XpLogPage/XpLogPage";
 import StatsPage from "../StatsPage/StatsPage";
 import AchievementsPage from "../AchievementsPage/AchievementsPage";
 
+//import AvatarPage 
+import AvatarsPage from "../Avatars/AvatarsPage"
+
 function App() {
   const dispatch = useDispatch();
 
@@ -127,6 +130,9 @@ function App() {
               <AchievementsPage />
             </ProtectedRoute>
 
+            <ProtectedRoute exact path="/AvatarsPage">
+              <AvatarsPage />
+            </ProtectedRoute>
             {/* If none of the other routes matched, we will show a 404. */}
             <Route>
               <h1>404</h1>

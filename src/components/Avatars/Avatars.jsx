@@ -1,5 +1,6 @@
 import Avatar from "boring-avatars";
 import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 
 //import Avatars Css
 import "./Avatars.css";
@@ -10,6 +11,7 @@ function Avatars() {
   return (
     <div id="avatarContainer">
       <div id="avatar">
+      <Link to='/AvatarsPage'>
         <Avatar
           size={100}
           name={userName.username}
@@ -24,6 +26,7 @@ function Avatars() {
             "#303841",
           ]}
         />
+        </Link>
       </div>
       <div id="username">{userName.username}</div>
     </div>
