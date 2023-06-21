@@ -15,16 +15,16 @@ export default function XpEarnedTab() {
   const starImage = (completedStatus) => {
     if (completedStatus) {
       return (
-        <img src={GoldStarRound} className='star-image' />
+        <img src={GoldStarSharp} className='star-image' />
       )
     } else {
       return (
-        <img src={GreyStarRound} className='star-image' />
+        <img src={GreyStarSharp} className='star-image' />
       )
     }
   }
 
-  const card = (achievement) => (
+  const AchievementCard = (achievement) => (
     <>
       <CardContent>
         <Typography sx={{fontSize:20}} gutterBottom>
@@ -45,8 +45,11 @@ export default function XpEarnedTab() {
         {xpEarned && xpEarned.length > 0 ?
           xpEarned.map((achievement, index) => (
             <Grid item xs={3} key={index}>
-              <Card sx={{bgcolor:'#c3e3eb'}}>
-                {card(achievement)}
+              <Card 
+                sx={{bgcolor:'#c3e3eb'}}
+                className='achievement-card'
+              >
+                {AchievementCard(achievement)}
               </Card>
             </Grid>
           ))
