@@ -57,7 +57,7 @@ function LandingPage() {
               {items.map( (item, i) => <Item key={i} item={item} /> )}
           </Carousel>
         </div>
-        <div className="grid-col grid-col_4">
+        <div className="grid-col grid-col_4" id='loginForm'>
           <LoginForm />
 
           <center>
