@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { useParams, useHistory } from "react-router-dom";
 
-function AvatarUsername() {
+function AvatarsUsername() {
 
   const dispatch = useDispatch();
 
@@ -36,4 +36,4 @@ function AvatarUsername() {
   );
 }
 
-export default AvatarUsername;
+export default AvatarsUsername;
