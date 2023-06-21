@@ -6,6 +6,7 @@ import activitySaga from './activities.saga';
 import skillsSaga from './skills.saga'
 import userActivitiesSaga from './user-activities.saga';
 import achievementsSaga from './achievements.saga'
+import avatars from './avatars.saga';
 
 // rootSaga is the primary saga.
 // It bundles up all of the other sagas so our project can use them.
@@ -23,5 +24,6 @@ export default function* rootSaga() {
     skillsSaga(),
     userActivitiesSaga(),
     achievementsSaga(),
+    avatars()
   ]);
 }
