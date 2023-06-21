@@ -37,7 +37,7 @@ function Avatars() {
         />
         </Link>
       </div>
-      <div id="username">{userName.username}</div>
+      <div id="username">{username.username}</div>
     </div>
   );
 }

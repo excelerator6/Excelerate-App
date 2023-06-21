@@ -3,6 +3,8 @@ import { useSelector } from "react-redux";
 
 import AvatarsItem from "./AvatarsItem";
 import Stack from '@mui/material/Stack';
+//import AvatarsUsername
+import AvatarsUsername from "./AvatarsUsername";
 
 import './Avatars.css'
 
@@ -11,7 +13,7 @@ function AvatarsPage(){
     return(
         <div id='AvatarsPage'>
             <h3> Choose your Username</h3>
-            
+            <AvatarsUsername />
             <h3> Choose New Avatar</h3>
             
             

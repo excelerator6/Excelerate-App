@@ -16,6 +16,7 @@ function AvatarsUsername() {
       type: "USERNAME_UPDATE",
       payload: nameInput,
     });
+    setNameInput('');
   };
 
   return (
