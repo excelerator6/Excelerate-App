@@ -1,12 +1,21 @@
 import Avatar from "boring-avatars";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from "react-router-dom";
+import React, { useEffect, useState } from 'react';
 
 //import Avatars Css
 import "./Avatars.css";
 
 function Avatars() {
-  const userName = useSelector((store) => store.user);
+
+ 
+  const dispatch = useDispatch();
+
+  const username = useSelector((store) => store.user);
+
+//   useEffect(() => {
+//     dispatch ({ type: 'POST_AVATAR', payload: userName.username });
+// }, []);
 
   return (
     <div id="avatarContainer">
@@ -14,7 +23,7 @@ function Avatars() {
       <Link to='/AvatarsPage'>
         <Avatar
           size={100}
-          name={userName.username}
+          name={username.username}
           variant="beam"
           // color scheme
           colors={[
