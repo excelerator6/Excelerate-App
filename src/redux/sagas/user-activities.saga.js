@@ -19,7 +19,6 @@ function* fetchUserActivityLog() {
   }
 }
 
-// router.get('/totalXpSkillsPoints', rejectUnauthenticated, (req, res) => {
 
 function* fetchUserTotalXpPoints() {
   try {
