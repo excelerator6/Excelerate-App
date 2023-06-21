@@ -1,6 +1,11 @@
 import { useEffect } from "react";
 import { useSelector } from "react-redux"
 import { Card, CardContent, Grid, Typography } from "@mui/material";
+import GreyStarRound from '../StarPngs/grey_star_round.png'
+import GreyStarSharp from '../StarPngs/grey_star_sharp.png'
+import GoldStarRound from '../StarPngs/gold_star_round.png'
+import GoldStarSharp from '../StarPngs/gold_star_sharp.png'
+
 
 export default function XpEarnedTab() {
   const xpEarned = useSelector(store => store.achievements.allAchievementsReducer.xpEarned)
@@ -10,11 +15,11 @@ export default function XpEarnedTab() {
   const starImage = (completedStatus) => {
     if (completedStatus) {
       return (
-        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTLk5OitGOwjZv42-jzEM_bg15TTmymPxOE5lQ5z53vsg&s" />
+        <img src={GoldStarRound} className='star-image' />
       )
     } else {
       return (
-        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTar8F5Cer-XnpSbIGj2Y8rQ1IiNPRGNkvhESdPUtxakg&s" />
+        <img src={GreyStarRound} className='star-image' />
       )
     }
   }
