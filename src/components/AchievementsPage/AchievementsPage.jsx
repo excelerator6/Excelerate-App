@@ -14,7 +14,6 @@ export default function AchievementsPage() {
   return (
     <div className="container">
       <AchievementsTabs />
-      <h2>Inside the Achievements Page</h2>
     </div>
   )
 }
