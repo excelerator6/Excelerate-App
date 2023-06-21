@@ -11,38 +11,34 @@ import LoginForm from '../LoginForm/LoginForm'
 
 function LandingPage() {
   const [heading, setHeading] = useState(`Let's EXCEL!`);
+  const [showRegisterForm, setShowRegisterForm] = useState(false);
+
   const history = useHistory();
 
-  const onLogin = (event) => {
-    history.push('/login');
+  const showRegister = () => {
+    setShowRegisterForm(true);
   };
+  const showLogin = () => {
+    setShowRegisterForm(false)
+  }
 
   function Item(props)
     {
         return (
             <Paper>
-                <h2>{props.item.name}</h2>
-                
-                  <img src={props.item.src} height={575}/>
-                
-
-                {/* <Button className="CheckButton">
-                    Check it out!
-                </Button> */}
+                  <img src={props.item.src} id='carouselImages' />
             </Paper>
         )
     }
+    // our carousel pictures
   const items = [
     {
-      name: "Dashboard",
       src: '/LandingPageImages/Excelerator-Dashboard.png'
     },
     {
-      name: "Stats",
       src: '/LandingPageImages/Excelerator--Stats.png'
     },
     {
-      name: 'XP Log',
       src: '/LandingPageImages/Excelerator--XPLog.png'
     }
 ]
@@ -58,15 +54,31 @@ function LandingPage() {
           </Carousel>
         </div>
         <div className="grid-col grid-col_4" id='loginForm'>
-          <LoginForm />
-
-          <center>
-            <h4>Not yet a Member?</h4>
-            <button className="btn btn_sizeSm" onClick={onLogin}>
-              {/* need to make this swap the login form with the register form */}
-              Register
-            </button>
-          </center>
+          {
+            !showRegisterForm ? 
+            <>
+              <LoginForm />
+              <center>
+                <h4>Not yet a Member?</h4>
+                <button className="btn btn_sizeSm" onClick={() => showRegister()}>
+                  Register
+                </button>
+              </center> 
+            </>
+            
+            : 
+            
+            <>
+              <RegisterForm />
+              <center>
+                <h4>Already a Member?</h4>
+                <button className="btn btn_sizeSm" onClick={() => showLogin()}>
+                  Login
+                </button>
+              </center>
+            </>
+          }
+         
         </div>
       </div>
     </div>
