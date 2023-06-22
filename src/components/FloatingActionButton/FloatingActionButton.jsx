@@ -113,12 +113,17 @@ export default function FloatingActionButton() {
               id="fab"
               variant="extended"
               size="large"
-              color="primary"
+              // color="primary"
               aria-label="add"
               sx={{
                 position: "fixed",
                 bottom: 16,
                 right: 16,
+                // backgroundColor: "primary.green",
+                backgroundColor: "skyblue",
+                "&:hover": {
+                  backgroundColor: "#90ee90",
+                },
               }}
             >
               <AddIcon />
