@@ -49,3 +49,8 @@
 .drawerRoot {
   display: flex;
 }
+
+.logo {
+  margin-left: -25px;
+  height: 80px;
+}

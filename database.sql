@@ -242,6 +242,7 @@ INSERT INTO user_achievements
 	(user_id, achievement_id)
 VALUES
 	(1, 9),	 -- Obtain 1 Level
+	(1, 49), -- Read 2 Book Summaries
 	(1, 50), -- Read 5 Book Summaries
 	(1, 51); -- Read 10 Book Summaries 
 

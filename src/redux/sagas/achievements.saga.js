@@ -4,7 +4,8 @@ import axios from 'axios';
 function* fetchAchievements() {
   try {
     const { data: achievementsData } = yield axios.get('/api/achievements');
-    yield put({ type: 'SET_ACHIEVEMENTS', payload: achievementsData })
+    yield put({ type: 'SET_ALL_ACHIEVEMENTS', payload: achievementsData.allAchievements })
+    yield put({ type: 'SET_USER_ACHIEVEMENTS', payload: achievementsData.userAchievements})
   } catch (error) {
     console.log('Error within fetchAchievements:', error);
   }

@@ -19,9 +19,21 @@ function* fetchUserActivityLog() {
   }
 }
 
+
+function* fetchUserTotalXpPoints() {
+  try {
+    const { data: userTotalXpPoints } = yield axios.get('/api/user-activities/totalXpSkillsPoints');
+    yield put({ type: 'SET_USER_TOTAL_XP_POINTS', payload: userTotalXpPoints })
+  } catch (error) {
+    console.log('Error within fetch_User_TOTAL_XP_POINTS:', error);
+  }
+}
+
+
 function* userActivitiesSaga() {
   yield takeLatest('FETCH_USER_ACTIVITIES', fetchUserActivities);
   yield takeLatest('FETCH_USER_ACTIVITY_LOG', fetchUserActivityLog);
+  yield takeLatest('FETCH_USER_TOTAL_XP_POINTS', fetchUserTotalXpPoints);
 
 }
 

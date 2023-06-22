@@ -88,7 +88,7 @@ function App() {
                 <Redirect to="/user" />
               ) : (
                 // Otherwise, show the login page
-                <LoginPage />
+                <LandingPage />
               )}
             </Route>
 
@@ -140,6 +140,7 @@ function App() {
           </Switch>
           <>
             {
+              // only want the log activity button to show if the user is logged in
               user.id ? <FloatingActionButton /> : <></>
             }
           </>
