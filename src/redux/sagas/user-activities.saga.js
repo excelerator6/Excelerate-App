@@ -10,6 +10,7 @@ function* fetchUserActivities() {
   }
 }
 
+
 function* fetchUserActivityLog() {
   try {
     const { data: userActivityLog } = yield axios.get('/api/user-activities/userActivityLog');

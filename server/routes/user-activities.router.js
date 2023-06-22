@@ -63,6 +63,7 @@ router.get('/', rejectUnauthenticated, (req, res) => {
     })
 });
 
+
 router.get('/userActivityLog', rejectUnauthenticated, (req, res) => {
   const userId = req.user.id
   const sqlQuery = `
@@ -84,22 +85,21 @@ router.get('/userActivityLog', rejectUnauthenticated, (req, res) => {
 });
 
 
-
 router.get('/totalXpSkillsPoints', rejectUnauthenticated, (req, res) => {
   const userId = req.user.id
   const sqlQuery = `
-  SELECT 
-  CONCAT(skills_user.skill_name , skills_enterprise.skill_name) AS skill,
-  SUM(activities_chart.xp_value) AS xp_points
-  FROM user_activities
-    LEFT JOIN Skills_user
-    ON user_activities.skills_user_id = skills_user.id
-    LEFT JOIN skills_enterprise
-      ON user_activities.skills_enterprise_id = skills_enterprise.id
+    SELECT 
+    CONCAT(skills_user.skill_name, skills_enterprise.skill_name) AS skill,
+    SUM(activities_chart.xp_value) AS xp_points
+    FROM user_activities
+      LEFT JOIN Skills_user
+        ON user_activities.skills_user_id = skills_user.id
+      LEFT JOIN skills_enterprise
+        ON user_activities.skills_enterprise_id = skills_enterprise.id
       LEFT JOIN activities_chart
-      ON user_activities.activity_id = activities_chart.id
-  WHERE user_activities.user_id=$1
-  GROUP BY skills_user.skill_name,skills_enterprise.skill_name  ;
+        ON user_activities.activity_id = activities_chart.id
+    WHERE user_activities.user_id=$1
+    GROUP BY skills_user.skill_name,skills_enterprise.skill_name;
   `;
 
   pool
