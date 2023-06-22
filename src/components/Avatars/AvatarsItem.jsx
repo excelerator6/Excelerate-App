@@ -72,7 +72,7 @@ function AvatarsItem() {
                     handleUpdate(event, "UPDATE_AVATAR_NAME");
                   }}
                 >
-                  Pick me!
+                  Click Here!
                 </Button>
               </Card>
             </Grid>
