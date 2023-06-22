@@ -1,8 +1,12 @@
 .star-image {
-  height: 100px;
+  /* height: 100px; */
+  width: 50%;
+  /* margin: auto; */
 }
 
-.achievement-card {
+.achievement {
   display: flex;
+  flex-direction: column;
   justify-content: center;
+  align-content: center;
 }

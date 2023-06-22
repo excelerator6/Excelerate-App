@@ -5,15 +5,15 @@ import Tab from '@mui/material/Tab';
 import Box from '@mui/material/Box';
 
 // Import the tab views
-import XpEarnedTab from './TabViews/XpEarnedTab';
-import LevelsObtainedTab from './TabViews/LevelsObtainedTab';
-import VideosWatchedTab from './TabViews/VideosWatchedTab';
-import PodcastsFinishedTab from './TabViews/PodcastsFinishedTab';
-import AudiobooksReadTab from './TabViews/AudiobooksReadTab';
-import BooksReadTab from './TabViews/BooksReadTab';
-import BooksSummariesTab from './TabViews/BookSummariesTab';
-import ArticlesReadTab from './TabViews/ArticlesReadTab';
-import CoursesCompletedTab from './TabViews/CoursesCompletedTab';
+import XpEarnedTab from './TabView/XpEarnedTab';
+import LevelsObtainedTab from './TabView/LevelsObtainedTab';
+import VideosWatchedTab from './TabView/VideosWatchedTab';
+import PodcastsFinishedTab from './TabView/PodcastsFinishedTab';
+import AudiobooksReadTab from './TabView/AudiobooksReadTab';
+import BooksReadTab from './TabView/BooksReadTab';
+import BooksSummariesTab from './TabView/BookSummariesTab';
+import ArticlesReadTab from './TabView/ArticlesReadTab';
+import CoursesCompletedTab from './TabView/CoursesCompletedTab';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;

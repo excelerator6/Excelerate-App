@@ -10,7 +10,6 @@ import GoldStarSharp from '../StarPngs/gold_star_sharp.png'
 export default function XpEarnedTab() {
   const xpEarned = useSelector(store => store.achievements.allAchievementsReducer.xpEarned)
   const completedAchievements = useSelector(store => store.achievements.userAchievementsReducer.completedAchievements)
-  console.log(completedAchievements);
 
   const starImage = (completedStatus) => {
     if (completedStatus) {
@@ -26,7 +25,14 @@ export default function XpEarnedTab() {
 
   const AchievementCard = (achievement) => (
     <>
-      <CardContent>
+      <CardContent 
+        sx={{
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          justifyContent: 'center'
+        }}
+      >
         <Typography sx={{fontSize:20}} gutterBottom>
           {achievement}
         </Typography>
@@ -46,8 +52,13 @@ export default function XpEarnedTab() {
           xpEarned.map((achievement, index) => (
             <Grid item xs={3} key={index}>
               <Card 
-                sx={{bgcolor:'#c3e3eb'}}
-                className='achievement-card'
+                sx={{
+                  bgcolor:'#c3e3eb',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'center',
+                  justifyContent: 'center'
+                }}
               >
                 {AchievementCard(achievement)}
               </Card>
