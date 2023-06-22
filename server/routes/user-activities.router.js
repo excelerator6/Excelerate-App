@@ -113,4 +113,26 @@ router.get('/totalXpSkillsPoints', rejectUnauthenticated, (req, res) => {
     })
 });
 
+router.get('/newestActivity', rejectUnauthenticated, async (req, res) => {
+  const userId = req.user.id
+  const newestActivityQuery = `
+    SELECT
+      activities_chart.activity,
+      activities_chart.id AS "activityId"
+    FROM user_activities
+    JOIN activities_chart
+      ON user_activities.activity_id = activities_chart.id
+    WHERE user_id = $1
+    ORDER BY user_activities.id DESC LIMIT 1;
+  `;
+  try {
+    const response = await pool.query(newestActivityQuery, [userId])
+    const newestActivity = response.rows[0]
+    console.log('newestActivity:', newestActivity);
+    res.send(newestActivity)
+  } catch (error) {
+    console.log('Error inside GET /newestActivituy:', error);
+  }
+})
+
 module.exports = router;

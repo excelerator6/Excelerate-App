@@ -182,6 +182,7 @@ router.post('/', rejectUnauthenticated, async (req, res) => {
     `;
     const { rows: userCompletedAchievements } = await connection.query(userCompletedAchievementsQuery, [userId])
     console.log('userCompletedAchievements:', userCompletedAchievements);
+    
     // Get the totals for what the user has done to compare vs completed achievements
     // and then POST a new achievement if it has been completed
 
@@ -196,7 +197,27 @@ router.post('/', rejectUnauthenticated, async (req, res) => {
     `;
     const { rows: userTotalXpPoints } = await connection.query(userTotalXpPointsQuery, [userId])
     let totalXpPoints = Number(userTotalXpPoints[0].xp_points)
-    console.log('totalXpPoints:', totalXpPoints);
+    switch (totalXpPoints) {
+      case (totalXpPoints >= 2750):
+        break
+      case (totalXpPoints >= 2500):
+        break
+      case (totalXpPoints >= 2250):
+        break
+      case (totalXpPoints >= 2000):
+        break
+      case (totalXpPoints >= 1750):
+        break
+      case (totalXpPoints >= 1500):
+        break
+      case (totalXpPoints >= 1250):
+        break
+      case (totalXpPoints >= 1000):
+        break
+      default:
+        console.log(`total XP = ${totalXpPoints}. This is not enough to get a new Xp achievement`);
+        break
+    }
 
     // Get the total amount of levels gained by the user
     const userAchievedSkillLevelsQuery = `
@@ -349,7 +370,6 @@ router.post('/', rejectUnauthenticated, async (req, res) => {
     console.log('totalArticlesFinished:', totalArticlesFinished);
 
     // Get the total amount of courses completed by the user
-    // Unsure if this is grabbing the correct data as we do not have a course completion activity...
     const userCompletedCoursesCountQuery = `
       SELECT
         COUNT(activities_chart.activity)
@@ -357,7 +377,7 @@ router.post('/', rejectUnauthenticated, async (req, res) => {
       LEFT JOIN activities_chart
         ON user_activities.activity_id = activities_chart.id
       WHERE
-        activities_chart.id = 8 AND
+        activities_chart.id = 34 AND
         user_activities.user_id = $1
       GROUP BY activities_chart.activity, activities_chart.id
       ORDER BY activities_chart.activity;

@@ -16,9 +16,55 @@ function* fetchAchievements() {
 
 function* checkThenPostNewAchievements() {
   try {
-    const response = yield axios.post( '/api/achievements' );
-    console.log('response inside checkThenPostNewAchievements:', response);
-    yield put({ type: 'FETCH_ACHIEVEMENTS'})
+    const { data: newestActivity } = yield axios.get('/api/user-activities/newestActivity')
+    console.log('newestActivity inside checkThenPostNewAchievements:', newestActivity);
+    const activityId = newestActivity.activityId
+    switch (activityId) {
+      // If the newest acitivity was one of the Watch a video options
+      case 21: // Watch a Video(+)
+      case 25: // Watch a Video(++)
+      case 32: // Watch a Video(+++)
+        console.log('Watched a video');
+        // const checkVideoAchievements = yield axios.post('/api/achievements/videosWatched');
+        break;
+      // If the newest activity was Finishing a Podcast
+      case 17: // Finished Podcast
+        console.log('Finished a podcast');
+        // const checkPodcastAchievements = yield axios.post('/api/achievements/podcastsFinished');
+        break;
+      // If the newest activity was finishing an audiobook
+      case 35: // Finish an Audiobook
+        console.log('Finished an audiobook');
+        // const checkAudiobookAchievements = yield axios.post('/api/achievements/audiobooksRead');
+        break;
+      // If the newest activity was one of the finish a book options
+      case 36: // Finish a Book (Pages < 100)
+      case 37: // Finsih a Book (Pages > 100)
+        console.log('Finished reading a book');
+        // const checkBookAchievments = yield axios.post('/api/achievements/booksRead');
+        break;
+      // If the newest activity was finishing a book summary
+      case 23: // Complete Book Summary
+        console.log('Finished reading a book summary');
+        // const checkSummaryAchievments = yield axios.post('/api/achievments/bookSummaries');
+        break;
+      // If the newest activity was finishing an article
+      case 3: // Read an Article
+        console.log('Finished reading an article');
+        // const checkArticleAchievements = yield axios.post('/api/achievements/articlesRead');
+        break;
+      // If the newest activity was completing a course
+      case 34: // Finish a Course
+        console.log('Completed a course');
+        // const checkCourseAchievements = yield axios.post('/api/achievements/coursesCompleted');
+      default:
+        break;
+    }
+    // const checkSkillLevelAchievements = yield axios.post('/api/achievments/skillLevels');
+    // const totalXpAchievements = yield axios.post('/api/achievements/totalXp');
+    // const response = yield axios.post( '/api/achievements' );
+    // console.log('response inside checkThenPostNewAchievements:', response);
+    // yield put({ type: 'FETCH_ACHIEVEMENTS'})
   } catch ( error ) {
     console.log( 'Error within checkThenPostNewAchievements:', error );
   }
