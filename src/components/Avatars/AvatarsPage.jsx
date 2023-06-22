@@ -5,7 +5,7 @@ import "./Avatars.css";
 function AvatarsPage() {
   return (
     <div id="AvatarsPage">
-      <h3> Choose New Avatar</h3>
+      <h3 id='titleChooseNewAvatar'> Choose New Avatar</h3>
       <AvatarsItem />
     </div>
   );

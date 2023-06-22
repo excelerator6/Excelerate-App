@@ -5,6 +5,7 @@ import React from 'react';
 
 //import Avatars Css
 import "./Avatars.css";
+import { Typography } from '@mui/material';
 
 function Avatars() {
 
@@ -31,6 +32,9 @@ function Avatars() {
           // color scheme
           colors={colors}
         />
+        <div>
+        <Typography>Select Avatar</Typography>
+        </div>
         </Link>
       </div>
       <div id="username">{username}</div>
