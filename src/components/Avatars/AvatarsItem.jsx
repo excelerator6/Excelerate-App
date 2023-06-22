@@ -2,11 +2,11 @@ import Avatar from "boring-avatars";
 import { useParams, useHistory } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-//import for material ui button and stack spacing
-import Stack from "@mui/material/Stack";
+//import for material ui button
 import Button from "@mui/material/Button";
-import { IconButton } from "@mui/material";
 import { Box, Card, Grid } from "@mui/material";
+import CardActions from '@mui/material/CardActions';
+import CardContent from '@mui/material/CardContent';
 
 function AvatarsItem() {
 
@@ -55,14 +55,18 @@ function AvatarsItem() {
         {avatarOptions.map((option, index) => {
           return (
             <Grid item xs={3} sm={3} md={3} key={index}>
-              <Card sx={{ width: "20vw" }}>
+              <Card sx={{ minWidth: 275 }}>
+              <CardContent>
                 <Avatar
                   size={100}
                   variant="beam"
                   colors={colors}
                   name={option}
                 />
+                </CardContent>
+                <CardActions>
                 <Button
+                size="lg"
                   variant="outlined"
                   sx={{ borderline: "2" }}
                   onClick={(event) => {
@@ -71,6 +75,7 @@ function AvatarsItem() {
                 >
                   Click Here!
                 </Button>
+                </CardActions>
               </Card>
             </Grid>
           );
