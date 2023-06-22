@@ -1,4 +1,4 @@
-import React from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import LogOutButton from "../LogOutButton/LogOutButton";
 // import './Nav.css';
@@ -26,14 +26,14 @@ import Avatars from "../Avatars/Avatars";
 const drawerWidth = 200;
 
 function Nav(props) {
+  const [currentWindow, setCurrentWindow] = useState('DASHBOARD')
   const { window } = props;
-  const [mobileOpen, setMobileOpen] = React.useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
   const user = useSelector((store) => store.user);
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
-
 
   const drawer = (
     <div>
@@ -44,7 +44,7 @@ function Nav(props) {
           <List>
           <Divider sx={{backgroundColor: '#c9cbcd', borderBottomWidth: 2}}/>
             <ListItem disablePadding>
-              <ListItemButton component="a" sx={{height:80}} href="#/about">
+              <ListItemButton component="a" sx={{height:80, backgroundColor: `${currentWindow === 'ABOUT' ? 'primary.navy' : 'primary.main'}`}} href="#/about" onClick={() => setCurrentWindow('ABOUT')}>
                 <ListItemIcon></ListItemIcon>
                 <ListItemText primary="ABOUT" />
               </ListItemButton>
@@ -55,7 +55,7 @@ function Nav(props) {
             {/* //If a user is logged in, show these links */}
             <>
               <ListItem disablePadding>
-                <ListItemButton component="a" sx={{height:80}} href="#/dashboard">
+                <ListItemButton component="a" sx={{height:80, backgroundColor: `${currentWindow === 'DASHBOARD' ? 'primary.navy' : 'primary.main'}`}} href="#/dashboard" onClick={() => setCurrentWindow('DASHBOARD')}>
                   <ListItemIcon></ListItemIcon>
                   <ListItemText primary="DASHBOARD" />
                 </ListItemButton>
@@ -63,7 +63,7 @@ function Nav(props) {
               <Divider sx={{backgroundColor: '#c9cbcd', borderBottomWidth: 2}}/>
 
               <ListItem disablePadding>
-                <ListItemButton component="a" sx={{height:80}} href="#/xp-log">
+                <ListItemButton component="a" sx={{height:80, backgroundColor: `${currentWindow === 'XP LOG' ? 'primary.navy' : 'primary.main'}`}} href="#/xp-log" onClick={() => setCurrentWindow('XP LOG')}>
                   <ListItemIcon></ListItemIcon>
                   <ListItemText primary="XP LOG" />
                 </ListItemButton>
@@ -71,7 +71,7 @@ function Nav(props) {
               <Divider sx={{backgroundColor: '#c9cbcd', borderBottomWidth: 2}}/>
 
               <ListItem disablePadding>
-                <ListItemButton component="a" sx={{height:80}} href="#/StatsPage">
+                <ListItemButton component="a" sx={{height:80, backgroundColor: `${currentWindow === 'STATS' ? 'primary.navy' : 'primary.main'}`}} href="#/StatsPage" onClick={() => setCurrentWindow('STATS')}>
                   <ListItemIcon></ListItemIcon>
                   <ListItemText primary="STATS" />
                 </ListItemButton>
@@ -79,7 +79,7 @@ function Nav(props) {
               <Divider sx={{backgroundColor: '#c9cbcd', borderBottomWidth: 2}}/>
 
               <ListItem disablePadding>
-                <ListItemButton component="a" sx={{height:80}} href="#/Achievements">
+                <ListItemButton component="a" sx={{height:80, backgroundColor: `${currentWindow === 'ACHIEVEMENTS' ? 'primary.navy' : 'primary.main'}`}} href="#/Achievements" onClick={() => setCurrentWindow('ACHIEVEMENTS')}>
                   <ListItemIcon></ListItemIcon>
                   <ListItemText primary="ACHIEVEMENTS"/>
                 </ListItemButton>
