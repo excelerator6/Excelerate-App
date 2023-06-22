@@ -9,9 +9,9 @@ import { IconButton } from "@mui/material";
 import { Box, Card, Grid } from "@mui/material";
 
 function AvatarsItem() {
-  const params = useParams();
+  
   const dispatch = useDispatch();
-  const history = useHistory();
+  
 
     //handleUpdate takes in 2 parameters, the new avatarOptions and dispatch called when clicked on
   const handleUpdate = (event, avatarNewName, message) => {

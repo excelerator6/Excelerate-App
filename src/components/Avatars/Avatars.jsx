@@ -10,6 +10,15 @@ function Avatars() {
 
   const userAvatar = useSelector((store) => store.user.user_avatar_path);
   const username = useSelector((store) => store.user.username)
+  
+  const colors = [
+    "#c9cbcd",
+    "#90ee90",
+    "#c3e3eb",
+    "#061e45",
+    "#36454f",
+    "#303841",
+  ];
 
   return (
     <div id="avatarContainer">
@@ -20,14 +29,7 @@ function Avatars() {
           name={userAvatar}
           variant="beam"
           // color scheme
-          colors={[
-            "#c9cbcd",
-            "#90ee90",
-            "#c3e3eb",
-            "#061e45",
-            "#36454f",
-            "#303841",
-          ]}
+          colors={colors}
         />
         </Link>
       </div>
