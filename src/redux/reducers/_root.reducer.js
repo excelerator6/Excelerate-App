@@ -4,7 +4,7 @@ import user from './user.reducer';
 import activities from './activities.reducer';
 import skills from './skills.reducer'
 import userActivities from './user-activities.reducer';
-import achievements from './achievements.reduer';
+import achievements from './achievements.reducer';
 import xpPoints from './xpPoints.reducer'
 
 // rootReducer is the primary reducer for our entire project

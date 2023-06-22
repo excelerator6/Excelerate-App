@@ -2,11 +2,14 @@ const express = require('express');
 const pool = require('../modules/pool');
 const { default: logger } = require('redux-logger');
 const router = express.Router();
+const {
+  rejectUnauthenticated,
+} = require('../modules/authentication-middleware');
 
 /**
  * GET route template
  */
-router.get('/getSkills', async (req, res) => {
+router.get('/getSkills', rejectUnauthenticated, async (req, res) => {
   // GET route code here
 
   const userID = req.user.id;
