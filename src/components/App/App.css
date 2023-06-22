@@ -34,8 +34,8 @@ Button
   border-color: #014041;
   border-width: 1px 1px 3px;
   border-radius: 4px;
-  background-color: #90ee90;
-  color: black;
+  background-color: #303841;
+  color: white;
   font-size: 1.1rem;
   outline: 0;
   cursor: pointer;
@@ -116,4 +116,8 @@ input {
 .carouselImages{
   height: 575;
   width: auto;
+}
+
+.avatar {
+  border: 5px solid white;
 }

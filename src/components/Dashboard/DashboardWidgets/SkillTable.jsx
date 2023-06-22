@@ -63,7 +63,7 @@ function SkillTable() {
         },
         [`& .${linearProgressClasses.bar}`]: {
           borderRadius: 10,
-          backgroundColor: theme.palette.mode === 'light' ? '#90ee90' : '#308fe8',
+          backgroundColor: theme.palette.mode === 'light' ? '#5982c4' : '#308fe8',
         },
       }));
 
