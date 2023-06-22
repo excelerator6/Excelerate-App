@@ -7,6 +7,7 @@ import { Paper } from "@mui/material";
 
 //import Avatars Css
 import "./Avatars.css";
+import { Typography } from '@mui/material';
 
 function Avatars() {
 

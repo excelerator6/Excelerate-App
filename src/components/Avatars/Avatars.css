@@ -9,6 +9,10 @@
 #avatar {
   display: flex;
   justify-content: center;
+  text-align: center;
+  margin: 0;
+  padding: -10;
+  margin-bottom: -15%;
 }
 
 #username {
@@ -18,7 +22,11 @@
   font-size: 30px;
 }
 
-#AvatarsPage{
+#AvatarsPage {
   padding-top: 5%;
-  padding-left: 5%;
+}
+
+#titleChooseNewAvatar{
+  display: flex;
+  justify-content: center;
 }

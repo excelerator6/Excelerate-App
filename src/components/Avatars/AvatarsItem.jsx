@@ -43,12 +43,12 @@ function AvatarsItem() {
   ];
 
   return (
-    <Box sx={{ flexGrow: 1 }} style={{ padding: 10 }}>
+    <Box sx={{ flexGrow: 1 }}>
       <Grid
         container
         direction="row"
         spacing={{ xs: 3, md: 4 }}
-        columns={{ xs: 3, sm: 8, md: 12 }}
+        columns={{ xs: 3, sm: 8, md: 14 }}
         justifyContent="center"
         alignItems="center"
         textAlign="center"
@@ -56,7 +56,7 @@ function AvatarsItem() {
         {avatarOptions.map((option, index) => {
           return (
             <Grid item xs={3} key={index}>
-              <Card sx={{ maxWidth: 1, minWidth: 1  }} variant="outlined">
+              <Card variant="outlined" sx={{}} >
                 <CardActionArea>
                   <CardContent>
                     <Avatar
