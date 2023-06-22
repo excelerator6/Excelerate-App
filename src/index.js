@@ -16,6 +16,9 @@ const exceleratorTheme = createTheme({
           color: "white",
         }
       }
+    },
+    MuiListItem: {
+      
     }
   },
   palette: {
@@ -32,7 +35,7 @@ const exceleratorTheme = createTheme({
     // divider: 'rgba(255,255,255,0.12)',
   },
   typography: {
-    fontFamily: []
+    fontFamily: ["Impact"],
   },
 })
 

@@ -18,7 +18,7 @@ import ListItemText from "@mui/material/ListItemText";
 import MenuIcon from "@mui/icons-material/Menu";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
-import { createTheme, ThemeProvider, Paper } from "@mui/material";
+import { Paper } from "@mui/material";
 
 //import Avatars
 import Avatars from "../Avatars/Avatars";
@@ -35,80 +35,56 @@ function Nav(props) {
   };
 
 
-  const navTheme = createTheme({
-    palette:{
-      type: 'light',
-      primary: {
-        main: '#303841',
-      },
-      secondary: {
-        main: '#90ee90',
-      },
-      success: {
-        main: '#ffe801',
-      },
-      background:{
-        default: '#303841'
-      }
-      // divider: 'rgba(255,255,255,0.12)',
-    }
-  })
   const drawer = (
     <div>
-      {/* <ThemeProvider theme={navTheme}> */}
-        {/* <Paper> */}
+      {/* <Paper sx={{backgroundColor: '#c9cbcd'}}> */}
         <Avatars />
-          <Divider />
+          {/* <Divider sx={{backgroundColor: '#c9cbcd'}}/> */}
+      {/* </Paper> */}
           <List>
+          <Divider sx={{backgroundColor: '#c9cbcd', borderBottomWidth: 2}}/>
             <ListItem disablePadding>
-              <ListItemButton component="a" href="#/about">
+              <ListItemButton component="a" sx={{height:80}} href="#/about">
                 <ListItemIcon></ListItemIcon>
-                <ListItemText primary="About" />
+                <ListItemText primary="ABOUT" />
               </ListItemButton>
             </ListItem>
-
-            {/* // If there's no user, show login/registration links */}
-            {
-              user.id ? <></> : <ListItem disablePadding>
-              <ListItemButton component="a" href="#/login">
-                <ListItemIcon></ListItemIcon>
-                <ListItemText primary="Login" />
-              </ListItemButton>
-            </ListItem>
-            }
+          <Divider sx={{backgroundColor: '#c9cbcd', borderBottomWidth: 2}}/>
             
-
-
 
             {/* //If a user is logged in, show these links */}
             <>
               <ListItem disablePadding>
-                <ListItemButton component="a" href="#/dashboard">
+                <ListItemButton component="a" sx={{height:80}} href="#/dashboard">
                   <ListItemIcon></ListItemIcon>
-                  <ListItemText primary="Dashboard" />
+                  <ListItemText primary="DASHBOARD" />
                 </ListItemButton>
               </ListItem>
+              <Divider sx={{backgroundColor: '#c9cbcd', borderBottomWidth: 2}}/>
 
               <ListItem disablePadding>
-                <ListItemButton component="a" href="#/xp-log">
+                <ListItemButton component="a" sx={{height:80}} href="#/xp-log">
                   <ListItemIcon></ListItemIcon>
                   <ListItemText primary="XP LOG" />
                 </ListItemButton>
               </ListItem>
+              <Divider sx={{backgroundColor: '#c9cbcd', borderBottomWidth: 2}}/>
 
               <ListItem disablePadding>
-                <ListItemButton component="a" href="#/StatsPage">
+                <ListItemButton component="a" sx={{height:80}} href="#/StatsPage">
                   <ListItemIcon></ListItemIcon>
-                  <ListItemText primary="Stats" />
+                  <ListItemText primary="STATS" />
                 </ListItemButton>
               </ListItem>
+              <Divider sx={{backgroundColor: '#c9cbcd', borderBottomWidth: 2}}/>
 
               <ListItem disablePadding>
-                <ListItemButton component="a" href="#/Achievements">
+                <ListItemButton component="a" sx={{height:80}} href="#/Achievements">
                   <ListItemIcon></ListItemIcon>
-                  <ListItemText primary="Achievements" />
+                  <ListItemText primary="ACHIEVEMENTS"/>
                 </ListItemButton>
               </ListItem>
+              <Divider sx={{backgroundColor: '#c9cbcd', borderBottomWidth: 2}}/>
 
               <Box
                 m={1}
@@ -122,10 +98,8 @@ function Nav(props) {
                 <LogOutButton className="btn" />
               </Box>
             </>
-          {/* // )} */}
         </List>
         {/* </Paper> */}
-      {/* </ThemeProvider> */}
     </div>
   );
 
@@ -179,7 +153,7 @@ function Nav(props) {
               <MenuIcon />
             </IconButton>
             <Typography variant="h6" noWrap component="div">
-              Excelerator
+              EXCELERATOR
             </Typography>
           </Toolbar>
         </AppBar>
@@ -233,25 +207,10 @@ function Nav(props) {
             width: { sm: `calc(100% - ${drawerWidth}px)` },
           }}
         >
-          {/* <Toolbar />
-          <Typography paragraph>
-
-          </Typography>
-          <Typography paragraph> */}
-
-          {/* </Typography> */}
         </Box>
       </Box>
     </div>
   );
 }
-
-// Nav.propTypes = {
-//   /**
-//    * Injected by the documentation to work in an iframe.
-//    * You won't need it on your project.
-//    */
-//   window: PropTypes.func,
-// };
 
 export default Nav;
