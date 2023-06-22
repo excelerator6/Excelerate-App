@@ -9,14 +9,10 @@ import { IconButton } from "@mui/material";
 import { Box, Card, Grid } from "@mui/material";
 
 function AvatarsItem() {
-  
+
   const dispatch = useDispatch();
-  
-
-    //handleUpdate takes in 2 parameters, the new avatarOptions and dispatch called when clicked on
+  //handleUpdate takes in 2 parameters, the new avatarOptions and dispatch called when clicked on
   const handleUpdate = (event, avatarNewName, message) => {
-
-    // console.log('test avatarName, dispatch', avatarNewName, message);
     dispatch({
       type: message,
       payload: avatarNewName,
@@ -33,18 +29,18 @@ function AvatarsItem() {
   ];
 
   const avatarOptions = [
-    "avatar1",
-    "avatar2",
-    "avatar3",
-    "avatar4",
-    "avatar5",
-    "avatar6",
-    "avatar7",
-    "avatar8",
-    "avatar9",
-    "avatar21",
-    "avatar22",
-    "avatar23",
+    "Abigail Adams",
+    "Margaret Fuller",
+    "Ellen Swallow",
+    "Alicia Dickerson",
+    "Mahalia Jackson",
+    "Emma Lazarus",
+    "Coretta Scott",
+    "Annie Jump",
+    "Irene Morgan",
+    "Susan B",
+    "Sojourner Truth",
+    "Georgia O",
   ];
 
   return (
@@ -60,14 +56,12 @@ function AvatarsItem() {
           return (
             <Grid item xs={3} sm={3} md={3} key={index}>
               <Card sx={{ width: "20vw" }}>
-                
                 <Avatar
                   size={100}
                   variant="beam"
                   colors={colors}
                   name={option}
                 />
-                
                 <Button
                   variant="outlined"
                   sx={{ borderline: "2" }}
