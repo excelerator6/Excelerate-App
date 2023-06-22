@@ -24,11 +24,11 @@ router.put('/:id', (req, res) => {
   
     
     const sqlQuery = `
-    UPDATE "avatars"
+    UPDATE "user"
         SET 
         "user.id" = $1
         AND
-        "avatar_name" = $2,
+        "user_avatar_path" = $2,
         WHERE "id" = $3
         `;
         

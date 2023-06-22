@@ -13,10 +13,13 @@ function AvatarsItem() {
   const dispatch = useDispatch();
   const history = useHistory();
 
-  const handleUpdate = (event, avatarName) => {
+    //handleUpdate takes in 2 parameters, the new avatarOptions and dispatch called when clicked on
+  const handleUpdate = (event, avatarNewName, message) => {
+
+    // console.log('test avatarName, dispatch', avatarNewName, message);
     dispatch({
-      type: avatarName,
-      payload: event.target.value,
+      type: message,
+      payload: avatarNewName,
     });
   };
 
@@ -69,7 +72,7 @@ function AvatarsItem() {
                   variant="outlined"
                   sx={{ borderline: "2" }}
                   onClick={(event) => {
-                    handleUpdate(event, "UPDATE_AVATAR_NAME");
+                    handleUpdate(event, option, "UPDATE_AVATAR_NAME");
                   }}
                 >
                   Click Here!
