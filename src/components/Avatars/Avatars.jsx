@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link } from "react-router-dom";
 import React from 'react';
 
+import { Paper } from "@mui/material";
+
 //import Avatars Css
 import "./Avatars.css";
 import { Typography } from '@mui/material';
@@ -25,16 +27,16 @@ function Avatars() {
     <div id="avatarContainer">
       <div id="avatar">
       <Link to='/AvatarsPage'>
-        <Avatar
-          size={100}
-          name={userAvatar}
-          variant="beam"
-          // color scheme
-          colors={colors}
-        />
-        <div>
-        <h4>Select New Avatar</h4>
-        </div>
+        <Paper sx={{backgroundColor:'white', p:.2, borderRadius: 17, display:'flex', justifyContent:'center', alignContent:'center'}}>
+          <Avatar
+            size={100}
+            name={userAvatar}
+            variant="beam"
+            // color scheme
+            colors={colors}
+            className="avatar"
+          />
+        </Paper>
         </Link>
       </div>
       <div id="username">{username}</div>

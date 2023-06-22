@@ -3,7 +3,7 @@
   flex-wrap: wrap;
   justify-content: center;
   flex-direction: column;
-  margin-top: 5%;
+  padding-top: 5%;
 }
 
 #avatar {
