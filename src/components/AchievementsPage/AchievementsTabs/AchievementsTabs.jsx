@@ -1,19 +1,12 @@
 import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Box from '@mui/material/Box';
 
 // Import the tab views
-import XpEarnedTab from './TabViews/XpEarnedTab';
-import LevelsObtainedTab from './TabViews/LevelsObtainedTab';
-import VideosWatchedTab from './TabViews/VideosWatchedTab';
-import PodcastsFinishedTab from './TabViews/PodcastsFinishedTab';
-import AudiobooksReadTab from './TabViews/AudiobooksReadTab';
-import BooksReadTab from './TabViews/BooksReadTab';
-import BooksSummariesTab from './TabViews/BookSummariesTab';
-import ArticlesReadTab from './TabViews/ArticlesReadTab';
-import CoursesCompletedTab from './TabViews/CoursesCompletedTab';
+import AchievementTabView from './TabView/TabView';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -50,6 +43,17 @@ function a11yProps(index) {
 
 export default function AchievementsTabs() {
   const [value, setValue] = useState(0);
+  const {
+    articlesRead,
+    audiobooksRead,
+    bookSummaries,
+    booksRead,
+    coursesCompleted,
+    levelsObtained,
+    podcastsFinished,
+    videosWatched,
+    xpEarned
+  } = useSelector(store => store.achievements.allAchievementsReducer)
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -75,32 +79,77 @@ export default function AchievementsTabs() {
           <Tab label="Courses Completed" {...a11yProps(8)} />
         </Tabs>
       </Box>
+
+      {/* Xp Earned Tab */}
       <TabPanel value={value} index={0}>
-        <XpEarnedTab />
+        <AchievementTabView
+          pageAchievements={xpEarned}
+          pageHeader='XP Earned'
+        />
       </TabPanel>
+
+      {/* Levels Obtained Tab */}
       <TabPanel value={value} index={1}>
-        <LevelsObtainedTab />
+        <AchievementTabView 
+          pageAchievements={levelsObtained}
+          pageHeader='Levels Obtained'
+        />
       </TabPanel>
+
+      {/* Videos Watched Tab */}
       <TabPanel value={value} index={2}>
-        <VideosWatchedTab />
+        <AchievementTabView 
+          pageAchievements={videosWatched}
+          pageHeader='Videos Watched'
+        />
       </TabPanel>
+
+      {/* Podcasts Finished Tab */}
       <TabPanel value={value} index={3}>
-        <PodcastsFinishedTab />
+        <AchievementTabView 
+          pageAchievements={podcastsFinished}
+          pageHeader='Podcasts Finished'
+        />
       </TabPanel>
+
+      {/* Audiobooks Read Tab */}
       <TabPanel value={value} index={4}>
-        <AudiobooksReadTab />
+        <AchievementTabView
+          pageAchievements={audiobooksRead}
+          pageHeader='Audiobooks Read'
+        />
       </TabPanel>
+
+      {/* Books Read Tab */}
       <TabPanel value={value} index={5}>
-        <BooksReadTab />
+        <AchievementTabView
+          pageAchievements={booksRead}
+          pageHeader='Books Read'
+        />
       </TabPanel>
+
+      {/* Book Summaries Tab */}
       <TabPanel value={value} index={6}>
-        <BooksSummariesTab />
+        <AchievementTabView
+          pageAchievements={bookSummaries}
+          pageHeader='Book Summaries'
+        />
       </TabPanel>
+
+      {/* Articles Read Tab */}
       <TabPanel value={value} index={7}>
-        <ArticlesReadTab />
+        <AchievementTabView
+          pageAchievements={articlesRead}
+          pageHeader='Articles Read'
+        />
       </TabPanel>
+
+      {/* Courses Completed Tab */}
       <TabPanel value={value} index={8}>
-        <CoursesCompletedTab />
+        <AchievementTabView
+          pageAchievements={coursesCompleted}
+          pageHeader='Courses Completed'
+        />
       </TabPanel>
     </Box>
   );

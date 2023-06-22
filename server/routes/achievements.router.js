@@ -52,7 +52,7 @@ router.get('/', rejectUnauthenticated, async (req, res) => {
     SELECT
       achievements.achievement_name AS achievement,
       achievements.achievement_category AS category,
-      date_achieved AS date
+      TO_CHAR(date_achieved, 'mm/dd/yyyy') AS date
     FROM user_achievements
       LEFT JOIN achievements
         ON user_achievements.achievement_id = achievements.id
