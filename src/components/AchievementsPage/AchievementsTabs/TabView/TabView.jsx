@@ -7,7 +7,6 @@ export default function AchievementTabView({pageAchievements, pageHeader}) {
   const completedAchievements = useSelector(store =>
     store.achievements.userAchievementsReducer.completedAchievements
   )
-  console.log('pageAchievements:', pageAchievements);
 
   const CompletedStarImage = (achievement) => {
     // Check to see if this achievement has been completed and render a different star and

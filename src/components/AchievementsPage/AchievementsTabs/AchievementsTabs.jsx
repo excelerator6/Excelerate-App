@@ -79,13 +79,15 @@ export default function AchievementsTabs() {
           <Tab label="Courses Completed" {...a11yProps(8)} />
         </Tabs>
       </Box>
+
       {/* Xp Earned Tab */}
       <TabPanel value={value} index={0}>
-        <AchievementTabView 
+        <AchievementTabView
           pageAchievements={xpEarned}
           pageHeader='XP Earned'
         />
       </TabPanel>
+
       {/* Levels Obtained Tab */}
       <TabPanel value={value} index={1}>
         <AchievementTabView 
@@ -93,6 +95,7 @@ export default function AchievementsTabs() {
           pageHeader='Levels Obtained'
         />
       </TabPanel>
+
       {/* Videos Watched Tab */}
       <TabPanel value={value} index={2}>
         <AchievementTabView 
@@ -100,6 +103,7 @@ export default function AchievementsTabs() {
           pageHeader='Videos Watched'
         />
       </TabPanel>
+
       {/* Podcasts Finished Tab */}
       <TabPanel value={value} index={3}>
         <AchievementTabView 
@@ -107,37 +111,42 @@ export default function AchievementsTabs() {
           pageHeader='Podcasts Finished'
         />
       </TabPanel>
+
       {/* Audiobooks Read Tab */}
       <TabPanel value={value} index={4}>
-        <AchievementTabView 
+        <AchievementTabView
           pageAchievements={audiobooksRead}
           pageHeader='Audiobooks Read'
         />
       </TabPanel>
+
       {/* Books Read Tab */}
       <TabPanel value={value} index={5}>
-        <AchievementTabView 
+        <AchievementTabView
           pageAchievements={booksRead}
           pageHeader='Books Read'
         />
       </TabPanel>
+
       {/* Book Summaries Tab */}
       <TabPanel value={value} index={6}>
-        <AchievementTabView 
+        <AchievementTabView
           pageAchievements={bookSummaries}
           pageHeader='Book Summaries'
         />
       </TabPanel>
+
       {/* Articles Read Tab */}
       <TabPanel value={value} index={7}>
-        <AchievementTabView 
+        <AchievementTabView
           pageAchievements={articlesRead}
           pageHeader='Articles Read'
         />
       </TabPanel>
+
       {/* Courses Completed Tab */}
       <TabPanel value={value} index={8}>
-        <AchievementTabView 
+        <AchievementTabView
           pageAchievements={coursesCompleted}
           pageHeader='Courses Completed'
         />
