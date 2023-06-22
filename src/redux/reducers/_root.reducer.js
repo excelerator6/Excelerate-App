@@ -1,11 +1,10 @@
-import { combineReducers } from 'redux';
-import errors from './errors.reducer';
-import user from './user.reducer';
-import activities from './activities.reducer';
-import skills from './skills.reducer'
-import userActivities from './user-activities.reducer';
-import achievements from './achievements.reduer';
-import avatars from './avatars.reducer';
+import { combineReducers } from "redux";
+import errors from "./errors.reducer";
+import user from "./user.reducer";
+import activities from "./activities.reducer";
+import skills from "./skills.reducer";
+import userActivities from "./user-activities.reducer";
+import achievements from "./achievements.reduer";
 
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
@@ -20,7 +19,6 @@ const rootReducer = combineReducers({
   skills, //list of the skills the user will be leveling up.
   userActivities, // The list of activites/events associated with the user
   achievements, // The list of achievements (counts of different activities) associated with the user
-  avatars, // The list of avatars settings
 });
 
 export default rootReducer;
