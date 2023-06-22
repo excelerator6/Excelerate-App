@@ -16,18 +16,17 @@ const exceleratorTheme = createTheme({
           color: "white",
         }
       }
-    },
-    MuiListItem: {
-      
     }
   },
   palette: {
     type: 'light',
     primary: {
       main: '#303841',
-    },
-    secondary: {
-      main: '#90ee90',
+      navy: '#061e45',
+      green: '#90ee90',
+      lightBlue: '#c3e3eb',
+      midGray: '#36454f',
+      lightGray: '#c9cbcd'
     },
     success: {
       main: '#ffe801',
