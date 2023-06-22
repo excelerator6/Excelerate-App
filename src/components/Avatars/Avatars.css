@@ -9,7 +9,10 @@
 #avatar {
   display: flex;
   justify-content: center;
-  font-size: small;
+  text-align: center;
+  margin: 0;
+  padding: -10;
+  margin-bottom: -15%;
 }
 
 #username {

@@ -33,7 +33,7 @@ function Avatars() {
           colors={colors}
         />
         <div>
-        <Typography>Select Avatar</Typography>
+        <h4>Select New Avatar</h4>
         </div>
         </Link>
       </div>
