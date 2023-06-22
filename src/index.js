@@ -35,6 +35,9 @@ const exceleratorTheme = createTheme({
   },
   typography: {
     fontFamily: ["Impact"],
+    h2:{
+      letterSpacing: '10px'
+    }
   },
 })
 
