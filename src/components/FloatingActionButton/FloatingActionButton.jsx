@@ -122,7 +122,6 @@ export default function FloatingActionButton() {
                 // backgroundColor: "primary.green",
                 backgroundColor: "skyblue",
                 "&:hover": {
-                  color: "#36454f",
                   backgroundColor: "#90ee90",
                 },
               }}
