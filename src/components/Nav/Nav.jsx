@@ -55,7 +55,7 @@ function Nav(props) {
   })
   const drawer = (
     <div>
-      <ThemeProvider theme={navTheme}>
+      {/* <ThemeProvider theme={navTheme}> */}
         {/* <Paper> */}
         <Avatars />
           <Divider />
@@ -125,7 +125,7 @@ function Nav(props) {
           {/* // )} */}
         </List>
         {/* </Paper> */}
-      </ThemeProvider>
+      {/* </ThemeProvider> */}
     </div>
   );
 

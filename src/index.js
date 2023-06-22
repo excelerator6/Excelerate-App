@@ -8,6 +8,16 @@ import store from './redux/store';
 import App from './components/App/App';
 
 const exceleratorTheme = createTheme({
+  components: {
+    MuiDrawer: {
+      styleOverrides: {
+        paper: {
+          backgroundColor: "#303841",
+          color: "white",
+        }
+      }
+    }
+  },
   palette: {
     type: 'light',
     primary: {
