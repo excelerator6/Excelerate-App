@@ -5,8 +5,8 @@ import { useDispatch, useSelector } from "react-redux";
 //import for material ui button
 import Button from "@mui/material/Button";
 import { Box, Card, Grid } from "@mui/material";
-import CardActions from '@mui/material/CardActions';
-import CardContent from '@mui/material/CardContent';
+import CardActions from "@mui/material/CardActions";
+import CardContent from "@mui/material/CardContent";
 
 function AvatarsItem() {
 
@@ -44,37 +44,52 @@ function AvatarsItem() {
   ];
 
   return (
-    <Box sx={{ flexGrow: 1 }}>
+    <Box 
+    sx={{ flexGrow: 1 }}
+    >
       <Grid
         container
-        spacing={2}
-        direction="row"
+        spacing={3}
+        // spacing={{ xs: 2, md: 3 }}
+        // columns={{ xs: 4, sm: 8, md: 12 }}
+
+        // direction="row"
         justifyContent="center"
         alignItems="center"
       >
         {avatarOptions.map((option, index) => {
           return (
-            <Grid item xs={3} sm={3} md={3} key={index}>
-              <Card sx={{ minWidth: 275 }}>
-              <CardContent>
-                <Avatar
-                  size={100}
-                  variant="beam"
-                  colors={colors}
-                  name={option}
-                />
+            <Grid
+            item
+            //   columnSpacing={{ xs: 1, sm: 2, md: 1 }}
+            //   xs={2}
+            //   sm={4}
+            //   md={4}
+            //   key={index}
+            >
+              <Card 
+            //   sx={{ }} 
+            //   variant="outlined"
+              >
+                <CardContent>
+                  <Avatar
+                    size={100}
+                    variant="beam"
+                    colors={colors}
+                    name={option}
+                  />
                 </CardContent>
                 <CardActions>
-                <Button
-                size="lg"
-                  variant="outlined"
-                  sx={{ borderline: "2" }}
-                  onClick={(event) => {
-                    handleUpdate(event, option, "UPDATE_AVATAR_NAME");
-                  }}
-                >
-                  Click Here!
-                </Button>
+                  <Button
+                    size="lg"
+                    variant="outlined"
+                    sx={{ borderline: "" }}
+                    onClick={(event) => {
+                      handleUpdate(event, option, "UPDATE_AVATAR_NAME");
+                    }}
+                  >
+                    Click Here!
+                  </Button>
                 </CardActions>
               </Card>
             </Grid>
