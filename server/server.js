@@ -10,9 +10,10 @@ const passport = require('./strategies/user.strategy');
 // Route includes
 const userRouter = require('./routes/user.router');
 const activityRouter = require('./routes/activities.router');
-const skillsRouter = require('./routes/skills.router')
-const userActivitiesRouter = require('./routes/user-activities.router')
-const achievementsRouter = require('./routes/achievements.router')
+const skillsRouter = require('./routes/skills.router');
+const userActivitiesRouter = require('./routes/user-activities.router');
+const achievementsRouter = require('./routes/achievements.router');
+const avatarsRouter = require('./routes/avatars.router');
 
 // Body parser middleware
 app.use(bodyParser.json());
@@ -31,6 +32,7 @@ app.use('/api/activity', activityRouter);
 app.use('/api/skills', skillsRouter);
 app.use('/api/user-activities', userActivitiesRouter);
 app.use('/api/achievements', achievementsRouter);
+app.use('/api/avatars', avatarsRouter);
 
 // Serve static files
 app.use(express.static('build'));
