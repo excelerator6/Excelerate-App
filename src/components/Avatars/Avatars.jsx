@@ -1,19 +1,18 @@
 import Avatar from "boring-avatars";
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import React from 'react';
+import React from "react";
 
 import { Paper } from "@mui/material";
 
 //import Avatars Css
 import "./Avatars.css";
-import { Typography } from '@mui/material';
+import { Typography } from "@mui/material";
 
 function Avatars() {
-
   const userAvatar = useSelector((store) => store.user.user_avatar_path);
-  const username = useSelector((store) => store.user.username)
-  
+  const username = useSelector((store) => store.user.username);
+
   const colors = [
     "#c9cbcd",
     "#90ee90",
@@ -26,17 +25,30 @@ function Avatars() {
   return (
     <div id="avatarContainer">
       <div id="avatar">
-      <Link to='/AvatarsPage'>
-        <Paper sx={{backgroundColor:'white', p:.2, borderRadius: 17, display:'flex', justifyContent:'center', alignContent:'center'}}>
-          <Avatar
-            size={100}
-            name={userAvatar}
-            variant="beam"
-            // color scheme
-            colors={colors}
-            className="avatar"
-          />
-        </Paper>
+        <Link to="/AvatarsPage">
+          <Paper
+            sx={{
+              backgroundColor: "white",
+              p: 0.2,
+              borderRadius: 17,
+              display: "flex",
+              justifyContent: "center",
+              alignContent: "center",
+              "&:hover": {
+                color: "#36454f",
+                backgroundColor: "#90ee90",
+              },
+            }}
+          >
+            <Avatar
+              size={100}
+              name={userAvatar}
+              variant="beam"
+              // color scheme
+              colors={colors}
+              className="avatar"
+            />
+          </Paper>
         </Link>
       </div>
       <div id="username">{username}</div>
