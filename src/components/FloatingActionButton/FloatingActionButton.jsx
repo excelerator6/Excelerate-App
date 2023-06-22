@@ -119,7 +119,12 @@ export default function FloatingActionButton() {
                 position: "fixed",
                 bottom: 16,
                 right: 16,
-                backgroundColor: "primary.green",
+                // backgroundColor: "primary.green",
+                backgroundColor: "skyblue",
+                "&:hover": {
+                  color: "#36454f",
+                  backgroundColor: "#90ee90",
+                },
               }}
             >
               <AddIcon />
