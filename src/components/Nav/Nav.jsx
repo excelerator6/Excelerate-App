@@ -19,7 +19,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import { Paper } from "@mui/material";
-import ExceleratorLogo from './images/Excelerator_Logo.png'
+import ExceleratorLogo from './images/ExceleratorLogoV2.png'
 
 //import Avatars
 import Avatars from "../Avatars/Avatars";
@@ -38,14 +38,11 @@ function Nav(props) {
 
   const drawer = (
     <div>
-      {/* <Paper sx={{backgroundColor: '#c9cbcd'}}> */}
-        <Avatars />
-          {/* <Divider sx={{backgroundColor: '#c9cbcd'}}/> */}
-      {/* </Paper> */}
+        <Avatars/>
           <List>
           <Divider sx={{backgroundColor: '#c9cbcd', borderBottomWidth: 2}}/>
             <ListItem disablePadding>
-              <ListItemButton component="a" sx={{height:80, backgroundColor: `${currentWindow === 'ABOUT' ? 'primary.navy' : 'primary.main'}`}} href="#/about" onClick={() => setCurrentWindow('ABOUT')}>
+              <ListItemButton component="a" sx={{height:80, backgroundColor: `${currentWindow === 'ABOUT' ? 'primary.navy' : 'primary.main'}`, color:'white'}} href="#/about" onClick={() => setCurrentWindow('ABOUT')}>
                 <ListItemIcon></ListItemIcon>
                 <ListItemText primary="ABOUT" />
               </ListItemButton>
@@ -56,7 +53,7 @@ function Nav(props) {
             {/* //If a user is logged in, show these links */}
             <>
               <ListItem disablePadding>
-                <ListItemButton component="a" sx={{height:80, backgroundColor: `${currentWindow === 'DASHBOARD' ? 'primary.navy' : 'primary.main'}`}} href="#/dashboard" onClick={() => setCurrentWindow('DASHBOARD')}>
+                <ListItemButton component="a" sx={{height:80, backgroundColor: `${currentWindow === 'DASHBOARD' ? 'primary.navy' : 'primary.main'}`, color:'white'}} href="#/dashboard" onClick={() => setCurrentWindow('DASHBOARD')}>
                   <ListItemIcon></ListItemIcon>
                   <ListItemText primary="DASHBOARD" />
                 </ListItemButton>
@@ -64,7 +61,7 @@ function Nav(props) {
               <Divider sx={{backgroundColor: '#c9cbcd', borderBottomWidth: 2}}/>
 
               <ListItem disablePadding>
-                <ListItemButton component="a" sx={{height:80, backgroundColor: `${currentWindow === 'XP LOG' ? 'primary.navy' : 'primary.main'}`}} href="#/xp-log" onClick={() => setCurrentWindow('XP LOG')}>
+                <ListItemButton component="a" sx={{height:80, backgroundColor: `${currentWindow === 'XP LOG' ? 'primary.navy' : 'primary.main'}`, color:'white'}} href="#/xp-log" onClick={() => setCurrentWindow('XP LOG')}>
                   <ListItemIcon></ListItemIcon>
                   <ListItemText primary="XP LOG" />
                 </ListItemButton>
@@ -72,7 +69,7 @@ function Nav(props) {
               <Divider sx={{backgroundColor: '#c9cbcd', borderBottomWidth: 2}}/>
 
               <ListItem disablePadding>
-                <ListItemButton component="a" sx={{height:80, backgroundColor: `${currentWindow === 'STATS' ? 'primary.navy' : 'primary.main'}`}} href="#/StatsPage" onClick={() => setCurrentWindow('STATS')}>
+                <ListItemButton component="a" sx={{height:80, backgroundColor: `${currentWindow === 'STATS' ? 'primary.navy' : 'primary.main'}`, color:'white'}} href="#/StatsPage" onClick={() => setCurrentWindow('STATS')}>
                   <ListItemIcon></ListItemIcon>
                   <ListItemText primary="STATS" />
                 </ListItemButton>
@@ -80,7 +77,7 @@ function Nav(props) {
               <Divider sx={{backgroundColor: '#c9cbcd', borderBottomWidth: 2}}/>
 
               <ListItem disablePadding>
-                <ListItemButton component="a" sx={{height:80, backgroundColor: `${currentWindow === 'ACHIEVEMENTS' ? 'primary.navy' : 'primary.main'}`}} href="#/Achievements" onClick={() => setCurrentWindow('ACHIEVEMENTS')}>
+                <ListItemButton component="a" sx={{height:80, backgroundColor: `${currentWindow === 'ACHIEVEMENTS' ? 'primary.navy' : 'primary.main'}`, color:'white'}} href="#/Achievements" onClick={() => setCurrentWindow('ACHIEVEMENTS')}>
                   <ListItemIcon></ListItemIcon>
                   <ListItemText primary="ACHIEVEMENTS"/>
                 </ListItemButton>
@@ -126,14 +123,6 @@ function Nav(props) {
 
   return (
     <div className="drawerRoot">
-      {/* If no user is logged in, show these links */}
-      {!user.id && (
-        // If there's no user, show login/registration links
-        <Link className="navLink" to="/login">
-          Login / Register
-        </Link>
-      )}
-
       <Box sx={{ display: "flex" }}>
         <CssBaseline />
         <AppBar
@@ -141,6 +130,7 @@ function Nav(props) {
           sx={{
             width: { sm: appBarWidth(drawerWidth) },
             ml: { sm: appMargin(drawerWidth) },
+            backgroundColor: 'primary.main'
           }}
         >
           <Toolbar>
@@ -153,10 +143,12 @@ function Nav(props) {
             >
               <MenuIcon />
             </IconButton>
-            <Typography variant="h6" noWrap component="div">
+            {/* <Paper sx={{backgroundColor:'primary.main', pl: 5, boxShadow:0, ml: 0, borderRadius:0}}> */}
+              <img src={ExceleratorLogo} className="logo"/>
+            {/* </Paper> */}
+            {/* <Typography variant="h6" noWrap component="div">
               EXCELERATOR
-            </Typography>
-            <img src={ExceleratorLogo} className="logo"/>
+            </Typography> */}
           </Toolbar>
         </AppBar>
         <Box
