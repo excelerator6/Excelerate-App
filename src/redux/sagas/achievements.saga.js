@@ -55,7 +55,7 @@ function* checkThenPostNewAchievements() {
       // If the newest activity was completing a course
       case 34: // Finish a Course
         console.log('Completed a course');
-        // const checkCourseAchievements = yield axios.post('/api/achievements/coursesCompleted');
+        const checkCourseAchievements = yield axios.post('/api/achievements/coursesCompleted');
       default:
         break;
     }

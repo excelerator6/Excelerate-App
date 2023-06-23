@@ -198,26 +198,6 @@ router.post('/', rejectUnauthenticated, async (req, res) => {
     }
     console.log('totalSkillLevels:', totalSkillLevels);
 
-    // Get the total amount of courses completed by the user
-    const userCompletedCoursesCountQuery = `
-      SELECT
-        COUNT(activities_chart.activity)
-      FROM user_activities
-      LEFT JOIN activities_chart
-        ON user_activities.activity_id = activities_chart.id
-      WHERE
-        activities_chart.id = 34 AND
-        user_activities.user_id = $1
-      GROUP BY activities_chart.activity, activities_chart.id
-      ORDER BY activities_chart.activity;
-    `;
-    const { rows: userCompletedCoursesCount } = await connection.query(userCompletedCoursesCountQuery, [userId])
-    let totalCompletedCourses = 0
-    if (userCompletedCoursesCount.length > 0) {
-      totalCompletedCourses = Number(userCompletedCoursesCount[0].count)
-    }
-    console.log('totalCompletedCourses:', totalCompletedCourses);
-
     res.sendStatus(200)
   } catch (error) {
     console.log('Error inside POST achievements:', error);
@@ -722,5 +702,88 @@ router.post('/articlesRead', rejectUnauthenticated, async (req, res) => {
     res.sendStatus(500)
   }
 })
+
+
+router.post('/coursesCompleted', rejectUnauthenticated, async (req, res) => {
+  const userId = req.user.id
+  try {
+    const connection = await pool.connect();
+    // Get the achievements the user has already completed
+    const userCompletedAchievementsQuery = `
+      SELECT
+        achievement_id,
+        achievement_name
+      FROM user_achievements
+        JOIN achievements
+          ON user_achievements.achievement_id = achievements.id
+      WHERE user_id = $1;
+    `;
+    const {rows: userCompletedAchievements} = await connection.query(userCompletedAchievementsQuery, [userId])
+
+    // Get the total amount of courses completed by the user
+    const userCompletedCoursesCountQuery = `
+      SELECT
+        COUNT(activities_chart.activity)
+      FROM user_activities
+      LEFT JOIN activities_chart
+        ON user_activities.activity_id = activities_chart.id
+      WHERE
+        activities_chart.id = 34 AND
+        user_activities.user_id = $1
+      GROUP BY activities_chart.activity, activities_chart.id
+      ORDER BY activities_chart.activity;
+    `;
+    const { rows: userCompletedCoursesCount } = await connection.query(userCompletedCoursesCountQuery, [userId])
+    let totalCompletedCourses = 0
+    if (userCompletedCoursesCount.length > 0) {
+      totalCompletedCourses = Number(userCompletedCoursesCount[0].count)
+    }
+    console.log('totalCompletedCourses:', totalCompletedCourses);
+
+    // Build the query for how to add a new achievement if it has been acheived
+    const postNewAchievementQuery = `
+      INSERT INTO user_achievements
+        (user_id, achievement_id)
+      VALUES
+        ($1, $2)
+    `;
+
+    let completed;
+    // Check if totalFinishedBookSummaries is at or over an achievement threshold And the user hasn't already completed that achievement
+    switch(true){
+      case (totalCompletedCourses >= 125):
+        completed = userCompletedAchievements.find(achieve => achieve.achievement_id === 72);
+        {!completed ? await connection.query(postNewAchievementQuery, [userId, 72]) : '' } break;
+      case (totalCompletedCourses >= 100):
+        completed = userCompletedAchievements.find(achieve => achieve.achievement_id === 71);
+        {!completed ? await connection.query(postNewAchievementQuery, [userId, 71]) : '' } break;
+      case (totalCompletedCourses >= 75):
+        completed = userCompletedAchievements.find(achieve => achieve.achievement_id === 70);
+        {!completed ? await connection.query(postNewAchievementQuery, [userId, 70]) : '' } break;
+      case (totalCompletedCourses >= 50):
+        completed = userCompletedAchievements.find(achieve => achieve.achievement_id === 69);
+        {!completed ? await connection.query(postNewAchievementQuery, [userId, 69]) : '' } break;
+      case (totalCompletedCourses >= 25):
+        completed = userCompletedAchievements.find(achieve => achieve.achievement_id === 68);
+        {!completed ? await connection.query(postNewAchievementQuery, [userId, 68]) : '' } break;
+      case (totalCompletedCourses >= 10):
+        completed = userCompletedAchievements.find(achieve => achieve.achievement_id === 67);
+        {!completed ? await connection.query(postNewAchievementQuery, [userId, 67]) : '' } break;
+      case (totalCompletedCourses >= 5):
+        completed = userCompletedAchievements.find(achieve => achieve.achievement_id === 66);
+        {!completed ? await connection.query(postNewAchievementQuery, [userId, 66]) : '' } break;
+      case (totalCompletedCourses >= 2):
+        completed = userCompletedAchievements.find(achieve => achieve.achievement_id === 65);
+        {!completed ? await connection.query(postNewAchievementQuery, [userId, 65]) : '' } break;
+      default: break;
+    }
+    res.sendStatus(201)
+  }
+  catch (error) {
+    console.log('Error inside POST /coursesCompleted:', error);
+    res.sendStatus(500)
+  }
+})
+
 
 module.exports = router;
