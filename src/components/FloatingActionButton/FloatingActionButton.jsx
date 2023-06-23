@@ -23,6 +23,7 @@ import { useDispatch, useSelector } from "react-redux";
 import dayjs from "dayjs";
 //import spacing from material ui
 import { spacing } from "@mui/system";
+
 //  * Should be refactored out to components, + needs to be formatted nicely
 export default function FloatingActionButton() {
   const dispatch = useDispatch();
@@ -36,6 +37,9 @@ export default function FloatingActionButton() {
   const [xp, setXp] = useState("");
   const [source, setSource] = useState("");
   const [takeaways, setTakeaways] = useState("");
+  const [requiredSkill, setRequiredSkill] = useState(false);
+  const[requiredActivity, setRequiredActivity] = useState(false);
+  const [requiredSource, setRequiredSource] = useState(false);
 
   // useEffect for getting the activities
   useEffect(() => {
@@ -44,51 +48,84 @@ export default function FloatingActionButton() {
   }, []);
 
   //handle opening of dialog box
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
   const handleClickOpen = () => {
     setOpen(true);
   };
+
   const handleClose = () => {
-    setOpen(false);
-  };
+    // First, turn off the angry red boxes 
+    setRequiredSkill(false)
+    setRequiredActivity(false)
+    setRequiredSource(false)
 
-  // Function to handle activity submission ===> sending that to the DB
-  function handleSubmit() {
-    // * Need to add a check, if the user has supplied a source or other required input
-    // create activity log object
-    const newActivity = {
-      date: date.format("MM/DD/YYYY"), // * <--- this formats the date as a string like so: 25-DEC-2023
-      activity: activities,
-      xp: xp,
-      source: source,
-      takeaway: takeaways,
-    };
-
-    // conditionally set new key=value pair of newActivity object, based on
-    // whether the skill came from the skills_enterprise table
-    // or the skills_user table
-    for (let skill of skillsList) {
-      if (skill.skill_name === skills) {
-        if (skill.user_skill_id) {
-          newActivity.skillUserId = skill.user_skill_id;
-        } else if (skill.enterprise_id) {
-          newActivity.enterpriseId = skill.enterprise_id;
-        }
-      }
-    }
-
-    // send that log object to the DB
-    dispatch({
-      type: "LOG_ACTIVITY",
-      payload: newActivity,
-    });
-    // clear input fields
+    // Second, clear the input fields
     setActivities("");
     setSkills("");
     setXp("");
     setSource("");
     setTakeaways("");
-    handleClose();
+
+    // Finally, close the Modal
+    setOpen(false);
+  };
+
+  // Function to handle activity submission ===> sending that to the DB
+  function handleSubmit() {
+    // If the required fields aren't empty, proceed to submit the new activity
+    if (skills !== '' && activities !== '' && source !== '') {
+      // create activity log object
+      const newActivity = {
+        date: date.format("MM/DD/YYYY"), // * <--- this formats the date as a string like so: 25-DEC-2023
+        activity: activities,
+        xp: xp,
+        source: source,
+        takeaway: takeaways,
+      };
+
+      // conditionally set new key=value pair of newActivity object, based on
+      // whether the skill came from the skills_enterprise table
+      // or the skills_user table
+      for (let skill of skillsList) {
+        if (skill.skill_name === skills) {
+          if (skill.user_skill_id) {
+            newActivity.skillUserId = skill.user_skill_id;
+          } else if (skill.enterprise_id) {
+            newActivity.enterpriseId = skill.enterprise_id;
+          }
+        }
+      }
+
+      // send that log object to the DB
+      dispatch({
+        type: "LOG_ACTIVITY",
+        payload: newActivity,
+      });
+
+      // Close the modal 
+      handleClose();
+    }
+    // Else highlight the required fields so the user knows what they still need to do
+    else {
+      requiredInputField(skills, setRequiredSkill)
+      requiredInputField(activities, setRequiredActivity)
+      requiredInputField(source, setRequiredSource)
+    }
+
+  }
+
+  /**
+   * Test if a piece of required state is empty, if it is adjust the setter function
+   * associated with that inputs error field. This will then highlight the box in red
+   * @param {text} input - The state we are testing
+   * @param {text} setRequiredInput - The setter function associated with the input
+   */
+  const requiredInputField = (input, setRequiredInput) => {
+    if(input === '') {
+      setRequiredInput(true)
+    } else {
+      setRequiredInput(false)
+    }
   }
 
   // We'll need to call this function again when the user creates a new skill
@@ -160,8 +197,9 @@ export default function FloatingActionButton() {
                 mt: 1,
               }}
               select
+              error={requiredSkill}
               label="Skills"
-              helperText="Please select your Skill"
+              helperText="Please select your Skill (Required)"
               value={skills}
               onChange={(event) => setSkills(event.target.value)}
             >
@@ -180,8 +218,9 @@ export default function FloatingActionButton() {
                 mt: 1,
               }}
               select
+              error={requiredActivity}
               label="Activities"
-              helperText="Please select your Activity"
+              helperText="Please select your Activity (Required)"
               value={activities}
               onChange={handleActivitySelect}
             >
@@ -215,6 +254,8 @@ export default function FloatingActionButton() {
             <TextField
               sx={{ p: 1, maxWidth: "90%" }}
               autoFocus
+              error={requiredSource}
+              helperText="(Required)"
               margin="dense"
               id="name"
               label="Source"
@@ -231,6 +272,7 @@ export default function FloatingActionButton() {
             <TextField
               sx={{ p: 1, maxWidth: "90%" }}
               autoFocus
+              helperText="(Optional)"
               margin="dense"
               id="name"
               label="Takeaways"
