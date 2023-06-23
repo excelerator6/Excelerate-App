@@ -21,7 +21,7 @@ function SkillTable() {
     // things needed from the store to calculate the user's skill levels
     const skills = useSelector(store => store.skills);
     const userActivities = useSelector(store => store.userActivities);
-
+    
     // need to calculate the user's skill levels 
     const calculateLevel = (skill) => {
         // use .filter to filter through the user's logged activites, returning any activity that used the same skill as the skill we're checking for.
@@ -76,6 +76,7 @@ function SkillTable() {
                         <TableRow>
                             <TableCell align="center">Skill</TableCell>
                             <TableCell align="center">Level</TableCell>
+                            <TableCell align="center">Total XP</TableCell>
                             <TableCell align="center">Current XP</TableCell>
                             <TableCell align="center">Badge</TableCell>
                         </TableRow>
@@ -88,8 +89,13 @@ function SkillTable() {
                                     key={index}
                                     sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                                     >
+                                        {/* Skill */}
                                         <TableCell align='center'>{skill.skill_name}</TableCell>
+                                        {/* Level */}
                                         <TableCell align='center'>{calculateLevel(skill)}</TableCell>
+                                        {/* Total XP */}
+                                        <TableCell align='center'></TableCell>
+                                        {/* Current XP */}
                                         <TableCell align='center'>
                                             <Box className="progressBarContainer" sx={{ display: 'flex' }}>
                                                 <Box className='progressBar' container="span">
@@ -108,6 +114,7 @@ function SkillTable() {
                                                 </Box>  
                                             </Box>
                                         </TableCell>
+                                        {/* Badge */}
                                         <TableCell align='center'>🤘</TableCell>
                                 </TableRow>
                             )
