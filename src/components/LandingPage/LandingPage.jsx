@@ -33,13 +33,16 @@ function LandingPage() {
     // our carousel pictures
   const items = [
     {
-      src: '/LandingPageImages/Excelerator-Dashboard.png'
+      src: '/LandingPageImages/Excelerator::Dashboard.png'
     },
     {
-      src: '/LandingPageImages/Excelerator--Stats.png'
+      src: '/LandingPageImages/Excelerator::StatsCal.png'
     },
     {
-      src: '/LandingPageImages/Excelerator--XPLog.png'
+      src: '/LandingPageImages/Excelerator::StatsGraph.png'
+    },
+    {
+      src: '/LandingPageImages/Excelerator::XPLog.png'
     }
 ]
 
