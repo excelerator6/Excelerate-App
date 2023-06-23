@@ -5,6 +5,7 @@ const {
   rejectUnauthenticated,
 } = require('../modules/authentication-middleware');
 
+// GET all of the achievements
 router.get('/', rejectUnauthenticated, async (req, res) => {
   const userId = req.user.id
 
@@ -116,60 +117,7 @@ router.get('/', rejectUnauthenticated, async (req, res) => {
   }
 });
 
-router.post('/', rejectUnauthenticated, async (req, res) => {
-  const userId = req.user.id;
-
-  ////////////////////////////////////////////////
-  // EXECUTE THE SQL TRANSACTION
-  ////////////////////////////////////////////////
-  const connection = await pool.connect();
-  try {
-    // Get the achievements the user has already completed
-    const userCompletedAchievementsQuery = `
-      SELECT
-        achievement_id,
-        achievement_name
-      FROM user_achievements
-        JOIN achievements
-          ON user_achievements.achievement_id = achievements.id
-      WHERE user_id = $1;
-    `;
-    const { rows: userCompletedAchievements } = await connection.query(userCompletedAchievementsQuery, [userId])
-    console.log('userCompletedAchievements:', userCompletedAchievements);
-    
-    // Get the totals for what the user has done to compare vs completed achievements
-    // and then POST a new achievement if it has been completed
-
-
-    switch (totalXpPoints) {
-      case (totalXpPoints >= 2750):
-        break
-      case (totalXpPoints >= 2500):
-        break
-      case (totalXpPoints >= 2250):
-        break
-      case (totalXpPoints >= 2000):
-        break
-      case (totalXpPoints >= 1750):
-        break
-      case (totalXpPoints >= 1500):
-        break
-      case (totalXpPoints >= 1250):
-        break
-      case (totalXpPoints >= 1000):
-        break
-      default:
-        console.log(`total XP = ${totalXpPoints}. This is not enough to get a new Xp achievement`);
-        break
-    }
-
-    res.sendStatus(200)
-  } catch (error) {
-    console.log('Error inside POST achievements:', error);
-  }
-})
-
-
+// Check if user has achievements associated with Videos Watched then post if achieved
 router.post('/videosWatched', rejectUnauthenticated, async (req, res) => {
   const userId = req.user.id
   try {
@@ -255,7 +203,7 @@ router.post('/videosWatched', rejectUnauthenticated, async (req, res) => {
   }
 })
 
-
+// Check if user has achievements associated with Podcasts Finished then post if achieved
 router.post('/podcastsFinished', rejectUnauthenticated, async (req, res) => {
   const userId = req.user.id
   try {
@@ -290,7 +238,6 @@ router.post('/podcastsFinished', rejectUnauthenticated, async (req, res) => {
     if (userFinishedPodcastsCount.length > 0) {
       totalFinishedPodcasts = Number(userFinishedPodcastsCount[0].count)
     }
-    console.log('totalFinishedPodcasts:', totalFinishedPodcasts);
 
     // Build the query for how to add a new achievement if it has been acheived
     const postNewAchievementQuery = `
@@ -337,7 +284,7 @@ router.post('/podcastsFinished', rejectUnauthenticated, async (req, res) => {
   }
 })
 
-
+// Check if user has achievements associated with Audiobooks Read then post if achieved
 router.post('/audiobooksRead', rejectUnauthenticated, async (req, res) => {
   const userId = req.user.id
   try {
@@ -419,7 +366,7 @@ router.post('/audiobooksRead', rejectUnauthenticated, async (req, res) => {
   }
 })
 
-
+// Check if user has achievements associated with BooksRead then post if achieved
 router.post('/booksRead', rejectUnauthenticated, async (req, res) => {
   const userId = req.user.id
   try {
@@ -457,7 +404,6 @@ router.post('/booksRead', rejectUnauthenticated, async (req, res) => {
         totalFinishedBooks += Number(count.count)
       })
     }
-    console.log('totalFinishedBooks:', totalFinishedBooks);
 
     // Build the query for how to add a new achievement if it has been acheived
     const postNewAchievementQuery = `
@@ -504,7 +450,7 @@ router.post('/booksRead', rejectUnauthenticated, async (req, res) => {
   }
 })
 
-
+// Check if user has achievements associated with Book Summaries then post if achieved
 router.post('/bookSummaries', rejectUnauthenticated, async (req, res) => {
   const userId = req.user.id
   try {
@@ -539,7 +485,6 @@ router.post('/bookSummaries', rejectUnauthenticated, async (req, res) => {
     if (userFinishedBookSummariesCount.length > 0) {
       totalFinishedBookSummaries = Number(userFinishedBookSummariesCount[0].count)
     }
-    console.log('totalFinishedBookSummaries:', totalFinishedBookSummaries);
 
     // Build the query for how to add a new achievement if it has been acheived
     const postNewAchievementQuery = `
@@ -586,7 +531,7 @@ router.post('/bookSummaries', rejectUnauthenticated, async (req, res) => {
   }
 })
 
-
+// Check if user has achievements associated with Articles Read then post if achieved
 router.post('/articlesRead', rejectUnauthenticated, async (req, res) => {
   const userId = req.user.id
   try {
@@ -621,7 +566,6 @@ router.post('/articlesRead', rejectUnauthenticated, async (req, res) => {
     if (userFinishedArticlesCount.length > 0) {
       totalArticlesFinished =  Number(userFinishedArticlesCount[0].count)
     }
-    console.log('totalArticlesFinished:', totalArticlesFinished);
 
     // Build the query for how to add a new achievement if it has been acheived
     const postNewAchievementQuery = `
@@ -668,7 +612,7 @@ router.post('/articlesRead', rejectUnauthenticated, async (req, res) => {
   }
 })
 
-
+// Check if user has achievements associated with Courses Completed then post if achieved
 router.post('/coursesCompleted', rejectUnauthenticated, async (req, res) => {
   const userId = req.user.id
   try {
@@ -703,7 +647,6 @@ router.post('/coursesCompleted', rejectUnauthenticated, async (req, res) => {
     if (userCompletedCoursesCount.length > 0) {
       totalCompletedCourses = Number(userCompletedCoursesCount[0].count)
     }
-    console.log('totalCompletedCourses:', totalCompletedCourses);
 
     // Build the query for how to add a new achievement if it has been acheived
     const postNewAchievementQuery = `
@@ -750,7 +693,7 @@ router.post('/coursesCompleted', rejectUnauthenticated, async (req, res) => {
   }
 })
 
-
+// Check if user has achievements associated with Skill Levels then post if achieved
 router.post('/skillLevels', rejectUnauthenticated, async (req, res) => {
   const userId = req.user.id
   try {
@@ -790,7 +733,6 @@ router.post('/skillLevels', rejectUnauthenticated, async (req, res) => {
         totalSkillLevels += Number(skill.skillLevels)
       })
     }
-    console.log('totalSkillLevels:', totalSkillLevels);
 
     // Build the query for how to add a new achievement if it has been acheived
     const postNewAchievementQuery = `
@@ -837,7 +779,7 @@ router.post('/skillLevels', rejectUnauthenticated, async (req, res) => {
   }
 })
 
-
+// Check if user has achievements associated with Total XP then post if achieved
 router.post('/totalXp', rejectUnauthenticated, async (req, res) => {
   const userId = req.user.id
   try {
@@ -865,7 +807,6 @@ router.post('/totalXp', rejectUnauthenticated, async (req, res) => {
     `;
     const { rows: userTotalXpPoints } = await connection.query(userTotalXpPointsQuery, [userId])
     let totalXpPoints = Number(userTotalXpPoints[0].xp_points)
-    console.log('totalXpPoints:', totalXpPoints);
 
     // Build the query for how to add a new achievement if it has been acheived
     const postNewAchievementQuery = `
