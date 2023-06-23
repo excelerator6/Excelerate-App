@@ -7,7 +7,10 @@ import { Paper } from "@mui/material";
 
 //import Avatars Css
 import "./Avatars.css";
-import { Typography } from "@mui/material";
+//import stylebadge on avatar
+import Badge from "@mui/material/Badge";
+import { styled } from "@mui/material/styles";
+import SwitchAccessShortcutAddIcon from "@mui/icons-material/SwitchAccessShortcutAdd";
 
 function Avatars() {
   const userAvatar = useSelector((store) => store.user.user_avatar_path);
@@ -21,6 +24,35 @@ function Avatars() {
     "#36454f",
     "#303841",
   ];
+
+  const StyledBadge = styled(Badge)(({ theme }) => ({
+    "& .MuiBadge-badge": {
+      backgroundColor: "#36454f",
+      color: "white",
+      boxShadow: `0 0 0 2px ${theme.palette.background.paper}`,
+      "&::after": {
+        position: "absolute",
+        top: 0,
+        left: 0,
+        width: "100%",
+        height: "100%",
+        borderRadius: "100%",
+        animation: "ripple 5s infinite ease-in-out",
+        border: "1px solid currentColor",
+        content: '""',
+      },
+    },
+    "@keyframes ripple": {
+      "0%": {
+        transform: "scale(.8)",
+        opacity: 1,
+      },
+      "100%": {
+        transform: "scale(2.4)",
+        opacity: 0,
+      },
+    },
+  }));
 
   return (
     <div id="avatarContainer">
@@ -40,14 +72,19 @@ function Avatars() {
               },
             }}
           >
-            <Avatar
-              size={100}
-              name={userAvatar}
-              variant="beam"
-              // color scheme
-              colors={colors}
-              className="avatar"
-            />
+            <StyledBadge
+              overlap="circular"
+              anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
+              badgeContent={<SwitchAccessShortcutAddIcon />}
+            >
+              <Avatar
+                size={100}
+                name={userAvatar}
+                variant="beam"
+                colors={colors}
+                className="avatar"
+              />
+            </StyledBadge>
           </Paper>
         </Link>
       </div>
