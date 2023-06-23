@@ -35,30 +35,22 @@ function SkillTable() {
         return Math.floor(totalXP / 10)
     }
     
-    // need to calculate total XP
-    const calculateXP = (skill) => {
+    // calculate the current xp out of 10 -takes the modulo left and it shows it onto the progress bar
+    const currentXP = (skill) => {
         const actInstances = userActivities.filter(item => skill.skill_name === item.skill)
         const totalXP = actInstances.map(activity => activity.xp).reduce((acc, current) => acc + current, 0);
 
         return (totalXP % 10);
     }
+    // calculate the total xp for each skills
     const totalXP = (skill) => {
         const actInstances = userActivities.filter(item => skill.skill_name === item.skill)
         const totalXP = actInstances.map(activity => activity.xp).reduce((acc, current) => acc + current, 0);
 
         return(totalXP)
     }
-    // might not need this, but I think it's here to set the boundaries of the leveling bar
+    //it's here to set the boundaries of the leveling bar
     const normalise = (value) => ((value - 0) * 100) / (10 - 0)
-    // need to calculate the xp needed to reach the next level;
-    const calculateNextLevelXP = (skill) => {
-        // call the calculateXP function to grab the total XP
-        const totalXP = calculateXP(skill);
-
-        // then we divide by 10 and grab the remainder, using modulo %
-        // finally, we take that and subtract it from 10 to get the amount needed until the next level
-        return 10 - (totalXP % 10);
-    }
 
     const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
         height: 10,
@@ -106,14 +98,14 @@ function SkillTable() {
                                                 <Box className='progressBar' container="span">
                                                     <BorderLinearProgress 
                                                         variant="determinate" 
-                                                        value={normalise(calculateXP(skill))}
+                                                        value={normalise(currentXP(skill))}
                                                         valueBuffer={10}                                              
                                                     />
                                                     <Box className='progressText' container="span">
                                                         <Typography
                                                             variant="body1"
                                                         >
-                                                            {calculateXP(skill)} / 10
+                                                            {currentXP(skill)} / 10
                                                         </Typography>
                                                     </Box>
                                                 </Box>  
