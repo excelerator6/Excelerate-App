@@ -25,24 +25,22 @@ function* checkThenPostNewAchievements() {
       case 25: // Watch a Video(++)
       case 32: // Watch a Video(+++)
         const {data: checkVideoAchievements} = yield axios.post('/api/achievements/videosWatched');
-        console.log('checkVideoAchievements status:', checkVideoAchievements);
         break;
       // If the newest activity was Finishing a Podcast
       case 17: // Finished Podcast
         console.log('Finished a podcast');
         const {data: checkPodcastAchievements} = yield axios.post('/api/achievements/podcastsFinished');
-        console.log('checkPodcastAchievements status:', checkPodcastAchievements);
         break;
       // If the newest activity was finishing an audiobook
       case 35: // Finish an Audiobook
         console.log('Finished an audiobook');
-        // const checkAudiobookAchievements = yield axios.post('/api/achievements/audiobooksRead');
+        const checkAudiobookAchievements = yield axios.post('/api/achievements/audiobooksRead');
         break;
       // If the newest activity was one of the finish a book options
       case 36: // Finish a Book (Pages < 100)
       case 37: // Finsih a Book (Pages > 100)
         console.log('Finished reading a book');
-        // const checkBookAchievments = yield axios.post('/api/achievements/booksRead');
+        const checkBookAchievments = yield axios.post('/api/achievements/booksRead');
         break;
       // If the newest activity was finishing a book summary
       case 23: // Complete Book Summary

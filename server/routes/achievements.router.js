@@ -198,26 +198,6 @@ router.post('/', rejectUnauthenticated, async (req, res) => {
     }
     console.log('totalSkillLevels:', totalSkillLevels);
 
-    // Get the total amount of audiobooks read by the user
-    const userFinishedAudiobooksCountQuery = `
-      SELECT
-        COUNT(activities_chart.activity)
-      FROM user_activities
-      LEFT JOIN activities_chart
-        ON user_activities.activity_id = activities_chart.id
-      WHERE
-        activities_chart.id = 35 AND
-        user_activities.user_id = $1
-      GROUP BY activities_chart.activity, activities_chart.id
-      ORDER BY activities_chart.activity;
-    `;
-    const { rows: userFinishedAudiobooksCount } = await connection.query(userFinishedAudiobooksCountQuery, [userId])
-    let totalFinishedAudiobooks = 0
-    if (userFinishedAudiobooksCount.length > 0) {
-      totalFinishedAudiobooks = Number(userFinishedAudiobooksCount[0].count)
-    }
-    console.log('totalFinishedAudiobooks:', totalFinishedAudiobooks);
-
     // Get the total amount of books read by the user
     const userFinishedBooksCountQuery = `
       SELECT
@@ -391,9 +371,9 @@ router.post('/videosWatched', rejectUnauthenticated, async (req, res) => {
   }
 })
 
+
 router.post('/podcastsFinished', rejectUnauthenticated, async (req, res) => {
   const userId = req.user.id
-  console.log('inside podcastsFinished');
   try {
     const connection = await pool.connect();
     // Get the achievements the user has already completed
@@ -437,7 +417,7 @@ router.post('/podcastsFinished', rejectUnauthenticated, async (req, res) => {
     `;
 
     let completed;
-    // Check if totalVideosWatched is at or over an achievement threshold And the user hasn't already completed that achievement
+    // Check if totalFinishedPodcasts is at or over an achievement threshold And the user hasn't already completed that achievement
     switch(true){
       case (totalFinishedPodcasts >= 500):
         completed = userCompletedAchievements.find(achieve => achieve.achievement_id === 32);
@@ -472,4 +452,90 @@ router.post('/podcastsFinished', rejectUnauthenticated, async (req, res) => {
     res.sendStatus(500)
   }
 })
+
+
+router.post('/audiobooksRead', rejectUnauthenticated, async (req, res) => {
+  const userId = req.user.id
+  try {
+    const connection = await pool.connect();
+    // Get the achievements the user has already completed
+    const userCompletedAchievementsQuery = `
+      SELECT
+        achievement_id,
+        achievement_name
+      FROM user_achievements
+        JOIN achievements
+          ON user_achievements.achievement_id = achievements.id
+      WHERE user_id = $1;
+    `;
+    const {rows: userCompletedAchievements} = await connection.query(userCompletedAchievementsQuery, [userId])
+
+    // Get the total amount of audiobooks read by the user
+    const userFinishedAudiobooksCountQuery = `
+      SELECT
+        COUNT(activities_chart.activity)
+      FROM user_activities
+      LEFT JOIN activities_chart
+        ON user_activities.activity_id = activities_chart.id
+      WHERE
+        activities_chart.id = 35 AND
+        user_activities.user_id = $1
+      GROUP BY activities_chart.activity, activities_chart.id
+      ORDER BY activities_chart.activity;
+    `;
+
+    const { rows: userFinishedAudiobooksCount } = await connection.query(userFinishedAudiobooksCountQuery, [userId])
+    let totalFinishedAudiobooks = 0
+    if (userFinishedAudiobooksCount.length > 0) {
+      totalFinishedAudiobooks = Number(userFinishedAudiobooksCount[0].count)
+    }
+
+    // Build the query for how to add a new achievement if it has been acheived
+    const postNewAchievementQuery = `
+      INSERT INTO user_achievements
+        (user_id, achievement_id)
+      VALUES
+        ($1, $2)
+    `;
+
+    let completed;
+    // Check if totalFinishedAudiobooks is at or over an achievement threshold And the user hasn't already completed that achievement
+    switch(true){
+      case (totalFinishedAudiobooks >= 50):
+        completed = userCompletedAchievements.find(achieve => achieve.achievement_id === 40);
+        {!completed ? await connection.query(postNewAchievementQuery, [userId, 40]) : '' } break;
+      case (totalFinishedAudiobooks >= 35):
+        completed = userCompletedAchievements.find(achieve => achieve.achievement_id === 39);
+        {!completed ? await connection.query(postNewAchievementQuery, [userId, 39]) : '' } break;
+      case (totalFinishedAudiobooks >= 25):
+        completed = userCompletedAchievements.find(achieve => achieve.achievement_id === 38);
+        {!completed ? await connection.query(postNewAchievementQuery, [userId, 38]) : '' } break;
+      case (totalFinishedAudiobooks >= 20):
+        completed = userCompletedAchievements.find(achieve => achieve.achievement_id === 37);
+        {!completed ? await connection.query(postNewAchievementQuery, [userId, 37]) : '' } break;
+      case (totalFinishedAudiobooks >= 15):
+        completed = userCompletedAchievements.find(achieve => achieve.achievement_id === 36);
+        {!completed ? await connection.query(postNewAchievementQuery, [userId, 36]) : '' } break;
+      case (totalFinishedAudiobooks >= 10):
+        completed = userCompletedAchievements.find(achieve => achieve.achievement_id === 35);
+        {!completed ? await connection.query(postNewAchievementQuery, [userId, 35]) : '' } break;
+      case (totalFinishedAudiobooks >= 5):
+        completed = userCompletedAchievements.find(achieve => achieve.achievement_id === 34);
+        {!completed ? await connection.query(postNewAchievementQuery, [userId, 34]) : '' } break;
+      case (totalFinishedAudiobooks >= 2):
+        completed = userCompletedAchievements.find(achieve => achieve.achievement_id === 33);
+        {!completed ? await connection.query(postNewAchievementQuery, [userId, 33]) : '' } break;
+      default: break;
+    }
+    res.sendStatus(201)
+  }
+  catch (error) {
+    console.log('Error inside POST /audiobooksRead:', error);
+    res.sendStatus(500)
+  }
+})
+
+
+
+
 module.exports = router;
