@@ -32,14 +32,14 @@ function AboutPage() {
             <img src={AndersQrCode} className='QR-Code' />
           </Grid>
           <Grid item xs={3} sx={{display:'flex', justifyContent: 'center', alignContent: 'center', flexDirection: 'column'}}>
-            <img src="https://media.licdn.com/dms/image/C5603AQGxTb9GcN0FcQ/profile-displayphoto-shrink_400_400/0/1553711884700?e=1692835200&v=beta&t=nTEvO7HQTKkXblB3nQUpYg-f-0EA5O1eRM49WL6LUig" />
+            <img src="https://media.licdn.com/dms/image/D5635AQHld-4IRhlCFw/profile-framedphoto-shrink_400_400/0/1687546634082?e=1688151600&v=beta&t=mxhbJG0VJdeXqocfDJHYCxGt2CzHfoGmWQGN4WN_kb8" />
             <br />
             <h2>Ilhan Dahir</h2>
             <br />
             <img src={IlhanQrCode} className='QR-Code' />
           </Grid>
           <Grid item xs={3} sx={{display:'flex', justifyContent: 'center', alignContent: 'center', flexDirection: 'column'}}>
-            <img src="https://media.licdn.com/dms/image/C5603AQF3JVuV9zDGKQ/profile-displayphoto-shrink_400_400/0/1564343673697?e=1692835200&v=beta&t=ro9AvOLIdGQQTNqBmmzRBd6pMfx9vsmAwAE44DKSLdk" />
+            <img src="https://media.licdn.com/dms/image/D5635AQFNJCANYIQJZA/profile-framedphoto-shrink_400_400/0/1687546446759?e=1688151600&v=beta&t=aEBs5gM2bFjXooDbNEFU8vWy9Lbxa_kxtsbngM9ZwQk" />
             <br />
             <h2>Joshua Engebretson</h2>
             <br />
