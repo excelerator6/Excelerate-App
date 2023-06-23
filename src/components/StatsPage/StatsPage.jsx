@@ -29,24 +29,29 @@ function StatsPage(props) {
     return (
         <Box sx={{ width: '100%', typography: 'body1', padding: '1em' }}>
             <TabContext value={value}>
+              
                 <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
                     <TabList onChange={handleChange} aria-label="lab API tabs example" centered>
                         <Tab label="Daily logs" value='0' />
-                        {/* <Tab label="XP Points 1" value='1' /> */}
-                        <Tab label="XP Points Chart" value='2' />
+                        <Tab label="XP Chart" value='1' />
+                        {/* <Tab label="XP Points 2" value='2' /> */}
                     </TabList>
                 </Box>
+
                 <TabPanel value='0'>
                     <Calendar />
                 </TabPanel>
-                {/* <TabPanel value='1'> */}
-                    {/* Bar ChartJS Goes Here */}
-                    {/* <BarChart /> */}
-                {/* </TabPanel> */}
-                <TabPanel value='2'>
+
+                {/* <TabPanel value='2'>
+                    // Bar ChartJS Goes Here 
+                    <BarChart />
+                </TabPanel> */}
+
+                <TabPanel value='1'>
                     {/* Bar ChartJS Goes Here */}
                     <BarChartHorizontal />
                 </TabPanel>
+
             </TabContext>
         </Box >
     );

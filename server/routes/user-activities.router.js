@@ -99,7 +99,8 @@ router.get('/totalXpSkillsPoints', rejectUnauthenticated, (req, res) => {
       LEFT JOIN activities_chart
         ON user_activities.activity_id = activities_chart.id
     WHERE user_activities.user_id=$1
-    GROUP BY skills_user.skill_name,skills_enterprise.skill_name;
+    GROUP BY skills_user.skill_name,skills_enterprise.skill_name
+    ORDER BY xp_points DESC ;
   `;
 
   pool
