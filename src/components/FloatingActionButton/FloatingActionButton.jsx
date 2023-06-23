@@ -1,28 +1,24 @@
-import * as React from "react";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import Box from "@mui/material/Box";
 import Fab from "@mui/material/Fab";
 import AddIcon from "@mui/icons-material/Add";
 //zoom import
 import Zoom from "@mui/material/Zoom";
+
 //dialog imports
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
-import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
-import { Select } from "@mui/material";
-//text field import
 import MenuItem from "@mui/material/MenuItem";
+
 //date and calendar imports
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
-//import for states
-import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import dayjs from "dayjs";
-//import spacing from material ui
-import { spacing } from "@mui/system";
+
 
 //  * Should be refactored out to components, + needs to be formatted nicely
 export default function FloatingActionButton() {
@@ -38,7 +34,7 @@ export default function FloatingActionButton() {
   const [source, setSource] = useState("");
   const [takeaways, setTakeaways] = useState("");
   const [requiredSkill, setRequiredSkill] = useState(false);
-  const[requiredActivity, setRequiredActivity] = useState(false);
+  const [requiredActivity, setRequiredActivity] = useState(false);
   const [requiredSource, setRequiredSource] = useState(false);
 
   // useEffect for getting the activities
@@ -132,6 +128,7 @@ export default function FloatingActionButton() {
   const getSkills = () => {
     dispatch({ type: "GET_SKILLS_LIST" });
   };
+
   // function for handling activity Select menu
   const handleActivitySelect = (event) => {
     const activityId = event.target.value;
@@ -145,30 +142,28 @@ export default function FloatingActionButton() {
     return (
       <div>
         <Box sx={{ "& > :not(style)": { m: 1 } }} onClick={handleClickOpen}>
-          <Zoom in={true} timeout={{ enter: 500, exit: 500 }} unmountOnExit>
-            <Fab
-              id="fab"
-              variant="extended"
-              size="large"
-              // color="primary"
-              aria-label="add"
-              sx={{
-                fontSize:'1.3em',
-                position: "fixed",
-                bottom: 16,
-                right: 16,
-                // backgroundColor: "primary.green",
-                backgroundColor: "skyblue",
-                "&:hover": {
-                  backgroundColor: "#90ee90",
-                },
-              }}
-            >
-              <AddIcon />
-              Add Log
-            </Fab>
-          </Zoom>
+          <Fab
+            id="fab"
+            variant="extended"
+            size="large"
+            // color="primary"
+            aria-label="add"
+            sx={{
+              fontSize:'1.3em',
+              position: "fixed",
+              bottom: 16,
+              right: 16,
+              // backgroundColor: "primary.green",
+              backgroundColor: "skyblue",
+              "&:hover": {
+                backgroundColor: "#90ee90",
+              },
+            }}
+          >
+            <AddIcon /> Add Log
+          </Fab>
         </Box>
+
         {/* dialog box */}
         <Dialog
           PaperProps={{ sx: { width: "75%", height: "75%" } }}
@@ -232,6 +227,7 @@ export default function FloatingActionButton() {
                 );
               })}
             </TextField>
+
             {/* text fields that auto field with the XP they get */}
             <TextField
               sx={{
@@ -267,8 +263,8 @@ export default function FloatingActionButton() {
                 setSource(event.target.value);
               }}
             />
-            {/* Takeaways text field */}
 
+            {/* Takeaways text field */}
             <TextField
               sx={{ p: 1, maxWidth: "90%" }}
               autoFocus
@@ -284,11 +280,13 @@ export default function FloatingActionButton() {
                 setTakeaways(event.target.value);
               }}
             />
+
           </DialogContent>
           <DialogActions>
             <Button onClick={handleClose}>Cancel</Button>
             <Button onClick={handleSubmit}>Submit</Button>
           </DialogActions>
+
         </Dialog>
       </div>
     );
