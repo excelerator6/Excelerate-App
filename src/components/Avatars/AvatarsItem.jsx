@@ -56,40 +56,38 @@ function AvatarsItem() {
         {avatarOptions.map((option, index) => {
           return (
             <Grid item xs={3} key={index}>
-              <Card variant="outlined" sx={{}} >
-                <CardActionArea>
-                  <CardContent>
-                    <Avatar
-                      size={100}
-                      variant="beam"
-                      colors={colors}
-                      name={option}
-                    />
-                  </CardContent>
-                  <CardActions>
-                    <Button
-                      style={{ margin: "0 auto", display: "flex" }}
-                      justifyContent="center"
-                      alignItems="center"
-                      textAlign="center"
-                      size="lg"
-                      variant="outlined"
-                      sx={[
-                        {
-                          "&:hover": {
-                            color: "#36454f",
-                            backgroundColor: "#90ee90",
-                          },
+              <Card variant="outlined" sx={{}}>
+                <CardContent>
+                  <Avatar
+                    size={100}
+                    variant="beam"
+                    colors={colors}
+                    name={option}
+                  />
+                </CardContent>
+                <CardActions>
+                  <Button
+                    style={{ margin: "0 auto", display: "flex" }}
+                    justifyContent="center"
+                    alignItems="center"
+                    textAlign="center"
+                    size="lg"
+                    variant="outlined"
+                    sx={[
+                      {
+                        "&:hover": {
+                          color: "#36454f",
+                          backgroundColor: "#90ee90",
                         },
-                      ]}
-                      onClick={(event) => {
-                        handleUpdate(event, option, "UPDATE_AVATAR_NAME");
-                      }}
-                    >
-                      Click Here!
-                    </Button>
-                  </CardActions>
-                </CardActionArea>
+                      },
+                    ]}
+                    onClick={(event) => {
+                      handleUpdate(event, option, "UPDATE_AVATAR_NAME");
+                    }}
+                  >
+                    Click Here!
+                  </Button>
+                </CardActions>
               </Card>
             </Grid>
           );
