@@ -21,7 +21,7 @@ function SkillTable() {
     // things needed from the store to calculate the user's skill levels
     const skills = useSelector(store => store.skills);
     const userActivities = useSelector(store => store.userActivities);
-    
+
     // need to calculate the user's skill levels 
     const calculateLevel = (skill) => {
         // use .filter to filter through the user's logged activites, returning any activity that used the same skill as the skill we're checking for.
@@ -42,7 +42,12 @@ function SkillTable() {
 
         return (totalXP % 10);
     }
+    const totalXP = (skill) => {
+        const actInstances = userActivities.filter(item => skill.skill_name === item.skill)
+        const totalXP = actInstances.map(activity => activity.xp).reduce((acc, current) => acc + current, 0);
 
+        return(totalXP)
+    }
     // might not need this, but I think it's here to set the boundaries of the leveling bar
     const normalise = (value) => ((value - 0) * 100) / (10 - 0)
     // need to calculate the xp needed to reach the next level;
@@ -94,7 +99,7 @@ function SkillTable() {
                                         {/* Level */}
                                         <TableCell align='center'>{calculateLevel(skill)}</TableCell>
                                         {/* Total XP */}
-                                        <TableCell align='center'></TableCell>
+                                        <TableCell align='center'>{totalXP(skill)}</TableCell>
                                         {/* Current XP */}
                                         <TableCell align='center'>
                                             <Box className="progressBarContainer" sx={{ display: 'flex' }}>
