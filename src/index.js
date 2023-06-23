@@ -34,7 +34,7 @@ const exceleratorTheme = createTheme({
     // divider: 'rgba(255,255,255,0.12)',
   },
   typography: {
-    fontFamily: ["Impact"],
+    fontFamily: ["AgencyFB"],
     h2:{
       letterSpacing: '10px'
     }

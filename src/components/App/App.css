@@ -3,7 +3,8 @@ body,
 #react-root {
   height: 100%;
   margin-left: 100px;
-  /* font-variant: small-caps; */
+  font-family: 'Medium';
+  font-variant: small-caps;
 }
 
 body {
@@ -121,3 +122,10 @@ input {
 .avatar {
   border: 5px solid white;
 }
+
+@font-face {
+  font-family: "Medium";   /*Can be any text*/
+  src: local("AgencyFB"),
+    url("../../fonts/AGENCYB.woff") format("woff");
+}
+
