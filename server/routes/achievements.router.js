@@ -135,11 +135,7 @@ router.post('/', rejectUnauthenticated, async (req, res) => {
       WHERE achievement_category = 'Levels Obtained';
     `;
     const { rows: levelsObtainedAchievement } = await connection.query(levelsObtainedAchievementsQuery)
-    const videosWatchedAchievementsQuery = `
-      SELECT id FROM achievements
-      WHERE achievement_category = 'Videos Watched';
-    `;
-    const { rows: videosWatchedAchievements } = await connection.query(videosWatchedAchievementsQuery)
+
     const podcastsFinishedAchievementsQuery = `
       SELECT id FROM achievements
       WHERE achievement_category = 'Podcasts Finished';
@@ -244,29 +240,7 @@ router.post('/', rejectUnauthenticated, async (req, res) => {
     }
     console.log('totalSkillLevels:', totalSkillLevels);
 
-    // Get the total amount of videos watched by the user
-    const userWatchedVideosCountQuery = `
-      SELECT
-        activities_chart.id AS activity_id,
-        activities_chart.activity,
-        COUNT(activities_chart.activity)
-      FROM user_activities
-      LEFT JOIN activities_chart
-        ON user_activities.activity_id = activities_chart.id
-      WHERE
-        (activities_chart.id = 21 OR
-        activities_chart.id = 25 OR
-        activities_chart.id = 32)
-        AND user_activities.user_id = $1
-      GROUP BY activities_chart.activity, activities_chart.id
-      ORDER BY activities_chart.activity;
-    `;
-    const { rows: userWatchedVideosCount } = await connection.query(userWatchedVideosCountQuery, [userId])
-    let totalMoviesWatched = 0;
-    if (userWatchedVideosCount.length > 0) { userWatchedVideosCount.map(activity => {
-      totalMoviesWatched += Number(activity.count)
-    })}
-    console.log('totalMoviesWatched:', totalMoviesWatched);
+
 
     // Get the total amount of podcasts finished by the user
     const userFinishedPodcastsCountQuery = `
@@ -392,6 +366,141 @@ router.post('/', rejectUnauthenticated, async (req, res) => {
     res.sendStatus(200)
   } catch (error) {
     console.log('Error inside POST achievements:', error);
+  }
+})
+
+
+router.post('/videosWatched', rejectUnauthenticated, async (req, res) => {
+  const userId = req.user.id
+  try {
+    const connection = await pool.connect();
+
+    // Get all ifs of the achievements associated with Videos Watched
+    const videosWatchedAchievementsQuery = `
+      SELECT id FROM achievements
+      WHERE achievement_category = 'Videos Watched';
+    `;
+    const { rows: videosWatchedAchievements } = await connection.query(videosWatchedAchievementsQuery)
+  
+    // Get the achievements the user has already completed
+    const userCompletedAchievementsQuery = `
+      SELECT
+        achievement_id,
+        achievement_name
+      FROM user_achievements
+        JOIN achievements
+          ON user_achievements.achievement_id = achievements.id
+      WHERE user_id = $1;
+    `;
+    const { rows: userCompletedAchievements } = await connection.query(userCompletedAchievementsQuery, [userId])
+    console.log('userCompletedAchievements:', userCompletedAchievements);
+
+    // Get the total amount of videos watched by the user
+    const userWatchedVideosCountQuery = `
+      SELECT
+        activities_chart.id AS activity_id,
+        activities_chart.activity,
+        COUNT(activities_chart.activity)
+      FROM user_activities
+      LEFT JOIN activities_chart
+        ON user_activities.activity_id = activities_chart.id
+      WHERE
+        (activities_chart.id = 21 OR
+        activities_chart.id = 25 OR
+        activities_chart.id = 32)
+        AND user_activities.user_id = $1
+      GROUP BY activities_chart.activity, activities_chart.id
+      ORDER BY activities_chart.activity;
+    `;
+    const { rows: userWatchedVideosCount } = await connection.query(userWatchedVideosCountQuery, [userId])
+    let totalVideosWatched = 0;
+    if (userWatchedVideosCount.length > 0) { userWatchedVideosCount.map(activity => {
+      totalVideosWatched += Number(activity.count)
+    })}
+    console.log('totalMoviesWatched:', totalVideosWatched);
+
+    const postNewVideoAchievementQuery = `
+      INSERT INTO user_achievements
+        (user_id, achievement_id)
+      VALUES
+        ($1, $2)
+    `;
+
+    let completed;
+    // Check if totalVideosWatched is at or over an achievement threshold And the user hasn't already gotten that achievement
+    switch(true){
+      case (totalVideosWatched >= 250):
+        completed = userCompletedAchievements.find(achieve => achieve.achievement_id === 24);
+        {!completed ?
+          await connection.query(postNewVideoAchievementQuery, [userId, 24])
+          :
+          console.log(`totalVideosWatched count = ${totalVideosWatched}. They already have the Watch 250 Videos achievement`);
+        }
+        break;
+      case (totalVideosWatched >= 200):
+        completed = userCompletedAchievements.find(achieve => achieve.achievement_id === 23);
+        {!completed ?
+          await connection.query(postNewVideoAchievementQuery, [userId, 23])
+          :
+          console.log(`totalVideosWatched count = ${totalVideosWatched}. They already have the Watch 200 Videos achievement`);
+        }
+        break;
+      case (totalVideosWatched >= 150):
+        completed = userCompletedAchievements.find(achieve => achieve.achievement_id === 22);
+        {!completed ?
+          await connection.query(postNewVideoAchievementQuery, [userId, 22])
+          :
+          console.log(`totalVideosWatched count = ${totalVideosWatched}. This gets the Watch 150 Videos achievement`);
+        }
+        break;
+      case (totalVideosWatched >= 100):
+        completed = userCompletedAchievements.find(achieve => achieve.achievement_id === 21);
+        {!completed ?
+          await connection.query(postNewVideoAchievementQuery, [userId, 21])
+          :
+          console.log(`totalVideosWatched count = ${totalVideosWatched}. They already have the Watch 100 Videos achievement`);
+        }
+        break;
+      case (totalVideosWatched >= 75):
+        completed = userCompletedAchievements.find(achieve => achieve.achievement_id === 20);
+        {!completed ?
+          await connection.query(postNewVideoAchievementQuery, [userId, 20])
+          :
+          console.log(`totalVideosWatched count = ${totalVideosWatched}. They already have the Watch 75 Videos achievement`);
+        }
+        break;
+      case (totalVideosWatched >= 50):
+        completed = userCompletedAchievements.find(achieve => achieve.achievement_id === 19);
+        {!completed ?
+          await connection.query(postNewVideoAchievementQuery, [userId, 19])
+          :
+          console.log(`totalVideosWatched count = ${totalVideosWatched}. They already have the Watch 50 Videos achievement`);
+        }
+        break;
+      case (totalVideosWatched >= 25):
+        completed = userCompletedAchievements.find(achieve => achieve.achievement_id === 18);
+        {!completed ?
+          await connection.query(postNewVideoAchievementQuery, [userId, 18])
+          :
+          console.log(`totalVideosWatched count = ${totalVideosWatched}. They already have the Watch 25 Videos achievement`);
+        }
+        break;
+      case (totalVideosWatched >= 10):
+        completed = userCompletedAchievements.find(achieve => achieve.achievement_id === 17);
+        {!completed ?
+          await connection.query(postNewVideoAchievementQuery, [userId, 17])
+          :
+          console.log(`totalVideosWatched count = ${totalVideosWatched}. They already have the Watch 10 Videos achievement`);
+        }       
+        break;
+      default:
+        break;
+    }
+    res.sendStatus(201)
+  }
+  catch (error) {
+    console.log('Error inside POST /videosWatched:', error);
+    res.sendStatus(500)
   }
 })
 

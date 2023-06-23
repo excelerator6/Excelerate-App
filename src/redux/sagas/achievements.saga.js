@@ -24,8 +24,8 @@ function* checkThenPostNewAchievements() {
       case 21: // Watch a Video(+)
       case 25: // Watch a Video(++)
       case 32: // Watch a Video(+++)
-        console.log('Watched a video');
-        // const checkVideoAchievements = yield axios.post('/api/achievements/videosWatched');
+        const {data: checkVideoAchievements} = yield axios.post('/api/achievements/videosWatched');
+        console.log('checkVideoAchievements status:', checkVideoAchievements);
         break;
       // If the newest activity was Finishing a Podcast
       case 17: // Finished Podcast
