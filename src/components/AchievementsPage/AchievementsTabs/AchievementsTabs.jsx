@@ -67,6 +67,7 @@ export default function AchievementsTabs() {
           onChange={handleChange}
           aria-label="basic tabs example"
           variant='fullWidth'
+          sx={{mt:2}}
         >
           <Tab label="Experience (XP) Earned" {...a11yProps(0)} />
           <Tab label="Levels Obtained" {...a11yProps(1)} />

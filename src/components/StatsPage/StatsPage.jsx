@@ -30,7 +30,7 @@ function StatsPage(props) {
         <Box sx={{ width: '100%', typography: 'body1', padding: '1em' }}>
             <TabContext value={value}>
                 <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-                    <TabList onChange={handleChange} aria-label="lab API tabs example" centered>
+                    <TabList onChange={handleChange} aria-label="lab API tabs example" centered sx={{mt:2}}>
                         <Tab label="Daily logs" value='0' />
                         <Tab label="XP Points 1" value='1' />
                         <Tab label="XP Points 2" value='2' />

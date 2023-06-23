@@ -31,7 +31,7 @@ function Dashboard() {
     <Box sx={{ flexGrow: 1 }}>
       <Grid container spacing={2} direction="row" justifyContent='center' alignItems='left'>
         <Grid item xs={12} sm={12} md={10}>
-          <Paper>
+          <Paper sx={{mt:5}}>
             <Overall />
           </Paper>
         </Grid>
