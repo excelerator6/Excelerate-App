@@ -116,6 +116,7 @@ export default function FloatingActionButton() {
               // color="primary"
               aria-label="add"
               sx={{
+                fontSize:'1.3em',
                 position: "fixed",
                 bottom: 16,
                 right: 16,

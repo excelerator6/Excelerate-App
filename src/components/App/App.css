@@ -32,10 +32,10 @@ Button
 .btn {
   display: inline-block;
   padding: 10px 20px;
-  border-color: #014041;
+  border-color: #c9cbcd;
   border-width: 1px 1px 3px;
   border-radius: 4px;
-  background-color: #303841;
+  background-color: #061e45;
   color: white;
   font-size: 1.1rem;
   outline: 0;
@@ -58,8 +58,9 @@ Button
 }
 
 .btn:hover {
-  background-color: #90ee90;
+  background-color: #c3e3eb;
   text-decoration: none;
+  color: black;
 }
 
 /* This line makes the "Register" and "Login" buttons look like links */
