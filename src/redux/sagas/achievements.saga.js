@@ -44,8 +44,8 @@ function* checkThenPostNewAchievements() {
         break;
       // If the newest activity was finishing a book summary
       case 23: // Complete Book Summary
+        const checkSummaryAchievments = yield axios.post('/api/achievements/bookSummaries');
         console.log('Finished reading a book summary');
-        // const checkSummaryAchievments = yield axios.post('/api/achievments/bookSummaries');
         break;
       // If the newest activity was finishing an article
       case 3: // Read an Article
@@ -59,7 +59,7 @@ function* checkThenPostNewAchievements() {
       default:
         break;
     }
-    // const checkSkillLevelAchievements = yield axios.post('/api/achievments/skillLevels');
+    // const checkSkillLevelAchievements = yield axios.post('/api/achievements/skillLevels');
     // const totalXpAchievements = yield axios.post('/api/achievements/totalXp');
     // const response = yield axios.post( '/api/achievements' );
     // console.log('response inside checkThenPostNewAchievements:', response);
