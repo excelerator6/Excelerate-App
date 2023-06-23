@@ -124,48 +124,6 @@ router.post('/', rejectUnauthenticated, async (req, res) => {
   ////////////////////////////////////////////////
   const connection = await pool.connect();
   try {
-    // Get the arrays of achievements for each achievement category
-    const xpEarnedAchievementsQuery = `
-      SELECT id FROM achievements
-      WHERE achievement_category = 'Xp Earned';
-    `;
-    const { rows: xpEarnedAchievements } = await connection.query(xpEarnedAchievementsQuery)
-    const levelsObtainedAchievementsQuery = `
-      SELECT id FROM achievements
-      WHERE achievement_category = 'Levels Obtained';
-    `;
-    const { rows: levelsObtainedAchievement } = await connection.query(levelsObtainedAchievementsQuery)
-
-    const podcastsFinishedAchievementsQuery = `
-      SELECT id FROM achievements
-      WHERE achievement_category = 'Podcasts Finished';
-    `;
-    const { rows: podcastsFinishedAchievements } = await connection.query(podcastsFinishedAchievementsQuery)
-    const audiobooksReadAchievementsQuery = `
-      SELECT id FROM achievements
-      WHERE achievement_category = 'Audiobooks Read';
-    `;
-    const { rows: audiobooksReadAchievements } = await connection.query(audiobooksReadAchievementsQuery)
-    const booksReadAchievementsQuery = `
-      SELECT id FROM achievements
-      WHERE achievement_category = 'Books Read';
-    `;
-    const { rows: booksReadAchievements } = await connection.query(booksReadAchievementsQuery)
-    const bookSummariesAchievementsQuery = `
-      SELECT id FROM achievements
-      WHERE achievement_category = 'Book Summaries';
-    `;
-    const { rows: bookSummariesAchievements } = await connection.query(bookSummariesAchievementsQuery)
-    const articlesReadAchievementsQuery = `
-      SELECT id FROM achievements
-      WHERE achievement_category = 'Articles Read';
-    `;
-    const { rows: articlesReadAchievements } = await connection.query(articlesReadAchievementsQuery)
-    const coursesCompletedAchievementsQuery = `
-      SELECT id FROM achievements
-      WHERE achievement_category = 'Courses Completed';
-    `;
-    const { rows: coursesCompletedAchievements } = await connection.query(coursesCompletedAchievementsQuery)
     // Get the achievements the user has already completed
     const userCompletedAchievementsQuery = `
       SELECT
@@ -239,28 +197,6 @@ router.post('/', rejectUnauthenticated, async (req, res) => {
       })
     }
     console.log('totalSkillLevels:', totalSkillLevels);
-
-
-
-    // Get the total amount of podcasts finished by the user
-    const userFinishedPodcastsCountQuery = `
-      SELECT
-        COUNT(activities_chart.activity)
-      FROM user_activities
-      LEFT JOIN activities_chart
-        ON user_activities.activity_id = activities_chart.id
-      WHERE
-        activities_chart.id = 17 AND
-        user_activities.user_id = $1
-      GROUP BY activities_chart.activity, activities_chart.id
-      ORDER BY activities_chart.activity;
-    `;
-    const { rows: userFinishedPodcastsCount } = await connection.query(userFinishedPodcastsCountQuery, [userId])
-    let totalFinishedPodcasts = 0
-    if (userFinishedPodcastsCount.length > 0) {
-      totalFinishedPodcasts = Number(userFinishedPodcastsCount[0].count)
-    }
-    console.log('totalFinishedPodcasts:', totalFinishedPodcasts);
 
     // Get the total amount of audiobooks read by the user
     const userFinishedAudiobooksCountQuery = `
@@ -455,4 +391,85 @@ router.post('/videosWatched', rejectUnauthenticated, async (req, res) => {
   }
 })
 
+router.post('/podcastsFinished', rejectUnauthenticated, async (req, res) => {
+  const userId = req.user.id
+  console.log('inside podcastsFinished');
+  try {
+    const connection = await pool.connect();
+    // Get the achievements the user has already completed
+    const userCompletedAchievementsQuery = `
+      SELECT
+        achievement_id,
+        achievement_name
+      FROM user_achievements
+        JOIN achievements
+          ON user_achievements.achievement_id = achievements.id
+      WHERE user_id = $1;
+    `;
+    const {rows: userCompletedAchievements} = await connection.query(userCompletedAchievementsQuery, [userId])
+
+    // Get the total amount of podcasts finished by the user
+    const userFinishedPodcastsCountQuery = `
+      SELECT
+        COUNT(activities_chart.activity)
+      FROM user_activities
+      LEFT JOIN activities_chart
+        ON user_activities.activity_id = activities_chart.id
+      WHERE
+        activities_chart.id = 17 AND
+        user_activities.user_id = $1
+      GROUP BY activities_chart.activity, activities_chart.id
+      ORDER BY activities_chart.activity;
+    `;
+    const { rows: userFinishedPodcastsCount } = await connection.query(userFinishedPodcastsCountQuery, [userId])
+    let totalFinishedPodcasts = 0
+    if (userFinishedPodcastsCount.length > 0) {
+      totalFinishedPodcasts = Number(userFinishedPodcastsCount[0].count)
+    }
+    console.log('totalFinishedPodcasts:', totalFinishedPodcasts);
+
+    // Build the query for how to add a new achievement if it has been acheived
+    const postNewAchievementQuery = `
+      INSERT INTO user_achievements
+        (user_id, achievement_id)
+      VALUES
+        ($1, $2)
+    `;
+
+    let completed;
+    // Check if totalVideosWatched is at or over an achievement threshold And the user hasn't already completed that achievement
+    switch(true){
+      case (totalFinishedPodcasts >= 500):
+        completed = userCompletedAchievements.find(achieve => achieve.achievement_id === 32);
+        {!completed ? await connection.query(postNewAchievementQuery, [userId, 32]) : '' } break;
+      case (totalFinishedPodcasts >= 250):
+        completed = userCompletedAchievements.find(achieve => achieve.achievement_id === 31);
+        {!completed ? await connection.query(postNewAchievementQuery, [userId, 31]) : '' } break;
+      case (totalFinishedPodcasts >= 200):
+        completed = userCompletedAchievements.find(achieve => achieve.achievement_id === 30);
+        {!completed ? await connection.query(postNewAchievementQuery, [userId, 30]) : '' } break;
+      case (totalFinishedPodcasts >= 150):
+        completed = userCompletedAchievements.find(achieve => achieve.achievement_id === 29);
+        {!completed ? await connection.query(postNewAchievementQuery, [userId, 29]) : '' } break;
+      case (totalFinishedPodcasts >= 100):
+        completed = userCompletedAchievements.find(achieve => achieve.achievement_id === 28);
+        {!completed ? await connection.query(postNewAchievementQuery, [userId, 28]) : '' } break;
+      case (totalFinishedPodcasts >= 75):
+        completed = userCompletedAchievements.find(achieve => achieve.achievement_id === 27);
+        {!completed ? await connection.query(postNewAchievementQuery, [userId, 27]) : '' } break;
+      case (totalFinishedPodcasts >= 50):
+        completed = userCompletedAchievements.find(achieve => achieve.achievement_id === 26);
+        {!completed ? await connection.query(postNewAchievementQuery, [userId, 26]) : '' } break;
+      case (totalFinishedPodcasts >= 25):
+        completed = userCompletedAchievements.find(achieve => achieve.achievement_id === 25);
+        {!completed ? await connection.query(postNewAchievementQuery, [userId, 25]) : '' } break;
+      default: break;
+    }
+    res.sendStatus(201)
+  }
+  catch (error) {
+    console.log('Error inside POST /videosWatched:', error);
+    res.sendStatus(500)
+  }
+})
 module.exports = router;

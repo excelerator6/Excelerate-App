@@ -30,7 +30,8 @@ function* checkThenPostNewAchievements() {
       // If the newest activity was Finishing a Podcast
       case 17: // Finished Podcast
         console.log('Finished a podcast');
-        // const checkPodcastAchievements = yield axios.post('/api/achievements/podcastsFinished');
+        const {data: checkPodcastAchievements} = yield axios.post('/api/achievements/podcastsFinished');
+        console.log('checkPodcastAchievements status:', checkPodcastAchievements);
         break;
       // If the newest activity was finishing an audiobook
       case 35: // Finish an Audiobook
@@ -64,7 +65,7 @@ function* checkThenPostNewAchievements() {
     // const totalXpAchievements = yield axios.post('/api/achievements/totalXp');
     // const response = yield axios.post( '/api/achievements' );
     // console.log('response inside checkThenPostNewAchievements:', response);
-    // yield put({ type: 'FETCH_ACHIEVEMENTS'})
+    yield put({ type: 'FETCH_ACHIEVEMENTS'})
   } catch ( error ) {
     console.log( 'Error within checkThenPostNewAchievements:', error );
   }
