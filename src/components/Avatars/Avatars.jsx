@@ -1,5 +1,5 @@
 import Avatar from "boring-avatars";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import React from "react";
 
@@ -29,7 +29,7 @@ function Avatars() {
     "& .MuiBadge-badge": {
       backgroundColor: "#36454f",
       color: "white",
-      boxShadow: `0 0 0 2px ${theme.palette.background.paper}`,
+      boxShadow: `0 0 0 0px ${theme.palette.background.paper}`,
       "&::after": {
         position: "absolute",
         top: 0,
@@ -37,7 +37,6 @@ function Avatars() {
         width: "100%",
         height: "100%",
         borderRadius: "100%",
-        animation: "ripple 5s infinite ease-in-out",
         border: "1px solid currentColor",
         content: '""',
       },
