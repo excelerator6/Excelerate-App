@@ -41,14 +41,6 @@ function Nav(props) {
         <Avatars/>
           <List>
           <Divider sx={{backgroundColor: '#c9cbcd', borderBottomWidth: 2}}/>
-            <ListItem disablePadding>
-              <ListItemButton component="a" sx={{height:80, backgroundColor: `${currentWindow === 'ABOUT' ? 'primary.navy' : 'primary.main'}`, color:'white'}} href="#/about" onClick={() => setCurrentWindow('ABOUT')}>
-                <ListItemIcon></ListItemIcon>
-                <ListItemText primary="ABOUT" />
-              </ListItemButton>
-            </ListItem>
-          <Divider sx={{backgroundColor: '#c9cbcd', borderBottomWidth: 2}}/>
-            
 
             {/* //If a user is logged in, show these links */}
             <>
@@ -80,6 +72,14 @@ function Nav(props) {
                 <ListItemButton component="a" sx={{height:80, backgroundColor: `${currentWindow === 'ACHIEVEMENTS' ? 'primary.navy' : 'primary.main'}`, color:'white'}} href="#/Achievements" onClick={() => setCurrentWindow('ACHIEVEMENTS')}>
                   <ListItemIcon></ListItemIcon>
                   <ListItemText primary="ACHIEVEMENTS"/>
+                </ListItemButton>
+              </ListItem>
+              <Divider sx={{backgroundColor: '#c9cbcd', borderBottomWidth: 2}}/>
+
+              <ListItem disablePadding>
+                <ListItemButton component="a" sx={{height:80, backgroundColor: `${currentWindow === 'ABOUT' ? 'primary.navy' : 'primary.main'}`, color:'white'}} href="#/about" onClick={() => setCurrentWindow('ABOUT')}>
+                  <ListItemIcon></ListItemIcon>
+                  <ListItemText primary="ABOUT" />
                 </ListItemButton>
               </ListItem>
               <Divider sx={{backgroundColor: '#c9cbcd', borderBottomWidth: 2}}/>
