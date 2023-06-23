@@ -173,31 +173,6 @@ router.post('/', rejectUnauthenticated, async (req, res) => {
         break
     }
 
-    // Get the total amount of levels gained by the user
-    const userAchievedSkillLevelsQuery = `
-      SELECT
-        (SUM(activities_chart.xp_value)/10) AS "skillLevels",
-        skills_user.skill_name AS "skillsUser",
-        skills_enterprise.skill_name AS "skillsEnterprise"
-      FROM activities_chart
-        LEFT JOIN user_activities
-          ON user_activities.activity_id = activities_chart.id
-        LEFT JOIN skills_enterprise
-          ON user_activities.skills_enterprise_id = skills_enterprise.id
-        LEFT JOIN skills_user
-          ON user_activities.skills_user_id = skills_user.id
-      WHERE user_activities.user_id = $1
-      GROUP BY "skillsUser", "skillsEnterprise";
-    `;
-    const { rows: userAchievedSkillLevels } = await connection.query(userAchievedSkillLevelsQuery, [userId])
-    let totalSkillLevels = 0;
-    if (userAchievedSkillLevels && userAchievedSkillLevels.length > 0) {
-      userAchievedSkillLevels.map(skill => {
-        totalSkillLevels += Number(skill.skillLevels)
-      })
-    }
-    console.log('totalSkillLevels:', totalSkillLevels);
-
     res.sendStatus(200)
   } catch (error) {
     console.log('Error inside POST achievements:', error);
@@ -667,7 +642,7 @@ router.post('/articlesRead', rejectUnauthenticated, async (req, res) => {
     `;
 
     let completed;
-    // Check if totalFinishedBookSummaries is at or over an achievement threshold And the user hasn't already completed that achievement
+    // Check if totalArticlesFinished is at or over an achievement threshold And the user hasn't already completed that achievement
     switch(true){
       case (totalArticlesFinished >= 250):
         completed = userCompletedAchievements.find(achieve => achieve.achievement_id === 64);
@@ -749,7 +724,7 @@ router.post('/coursesCompleted', rejectUnauthenticated, async (req, res) => {
     `;
 
     let completed;
-    // Check if totalFinishedBookSummaries is at or over an achievement threshold And the user hasn't already completed that achievement
+    // Check if totalCompletedCourses is at or over an achievement threshold And the user hasn't already completed that achievement
     switch(true){
       case (totalCompletedCourses >= 125):
         completed = userCompletedAchievements.find(achieve => achieve.achievement_id === 72);
@@ -785,5 +760,91 @@ router.post('/coursesCompleted', rejectUnauthenticated, async (req, res) => {
   }
 })
 
+
+router.post('/skillLevels', rejectUnauthenticated, async (req, res) => {
+  const userId = req.user.id
+  try {
+    const connection = await pool.connect();
+    // Get the achievements the user has already completed
+    const userCompletedAchievementsQuery = `
+      SELECT
+        achievement_id,
+        achievement_name
+      FROM user_achievements
+        JOIN achievements
+          ON user_achievements.achievement_id = achievements.id
+      WHERE user_id = $1;
+    `;
+    const {rows: userCompletedAchievements} = await connection.query(userCompletedAchievementsQuery, [userId])
+
+    // Get the total amount of levels gained by the user
+    const userAchievedSkillLevelsQuery = `
+      SELECT
+        (SUM(activities_chart.xp_value)/10) AS "skillLevels",
+        skills_user.skill_name AS "skillsUser",
+        skills_enterprise.skill_name AS "skillsEnterprise"
+      FROM activities_chart
+        LEFT JOIN user_activities
+          ON user_activities.activity_id = activities_chart.id
+        LEFT JOIN skills_enterprise
+          ON user_activities.skills_enterprise_id = skills_enterprise.id
+        LEFT JOIN skills_user
+          ON user_activities.skills_user_id = skills_user.id
+      WHERE user_activities.user_id = $1
+      GROUP BY "skillsUser", "skillsEnterprise";
+    `;
+    const { rows: userAchievedSkillLevels } = await connection.query(userAchievedSkillLevelsQuery, [userId])
+    let totalSkillLevels = 0;
+    if (userAchievedSkillLevels && userAchievedSkillLevels.length > 0) {
+      userAchievedSkillLevels.map(skill => {
+        totalSkillLevels += Number(skill.skillLevels)
+      })
+    }
+    console.log('totalSkillLevels:', totalSkillLevels);
+
+    // Build the query for how to add a new achievement if it has been acheived
+    const postNewAchievementQuery = `
+      INSERT INTO user_achievements
+        (user_id, achievement_id)
+      VALUES
+        ($1, $2)
+    `;
+
+    let completed;
+    // Check if totalSkillLevels is at or over an achievement threshold And the user hasn't already completed that achievement
+    switch(true){
+      case (totalSkillLevels >= 500):
+        completed = userCompletedAchievements.find(achieve => achieve.achievement_id === 16);
+        {!completed ? await connection.query(postNewAchievementQuery, [userId, 16]) : '' } break;
+      case (totalSkillLevels >= 200):
+        completed = userCompletedAchievements.find(achieve => achieve.achievement_id === 15);
+        {!completed ? await connection.query(postNewAchievementQuery, [userId, 15]) : '' } break;
+      case (totalSkillLevels >= 100):
+        completed = userCompletedAchievements.find(achieve => achieve.achievement_id === 14);
+        {!completed ? await connection.query(postNewAchievementQuery, [userId, 14]) : '' } break;
+      case (totalSkillLevels >= 50):
+        completed = userCompletedAchievements.find(achieve => achieve.achievement_id === 13);
+        {!completed ? await connection.query(postNewAchievementQuery, [userId, 13]) : '' } break;
+      case (totalSkillLevels >= 25):
+        completed = userCompletedAchievements.find(achieve => achieve.achievement_id === 12);
+        {!completed ? await connection.query(postNewAchievementQuery, [userId, 12]) : '' } break;
+      case (totalSkillLevels >= 10):
+        completed = userCompletedAchievements.find(achieve => achieve.achievement_id === 11);
+        {!completed ? await connection.query(postNewAchievementQuery, [userId, 11]) : '' } break;
+      case (totalSkillLevels >= 5):
+        completed = userCompletedAchievements.find(achieve => achieve.achievement_id === 10);
+        {!completed ? await connection.query(postNewAchievementQuery, [userId, 10]) : '' } break;
+      case (totalSkillLevels >= 1):
+        completed = userCompletedAchievements.find(achieve => achieve.achievement_id === 9);
+        {!completed ? await connection.query(postNewAchievementQuery, [userId, 9]) : '' } break;
+      default: break;
+    }
+    res.sendStatus(201)
+  }
+  catch (error) {
+    console.log('Error inside POST /skillLevels:', error);
+    res.sendStatus(500)
+  }
+})
 
 module.exports = router;

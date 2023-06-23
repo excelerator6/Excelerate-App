@@ -59,10 +59,8 @@ function* checkThenPostNewAchievements() {
       default:
         break;
     }
-    // const checkSkillLevelAchievements = yield axios.post('/api/achievements/skillLevels');
+    const checkSkillLevelAchievements = yield axios.post('/api/achievements/skillLevels');
     // const totalXpAchievements = yield axios.post('/api/achievements/totalXp');
-    // const response = yield axios.post( '/api/achievements' );
-    // console.log('response inside checkThenPostNewAchievements:', response);
     yield put({ type: 'FETCH_ACHIEVEMENTS'})
   } catch ( error ) {
     console.log( 'Error within checkThenPostNewAchievements:', error );
