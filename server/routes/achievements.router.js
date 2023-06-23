@@ -140,17 +140,7 @@ router.post('/', rejectUnauthenticated, async (req, res) => {
     // Get the totals for what the user has done to compare vs completed achievements
     // and then POST a new achievement if it has been completed
 
-    // Get the total amount of xp gained by the user
-    const userTotalXpPointsQuery = `
-      SELECT 
-        SUM(activities_chart.xp_value) AS xp_points
-      FROM user_activities
-        LEFT JOIN activities_chart
-          ON user_activities.activity_id = activities_chart.id
-      WHERE user_activities.user_id = $1;
-    `;
-    const { rows: userTotalXpPoints } = await connection.query(userTotalXpPointsQuery, [userId])
-    let totalXpPoints = Number(userTotalXpPoints[0].xp_points)
+
     switch (totalXpPoints) {
       case (totalXpPoints >= 2750):
         break
@@ -843,6 +833,81 @@ router.post('/skillLevels', rejectUnauthenticated, async (req, res) => {
   }
   catch (error) {
     console.log('Error inside POST /skillLevels:', error);
+    res.sendStatus(500)
+  }
+})
+
+
+router.post('/totalXp', rejectUnauthenticated, async (req, res) => {
+  const userId = req.user.id
+  try {
+    const connection = await pool.connect();
+    // Get the achievements the user has already completed
+    const userCompletedAchievementsQuery = `
+      SELECT
+        achievement_id,
+        achievement_name
+      FROM user_achievements
+        JOIN achievements
+          ON user_achievements.achievement_id = achievements.id
+      WHERE user_id = $1;
+    `;
+    const {rows: userCompletedAchievements} = await connection.query(userCompletedAchievementsQuery, [userId])
+
+    // Get the total amount of xp gained by the user
+    const userTotalXpPointsQuery = `
+      SELECT 
+        SUM(activities_chart.xp_value) AS xp_points
+      FROM user_activities
+        LEFT JOIN activities_chart
+          ON user_activities.activity_id = activities_chart.id
+      WHERE user_activities.user_id = $1;
+    `;
+    const { rows: userTotalXpPoints } = await connection.query(userTotalXpPointsQuery, [userId])
+    let totalXpPoints = Number(userTotalXpPoints[0].xp_points)
+    console.log('totalXpPoints:', totalXpPoints);
+
+    // Build the query for how to add a new achievement if it has been acheived
+    const postNewAchievementQuery = `
+      INSERT INTO user_achievements
+        (user_id, achievement_id)
+      VALUES
+        ($1, $2)
+    `;
+
+    let completed;
+    // Check if totalXpPoints is at or over an achievement threshold And the user hasn't already completed that achievement
+    switch(true){
+      case (totalXpPoints >= 2750):
+        completed = userCompletedAchievements.find(achieve => achieve.achievement_id === 8);
+        {!completed ? await connection.query(postNewAchievementQuery, [userId, 8]) : '' } break;
+      case (totalXpPoints >= 2500):
+        completed = userCompletedAchievements.find(achieve => achieve.achievement_id === 7);
+        {!completed ? await connection.query(postNewAchievementQuery, [userId, 7]) : '' } break;
+      case (totalXpPoints >= 2250):
+        completed = userCompletedAchievements.find(achieve => achieve.achievement_id === 6);
+        {!completed ? await connection.query(postNewAchievementQuery, [userId, 6]) : '' } break;
+      case (totalXpPoints >= 2000):
+        completed = userCompletedAchievements.find(achieve => achieve.achievement_id === 5);
+        {!completed ? await connection.query(postNewAchievementQuery, [userId, 5]) : '' } break;
+      case (totalXpPoints >= 1750):
+        completed = userCompletedAchievements.find(achieve => achieve.achievement_id === 4);
+        {!completed ? await connection.query(postNewAchievementQuery, [userId, 4]) : '' } break;
+      case (totalXpPoints >= 1500):
+        completed = userCompletedAchievements.find(achieve => achieve.achievement_id === 3);
+        {!completed ? await connection.query(postNewAchievementQuery, [userId, 3]) : '' } break;
+      case (totalXpPoints >= 1250):
+        completed = userCompletedAchievements.find(achieve => achieve.achievement_id === 2);
+        {!completed ? await connection.query(postNewAchievementQuery, [userId, 2]) : '' } break;
+      case (totalXpPoints >= 1000):
+        completed = userCompletedAchievements.find(achieve => achieve.achievement_id === 1);
+        {!completed ? await connection.query(postNewAchievementQuery, [userId, 1]) : '' } break;
+      default: break;
+    }
+    res.sendStatus(201)
+  }
+  catch (error) {
+    console.log('Error inside POST /totalXp:', error);
     res.sendStatus(500)
   }
 })
