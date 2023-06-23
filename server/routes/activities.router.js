@@ -20,7 +20,7 @@ router.get('/getList', rejectUnauthenticated, (req, res) => {
 // Route for logging new activity
 // * WILL WANT TO REFACTOR USING ASYNC / AWAIT
 router.post('/log', rejectUnauthenticated, (req, res) => {
-  console.log("Got our log:", req.body);
+  // console.log("Got our log:", req.body);
   const date = req.body.date; // * we need to format this date differently, don't we?
   const activity = req.body.activity;
   const source = req.body.source;
@@ -39,7 +39,7 @@ router.post('/log', rejectUnauthenticated, (req, res) => {
         let sqlValues = [date, req.body.enterpriseId, userID, activity, source, takeaway];
         pool.query(sqlText, sqlValues)
             .then(dbRes => {
-              console.log("Successfully added activity to the DB:", dbRes);
+              // console.log("Successfully added activity to the DB:", dbRes);
               res.sendStatus(201)
             }).catch(dbErr => {
               console.log("Error connecting to DB in activites.router /log:", dbErr);
@@ -53,7 +53,7 @@ router.post('/log', rejectUnauthenticated, (req, res) => {
         let sqlValues = [date, req.body.enterpriseId, userID, activity, source];
         pool.query(sqlText, sqlValues)
             .then(dbRes => {
-              console.log("Successfully added activity to the DB:", dbRes);
+              // console.log("Successfully added activity to the DB:", dbRes);
               res.sendStatus(201)
             }).catch(dbErr => {
               console.log("Error connecting to DB in activites.router /log:", dbErr);
@@ -69,7 +69,7 @@ router.post('/log', rejectUnauthenticated, (req, res) => {
         let sqlValues = [date, req.body.skillUserId, userID, activity, source, takeaway];
         pool.query(sqlText, sqlValues)
             .then(dbRes => {
-              console.log("Successfully added activity to the DB:", dbRes);
+              // console.log("Successfully added activity to the DB:", dbRes);
               res.sendStatus(201)
             }).catch(dbErr => {
               console.log("Error connecting to DB in activites.router /log:", dbErr);
@@ -83,7 +83,7 @@ router.post('/log', rejectUnauthenticated, (req, res) => {
         let sqlValues = [date, req.body.skillUserId, userID, activity, source];
         pool.query(sqlText, sqlValues)
             .then(dbRes => {
-              console.log("Successfully added activity to the DB:", dbRes);
+              // console.log("Successfully added activity to the DB:", dbRes);
               res.sendStatus(201)
             }).catch(dbErr => {
               console.log("Error connecting to DB in activites.router /log:", dbErr);
