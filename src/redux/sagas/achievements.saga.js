@@ -50,7 +50,7 @@ function* checkThenPostNewAchievements() {
       // If the newest activity was finishing an article
       case 3: // Read an Article
         console.log('Finished reading an article');
-        // const checkArticleAchievements = yield axios.post('/api/achievements/articlesRead');
+        const checkArticleAchievements = yield axios.post('/api/achievements/articlesRead');
         break;
       // If the newest activity was completing a course
       case 34: // Finish a Course
