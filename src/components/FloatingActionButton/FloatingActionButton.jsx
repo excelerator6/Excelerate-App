@@ -200,6 +200,7 @@ export default function FloatingActionButton() {
               helperText="Please select your Skill (Required)"
               value={skills}
               onChange={(event) => setSkills(event.target.value)}
+              onClick={() => { getSkills() }}
             >
               {skillsList.map((skill, index) => {
                 return (
@@ -295,7 +296,7 @@ export default function FloatingActionButton() {
           </DialogActions>
 
         </Dialog>
-      </div>
+      </div >
     );
   } else {
     return <p></p>;
