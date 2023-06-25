@@ -40,10 +40,15 @@ router.post('/logNewSkill', (req, res) => {
   console.log(newSkill)
   const userID = req.user.id;
 
+  //updated sql query to check that we dont add duplicate skills to our DB
   let sqlText = `
-          INSERT INTO "skills_user" (skill_name, user_id )
-          VALUES ($1, $2);
-        `;
+  insert into skills_user (skill_name, user_id) 
+  select $1, $2 
+  where not exists (
+   select null from skills_user 
+   WHERE lower(skills_user.skill_name) = lower('$1') 
+ AND skills_user.user_id = $2
+  ); `;
   let sqlValues = [newSkill, userID];
   pool.query(sqlText, sqlValues)
     .then(dbRes => {

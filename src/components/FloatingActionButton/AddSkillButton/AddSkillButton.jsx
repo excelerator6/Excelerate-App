@@ -87,7 +87,15 @@ export default function AddSkillButton() {
 
     return (
         <div>
-            <Button variant="outlined" onClick={handleClickOpen}>
+            <Button variant="outlined" onClick={handleClickOpen}
+                style={{
+                    borderRadius: 5,
+                    backgroundColor: "#ccc",
+                    text: "white",
+                    padding: "13px 25px",
+                    fontSize: "14px"
+                }}
+            >
                 Add A New Skill
             </Button>
             <Dialog open={open} onClose={handleClose}>
