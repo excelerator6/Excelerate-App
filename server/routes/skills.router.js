@@ -32,11 +32,28 @@ router.get('/getSkills', rejectUnauthenticated, async (req, res) => {
   }
 });
 
-/**
- * POST route template
- */
-router.post('/', (req, res) => {
-  // POST route code here
+// POST route code here
+router.post('/logNewSkill', (req, res) => {
+
+  // console.log("Got our log:", req.body);
+  const newSkill = req.body.skill;
+  console.log(newSkill)
+  const userID = req.user.id;
+
+  let sqlText = `
+          INSERT INTO "skills_user" (skill_name, user_id )
+          VALUES ($1, $2);
+        `;
+  let sqlValues = [newSkill, userID];
+  pool.query(sqlText, sqlValues)
+    .then(dbRes => {
+      // console.log("Successfully added new skill to the DB:", dbRes);
+      res.sendStatus(201)
+    }).catch(dbErr => {
+      console.log("Error connecting to DB in skills.router /logNewSkill", dbErr);
+      res.sendStatus(500);
+    })
+
 });
 
 module.exports = router;

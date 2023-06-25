@@ -19,6 +19,9 @@ import MenuItem from "@mui/material/MenuItem";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import dayjs from "dayjs";
 
+//Add Skill button
+import AddSkillButton from "./AddSkillButton/AddSkillButton"
+
 
 //  * Should be refactored out to components, + needs to be formatted nicely
 export default function FloatingActionButton() {
@@ -117,7 +120,7 @@ export default function FloatingActionButton() {
    * @param {text} setRequiredInput - The setter function associated with the input
    */
   const requiredInputField = (input, setRequiredInput) => {
-    if(input === '') {
+    if (input === '') {
       setRequiredInput(true)
     } else {
       setRequiredInput(false)
@@ -149,7 +152,7 @@ export default function FloatingActionButton() {
             // color="primary"
             aria-label="add"
             sx={{
-              fontSize:'1.3em',
+              fontSize: '1.3em',
               position: "fixed",
               bottom: 16,
               right: 16,
@@ -206,6 +209,8 @@ export default function FloatingActionButton() {
                 );
               })}
             </TextField>
+
+
             {/* Activities Select Field */}
             <TextField
               sx={{
@@ -280,7 +285,9 @@ export default function FloatingActionButton() {
                 setTakeaways(event.target.value);
               }}
             />
+            {/* Add New Skill Button */}
 
+            <AddSkillButton />
           </DialogContent>
           <DialogActions>
             <Button onClick={handleClose}>Cancel</Button>
