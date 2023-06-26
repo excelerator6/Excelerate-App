@@ -24,7 +24,7 @@ import AddSkillButton from "./AddSkillButton/AddSkillButton"
 
 
 //  * Should be refactored out to components, + needs to be formatted nicely
-export default function FloatingActionButton() {
+export default function AddLogButton() {
   const dispatch = useDispatch();
   const activitiesList = useSelector((store) => store.activities);
   const skillsList = useSelector((store) => store.skills);
@@ -261,7 +261,7 @@ export default function FloatingActionButton() {
               margin="dense"
               id="name"
               label="Source"
-              type="email"
+              type="email" // type email??
               fullWidth
               variant="standard"
               value={source}
@@ -278,7 +278,7 @@ export default function FloatingActionButton() {
               margin="dense"
               id="name"
               label="Takeaways"
-              type="email"
+              type="email" // type email??
               fullWidth
               variant="standard"
               value={takeaways}
