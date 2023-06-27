@@ -136,10 +136,16 @@ export default function AddLogButton() {
   const handleActivitySelect = (event) => {
     const activityId = event.target.value;
     setActivities(activityId);
-
     // autofill the XP field with the XP amount associated with the activity
+    console.log(activityId);
+    console.log(activitiesList);
     setXp(activitiesList[activityId - 1].xp_value);
   };
+
+  const autoFillAddLog = () => {
+    setSource('Practicing Mindfulness: 75 Essential Meditations to Reduce Stress, Improve Mental Health, and Find Peace in the Everyday')
+    setTakeaways('EVIDENCE-BASED ADVICE: Find expert advice on dealing with distorted or wandering thoughts and how to handle mental blocks.')
+  }
 
   if (activitiesList.length > 0 && skillsList.length > 0) {
     return (
@@ -261,7 +267,7 @@ export default function AddLogButton() {
               margin="dense"
               id="name"
               label="Source"
-              type="email" // type email??
+              type="text"
               fullWidth
               variant="standard"
               value={source}
@@ -278,7 +284,7 @@ export default function AddLogButton() {
               margin="dense"
               id="name"
               label="Takeaways"
-              type="email" // type email??
+              type="text"
               fullWidth
               variant="standard"
               value={takeaways}
@@ -286,9 +292,12 @@ export default function AddLogButton() {
                 setTakeaways(event.target.value);
               }}
             />
-            {/* Add New Skill Button */}
 
-            <AddSkillButton />
+            {/* Add New Skill Button */}
+            {/* remove div with onClick after presentation */}
+            <div onClick={autoFillAddLog}>
+              <AddSkillButton />
+            </div>
           </DialogContent>
           <DialogActions>
             <Button onClick={handleClose}>Cancel</Button>
