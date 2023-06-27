@@ -142,11 +142,6 @@ export default function AddLogButton() {
     setXp(activitiesList[activityId - 1].xp_value);
   };
 
-  const autoFillAddLog = () => {
-    setSource('Practicing Mindfulness: 75 Essential Meditations to Reduce Stress, Improve Mental Health, and Find Peace in the Everyday')
-    setTakeaways('EVIDENCE-BASED ADVICE: Find expert advice on dealing with distorted or wandering thoughts and how to handle mental blocks.')
-  }
-
   if (activitiesList.length > 0 && skillsList.length > 0) {
     return (
       <div>
@@ -294,8 +289,7 @@ export default function AddLogButton() {
             />
 
             {/* Add New Skill Button */}
-            {/* remove div with onClick after presentation */}
-            <div onClick={autoFillAddLog}>
+            <div>
               <AddSkillButton />
             </div>
           </DialogContent>

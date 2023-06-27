@@ -11,7 +11,6 @@ const {
 router.get('/getList', rejectUnauthenticated, (req, res) => {
     pool.query('SELECT * FROM "activities_chart" ORDER BY id;')
         .then(dbRes => {
-          console.log(dbRes.rows);
           res.send(dbRes.rows);
         }).catch(dbErr => {
           console.log("Error connecting to DB:", dbErr);

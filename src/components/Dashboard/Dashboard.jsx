@@ -35,20 +35,20 @@ function Dashboard() {
         alignItems="left"
       >
         <Grid item xs={12} sm={12} md={10}>
-          <Paper sx={{ mt: 5 }}>
+          <Paper sx={{ mt: 5 }} elevation={6}>
             <Overall />
           </Paper>
         </Grid>
         <Grid item xs={12} sm={12} md={7} mt={-2}>
-          <Paper id="dboard-skill-table">
+          <Paper id="dboard-skill-table" elevation={6}>
             <SkillTable />
           </Paper>
         </Grid>
         <Grid item xs={8} sm={8} md={4} mr={1} mt={-2}>
-          <Paper>
+          <Paper elevation={6}>
             <HeatmapChart />
           </Paper>
-          <Paper>
+          <Paper elevation={6}>
             <ConsumedContent />
           </Paper>
         </Grid>

@@ -59,6 +59,7 @@ export default function AchievementTabView({pageAchievements, pageHeader}) {
                     alignItems: 'center',
                     justifyContent: 'center'
                   }}
+                  elevation={4}
                 >
                   {AchievementCard(achievement)}
                 </Card>
