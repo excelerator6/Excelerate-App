@@ -8,65 +8,53 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-import LinearProgress, {
-  linearProgressClasses,
-} from "@mui/material/LinearProgress";
+import LinearProgress, { linearProgressClasses } from "@mui/material/LinearProgress";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import { styled } from "@mui/material/styles";
 
+//import skillTable css
 import "./SkillTable.css";
-// How do we calculate the level, current XP / XP to next level, etc.
 
 // Badge Component
 import LevelBadge from "./SkillTableComponents/LevelBadge";
 
 function SkillTable() {
-  // things needed from the store to calculate the user's skill levels
+  // State needed from the store to calculate the user's skill levels
   const skills = useSelector((store) => store.skills);
   const userActivities = useSelector((store) => store.userActivities);
 
-  // need to calculate the user's skill levels
-  const calculateLevel = (skill) => {
-    // use .filter to filter through the user's logged activites, returning any activity that used the same skill as the skill we're checking for.
-    // If it matches, it copies that into the actInstances
+
+  // Calculate the total xp for each skills
+  const calculateTotalSkillXp = (skill) => {
+    // Use .filter to filter through the user's logged activites,
+    //  returning any activity that used the same skill as the skill we're checking for.
+    // If it matches, it copies that into the resulting array
     const actInstances = userActivities.filter(
       (item) => skill.skill_name === item.skill
     );
-    // then, we loop through actInstances and extract ONLY the xp_value using .map
-    // then we use .reduce to add each XP amount to the last (acc + current) to get our total XP.
-    const totalXP = actInstances
+    return actInstances
+      // Loop through activitiesArray and extract ONLY the xp_value using .map
       .map((activity) => activity.xp)
+      // Then use .reduce to add each XP amount to the last (acc + current) to get our total XP.
       .reduce((acc, current) => acc + current, 0);
-    // then we divide by 10 and round up to get the actual level,
-    // since all levels are 10 XP
-    return Math.floor(totalXP / 10);
+    // return calculateTotalXp(actInstances)
   };
 
-  // calculate the current xp out of 10 -takes the modulo left and it shows it onto the progress bar
-  const currentXP = (skill) => {
-    const actInstances = userActivities.filter(
-      (item) => skill.skill_name === item.skill
-    );
-    const totalXP = actInstances
-      .map((activity) => activity.xp)
-      .reduce((acc, current) => acc + current, 0);
-
-    return totalXP % 10;
-  };
-  // calculate the total xp for each skills
-  const totalXP = (skill) => {
-    const actInstances = userActivities.filter(
-      (item) => skill.skill_name === item.skill
-    );
-    const totalXP = actInstances
-      .map((activity) => activity.xp)
-      .reduce((acc, current) => acc + current, 0);
-
-    return totalXP;
-  };
-  //it's here to set the boundaries of the leveling bar
-  const normalise = (value) => ((value - 0) * 100) / (10 - 0);
+    // Function to calculate the user's skill levels
+    const calculateLevel = (skill) => {
+      // Divide totalXp by 10 and round up to get the actual level, all levels are 10 XP
+      return Math.floor(calculateTotalSkillXp(skill) / 10)
+    };
+  
+    // Calculate the current xp out of 10
+    const currentXpForLevel = (skill) => {
+      // Takes the modulo left and it shows it on the progress bar
+      return (calculateTotalSkillXp(skill) % 10)
+    };
+  
+  // Returns a percentage to fill in the leveling bar based on the provided value
+  const currentXpPercentage = (value) => ((value * 100) / 10);
 
   const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
     height: 10,
@@ -97,39 +85,52 @@ function SkillTable() {
           </TableHead>
           <TableBody>
             {skills.map((skill, index) => {
+              const currentXp = currentXpForLevel(skill)
+              const currentLevel = calculateLevel(skill)
               return (
                 <TableRow
                   key={index}
                   sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                 >
-                  {/* Skill */}
-                  <TableCell align="center">{skill.skill_name}</TableCell>
-                  {/* Level */}
-                  <TableCell align="center">{calculateLevel(skill)}</TableCell>
-                  {/* Total XP */}
-                  <TableCell align="center">{totalXP(skill)}</TableCell>
-                  {/* Current XP */}
+                  {/* Skill Column */}
+                  <TableCell align="center">
+                    {skill.skill_name}
+                  </TableCell>
+
+                  {/* Level Column */}
+                  <TableCell align="center">
+                    {currentLevel}
+                  </TableCell>
+
+                  {/* Total XP Column */}
+                  <TableCell align="center">
+                    {calculateTotalSkillXp(skill)}
+                  </TableCell>
+
+                  {/* Current XP Column */}
                   <TableCell align="center">
                     <Box
                       className="progressBarContainer"
                       sx={{ display: "flex" }}
                     >
-                      <Box className="progressBar" container="span">
-                        <BorderLinearProgress
-                          variant="determinate"
-                          value={normalise(currentXP(skill))}
-                          valueBuffer={10}
-                        />
-                        <Box className="progressText" container="span">
-                          <Typography variant="body1">
-                            {currentXP(skill)} / 10
-                          </Typography>
-                        </Box>
-                      </Box>
+                      {/* The progress bar for current XP */}
+                      <BorderLinearProgress
+                        variant="determinate"
+                        value={currentXpPercentage(currentXp)}
+                        valueBuffer={10}
+                      />
+                      {/* The written out progress. example "2/10" */}
+                      <Typography variant="body1">
+                        {currentXp} / 10
+                      </Typography>
                     </Box>
                   </TableCell>
-                  {/* Badge */}
-                  <TableCell align="center">{LevelBadge(calculateLevel(skill))}</TableCell>
+
+                  {/* Badge Column */}
+                  <TableCell align="center">
+                    {LevelBadge(currentLevel)}
+                  </TableCell>
+
                 </TableRow>
               );
             })}

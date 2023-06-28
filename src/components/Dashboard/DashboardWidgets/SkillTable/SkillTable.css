@@ -4,14 +4,4 @@
     flex-direction: column;
     flex-wrap: wrap;
     justify-content: center;
-    
-  }
-  
-  .progressBar {
-    width: 100%
-  }
-  
-  .progressText {
-    display:flex;
-    justify-content: center;
   }
