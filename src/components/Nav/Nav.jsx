@@ -42,7 +42,7 @@ function Nav(props) {
 
   const ListItemButtonStyling = (window) => {
     const styling = {
-      height:80,
+      height: 80,
       backgroundColor: `${currentWindow === `${window}` ? 'primary.navy' : 'primary.main'}`,
       color:'white'
     }
