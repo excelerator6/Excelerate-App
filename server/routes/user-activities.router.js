@@ -129,7 +129,6 @@ router.get('/newestActivity', rejectUnauthenticated, async (req, res) => {
   try {
     const response = await pool.query(newestActivityQuery, [userId])
     const newestActivity = response.rows[0]
-    console.log('newestActivity:', newestActivity);
     res.send(newestActivity)
   } catch (error) {
     console.log('Error inside GET /newestActivituy:', error);

@@ -24,7 +24,7 @@ import AddSkillButton from "./AddSkillButton/AddSkillButton"
 
 
 //  * Should be refactored out to components, + needs to be formatted nicely
-export default function FloatingActionButton() {
+export default function AddLogButton() {
   const dispatch = useDispatch();
   const activitiesList = useSelector((store) => store.activities);
   const skillsList = useSelector((store) => store.skills);
@@ -136,8 +136,9 @@ export default function FloatingActionButton() {
   const handleActivitySelect = (event) => {
     const activityId = event.target.value;
     setActivities(activityId);
-
     // autofill the XP field with the XP amount associated with the activity
+    console.log(activityId);
+    console.log(activitiesList);
     setXp(activitiesList[activityId - 1].xp_value);
   };
 
@@ -261,7 +262,7 @@ export default function FloatingActionButton() {
               margin="dense"
               id="name"
               label="Source"
-              type="email"
+              type="text"
               fullWidth
               variant="standard"
               value={source}
@@ -278,7 +279,7 @@ export default function FloatingActionButton() {
               margin="dense"
               id="name"
               label="Takeaways"
-              type="email"
+              type="text"
               fullWidth
               variant="standard"
               value={takeaways}
@@ -286,9 +287,11 @@ export default function FloatingActionButton() {
                 setTakeaways(event.target.value);
               }}
             />
-            {/* Add New Skill Button */}
 
-            <AddSkillButton />
+            {/* Add New Skill Button */}
+            <div>
+              <AddSkillButton />
+            </div>
           </DialogContent>
           <DialogActions>
             <Button onClick={handleClose}>Cancel</Button>

@@ -2,6 +2,7 @@ import { useSelector } from "react-redux"
 import { Card, CardContent, Grid, Typography } from "@mui/material";
 import GreyStarSharp from '../StarPngs/grey_star_sharp.png'
 import GoldStarSharp from '../StarPngs/gold_star_sharp.png'
+import WhiteStarSharp from '../StarPngs/white_star_sharp.png'
 
 export default function AchievementTabView({pageAchievements, pageHeader}) {
   const completedAchievements = useSelector(store =>
@@ -15,7 +16,7 @@ export default function AchievementTabView({pageAchievements, pageHeader}) {
     return (
       <>
         {/* If compelted is true, show a GoldStarSharp, ELSE show a GreyStarSharp */}
-        <img src={completed ? GoldStarSharp : GreyStarSharp} className='star-image' />
+        <img src={completed ? GoldStarSharp : WhiteStarSharp} className='star-image' />
         <Typography sc={{fontSize:14}} color="text.secondary">
           {/* If completed is true, show the date this achievement was completed
               Otherwise, don't show a date.
@@ -58,6 +59,7 @@ export default function AchievementTabView({pageAchievements, pageHeader}) {
                     alignItems: 'center',
                     justifyContent: 'center'
                   }}
+                  elevation={4}
                 >
                   {AchievementCard(achievement)}
                 </Card>

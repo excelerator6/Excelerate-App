@@ -3,9 +3,7 @@ import axios from 'axios';
 
 function* getSkills() {
     try {
-
         const res = yield axios.get('/api/skills/getSkills');
-
         yield put({
             type: 'SET_SKILLS_LIST',
             payload: res.data

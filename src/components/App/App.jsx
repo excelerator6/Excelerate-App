@@ -21,7 +21,7 @@ import LoginPage from "../LoginPage/LoginPage";
 import RegisterPage from "../RegisterPage/RegisterPage";
 
 //importing floatingActionButton
-import FloatingActionButton from "../FloatingActionButton/FloatingActionButton";
+import AddLogButton from "../AddLogButton/AddLogButton";
 //importing to wrap app for the date picker
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
@@ -142,7 +142,7 @@ function App() {
           <>
             {
               // only want the log activity button to show if the user is logged in
-              user.id ? <FloatingActionButton /> : <></>
+              user.id ? <AddLogButton /> : <></>
             }
           </>
           <Footer />

@@ -45,7 +45,10 @@ function Nav(props) {
             {/* //If a user is logged in, show these links */}
             <>
               <ListItem disablePadding>
-                <ListItemButton component="a" sx={{height:80, backgroundColor: `${currentWindow === 'DASHBOARD' ? 'primary.navy' : 'primary.main'}`, color:'white'}} href="#/dashboard" onClick={() => setCurrentWindow('DASHBOARD')}>
+                <ListItemButton
+                  component="a" 
+                  sx={{
+                    height:80, backgroundColor: `${currentWindow === 'DASHBOARD' ? 'primary.navy' : 'primary.main'}`, color:'white'}} href="#/dashboard" onClick={() => setCurrentWindow('DASHBOARD')}>
                   <ListItemIcon></ListItemIcon>
                   <ListItemText primary="DASHBOARD" />
                 </ListItemButton>
@@ -53,7 +56,10 @@ function Nav(props) {
               <Divider sx={{backgroundColor: '#c9cbcd', borderBottomWidth: 2}}/>
 
               <ListItem disablePadding>
-                <ListItemButton component="a" sx={{height:80, backgroundColor: `${currentWindow === 'XP LOG' ? 'primary.navy' : 'primary.main'}`, color:'white'}} href="#/xp-log" onClick={() => setCurrentWindow('XP LOG')}>
+                <ListItemButton
+                  component="a" 
+                  sx={{
+                    height:80, backgroundColor: `${currentWindow === 'XP LOG' ? 'primary.navy' : 'primary.main'}`, color:'white'}} href="#/xp-log" onClick={() => setCurrentWindow('XP LOG')}>
                   <ListItemIcon></ListItemIcon>
                   <ListItemText primary="XP LOG" />
                 </ListItemButton>
@@ -61,7 +67,10 @@ function Nav(props) {
               <Divider sx={{backgroundColor: '#c9cbcd', borderBottomWidth: 2}}/>
 
               <ListItem disablePadding>
-                <ListItemButton component="a" sx={{height:80, backgroundColor: `${currentWindow === 'STATS' ? 'primary.navy' : 'primary.main'}`, color:'white'}} href="#/StatsPage" onClick={() => setCurrentWindow('STATS')}>
+                <ListItemButton
+                  component="a" 
+                  sx={{
+                    height:80, backgroundColor: `${currentWindow === 'STATS' ? 'primary.navy' : 'primary.main'}`, color:'white'}} href="#/StatsPage" onClick={() => setCurrentWindow('STATS')}>
                   <ListItemIcon></ListItemIcon>
                   <ListItemText primary="STATS" />
                 </ListItemButton>
@@ -69,20 +78,22 @@ function Nav(props) {
               <Divider sx={{backgroundColor: '#c9cbcd', borderBottomWidth: 2}}/>
 
               <ListItem disablePadding>
-                <ListItemButton component="a" sx={{height:80, backgroundColor: `${currentWindow === 'ACHIEVEMENTS' ? 'primary.navy' : 'primary.main'}`, color:'white'}} href="#/Achievements" onClick={() => setCurrentWindow('ACHIEVEMENTS')}>
+                <ListItemButton
+                  component="a" 
+                  sx={{height:80, backgroundColor: `${currentWindow === 'ACHIEVEMENTS' ? 'primary.navy' : 'primary.main'}`, color:'white'}} href="#/Achievements" onClick={() => setCurrentWindow('ACHIEVEMENTS')}>
                   <ListItemIcon></ListItemIcon>
                   <ListItemText primary="ACHIEVEMENTS"/>
                 </ListItemButton>
               </ListItem>
               <Divider sx={{backgroundColor: '#c9cbcd', borderBottomWidth: 2}}/>
 
-              <ListItem disablePadding>
+              {/* <ListItem disablePadding>
                 <ListItemButton component="a" sx={{height:80, backgroundColor: `${currentWindow === 'ABOUT' ? 'primary.navy' : 'primary.main'}`, color:'white'}} href="#/about" onClick={() => setCurrentWindow('ABOUT')}>
                   <ListItemIcon></ListItemIcon>
                   <ListItemText primary="ABOUT" />
                 </ListItemButton>
               </ListItem>
-              <Divider sx={{backgroundColor: '#c9cbcd', borderBottomWidth: 2}}/>
+              <Divider sx={{backgroundColor: '#c9cbcd', borderBottomWidth: 2}}/> */}
 
               <Box
                 m={1}
