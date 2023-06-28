@@ -1,10 +1,8 @@
 import React from "react";
-import LogOutButton from "../LogOutButton/LogOutButton";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useEffect } from "react";
 
 // material UI grid components
-import { styled } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid";
@@ -19,7 +17,6 @@ import ConsumedContent from "./DashboardWidgets/ConsumedContent";
 
 function Dashboard() {
   const dispatch = useDispatch();
-  const user = useSelector((store) => store.user);
 
   useEffect(() => {
     dispatch({ type: "FETCH_USER_ACTIVITIES" });
@@ -57,5 +54,4 @@ function Dashboard() {
   );
 }
 
-// this allows us to use <App /> in index.js
 export default Dashboard;

@@ -6,7 +6,7 @@ import './HeatmapChart.css';
 
 import { Paper, Box, Popover } from '@mui/material';
 
-function HeatmapChart() {
+export default function HeatmapChart() {
     const [anchorEl, setAnchorEl] = useState(null);
     const [popupText, setPopupText] = useState('');
 
@@ -100,5 +100,3 @@ function HeatmapChart() {
         </div>
     );
 }
-
-export default HeatmapChart;

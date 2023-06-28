@@ -9,62 +9,30 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import { Paper } from '@mui/material';
 
-// import './ConsumedContent.css'
-
-// * This component needs to sum up each type of content and display it.
-// * Need to display Books, Podcasts, Videos, Audiobooks, Courses, Articles, Workouts, Book Summaries?, Speed Read?
-// * Need to loop through the user's activities, figure out which activities relate to which content, and sum the up
-function ConsumedContent() {
+// * This component sums up each type of content and displays that count on the DOM.
+export default function ConsumedContent() {
     const userActivities = useSelector(store => store.userActivities)
 
-    // functions that find which activities the user has logged apply to that type of content
-    const podcasts = userActivities.filter(item => {
-        if(item.activity.toLowerCase().includes('finish podcast')){
-            return item;
-        }
-    })
-    const videos = userActivities.filter(item => {
-        if(item.activity.toLowerCase().includes('watch a video')){
-            return item;
-        }
-    })
-    const courses = userActivities.filter(item => {
-        if(item.activity.toLowerCase().includes('finish a course')){
-            return item;
-        }
-    })
-    const bookSummaries = userActivities.filter(item => {
-        if(item.activity.toLowerCase().includes('complete book summary')){
-            return item;
-        }
-    })
-    const articles = userActivities.filter(item => {
-        if(item.activity.toLowerCase().includes('read an article')){
-            return item;
-        }
-    })
-    const audiobooks = userActivities.filter(item => {
-        if(item.activity.toLowerCase().includes('finish an audiobook')){
-            return item;
-        }
-    })
-    const books = userActivities.filter(item => {
-        if(item.activity.toLowerCase().includes('finish a book')){
-            return item;
-        }
-    })
-    const workouts = userActivities.filter(item => {
-        if(item.activity.toLowerCase().includes('workout')){
-            return item;
-        }
-    })
-    const speedRead = userActivities.filter(item => {
-        if(item.activity.toLowerCase().includes('speed read (full book)')){
-            return item;
-        }
-    })
+    // Functions that finds which activities the user has logged that apply to a supplied type of content
+    function filterCompletedActivites(activity) {
+        return userActivities.filter(item => {
+            if(item.activity.toLowerCase().includes(activity)){
+                return item;
+            }
+        })
+    }
 
-    const thisYear = (arr) => {
+    const podcasts = filterCompletedActivites('finish podcast');
+    const videos = filterCompletedActivites('watch a video');
+    const courses = filterCompletedActivites('finish a course');
+    const bookSummaries = filterCompletedActivites('complete book summary');
+    const articles = filterCompletedActivites('read an article');
+    const audiobooks = filterCompletedActivites('finish an audiobook');
+    const books = filterCompletedActivites('finish a book');
+    const workouts = filterCompletedActivites('workout');
+    const speedRead = filterCompletedActivites('speed read (full book)');
+
+    const completedThisYear = (arr) => {
         const doneThisYear = arr.filter(item => {
             const formattedDate = item.date.slice(6);
             if(formattedDate ==  new Date().getFullYear()){
@@ -87,55 +55,63 @@ function ConsumedContent() {
                         </TableRow>
                     </TableHead>
                     <TableBody>
+                        {/* Book Summaries Row */}
                         <TableRow>
                             <TableCell align='center'>Book Summaries</TableCell>
                             <TableCell align='center'>{bookSummaries.length}</TableCell>
-                            <TableCell align='center'>{thisYear(bookSummaries)}</TableCell>
+                            <TableCell align='center'>{completedThisYear(bookSummaries)}</TableCell>
                         </TableRow>
+                        {/* Podcasts Row */}
                         <TableRow>
                             <TableCell align='center'>Podcasts</TableCell>
                             <TableCell align='center'>{podcasts.length}</TableCell>
-                            <TableCell align='center'>{thisYear(podcasts)}</TableCell>
+                            <TableCell align='center'>{completedThisYear(podcasts)}</TableCell>
                         </TableRow>
+                        {/* Videos Row */}
                         <TableRow>
                             <TableCell align='center'>Videos</TableCell>
                             <TableCell align='center'>{videos.length}</TableCell>
-                            <TableCell align='center'>{thisYear(videos)}</TableCell>
+                            <TableCell align='center'>{completedThisYear(videos)}</TableCell>
                         </TableRow>
+                        {/* Articles Row */}
                         <TableRow>
                             <TableCell align='center'>Articles</TableCell>
                             <TableCell align='center'>{articles.length}</TableCell>
-                            <TableCell align='center'>{thisYear(articles)}</TableCell>
+                            <TableCell align='center'>{completedThisYear(articles)}</TableCell>
                         </TableRow>
+                        {/* Courses Row */}
                         <TableRow>
                             <TableCell align='center'>Courses</TableCell>
                             <TableCell align='center'>{courses.length}</TableCell>
-                            <TableCell align='center'>{thisYear(courses)}</TableCell>
+                            <TableCell align='center'>{completedThisYear(courses)}</TableCell>
                         </TableRow>
+                        {/* Books Row */}
                         <TableRow>
                             <TableCell align='center'>Books</TableCell>
                             <TableCell align='center'>{books.length}</TableCell>
-                            <TableCell align='center'>{thisYear(books)}</TableCell>
+                            <TableCell align='center'>{completedThisYear(books)}</TableCell>
                         </TableRow>
+                        {/* Speed Read Row */}
                         <TableRow>
                             <TableCell align='center'>Speed Read</TableCell>
                             <TableCell align='center'>{speedRead.length}</TableCell>
-                            <TableCell align='center'>{thisYear(speedRead)}</TableCell>
+                            <TableCell align='center'>{completedThisYear(speedRead)}</TableCell>
                         </TableRow>
+                        {/* Audiobooks Row */}
                         <TableRow>
                             <TableCell align='center'>Audiobooks</TableCell>
                             <TableCell align='center'>{audiobooks.length}</TableCell>
-                            <TableCell align='center'>{thisYear(audiobooks)}</TableCell>
+                            <TableCell align='center'>{completedThisYear(audiobooks)}</TableCell>
                         </TableRow>
+                        {/* Workouts Row */}
                         <TableRow>
                             <TableCell align='center'>Workouts</TableCell>
                             <TableCell align='center'>{workouts.length}</TableCell>
-                            <TableCell align='center'>{thisYear(workouts)}</TableCell>
+                            <TableCell align='center'>{completedThisYear(workouts)}</TableCell>
                         </TableRow>
                     </TableBody>
                 </Table>
             </TableContainer>
         </>
     )
-}
-export default ConsumedContent;
+};

@@ -18,44 +18,29 @@ import "./SkillTable.css";
 
 // Badge Component
 import LevelBadge from "./SkillTableComponents/LevelBadge";
+import calculateTotalSkillXp from "../ReusedCalculationFunctions/calculateTotalSkillXp";
 
-function SkillTable() {
+export default function SkillTable() {
   // State needed from the store to calculate the user's skill levels
   const skills = useSelector((store) => store.skills);
   const userActivities = useSelector((store) => store.userActivities);
 
-
-  // Calculate the total xp for each skills
-  const calculateTotalSkillXp = (skill) => {
-    // Use .filter to filter through the user's logged activites,
-    //  returning any activity that used the same skill as the skill we're checking for.
-    // If it matches, it copies that into the resulting array
-    const actInstances = userActivities.filter(
-      (item) => skill.skill_name === item.skill
-    );
-    return actInstances
-      // Loop through activitiesArray and extract ONLY the xp_value using .map
-      .map((activity) => activity.xp)
-      // Then use .reduce to add each XP amount to the last (acc + current) to get our total XP.
-      .reduce((acc, current) => acc + current, 0);
-    // return calculateTotalXp(actInstances)
-  };
-
     // Function to calculate the user's skill levels
     const calculateLevel = (skill) => {
       // Divide totalXp by 10 and round up to get the actual level, all levels are 10 XP
-      return Math.floor(calculateTotalSkillXp(skill) / 10)
+      return Math.floor(calculateTotalSkillXp(skill, userActivities) / 10)
     };
   
     // Calculate the current xp out of 10
     const currentXpForLevel = (skill) => {
       // Takes the modulo left and it shows it on the progress bar
-      return (calculateTotalSkillXp(skill) % 10)
+      return (calculateTotalSkillXp(skill, userActivities) % 10)
     };
   
   // Returns a percentage to fill in the leveling bar based on the provided value
   const currentXpPercentage = (value) => ((value * 100) / 10);
 
+  // Set styling for the progress bar
   const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
     height: 10,
     borderRadius: 10,
@@ -104,7 +89,7 @@ function SkillTable() {
 
                   {/* Total XP Column */}
                   <TableCell align="center">
-                    {calculateTotalSkillXp(skill)}
+                    {calculateTotalSkillXp(skill, userActivities)}
                   </TableCell>
 
                   {/* Current XP Column */}
@@ -139,6 +124,4 @@ function SkillTable() {
       </TableContainer>
     </div>
   );
-}
-
-export default SkillTable;
+};
