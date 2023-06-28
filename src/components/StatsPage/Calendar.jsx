@@ -59,7 +59,7 @@ function Calendar() {
 
     return (
         <div id='fullCalendar'>
-            <Paper>
+            <Paper elevation={0}>
                 <FullCalendar
                     plugins={[dayGridPlugin]}
                     initialView="dayGridMonth"

@@ -24,9 +24,15 @@ function LoginForm() {
     }
   }; // end login
 
+  // Autofill for presentation sake
+  const autoFillMaxPower = () => {
+    setUsername('MaxPower')
+    setPassword('test@test.com')
+  }
+
   return (
     <form className="formPanel" onSubmit={login}>
-      <h2>Login</h2>
+      <h2 onClick={autoFillMaxPower}>Login</h2>
       {errors.loginMessage && (
         <h3 className="alert" role="alert">
           {errors.loginMessage}
