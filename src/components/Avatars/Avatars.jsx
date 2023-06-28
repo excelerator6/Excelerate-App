@@ -56,7 +56,7 @@ function Avatars() {
   return (
     <div id="avatarContainer">
       <div id="avatar">
-        <Link to="/AvatarsPage">
+        <Link to="/avatars-page">
           <Paper
             sx={{
               backgroundColor: "white",
