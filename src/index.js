@@ -34,7 +34,7 @@ const exceleratorTheme = createTheme({
     // divider: 'rgba(255,255,255,0.12)',
   },
   typography: {
-    fontSize: '2rem',
+    fontSize: '18',
     fontFamily: ["Medium"],
   },
 })
