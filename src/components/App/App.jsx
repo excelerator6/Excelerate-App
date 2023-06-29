@@ -32,7 +32,7 @@ import StatsPage from "../StatsPage/StatsPage";
 import AchievementsPage from "../AchievementsPage/AchievementsPage";
 
 //import AvatarPage 
-import AvatarsPage from "../Avatars/AvatarsPage"
+import AvatarsPage from "../Avatars/AvatarsPage/AvatarsPage"
 
 function App() {
   const dispatch = useDispatch();

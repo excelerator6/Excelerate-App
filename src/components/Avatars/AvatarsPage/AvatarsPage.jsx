@@ -1,11 +1,11 @@
 import AvatarsItem from "./AvatarsItem";
 
-import "./Avatars.css";
+import "../UserAvatar.css";
 
 function AvatarsPage() {
   return (
     <div id="AvatarsPage">
-      <h3 id='titleChooseNewAvatar'> Choose New Avatar</h3>
+      <h3 id='titleChooseNewAvatar'> Choose A New Avatar</h3>
       <AvatarsItem />
     </div>
   );

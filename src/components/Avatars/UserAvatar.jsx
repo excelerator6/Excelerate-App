@@ -6,17 +6,19 @@ import React from "react";
 import { Paper } from "@mui/material";
 
 //import Avatars Css
-import "./Avatars.css";
+import "./UserAvatar.css";
+
 //import stylebadge on avatar
 import Badge from "@mui/material/Badge";
 import { styled } from "@mui/material/styles";
 import SwitchAccessShortcutAddIcon from "@mui/icons-material/SwitchAccessShortcutAdd";
 
-function Avatars() {
+export default function UserAvatar() {
   const userAvatar = useSelector((store) => store.user.user_avatar_path);
   const username = useSelector((store) => store.user.username);
 
-  const colors = [
+  // Brand Colors for Excelerator
+  const brandColors = [
     "#c9cbcd",
     "#90ee90",
     "#c3e3eb",
@@ -25,6 +27,7 @@ function Avatars() {
     "#303841",
   ];
 
+  // Badge to help draw attention to the avatar being editable within the NavBar
   const StyledBadge = styled(Badge)(({ theme }) => ({
     "& .MuiBadge-badge": {
       backgroundColor: "#36454f",
@@ -80,7 +83,7 @@ function Avatars() {
                 size={100}
                 name={userAvatar}
                 variant="beam"
-                colors={colors}
+                colors={brandColors}
                 className="avatar"
               />
             </StyledBadge>
@@ -91,5 +94,3 @@ function Avatars() {
     </div>
   );
 }
-
-export default Avatars;

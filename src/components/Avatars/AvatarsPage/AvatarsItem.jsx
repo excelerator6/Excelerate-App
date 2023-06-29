@@ -1,24 +1,20 @@
 import Avatar from "boring-avatars";
-import { useParams, useHistory } from "react-router-dom";
-import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-//import for material ui button
-import Button from "@mui/material/Button";
-import { Box, Card, Grid, CardActionArea } from "@mui/material";
-import CardActions from "@mui/material/CardActions";
-import CardContent from "@mui/material/CardContent";
+import { useDispatch } from "react-redux";
+//import material ui components
+import { Box, Button, Card, CardActions, CardContent, Grid } from "@mui/material";
 
 function AvatarsItem() {
   const dispatch = useDispatch();
-  //handleUpdate takes in 2 parameters, the new avatarOptions and dispatch called when clicked on
-  const handleUpdate = (event, avatarNewName, message) => {
+  
+  const handleUpdate = (event, avatarNewName) => {
     dispatch({
-      type: message,
+      type: "UPDATE_AVATAR_NAME",
       payload: avatarNewName,
     });
   };
 
-  const colors = [
+  // Brand Colors for Excelerator
+  const brandColors = [
     "#c9cbcd",
     "#90ee90",
     "#c3e3eb",
@@ -27,6 +23,8 @@ function AvatarsItem() {
     "#303841",
   ];
 
+  // The names within the avatarOptions array are selected from
+  // a group of options found at the boring-avatars website https://boringavatars.com/
   const avatarOptions = [
     "Abigail Adams",
     "Margaret Fuller",
@@ -61,16 +59,13 @@ function AvatarsItem() {
                   <Avatar
                     size={100}
                     variant="beam"
-                    colors={colors}
+                    colors={brandColors}
                     name={option}
                   />
                 </CardContent>
                 <CardActions>
                   <Button
                     style={{ margin: "0 auto", display: "flex" }}
-                    justifyContent="center"
-                    alignItems="center"
-                    textAlign="center"
                     size="lg"
                     variant="outlined"
                     sx={[
@@ -82,7 +77,7 @@ function AvatarsItem() {
                       },
                     ]}
                     onClick={(event) => {
-                      handleUpdate(event, option, "UPDATE_AVATAR_NAME");
+                      handleUpdate(event, option);
                     }}
                   >
                     Click Here!

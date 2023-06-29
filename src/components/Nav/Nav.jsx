@@ -22,7 +22,7 @@ import { Paper } from "@mui/material";
 import ExceleratorLogo from './images/ExceleratorLogoV2.png'
 
 //import Avatars
-import Avatars from "../Avatars/Avatars";
+import UserAvatar from "../Avatars/UserAvatar";
 
 const drawerWidth = 200;
 
@@ -51,7 +51,7 @@ function Nav(props) {
 
   const drawer = (
     <div>
-        <Avatars/>
+        <UserAvatar/>
           <List>
           <GreyLineDivider />
           {/* //If a user is logged in, show these links */}
