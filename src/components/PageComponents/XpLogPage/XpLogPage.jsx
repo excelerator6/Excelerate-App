@@ -2,7 +2,6 @@ import XpLogDataGrid from "./XpLogDataGrid/XpLogDataGrid.jsx"
 import { useDispatch } from "react-redux"
 import { useEffect } from "react"
 import RenderExpandCellGrid from "./XpLogDataGrid/RenderExpandCellGrid.jsx";
-import XpLogTable from "./XpLogTable/XpLogTable.jsx";
 
 export default function XpLogPage() {
   const dispatch = useDispatch();
@@ -14,11 +13,6 @@ export default function XpLogPage() {
   return (
     <div className="container">
       <h2>Inside XpLogPage</h2>
-      {/* 
-        // The original view of the XpLogTable, no longer in use.
-        // Still available in case we need to reference for other tables
-        <XpLogTable />
-      */}
       
       {/*
         // The 2nd version of the XpLog view,
