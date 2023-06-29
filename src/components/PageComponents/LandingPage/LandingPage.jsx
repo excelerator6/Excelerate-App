@@ -4,8 +4,8 @@ import Carousel from 'react-material-ui-carousel';
 import { Paper } from '@mui/material'
 
 // CUSTOM COMPONENTS
-import RegisterForm from '../RegisterForm/RegisterForm';
-import LoginForm from '../LoginForm/LoginForm'
+import RegisterForm from '../LoginAndRegisterPages/RegisterPage/RegisterForm/RegisterForm';
+import LoginForm from '../LoginAndRegisterPages/LoginPage/LoginForm/LoginForm'
 
 export default function LandingPage() {
   const [heading, setHeading] = useState(`Let's EXCEL!`);

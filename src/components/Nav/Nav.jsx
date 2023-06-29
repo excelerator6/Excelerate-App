@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import LogOutButton from "../LogOutButton/LogOutButton";
+import LogOutButton from "../ButtonComponents/LogOutButton/LogOutButton";
 import './Nav.css';
 import { useSelector } from "react-redux";
 
@@ -20,7 +20,7 @@ import Toolbar from "@mui/material/Toolbar";
 import ExceleratorLogo from './images/ExceleratorLogoV2.png'
 
 //import Avatars
-import UserAvatar from "../Avatars/UserAvatar";
+import UserAvatar from "../PageComponents/Avatars/UserAvatar";
 
 const drawerWidth = 200;
 

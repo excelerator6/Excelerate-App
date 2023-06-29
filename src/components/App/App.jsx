@@ -13,16 +13,16 @@ import Footer from "../Footer/Footer";
 
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 
-import Dashboard from "../Dashboard/Dashboard";
-import InfoPage from "../InfoPage/InfoPage";
-import LandingPage from "../LandingPage/LandingPage";
-import RegisterPage from "../RegisterPage/RegisterPage";
-import XpLogPage from "../XpLogPage/XpLogPage";
-import StatsPage from "../StatsPage/StatsPage";
-import AchievementsPage from "../AchievementsPage/AchievementsPage";
-import AvatarsPage from "../Avatars/AvatarsPage/AvatarsPage"
+import Dashboard from "../PageComponents/Dashboard/Dashboard";
+import InfoPage from "../PageComponents/InfoPage/InfoPage";
+import LandingPage from "../PageComponents/LandingPage/LandingPage";
+import RegisterPage from "../PageComponents/LoginAndRegisterPages/RegisterPage/RegisterPage";
+import XpLogPage from "../PageComponents/XpLogPage/XpLogPage";
+import StatsPage from "../PageComponents/StatsPage/StatsPage";
+import AchievementsPage from "../PageComponents/AchievementsPage/AchievementsPage";
+import AvatarsPage from "../PageComponents/Avatars/AvatarsPage/AvatarsPage"
 
-import AddLogButton from "../AddLogButton/AddLogButton";
+import AddLogButton from "../ButtonComponents/AddLogButton/AddLogButton";
 
 //importing to wrap app for the date picker
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";

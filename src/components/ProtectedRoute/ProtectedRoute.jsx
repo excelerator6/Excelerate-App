@@ -1,6 +1,6 @@
 import React from 'react';
 import { Route } from 'react-router-dom';
-import LandingPage from '../LandingPage/LandingPage';
+import LandingPage from '../PageComponents/LandingPage/LandingPage';
 import {useSelector} from 'react-redux';
 
 // Responsible for watching redux state, and returning an appropriate component
