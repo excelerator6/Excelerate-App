@@ -21,11 +21,8 @@ INSERT INTO "user"
 VALUES
 	-- username: test1
 	-- password: test1
-	('test1', '$2a$10$mvHgC4madG9DTnjLL1knS.3eGwr5ygKraosNCj//F/6MYml4aPcye', 'test1@test1.com', 'occupation1', false, 'test1 avatar path'),
-	-- username: admin1
-	-- password: admin1
-	('admin1', '$2a$10$IMQy6fs0P7bRSlxBrG5NduakFhO.LG1aAnZZXHLRRjjr/Vatjzt1.', 'admin1@admin1.com', 'adminOccupation2', true, 'admin1 avatar path');
-	
+	('test1', '$2a$10$mvHgC4madG9DTnjLL1knS.3eGwr5ygKraosNCj//F/6MYml4aPcye', 'test1@test1.com', 'occupation1', false, 'test1 avatar path');
+
 
 ----------------------------------------------------------------
 ----------------------------------------------------------------
