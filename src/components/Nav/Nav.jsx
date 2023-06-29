@@ -17,8 +17,6 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import MenuIcon from "@mui/icons-material/Menu";
 import Toolbar from "@mui/material/Toolbar";
-import Typography from "@mui/material/Typography";
-import { Paper } from "@mui/material";
 import ExceleratorLogo from './images/ExceleratorLogoV2.png'
 
 //import Avatars
@@ -166,7 +164,9 @@ function Nav(props) {
             >
               <MenuIcon />
             </IconButton>
-              <img src={ExceleratorLogo} className="logo"/>
+              <Link to='/home'>
+                <img src={ExceleratorLogo} className="logo"/>
+              </Link>
           </Toolbar>
         </AppBar>
         <Box
