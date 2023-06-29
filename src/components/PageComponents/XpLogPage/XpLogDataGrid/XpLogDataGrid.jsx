@@ -1,160 +1,213 @@
-import React, { useState, useEffect, useRef } from 'react';
+import { memo, useEffect, useRef, useState } from 'react';
 import Box from '@mui/material/Box';
+import Typography from '@mui/material/Typography';
+import Paper from '@mui/material/Paper';
+import Popper from '@mui/material/Popper';
 import { DataGrid } from '@mui/x-data-grid';
-import { useDispatch, useSelector } from "react-redux";
-import { Link, Paper, Popover } from '@mui/material';
+import { useSelector } from 'react-redux';
+import { Link } from '@mui/material';
 
+/**
+ * Function to check if the current "element's" contents are wider than allowed
+ * @param {*} element What is being checked
+ */
+function isOverflown(element) {
+  return (
+    element.scrollHeight > element.clientHeight ||
+    element.scrollWidth > element.clientWidth
+  );
+}
 
+/**
+ * Allows the cell to display an ellipsis if it is wider than the current
+ * computedWidth of that column. It will then allow the user to expand out that
+ * column to view all of the information associated with that cell.
+ */
+const GridCellExpand = memo(function GridCellExpand(props) {
+  const { width, value } = props;
+  const wrapper = useRef(null);
+  const cellDiv = useRef(null);
+  const cellValue = useRef(null);
+  const [anchorEl, setAnchorEl] = useState(null);
+  const [showFullCell, setShowFullCell] = useState(false);
+  const [showPopper, setShowPopper] = useState(false);
 
-export default function XpLogDataGrid() {
-  const userActivities = useSelector(store => store.userActivities);
+  const handleCellClick = () => {
+    const isCurrentlyOverflown = isOverflown(cellValue.current);
+    setShowPopper(isCurrentlyOverflown);
+    setAnchorEl(cellDiv.current);
+    setShowFullCell(true);
+  };
 
-  const RenderExpandSource = (props) => {
-    const [anchorEl, setAnchorEl] = useState(null);
-    const [isCurrentlyOverflown, setCurrentlyOverflown] = useState(false)
-    const cellValueRef = useRef(null)
-    // Set width for the Popover
-    const width = 200
+  const handleMouseLeave = () => {
+    setShowFullCell(false);
+  };
 
-    useEffect(() => {
-      setCurrentlyOverflown(isOverflown(cellValueRef));
-    }, [isCurrentlyOverflown, props.value]);
-    
-    function isOverflown(element) {
-      return (
-        element.scrollHeight > element.clientHeight ||
-        element.scrollWidth > element.clientWidth
-      );
+  useEffect(() => {
+    if (!showFullCell) {
+      return undefined;
     }
+    // Set up key listener to know if the user has clicked Esc to close out of the popup
+    function handleKeyDown(nativeEvent) {
+      if (nativeEvent.key === 'Escape' || nativeEvent.key === 'Esc') {
+        setShowFullCell(false);
+      }
+    }
+    document.addEventListener('keydown', handleKeyDown);
+    return () => {document.removeEventListener('keydown', handleKeyDown)};
+  }, [setShowFullCell, showFullCell]);
 
-    const handleClick = (event) => {
-      setAnchorEl(event.currentTarget);
-      // console.log('props:', props);
-      return;
-    };
-  
-    const handleClose = () => {
-      setAnchorEl(null);
-    };
-  
-    const open = Boolean(anchorEl);
-    const id = open ? 'simple-popover' : undefined;
-
-    return (
-      <div>
-        <Box
-          ref={cellValueRef}
-          overflow={'hidden'}
-          textOverflow={'ellipsis'}
-        >
-          {props.value}
-        </Box>
-        {/* {isCurrentlyOverflown && ( */}
-          <>
-            <Link
-              href='/#/xp-log'
-              onClick={handleClick}
-            >
-              View All
-            </Link>
-            <Popover
-              id={id}
-              open={open}
-              anchorEl={anchorEl}
-              onClose={handleClose}
-              anchorOrigin={{
-                vertical: 'bottom',
-                horizontal: 'left',
-              }}
-            >
-              <Paper elevation={1}>
-                <Box 
-                  width={width}
-                  p={2}
-                >
-                  {props.value}
-                </Box>
-              </Paper>
-            </Popover>
-          </>
-        {/* )} */}
-
-      </div>
-    )
-  }
-  const columns = [
-    // { field: 'id', headerName: 'ID', width: 90 },
-    {
-      field: 'date',
-      renderHeader: () => (
-        <strong>{'Date'}</strong>
-      ),
-      minWidth: 100,
-      flex: .4,
-      editable: false,
-      
-    },
-    {
-      field: 'skill',
-      renderHeader: () => (
-        <strong>{'Skill'}</strong>
-      ),
-      minWidth: 120,
-      flex: .8,
-      editable: false,
-    },
-    {
-      field: 'activity',
-      renderHeader: () => (
-        <strong>{'Activity'}</strong>
-      ),
-      minWidth: 130,
-      flex: 1,
-      editable: false,
-    },
-    {
-      field: 'xp',
-      renderHeader: () => (
-        <strong>{'XP'}</strong>
-      ),
-      numer: true,
-      minWidth: 50,
-      flex: .2,
-      editable: false,
-    },
-    {
-      field: 'source',
-      renderHeader: () => (
-        <strong>{'Source'}</strong>
-      ),
-      minWidth: 130,
-      flex: 1,
-      editable: false,
-      renderCell: RenderExpandSource
-    },
-    {
-      field: 'takeaways',
-      renderHeader: () => (
-        <strong>{'Key Takeaways'}</strong>
-      ),
-      minWidth: 130,
-      flex: 1,
-      editable: false,
-    },
-  ];
-  const [selectedIds, setSelectedIds] = useState([]);
-
-  const handleDeleteSelected = () => {
-    console.log('ids to delete', selectedIds);
-  }
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+    return;
+  };
 
   return (
-    <Box sx={{ height: 540, width: '100%' }}>
+    <Box
+      ref={wrapper}
+      onClick={handleCellClick}
+      onMouseLeave={handleMouseLeave}
+      sx={{
+        alignItems: 'center',
+        lineHeight: '24px',
+        width: '100%',
+        height: '100%',
+        position: 'relative',
+        display: 'flex',
+      }}
+    >
+      <Box
+        ref={cellDiv}
+        sx={{
+          height: '100%',
+          width,
+          display: 'block',
+          position: 'absolute',
+          top: 0,
+        }}
+      />
+      <Box
+        ref={cellValue}
+        sx={{ whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}
+      >
+        {value}
+      </Box>
+      {showPopper && (
+        <>
+          <Link
+            href='/#/xp-log'
+            onClick={handleClick}
+          >
+            View All
+          </Link>
+          <Popper
+            open={showFullCell && anchorEl !== null}
+            anchorEl={anchorEl}
+            style={{ width, marginLeft: -17 }}
+          >
+            <Paper
+              elevation={1}
+              style={{ minHeight: wrapper.current.offsetHeight - 3 }}
+            >
+              <Typography variant="body2" style={{ padding: 8 }}>
+                {value}
+              </Typography>
+            </Paper>
+          </Popper>
+        </>
+      )}
+    </Box>
+  );
+});
+
+/**
+ * @param {*} params The information being passed down to each column's cell.
+ */
+function renderCellExpand(params) {
+  return (
+    <GridCellExpand value={params.value || ''} width={params.colDef.computedWidth} />
+  );
+}
+
+/**
+ * The header columns for the MUI DataGrid displaying the XpLog information
+ * - This is an array of objects.
+ */
+const columns = [
+  {
+    field: 'date',
+    renderHeader: () => (
+      <strong>{'Date'}</strong>
+    ),
+    minWidth: 100,
+    flex: .4,
+    editable: false,
+    renderCell: renderCellExpand,
+  },
+  {
+    field: 'skill',
+    renderHeader: () => (
+      <strong>{'Skill'}</strong>
+    ),
+    minWidth: 120,
+    flex: .8,
+    editable: false,
+    renderCell: renderCellExpand,
+  },
+  {
+    field: 'activity',
+    renderHeader: () => (
+      <strong>{'Activity'}</strong>
+    ),
+    minWidth: 130,
+    flex: 1,
+    editable: false,
+    renderCell: renderCellExpand,
+  },
+  {
+    field: 'xp',
+    renderHeader: () => (
+      <strong>{'XP'}</strong>
+    ),
+    numer: true,
+    minWidth: 50,
+    flex: .2,
+    editable: false,
+    renderCell: renderCellExpand,
+  },
+  {
+    field: 'source',
+    renderHeader: () => (
+      <strong>{'Source'}</strong>
+    ),
+    minWidth: 130,
+    flex: 1,
+    editable: false,
+    renderCell: renderCellExpand,
+  },
+  {
+    field: 'takeaways',
+    renderHeader: () => (
+      <strong>{'Key Takeaways'}</strong>
+    ),
+    minWidth: 130,
+    flex: 1,
+    editable: false,
+    renderCell: renderCellExpand,
+  },
+];
+
+/**
+ * @returns MUI DataGrid containing the XpLog information
+ */
+export default function XpLogDataGrid() {
+  const userActivities = useSelector(store => store.userActivities)
+  return (
+    <Box sx={{ height: '74vh', width: '100%' }}>
       <DataGrid
         rows={userActivities}
         columns={columns}
-        // rowHeight={50}
-        // getRowHeight={() => 'auto'}
+        rowHeight={49}
         initialState={{
           pagination: {
             paginationModel: {
@@ -163,13 +216,8 @@ export default function XpLogDataGrid() {
           },
         }}
         pageSizeOptions={[5, 10, 25, 50]}
-        checkboxSelection
         disableRowSelectionOnClick
-        onRowSelectionModelChange={(ids) => {
-          setSelectedIds(ids)
-        }}
       />
-      <button onClick={handleDeleteSelected}>Delete Selected</button>
     </Box>
   );
 }
