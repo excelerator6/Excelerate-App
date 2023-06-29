@@ -46,8 +46,19 @@ function Calendar() {
                 return item;
             }
         });
-
-        const text = `Skill: ${popupText[0].skill} // Activity: ${popupText[0].activity}`;
+        const text = (
+            <>
+                <p>Skill: {popupText[0].skill}</p>
+                <p>Activity: {popupText[0].activity}</p>
+                <p>Source: {popupText[0].source}</p>
+                {/* If there is a takeaway, display that in the popup as well */}
+                {popupText[0].takeaways !== null ?
+                    <p>Takeaway: {popupText[0].takeaways}</p>
+                    :
+                    ''
+                }
+            </>
+        )
         setPopupText(text);
     };
 
