@@ -12,12 +12,6 @@ export default function XpLogPage() {
   return (
     <div className="container">
       <h2>Inside XpLogPage</h2>
-
-      {/*
-        // The current version we are utilizing to display the XpLog
-        // - We will want to rename this if this is the option we place
-        //   into our production build.
-      */}
       <XpLogDataGrid />
     </div>
   )
