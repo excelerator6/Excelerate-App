@@ -13,29 +13,25 @@ import Footer from "../Footer/Footer";
 
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 
-import AboutPage from "../AboutPage/AboutPage";
-import Dashboard from "../Dashboard/Dashboard";
-import InfoPage from "../InfoPage/InfoPage";
-import LandingPage from "../LandingPage/LandingPage";
-import LoginPage from "../LoginPage/LoginPage";
-import RegisterPage from "../RegisterPage/RegisterPage";
+import Dashboard from "../PageComponents/Dashboard/Dashboard";
+import InfoPage from "../PageComponents/InfoPage/InfoPage";
+import LandingPage from "../PageComponents/LandingPage/LandingPage";
+import RegisterPage from "../PageComponents/LoginAndRegisterPages/RegisterPage/RegisterPage";
+import XpLogPage from "../PageComponents/XpLogPage/XpLogPage";
+import StatsPage from "../PageComponents/StatsPage/StatsPage";
+import AchievementsPage from "../PageComponents/AchievementsPage/AchievementsPage";
+import AvatarsPage from "../PageComponents/Avatars/AvatarsPage/AvatarsPage"
 
-//importing floatingActionButton
-import AddLogButton from "../AddLogButton/AddLogButton";
+import AddLogButton from "../ButtonComponents/AddLogButton/AddLogButton";
+
 //importing to wrap app for the date picker
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 
 import "./App.css";
 import '../../fonts/AGENCYB.woff';
-import XpLogPage from "../XpLogPage/XpLogPage";
-import StatsPage from "../StatsPage/StatsPage";
-import AchievementsPage from "../AchievementsPage/AchievementsPage";
 
-//import AvatarPage 
-import AvatarsPage from "../Avatars/AvatarsPage"
-
-function App() {
+export default function App() {
   const dispatch = useDispatch();
 
   const user = useSelector((store) => store.user);
@@ -53,29 +49,21 @@ function App() {
             {/* Visiting localhost:3000 will redirect to localhost:3000/home */}
             <Redirect exact from="/" to="/home" />
 
-            {/* Visiting localhost:3000/about will show the about page. */}
-            <Route
-              // shows AboutPage at all times (logged in or not)
-              exact
-              path="/about"
-            >
-              <AboutPage />
-            </Route>
 
             {/* For protected routes, the view could show one of several things on the same route.
-            Visiting localhost:3000/user will show the UserPage if the user is logged in.
-            If the user is not logged in, the ProtectedRoute will show the LoginPage (component).
+            Visiting localhost:3000/dashboard will show the Dashboard if the user is logged in.
+            If the user is not logged in, the ProtectedRoute will show the LandingPage (component).
             Even though it seems like they are different pages, the user is always on localhost:3000/user */}
             <ProtectedRoute
-              // logged in shows UserPage else shows LoginPage
+              // logged in shows UserPage else shows LandingPage
               exact
-              path="/user"
+              path="/dashboard"
             >
               <Dashboard />
             </ProtectedRoute>
 
             <ProtectedRoute
-              // logged in shows InfoPage else shows LoginPage
+              // logged in shows InfoPage else shows LandingPage
               exact
               path="/info"
             >
@@ -85,8 +73,8 @@ function App() {
             <Route exact path="/login">
               {user.id ? (
                 // If the user is already logged in,
-                // redirect to the /user page
-                <Redirect to="/user" />
+                // redirect to the /dashboard page
+                <Redirect to="/dashboard" />
               ) : (
                 // Otherwise, show the login page
                 <LandingPage />
@@ -96,8 +84,8 @@ function App() {
             <Route exact path="/registration">
               {user.id ? (
                 // If the user is already logged in,
-                // redirect them to the /user page
-                <Redirect to="/user" />
+                // redirect them to the /dashboard page
+                <Redirect to="/dashboard" />
               ) : (
                 // Otherwise, show the registration page
                 <RegisterPage />
@@ -107,10 +95,10 @@ function App() {
             <Route exact path="/home">
               {user.id ? (
                 // If the user is already logged in,
-                // redirect them to the /user page
-                <Redirect to="/user" />
+                // redirect them to the /dashboard page
+                <Redirect to="/dashboard" />
               ) : (
-                // Otherwise, show the Landing page
+                // Otherwise, show the LandingPage
                 <LandingPage />
               )}
             </Route>
@@ -119,29 +107,29 @@ function App() {
               <XpLogPage />
             </ProtectedRoute>
 
-            <ProtectedRoute exact path="/StatsPage">
+            <ProtectedRoute exact path="/stats-page">
               <StatsPage />
             </ProtectedRoute>
 
-            <ProtectedRoute exact path="/Dashboard">
+            <ProtectedRoute exact path="/dashboard">
               <Dashboard />
             </ProtectedRoute>
 
-            <ProtectedRoute exact path="/Achievements">
+            <ProtectedRoute exact path="/achievements">
               <AchievementsPage />
             </ProtectedRoute>
 
-            <ProtectedRoute exact path="/AvatarsPage">
+            <ProtectedRoute exact path="/avatars-page">
               <AvatarsPage />
             </ProtectedRoute>
+
             {/* If none of the other routes matched, we will show a 404. */}
             <Route>
               <h1>404</h1>
             </Route>
           </Switch>
           <>
-            {
-              // only want the log activity button to show if the user is logged in
+            {// only want the log activity button to show if the user is logged in
               user.id ? <AddLogButton /> : <></>
             }
           </>
@@ -151,5 +139,3 @@ function App() {
     </LocalizationProvider>
   );
 }
-
-export default App;
