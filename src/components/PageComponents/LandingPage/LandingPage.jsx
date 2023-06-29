@@ -49,19 +49,19 @@ export default function LandingPage() {
             }}
             indicatorIconButtonProps={{
               style: {
-                  padding: '5px',    // 1
-                  color: '#36454f'       // 3
+                  padding: '5px',
+                  color: '#36454f'
               }
             }}
             activeIndicatorIconButtonProps={{
                 style: {
-                    backgroundColor: '#c9cbcd' // 2
+                    backgroundColor: '#c9cbcd'
                 }
             }}
             indicatorContainerProps={{
                 style: {
-                    marginTop: '25px', // 5
-                    textAlign: 'center' // 4
+                    marginTop: '25px',
+                    textAlign: 'center'
                 }
         
             }}

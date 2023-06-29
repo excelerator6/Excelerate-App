@@ -13,7 +13,7 @@ import { Paper } from '@mui/material';
 export default function ConsumedContent() {
     const userActivities = useSelector(store => store.userActivities)
 
-    // Functions that finds which activities the user has logged that apply to a supplied type of content
+    // Function that finds which activities the user has logged that apply to a supplied type of content
     function filterCompletedActivites(activity) {
         return userActivities.filter(item => {
             if(item.activity.toLowerCase().includes(activity)){
