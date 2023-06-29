@@ -819,28 +819,28 @@ router.post('/totalXp', rejectUnauthenticated, async (req, res) => {
     let completed;
     // Check if totalXpPoints is at or over an achievement threshold And the user hasn't already completed that achievement
     switch(true){
-      case (totalXpPoints >= 2750):
+      case (totalXpPoints >= 1000):
         completed = userCompletedAchievements.find(achieve => achieve.achievement_id === 8);
         {!completed ? await connection.query(postNewAchievementQuery, [userId, 8]) : '' } break;
-      case (totalXpPoints >= 2500):
+      case (totalXpPoints >= 500):
         completed = userCompletedAchievements.find(achieve => achieve.achievement_id === 7);
         {!completed ? await connection.query(postNewAchievementQuery, [userId, 7]) : '' } break;
-      case (totalXpPoints >= 2250):
+      case (totalXpPoints >= 350):
         completed = userCompletedAchievements.find(achieve => achieve.achievement_id === 6);
         {!completed ? await connection.query(postNewAchievementQuery, [userId, 6]) : '' } break;
-      case (totalXpPoints >= 2000):
+      case (totalXpPoints >= 250):
         completed = userCompletedAchievements.find(achieve => achieve.achievement_id === 5);
         {!completed ? await connection.query(postNewAchievementQuery, [userId, 5]) : '' } break;
-      case (totalXpPoints >= 1750):
+      case (totalXpPoints >= 150):
         completed = userCompletedAchievements.find(achieve => achieve.achievement_id === 4);
         {!completed ? await connection.query(postNewAchievementQuery, [userId, 4]) : '' } break;
-      case (totalXpPoints >= 1500):
+      case (totalXpPoints >= 100):
         completed = userCompletedAchievements.find(achieve => achieve.achievement_id === 3);
         {!completed ? await connection.query(postNewAchievementQuery, [userId, 3]) : '' } break;
-      case (totalXpPoints >= 1250):
+      case (totalXpPoints >= 50):
         completed = userCompletedAchievements.find(achieve => achieve.achievement_id === 2);
         {!completed ? await connection.query(postNewAchievementQuery, [userId, 2]) : '' } break;
-      case (totalXpPoints >= 1000):
+      case (totalXpPoints >= 25):
         completed = userCompletedAchievements.find(achieve => achieve.achievement_id === 1);
         {!completed ? await connection.query(postNewAchievementQuery, [userId, 1]) : '' } break;
       default: break;

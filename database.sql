@@ -21,11 +21,8 @@ INSERT INTO "user"
 VALUES
 	-- username: test1
 	-- password: test1
-	('test1', '$2a$10$mvHgC4madG9DTnjLL1knS.3eGwr5ygKraosNCj//F/6MYml4aPcye', 'test1@test1.com', 'occupation1', false, 'test1 avatar path'),
-	-- username: admin1
-	-- password: admin1
-	('admin1', '$2a$10$IMQy6fs0P7bRSlxBrG5NduakFhO.LG1aAnZZXHLRRjjr/Vatjzt1.', 'admin1@admin1.com', 'adminOccupation2', true, 'admin1 avatar path');
-	
+	('test1', '$2a$10$mvHgC4madG9DTnjLL1knS.3eGwr5ygKraosNCj//F/6MYml4aPcye', 'test1@test1.com', 'occupation1', false, 'test1 avatar path');
+
 
 ----------------------------------------------------------------
 ----------------------------------------------------------------
@@ -188,9 +185,9 @@ INSERT INTO achievements
 	(achievement_name, achievement_category)
 VALUES
 	-- XP Earned
-	('Earn 1000 XP', 'Xp Earned'), ('Earn 1250 XP', 'Xp Earned'), ('Earn 1500 XP', 'Xp Earned'),
-	('Earn 1750 XP', 'Xp Earned'), ('Earn 2000 XP', 'Xp Earned'), ('Earn 2250 XP', 'Xp Earned'),
-	('Earn 2500 XP', 'Xp Earned'), ('Earn 2750 XP', 'Xp Earned'),
+	('Earn 25 XP', 'Xp Earned'), ('Earn 50 XP', 'Xp Earned'), ('Earn 100 XP', 'Xp Earned'),
+	('Earn 150 XP', 'Xp Earned'), ('Earn 250 XP', 'Xp Earned'), ('Earn 350 XP', 'Xp Earned'),
+	('Earn 500 XP', 'Xp Earned'), ('Earn 1000 XP', 'Xp Earned'),
 	-- Levels Obtained
 	('Obtain 1 Level', 'Levels Obtained'), ('Obtain 5 Levels', 'Levels Obtained'), ('Obtain 10 Levels', 'Levels Obtained'),
 	('Obtain 25 Levels', 'Levels Obtained'), ('Obtain 50 Levels', 'Levels Obtained'), ('Obtain 100 Levels', 'Levels Obtained'),

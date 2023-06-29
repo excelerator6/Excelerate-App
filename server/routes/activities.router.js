@@ -9,7 +9,7 @@ const {
  * GET route template
  */
 router.get('/getList', rejectUnauthenticated, (req, res) => {
-    pool.query('SELECT * FROM "activities_chart";')
+    pool.query('SELECT * FROM "activities_chart" ORDER BY id;')
         .then(dbRes => {
           res.send(dbRes.rows);
         }).catch(dbErr => {
