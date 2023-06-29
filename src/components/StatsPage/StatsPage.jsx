@@ -1,11 +1,9 @@
-import React, { useState, useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useState } from 'react';
 
 import './Stats.css';
 
 // MUI components
 import Box from '@mui/material/Box';
-import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import TabContext from '@mui/lab/TabContext';
 import TabList from '@mui/lab/TabList';
@@ -14,7 +12,6 @@ import TabPanel from '@mui/lab/TabPanel';
 
 // components
 import Calendar from './Calendar';
-import BarChart from './BarChart';
 import BarChartHorizontal from './BarChartHorizontal';
 
 function StatsPage(props) {
