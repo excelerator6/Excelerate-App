@@ -1,9 +1,7 @@
 import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
 import './LandingPage.css';
 import Carousel from 'react-material-ui-carousel';
-import { Paper, Button } from '@mui/material'
-// import '../../../public/LandingPageImages/Excelerator--XP Log.png'
+import { Paper } from '@mui/material'
 
 // CUSTOM COMPONENTS
 import RegisterForm from '../RegisterForm/RegisterForm';
@@ -13,47 +11,37 @@ function LandingPage() {
   const [heading, setHeading] = useState(`Let's EXCEL!`);
   const [showRegisterForm, setShowRegisterForm] = useState(false);
 
-  // functions that tab between whether the login and register forms showing
-  const showRegister = () => {
-    setShowRegisterForm(true);
+  // Function that toggles between whether the login or register form is showing
+  const toggleRegister = () => {
+    setShowRegisterForm(!showRegisterForm);
   };
-  const showLogin = () => {
-    setShowRegisterForm(false)
-  }
 
-  // function to format the given props into the items for the carousel.
-  function Item(props)
-    {
-        return (
-            <Paper>
-                  <img src={props.item.src} id='carouselImages' />
-            </Paper>
-        )
-    }
-    // our carousel pictures
+  // Function to format the given props into the items for the carousel.
+  function Item(props) {
+    return (
+      <Paper>
+        <img src={props.item.src} id='carouselImages' />
+      </Paper>
+    )
+  }
+  // The carousel pictures
   const items = [
-    {
-      src: '/LandingPageImages/Excelerator::Dashboard.png'
-    },
-    {
-      src: '/LandingPageImages/Excelerator::StatsCal.png'
-    },
-    {
-      src: '/LandingPageImages/Excelerator::StatsGraph.png'
-    },
-    {
-      src: '/LandingPageImages/Excelerator::XPLog.png'
-    }
-]
+    {src: '/LandingPageImages/Excelerator::Dashboard.png'},
+    {src: '/LandingPageImages/Excelerator::StatsCal.png'},
+    {src: '/LandingPageImages/Excelerator::StatsGraph.png'},
+    {src: '/LandingPageImages/Excelerator::XPLog.png'}
+  ]
 
   return (
     <div className="container">
 
       <div className="grid">
+
         <div className="grid-col grid-col_8" id='carousel'>
         <h2>{heading}</h2>
           <Carousel
-            navButtonsProps={{          // Change the colors and radius of the actual buttons. THIS STYLES BOTH BUTTONS
+            navButtonsProps={{
+              // Change the colors and radius of the actual buttons. THIS STYLES BOTH BUTTONS
               style: {
                   backgroundColor: '#90ee90',
                   borderRadius: 17
@@ -80,7 +68,8 @@ function LandingPage() {
           >
               {items.map( (item, i) => <Item key={i} item={item} /> )}
           </Carousel>
-        </div>
+        </div> {/* End carousel */}
+
         <div className="grid-col grid-col_4" id='loginForm'>
           {
             !showRegisterForm ? 
@@ -88,7 +77,7 @@ function LandingPage() {
               <LoginForm />
               <center>
                 <h4>Not yet a Member?</h4>
-                <button className="btn btn_sizeSm" onClick={() => showRegister()}>
+                <button className="btn btn_sizeSm" onClick={() => toggleRegister()}>
                   Register
                 </button>
               </center> 
@@ -100,14 +89,14 @@ function LandingPage() {
               <RegisterForm />
               <center>
                 <h4>Already a Member?</h4>
-                <button className="btn btn_sizeSm" onClick={() => showLogin()}>
+                <button className="btn btn_sizeSm" onClick={() => toggleRegister()}>
                   Login
                 </button>
               </center>
             </>
           }
-         
-        </div>
+        </div> {/* End loginForm */}
+
       </div>
     </div>
   );
