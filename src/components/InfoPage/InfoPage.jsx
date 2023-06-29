@@ -1,11 +1,9 @@
 import React from 'react';
 
-function InfoPage() {
+export default function InfoPage() {
   return (
     <div className="container">
       <p>Info Page</p>
     </div>
   );
 }
-
-export default InfoPage;

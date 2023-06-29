@@ -7,7 +7,7 @@ import { Paper } from '@mui/material'
 import RegisterForm from '../RegisterForm/RegisterForm';
 import LoginForm from '../LoginForm/LoginForm'
 
-function LandingPage() {
+export default function LandingPage() {
   const [heading, setHeading] = useState(`Let's EXCEL!`);
   const [showRegisterForm, setShowRegisterForm] = useState(false);
 
@@ -101,5 +101,3 @@ function LandingPage() {
     </div>
   );
 }
-
-export default LandingPage;

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import {useSelector} from 'react-redux';
 
-function LoginForm() {
+export default function LoginForm() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const errors = useSelector(store => store.errors);
@@ -24,15 +24,9 @@ function LoginForm() {
     }
   }; // end login
 
-  // Autofill for presentation sake
-  const autoFillMaxPower = () => {
-    setUsername('MaxPower')
-    setPassword('test@test.com')
-  }
-
   return (
     <form className="formPanel" onSubmit={login}>
-      <h2 onClick={autoFillMaxPower}>Login</h2>
+      <h2>Login</h2>
       {errors.loginMessage && (
         <h3 className="alert" role="alert">
           {errors.loginMessage}
@@ -68,5 +62,3 @@ function LoginForm() {
     </form>
   );
 }
-
-export default LoginForm;

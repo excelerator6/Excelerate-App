@@ -15,7 +15,7 @@ import Overall from "./DashboardWidgets/Overall";
 import HeatmapChart from "./DashboardWidgets/HeatmapChart/HeatmapChart";
 import ConsumedContent from "./DashboardWidgets/ConsumedContent";
 
-function Dashboard() {
+export default function Dashboard() {
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -53,5 +53,3 @@ function Dashboard() {
     </Box>
   );
 }
-
-export default Dashboard;

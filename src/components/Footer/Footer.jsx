@@ -1,8 +1,6 @@
 import React from 'react';
 import './Footer.css';
 
-function Footer() {
+export default function Footer() {
   return <footer>&copy; Excelerator App</footer>;
 }
-
-export default Footer;
