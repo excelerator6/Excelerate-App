@@ -1,6 +1,5 @@
 import { useSelector } from "react-redux"
 import { Card, CardContent, Grid, Typography } from "@mui/material";
-import GreyStarSharp from '../StarPngs/grey_star_sharp.png'
 import GoldStarSharp from '../StarPngs/gold_star_sharp.png'
 import WhiteStarSharp from '../StarPngs/white_star_sharp.png'
 
