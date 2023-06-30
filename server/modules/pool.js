@@ -19,9 +19,10 @@ if (process.env.DATABASE_URL) {
 // also running on our computer (localhost)
 else {
     pool = new pg.Pool({
-        host: 'localhost',
-        port: 5432,
-        database: 'Excelerate',
+        host: 'localhost',          // where to find the database
+        port: 5432,                 // port for finding the database
+        database: 'Excelerate',     // database name
+        idleTimeoutMillis: 30000    // 30 seconds before timeout/cancel query
     });
 }
 
