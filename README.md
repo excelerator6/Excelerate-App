@@ -29,27 +29,27 @@ Create a new database called `Excelerate`. If you wish to name the database some
 ## Development Setup Instructions
 
 - Fork the repository.
-- Copy the SSH key from your new repo.
-- At the directory you want the project, type `git clone {SSH-KEY}` into your CLI.
+- Copy the SSH Link from your new repo.
+- At the directory you want the project, type `git clone {SSH-Link}` into your CLI.
 - Run `npm install` in your CLI to install dependencies.
 - Create a `.env` file at the root of the project and paste this line into the file:
   ```
   SERVER_SESSION_SECRET=superDuperSecret
   ```
   While you're in your new `.env` file, take the time to replace `superDuperSecret` with some long random string like `25POUbVtx6RKVNWszd9ERB9Bb6` to keep your application secure. Here's a site that can help you: [https://passwordsgenerator.net/](https://passwordsgenerator.net/). If you don't do this step, create a secret with less than eight characters, or leave it as `superDuperSecret`, you will get a warning.
-- Start postgres if not running already by using `brew services start postgresql`
+- Start postgres if not running already
 - Run `npm run server`
 - Run `npm run client`
-- If you aren't automatically taken to the app, navigate to `localhost:5000`
+- If you aren't automatically taken to the app, navigate to `localhost:3000`
 
 
 ## Production Build
 
 Before pushing to Heroku, run `npm run build` in terminal. This will create a build folder that contains the code Heroku will be pointed at. You can test this build by typing `npm start`. Keep in mind that `npm start` will let you preview the production build but will **not** auto update.
 
-- Start postgres if not running already by using `brew services start postgresql`
+- Start postgres if not running already
 - Run `npm start`
-- Navigate to `localhost:5000`
+- Navigate to `localhost:3000`
 
 
 ## Deployment
