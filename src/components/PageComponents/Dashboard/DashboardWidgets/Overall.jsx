@@ -11,7 +11,6 @@ import Paper from '@mui/material/Paper';
 
 import calculateTotalSkillXp from "./ReusedCalculationFunctions/calculateTotalSkillXp";
 
-//  * What does this component do?
     // * Displays:
         // * Total XP earned 
         // * Total number of entries (userActivities.length)
