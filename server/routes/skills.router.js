@@ -35,24 +35,22 @@ router.get('/getSkills', rejectUnauthenticated, async (req, res) => {
 // POST route code here
 router.post('/logNewSkill', (req, res) => {
 
-  // console.log("Got our log:", req.body);
   const newSkill = req.body.skill;
-  console.log(newSkill)
   const userID = req.user.id;
 
   //updated sql query to check that we dont add duplicate skills to our DB
   let sqlText = `
-  insert into skills_user (skill_name, user_id) 
-  select $1, $2 
-  where not exists (
-   select null from skills_user 
-   WHERE lower(skills_user.skill_name) = lower('$1') 
- AND skills_user.user_id = $2
-  ); `;
+    INSERT INTO skills_user (skill_name, user_id) 
+    SELECT $1, $2 
+    WHERE NOT EXISTS (
+      SELECT NULL FROM skills_user 
+      WHERE LOWER(skills_user.skill_name) = LOWER('$1') 
+        AND skills_user.user_id = $2
+    );
+  `;
   let sqlValues = [newSkill, userID];
   pool.query(sqlText, sqlValues)
     .then(dbRes => {
-      // console.log("Successfully added new skill to the DB:", dbRes);
       res.sendStatus(201)
     }).catch(dbErr => {
       console.log("Error connecting to DB in skills.router /logNewSkill", dbErr);

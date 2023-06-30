@@ -18,8 +18,6 @@ function RegisterForm() {
       occupation: occupation,
     }
 
-    console.log(newUser);
-
     dispatch({
       type: 'REGISTER',
       payload: newUser

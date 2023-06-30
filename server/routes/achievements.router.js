@@ -81,8 +81,6 @@ router.get('/', rejectUnauthenticated, async (req, res) => {
     const { rows: completedAchievements } = await connection.query( completedAchievementsQuery, [ userId ] )
     const { rows: allAchievementsUnformatted } = await connection.query( allAchievementsQuery )
 
-    // console.log('allAchievementsUnformatted:', allAchievementsUnformatted);
-
     let allAchievementsFormatted = allAchievementsUnformatted.reduce( ( result, item ) => {
       let { achievement, category } = item
       category =  category.charAt(0).toLowerCase() + category.replace(' ', '').slice(1)
