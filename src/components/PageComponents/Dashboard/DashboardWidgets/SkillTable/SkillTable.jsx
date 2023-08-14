@@ -54,6 +54,16 @@ export default function SkillTable() {
     },
   }));
 
+  // sort skills by xp level in ascending order
+  const sortedSkills = skills.map(skill => {
+    // adding an xp key to each skill object
+    skill = {...skill}
+    skill.xp = currentXpForLevel(skill)
+    return skill;
+  }).sort((a, b) => {return b.xp - a.xp});
+
+  console.log(sortedSkills)
+
   return (
     <div>
       <h2>skills</h2>
@@ -69,59 +79,61 @@ export default function SkillTable() {
             </TableRow>
           </TableHead>
           <TableBody>
-            {skills.map((skill, index) => {
-              const currentXp = currentXpForLevel(skill)
-              const currentLevel = calculateLevel(skill)
-              return (
-                <TableRow
-                  key={index}
-                  sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-                >
-                  {/* Skill Column */}
-                  <TableCell align="center">
-                    {skill.skill_name}
-                  </TableCell>
+          // {sortedSkills.map((skill, index) => {
+                const currentXp = currentXpForLevel(skill)
+                const currentLevel = calculateLevel(skill)
+                return (
+                  <TableRow
+                    key={index}
+                    sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                  >
+                    {/* Skill Column */}
+                    <TableCell align="center">
+                      {skill.skill_name}
+                    </TableCell>
 
-                  {/* Level Column */}
-                  <TableCell align="center">
-                    {currentLevel}
-                  </TableCell>
+                    {/* Level Column */}
+                    <TableCell align="center">
+                      {currentLevel}
+                    </TableCell>
 
-                  {/* Total XP Column */}
-                  <TableCell align="center">
-                    {calculateTotalSkillXp(skill, userActivities)}
-                  </TableCell>
+                    {/* Total XP Column */}
+                    <TableCell align="center">
+                      {calculateTotalSkillXp(skill, userActivities)}
+                    </TableCell>
 
-                  {/* Current XP Column */}
-                  <TableCell align="center">
-                    <Box
-                      className="progressBarContainer"
-                      sx={{ display: "flex" }}
-                    >
-                      {/* The progress bar for current XP */}
-                      <BorderLinearProgress
-                        variant="determinate"
-                        value={currentXpPercentage(currentXp)}
-                        valueBuffer={10}
-                      />
-                      {/* The written out progress. example "2/10" */}
-                      <Typography variant="body1">
-                        {currentXp} / 10
-                      </Typography>
-                    </Box>
-                  </TableCell>
+                    {/* Current XP Column */}
+                    <TableCell align="center">
+                      <Box
+                        className="progressBarContainer"
+                        sx={{ display: "flex" }}
+                      >
+                        {/* The progress bar for current XP */}
+                        <BorderLinearProgress
+                          variant="determinate"
+                          value={currentXpPercentage(currentXp)}
+                          valueBuffer={10}
+                        />
+                        {/* The written out progress. example "2/10" */}
+                        <Typography variant="body1">
+                          {currentXp} / 10
+                        </Typography>
+                      </Box>
+                    </TableCell>
 
-                  {/* Badge Column */}
-                  <TableCell align="center">
-                    {LevelBadge(currentLevel)}
-                  </TableCell>
+                    {/* Badge Column */}
+                    <TableCell align="center">
+                      {LevelBadge(currentLevel)}
+                    </TableCell>
 
-                </TableRow>
-              );
-            })}
+                  </TableRow>
+                );
+              })}
           </TableBody>
         </Table>
       </TableContainer>
     </div>
   );
 };
+
+
