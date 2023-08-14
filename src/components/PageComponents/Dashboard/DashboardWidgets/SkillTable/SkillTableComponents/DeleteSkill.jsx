@@ -24,7 +24,12 @@ export default function AlertDialog(skill) {
   };
 
   const deleteSkill = (skill) => {
-    console.log('This is the skill we want to delete:', skill)
+    // console.log('This is the skill we want to delete:', skill.skill)
+
+    dispatch({
+        type: 'DELETE_SKILL',
+        payload: skill.skill
+    });
     handleClose();
   }
 
@@ -48,7 +53,7 @@ export default function AlertDialog(skill) {
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose}>Disagree</Button>
+          <Button onClick={handleClose}>Don't Delete</Button>
           <Button onClick={() => deleteSkill(skill)} autoFocus>
             Delete
           </Button>

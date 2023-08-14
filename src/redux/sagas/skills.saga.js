@@ -22,9 +22,19 @@ function* skillToAdd(action) {
     }
 }
 
+function* deleteSkill(action) {
+    try {
+        // const res = yield axios.delete()
+        console.log('Here is the skill we want to delete', action.payload);
+    } catch {
+        console.log('Error communicating with server to delete skill', error)
+    }
+}
+
 function* skillsSaga() {
     yield takeLatest('GET_SKILLS_LIST', getSkills);
     yield takeLatest('LOG_NEW_SKILL', skillToAdd);
+    yield takeLatest('DELETE_SKILL', deleteSkill);
 
 }
 export default skillsSaga;
