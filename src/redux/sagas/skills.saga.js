@@ -24,9 +24,9 @@ function* skillToAdd(action) {
 
 function* deleteSkill(action) {
     try {
-        // const res = yield axios.delete()
         console.log('Here is the skill we want to delete', action.payload);
-    } catch {
+        const res = yield axios.delete(`/api/skills/deleteSkill/${action.payload}`);
+    } catch (error) {
         console.log('Error communicating with server to delete skill', error)
     }
 }
