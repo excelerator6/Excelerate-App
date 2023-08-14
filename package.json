@@ -7,7 +7,6 @@
     "node": "18.x"
   },
   "dependencies": {
-    "@babel/plugin-proposal-private-property-in-object": "7.21.11",
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
     "@fullcalendar/core": "^6.1.8",
@@ -55,7 +54,8 @@
   },
   "devDependencies": {
     "@faker-js/faker": "^8.0.2",
-    "nodemon": "^2.0.4"
+    "nodemon": "^2.0.4",
+    "@babel/plugin-proposal-private-property-in-object": "7.21.11"
   },
   "browserslist": {
     "production": [

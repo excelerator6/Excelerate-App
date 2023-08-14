@@ -41,16 +41,16 @@ Create a new database called `Excelerate`. If you wish to name the database some
 - Start postgres if not running already by using `brew services start postgresql`
 - Run `npm run server`
 - Run `npm run client`
-- If you aren't automatically taken to the app, navigate to `localhost:5000`
+- If you aren't automatically taken to the app, navigate to `localhost:3000`
 
 
 ## Production Build
 
 Before pushing to Heroku, run `npm run build` in terminal. This will create a build folder that contains the code Heroku will be pointed at. You can test this build by typing `npm start`. Keep in mind that `npm start` will let you preview the production build but will **not** auto update.
 
-- Start postgres if not running already by using `brew services start postgresql`
+- Start postgres if not running already
 - Run `npm start`
-- Navigate to `localhost:5000`
+- Navigate to `localhost:3000`
 
 
 ## Deployment

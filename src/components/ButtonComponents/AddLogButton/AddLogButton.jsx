@@ -137,8 +137,6 @@ export default function AddLogButton() {
     const activityId = event.target.value;
     setActivities(activityId);
     // autofill the XP field with the XP amount associated with the activity
-    console.log(activityId);
-    console.log(activitiesList);
     setXp(activitiesList[activityId - 1].xp_value);
   };
 
@@ -150,14 +148,12 @@ export default function AddLogButton() {
             id="fab"
             variant="extended"
             size="large"
-            // color="primary"
             aria-label="add"
             sx={{
               fontSize: '1.3em',
               position: "fixed",
               bottom: 16,
               right: 16,
-              // backgroundColor: "primary.green",
               backgroundColor: "skyblue",
               "&:hover": {
                 backgroundColor: "#90ee90",
@@ -189,6 +185,7 @@ export default function AddLogButton() {
                 setDate(newValue);
               }}
             />
+
             {/* Skills Select Field */}
             <TextField
               sx={{
@@ -212,7 +209,6 @@ export default function AddLogButton() {
               })}
             </TextField>
 
-
             {/* Activities Select Field */}
             <TextField
               sx={{
@@ -235,7 +231,7 @@ export default function AddLogButton() {
               })}
             </TextField>
 
-            {/* text fields that auto field with the XP they get */}
+            {/* XP Field, autofills based on the selected activity */}
             <TextField
               sx={{
                 p: 1,
@@ -243,11 +239,8 @@ export default function AddLogButton() {
                 width: "8%",
                 typography: "body1",
               }}
-              // disabled makes the box unselectable, since a user will not
-              // have the option to change the associated xp value
-              //  However this does grey out the box currently. May need
-              //  to adjust the className so that it doesn't show grey...
-              disabled
+              disabled  // Makes the box unselectable, since a user will not
+                        // have the option to change the associated xp value
               box="true"
               label="XP"
               value={xp}
