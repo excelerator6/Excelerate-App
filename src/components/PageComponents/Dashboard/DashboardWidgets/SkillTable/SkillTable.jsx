@@ -58,11 +58,10 @@ export default function SkillTable() {
   const sortedSkills = skills.map(skill => {
     // adding an xp key to each skill object
     skill = {...skill}
-    skill.xp = currentXpForLevel(skill)
+    skill.xp = calculateTotalSkillXp(skill, userActivities);
     return skill;
+    // then sort the skills by comparing their xp to each other.
   }).sort((a, b) => {return b.xp - a.xp});
-
-  console.log(sortedSkills)
 
   return (
     <div>
@@ -74,13 +73,12 @@ export default function SkillTable() {
               <TableCell align="center">Skill</TableCell>
               <TableCell align="center">Level</TableCell>
               <TableCell align="center">Total XP</TableCell>
-              <TableCell align="center">Current XP</TableCell>
+              <TableCell align="center">XP Until Level Up</TableCell>
               <TableCell align="center">Badge</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
-          // {sortedSkills.map((skill, index) => {
-                const currentXp = currentXpForLevel(skill)
+           {sortedSkills.map((skill, index) => {
                 const currentLevel = calculateLevel(skill)
                 return (
                   <TableRow
@@ -111,12 +109,12 @@ export default function SkillTable() {
                         {/* The progress bar for current XP */}
                         <BorderLinearProgress
                           variant="determinate"
-                          value={currentXpPercentage(currentXp)}
+                          value={currentXpPercentage(currentXpForLevel(skill))}
                           valueBuffer={10}
                         />
                         {/* The written out progress. example "2/10" */}
                         <Typography variant="body1">
-                          {currentXp} / 10
+                          {skill.xp > 1 ? (10 - currentXpForLevel(skill)) : 0}
                         </Typography>
                       </Box>
                     </TableCell>
