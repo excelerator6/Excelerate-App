@@ -12,6 +12,8 @@ import LinearProgress, { linearProgressClasses } from "@mui/material/LinearProgr
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import { styled } from "@mui/material/styles";
+import DeleteForeverOutlinedIcon from '@mui/icons-material/DeleteForeverOutlined';
+import { Button } from "@mui/material";
 
 //import skillTable css
 import "./SkillTable.css";
@@ -19,6 +21,9 @@ import "./SkillTable.css";
 // Badge Component
 import LevelBadge from "./SkillTableComponents/LevelBadge";
 import calculateTotalSkillXp from "../ReusedCalculationFunctions/calculateTotalSkillXp";
+
+// Alert to Delete Skills Component
+import AlertDialog from "./SkillTableComponents/DeleteSkill";
 
 export default function SkillTable() {
   // State needed from the store to calculate the user's skill levels
@@ -70,6 +75,7 @@ export default function SkillTable() {
         <Table size="small" aria-label="a dense table">
           <TableHead id="skillTableHeader">
             <TableRow>
+              <TableCell align="center">Delete Skill</TableCell>
               <TableCell align="center">Skill</TableCell>
               <TableCell align="center">Level</TableCell>
               <TableCell align="center">Total XP</TableCell>
@@ -85,6 +91,12 @@ export default function SkillTable() {
                     key={index}
                     sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                   >
+                    {/* Skill Column */}
+                    <TableCell align="center">
+                      <AlertDialog 
+                        skill = {skill}
+                      />
+                    </TableCell>
                     {/* Skill Column */}
                     <TableCell align="center">
                       {skill.skill_name}
