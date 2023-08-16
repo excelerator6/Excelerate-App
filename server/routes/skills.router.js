@@ -60,8 +60,42 @@ router.post('/logNewSkill', rejectUnauthenticated, (req, res) => {
 });
 
 
-router.delete('/deleteSkill/:skill', rejectUnauthenticated, async (req, res) => {
-  console.log("Here's the skill we're working with:", req.params.skill);
+router.delete('/deleteEnterpriseSkill/:skill', rejectUnauthenticated, async (req, res) => {
+  console.log("Here's the skill we're working with in enterprise:", req.params.skill);
+  const skillID = req.params.skill;
+
+  let sqlText = `
+    DELETE FROM "skills_enterprise"
+      WHERE "id" = $1;
+  `;
+
+  pool.query(sqlText, [skillID])
+    .then(dbRes => {
+      console.log('Did we get it 1st?:', dbRes.rows)
+      res.sendStatus(200)
+    }).catch(dbErr => {
+      console.log('Error connecting to DB in skills.router /deleteEnterpriseSkill', dbErr)
+      res.sendStatus(500)
+    })
+});
+
+router.delete('/deleteUserSkill/:skill', rejectUnauthenticated, async (req, res) => {
+  console.log("Here's the skill we're working with in user:", req.params.skill);
+  const skillID = req.params.skill;
+
+  let sqlText = `
+    DELETE FROM "skills_user"
+      WHERE "id" = $1;
+  `;
+
+  pool.query(sqlText, [skillID])
+    .then(dbRes => {
+      console.log('did we get it 2nd?:', dbRes.rows)
+      res.sendStatus(200)
+    }).catch(dbErr => {
+      console.log('Error connecting to DB in skills.router /deleteEnterpriseSkill', dbErr)
+      res.sendStatus(500)
+    })
 });
 
 module.exports = router;
