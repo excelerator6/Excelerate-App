@@ -30,6 +30,7 @@ export default function AlertDialog(skill) {
         type: 'DELETE_SKILL',
         payload: skill.skill
     });
+    dispatch({type: 'GET_SKILLS_LIST'});
     handleClose();
   }
 

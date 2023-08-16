@@ -71,7 +71,6 @@ router.delete('/deleteEnterpriseSkill/:skill', rejectUnauthenticated, async (req
 
   pool.query(sqlText, [skillID])
     .then(dbRes => {
-      console.log('Did we get it 1st?:', dbRes.rows)
       res.sendStatus(200)
     }).catch(dbErr => {
       console.log('Error connecting to DB in skills.router /deleteEnterpriseSkill', dbErr)
@@ -90,7 +89,6 @@ router.delete('/deleteUserSkill/:skill', rejectUnauthenticated, async (req, res)
 
   pool.query(sqlText, [skillID])
     .then(dbRes => {
-      console.log('did we get it 2nd?:', dbRes.rows)
       res.sendStatus(200)
     }).catch(dbErr => {
       console.log('Error connecting to DB in skills.router /deleteEnterpriseSkill', dbErr)
