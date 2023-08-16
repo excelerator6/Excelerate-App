@@ -22,9 +22,23 @@ function* skillToAdd(action) {
     }
 }
 
+function* deleteSkill(action) {
+    try {
+        if(Object.keys(action.payload)[0] == 'enterprise_id'){
+            const res = yield axios.delete(`/api/skills/deleteEnterpriseSkill/${Object.values(action.payload)[0]}`);
+            console.log("Here's the response:", res)
+        } else if (Object.keys(action.payload)[0] == 'user_skill_id') {
+            const res = yield axios.delete(`/api/skills/deleteUserSkill/${Object.values(action.payload)[0]}`);
+        }
+    } catch (error) {
+        console.log('Error communicating with server to delete skill', error)
+    }
+}
+
 function* skillsSaga() {
     yield takeLatest('GET_SKILLS_LIST', getSkills);
     yield takeLatest('LOG_NEW_SKILL', skillToAdd);
+    yield takeLatest('DELETE_SKILL', deleteSkill);
 
 }
 export default skillsSaga;

@@ -5,6 +5,7 @@ body,
   margin-left: 100px;
   font-family: 'Medium';
   font-variant: small-caps;
+  text-transform: uppercase;
 }
 
 body {

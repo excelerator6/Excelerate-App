@@ -12,6 +12,8 @@ import LinearProgress, { linearProgressClasses } from "@mui/material/LinearProgr
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import { styled } from "@mui/material/styles";
+import DeleteForeverOutlinedIcon from '@mui/icons-material/DeleteForeverOutlined';
+import { Button } from "@mui/material";
 
 //import skillTable css
 import "./SkillTable.css";
@@ -19,6 +21,9 @@ import "./SkillTable.css";
 // Badge Component
 import LevelBadge from "./SkillTableComponents/LevelBadge";
 import calculateTotalSkillXp from "../ReusedCalculationFunctions/calculateTotalSkillXp";
+
+// Alert to Delete Skills Component
+import AlertDialog from "./SkillTableComponents/DeleteSkill";
 
 export default function SkillTable() {
   // State needed from the store to calculate the user's skill levels
@@ -54,6 +59,15 @@ export default function SkillTable() {
     },
   }));
 
+  // sort skills by xp level in ascending order
+  const sortedSkills = skills.map(skill => {
+    // adding an xp key to each skill object
+    skill = {...skill}
+    skill.xp = calculateTotalSkillXp(skill, userActivities);
+    return skill;
+    // then sort the skills by comparing their xp to each other.
+  }).sort((a, b) => {return b.xp - a.xp});
+
   return (
     <div>
       <h2>skills</h2>
@@ -61,67 +75,75 @@ export default function SkillTable() {
         <Table size="small" aria-label="a dense table">
           <TableHead id="skillTableHeader">
             <TableRow>
+              <TableCell align="center">Delete Skill</TableCell>
               <TableCell align="center">Skill</TableCell>
               <TableCell align="center">Level</TableCell>
               <TableCell align="center">Total XP</TableCell>
-              <TableCell align="center">Current XP</TableCell>
+              <TableCell align="center">XP Until Level Up</TableCell>
               <TableCell align="center">Badge</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
-            {skills.map((skill, index) => {
-              const currentXp = currentXpForLevel(skill)
-              const currentLevel = calculateLevel(skill)
-              return (
-                <TableRow
-                  key={index}
-                  sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-                >
-                  {/* Skill Column */}
-                  <TableCell align="center">
-                    {skill.skill_name}
-                  </TableCell>
-
-                  {/* Level Column */}
-                  <TableCell align="center">
-                    {currentLevel}
-                  </TableCell>
-
-                  {/* Total XP Column */}
-                  <TableCell align="center">
-                    {calculateTotalSkillXp(skill, userActivities)}
-                  </TableCell>
-
-                  {/* Current XP Column */}
-                  <TableCell align="center">
-                    <Box
-                      className="progressBarContainer"
-                      sx={{ display: "flex" }}
-                    >
-                      {/* The progress bar for current XP */}
-                      <BorderLinearProgress
-                        variant="determinate"
-                        value={currentXpPercentage(currentXp)}
-                        valueBuffer={10}
+           {sortedSkills.map((skill, index) => {
+                const currentLevel = calculateLevel(skill)
+                return (
+                  <TableRow
+                    key={index}
+                    sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                  >
+                    {/* Skill Column */}
+                    <TableCell align="center">
+                      <AlertDialog 
+                        skill = {skill}
                       />
-                      {/* The written out progress. example "2/10" */}
-                      <Typography variant="body1">
-                        {currentXp} / 10
-                      </Typography>
-                    </Box>
-                  </TableCell>
+                    </TableCell>
+                    {/* Skill Column */}
+                    <TableCell align="center">
+                      {skill.skill_name}
+                    </TableCell>
 
-                  {/* Badge Column */}
-                  <TableCell align="center">
-                    {LevelBadge(currentLevel)}
-                  </TableCell>
+                    {/* Level Column */}
+                    <TableCell align="center">
+                      {currentLevel}
+                    </TableCell>
 
-                </TableRow>
-              );
-            })}
+                    {/* Total XP Column */}
+                    <TableCell align="center">
+                      {calculateTotalSkillXp(skill, userActivities)}
+                    </TableCell>
+
+                    {/* Current XP Column */}
+                    <TableCell align="center">
+                      <Box
+                        className="progressBarContainer"
+                        sx={{ display: "flex" }}
+                      >
+                        {/* The progress bar for current XP */}
+                        <BorderLinearProgress
+                          variant="determinate"
+                          value={currentXpPercentage(currentXpForLevel(skill))}
+                          valueBuffer={10}
+                        />
+                        {/* The written out progress. example "2/10" */}
+                        <Typography variant="body1">
+                          {skill.xp > 1 ? (10 - currentXpForLevel(skill)) : 0}
+                        </Typography>
+                      </Box>
+                    </TableCell>
+
+                    {/* Badge Column */}
+                    <TableCell align="center">
+                      {LevelBadge(currentLevel)}
+                    </TableCell>
+
+                  </TableRow>
+                );
+              })}
           </TableBody>
         </Table>
       </TableContainer>
     </div>
   );
 };
+
+
