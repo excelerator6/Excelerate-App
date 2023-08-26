@@ -59,7 +59,7 @@ export default function SkillTable() {
     },
   }));
 
-  // sort skills by xp level in ascending order
+  // sort skills by total xp in ascending order
   const sortedSkills = skills.map(skill => {
     // adding an xp key to each skill object
     skill = {...skill}
@@ -75,12 +75,12 @@ export default function SkillTable() {
         <Table size="small" aria-label="a dense table">
           <TableHead id="skillTableHeader">
             <TableRow>
-              <TableCell align="center">Delete Skill</TableCell>
               <TableCell align="center">Skill</TableCell>
               <TableCell align="center">Level</TableCell>
               <TableCell align="center">Total XP</TableCell>
               <TableCell align="center">XP Until Level Up</TableCell>
               <TableCell align="center">Badge</TableCell>
+              <TableCell align="center">Delete Skill</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -91,12 +91,6 @@ export default function SkillTable() {
                     key={index}
                     sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                   >
-                    {/* Skill Column */}
-                    <TableCell align="center">
-                      <AlertDialog 
-                        skill = {skill}
-                      />
-                    </TableCell>
                     {/* Skill Column */}
                     <TableCell align="center">
                       {skill.skill_name}
@@ -135,7 +129,13 @@ export default function SkillTable() {
                     <TableCell align="center">
                       {LevelBadge(currentLevel)}
                     </TableCell>
-
+                   {/* Delete Button Column */}
+                   <TableCell align="center">
+                      {/* this is actually the delete skill component, but onClick creates 'Are You Sure' modal */}
+                      <AlertDialog 
+                        skill = {skill}
+                      />
+                    </TableCell>
                   </TableRow>
                 );
               })}

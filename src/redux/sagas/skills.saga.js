@@ -24,6 +24,8 @@ function* skillToAdd(action) {
 
 function* deleteSkill(action) {
     try {
+        // need to check whether the skill to delete is an enterprise skill or a user-created skill
+        // then have two seperate routes, one for each possibility.
         if(Object.keys(action.payload)[0] == 'enterprise_id'){
             const res = yield axios.delete(`/api/skills/deleteEnterpriseSkill/${Object.values(action.payload)[0]}`);
             console.log("Here's the response:", res)

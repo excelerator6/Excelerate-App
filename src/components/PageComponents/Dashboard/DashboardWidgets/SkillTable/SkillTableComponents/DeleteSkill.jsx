@@ -33,6 +33,7 @@ export default function AlertDialog(skill) {
     dispatch({type: 'GET_SKILLS_LIST'});
     handleClose();
   }
+  console.log(skill);
 
   return (
     <div>
@@ -46,7 +47,7 @@ export default function AlertDialog(skill) {
         aria-describedby="alert-dialog-description"
       >
         <DialogTitle id="alert-dialog-title">
-          {"Are you sure you want to delete this skill?"}
+          {`Are you sure you want to delete your ${skill.skill.skill_name} skill?`}
         </DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
@@ -55,7 +56,7 @@ export default function AlertDialog(skill) {
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Don't Delete</Button>
-          <Button onClick={() => deleteSkill(skill)} autoFocus>
+          <Button color='error' onClick={() => deleteSkill(skill)} autoFocus>
             Delete
           </Button>
         </DialogActions>
