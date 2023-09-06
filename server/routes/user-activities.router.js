@@ -136,12 +136,29 @@ router.get('/newestActivity', rejectUnauthenticated, async (req, res) => {
 });
 
 // put the log / activity delete route here
-router.delete('/deleteLogs/:ids', rejectUnauthenticated, (req, res) => {
+router.delete('/deleteLogs/:ids', rejectUnauthenticated, async (req, res) => {
   // gotta remove all commas and apostraphes from array of numbers
   const logIDS = req.params.ids.split(',');
-  console.log("our ids:", logIDS[0].replaceAll("'", " "))
+  console.log('Got our ids', logIDS);
 
-  
+  let sqlText = `
+  DELETE FROM "user_activities"
+    WHERE "id" = $1;  
+  `;
+
+  try {
+    console.log("We are in the try")
+    for (id of logIDS){
+      console.log("We are in the for loop, here's our id", id)
+      const response = await pool.query(sqlText, [id])
+      console.log("Successfully deleted log!", response);
+    }
+    res.sendStatus(200);
+  } catch (error) {
+    console.log("ERROR!", error)
+    res.sendStatus(500);
+  }
+
 })
 
 module.exports = router;
