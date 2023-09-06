@@ -30,11 +30,22 @@ function* fetchUserTotalXpPoints() {
   }
 }
 
+function* deleteLogs(action){
+  try {
+      console.log("Here's our log ids to delete:", action.payload)
+      const res = yield axios.delete(`/api/user-activities/deleteLogs/${action.payload}`)
+      yield put({type:'FETCH_USER_ACTIVITIES'})
+  } catch (error) {
+      console.log("Error within deleteLogs saga:", error)
+  }
+}
+
 
 function* userActivitiesSaga() {
   yield takeLatest('FETCH_USER_ACTIVITIES', fetchUserActivities);
   yield takeLatest('FETCH_USER_ACTIVITY_LOG', fetchUserActivityLog);
   yield takeLatest('FETCH_USER_TOTAL_XP_POINTS', fetchUserTotalXpPoints);
+  yield takeLatest('DELETE_LOGS', deleteLogs);
 
 }
 

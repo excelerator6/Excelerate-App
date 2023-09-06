@@ -22,18 +22,9 @@ function* getActivities(){
     }
 }
 
-function* deleteLogs(action){
-    try {
-        console.log("Here's our log ids to delete:", action.payload)
-        const res = yield axios.delete(`/api/user-activities/deleteLogs/${action.payload}`)
-    } catch (error) {
-        
-    }
-}
 
 function* activitySaga() {
     yield takeLatest('LOG_ACTIVITY', logActivity);
     yield takeLatest('GET_ACTIVITY_LIST', getActivities);
-    yield takeLatest('DELETE_LOGS', deleteLogs);
 }
 export default activitySaga;
