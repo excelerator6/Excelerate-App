@@ -24,7 +24,6 @@ export default function AlertDialog(skill) {
   };
 
   const deleteSkill = (skill) => {
-    // console.log('This is the skill we want to delete:', skill.skill)
 
     dispatch({
         type: 'DELETE_SKILL',

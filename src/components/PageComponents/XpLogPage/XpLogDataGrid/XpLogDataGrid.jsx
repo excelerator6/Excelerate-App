@@ -210,6 +210,7 @@ export default function XpLogDataGrid() {
   const [checkboxShown, setCheckboxShown] = useState(false);
   // const [logSelected, setLogSelected] = useState(false);
 
+  // ** I need to create a delete modal for log delete confirmation ** \\
   const deleteLogs = (id) => {
     dispatch({
       type: 'DELETE_LOGS',

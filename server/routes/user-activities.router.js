@@ -133,6 +133,15 @@ router.get('/newestActivity', rejectUnauthenticated, async (req, res) => {
   } catch (error) {
     console.log('Error inside GET /newestActivituy:', error);
   }
+});
+
+// put the log / activity delete route here
+router.delete('/deleteLogs/:ids', rejectUnauthenticated, (req, res) => {
+  // gotta remove all commas and apostraphes from array of numbers
+  const logIDS = req.params.ids.split(',');
+  console.log("our ids:", logIDS[0].replaceAll("'", " "))
+
+  
 })
 
 module.exports = router;

@@ -22,9 +22,10 @@ function* getActivities(){
     }
 }
 
-function* deleteLogs(){
+function* deleteLogs(action){
     try {
         console.log("Here's our log ids to delete:", action.payload)
+        const res = yield axios.delete(`/api/user-activities/deleteLogs/${action.payload}`)
     } catch (error) {
         
     }
