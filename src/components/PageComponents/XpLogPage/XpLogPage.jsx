@@ -11,7 +11,7 @@ export default function XpLogPage() {
 
   return (
     <div className="container">
-      <h2>Inside XpLogPage</h2>
+      <h2>Xp log</h2>
       <XpLogDataGrid />
     </div>
   )

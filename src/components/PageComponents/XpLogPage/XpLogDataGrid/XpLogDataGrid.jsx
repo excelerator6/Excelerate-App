@@ -6,6 +6,9 @@ import Popper from '@mui/material/Popper';
 import { DataGrid } from '@mui/x-data-grid';
 import { useSelector } from 'react-redux';
 import { Link } from '@mui/material';
+import { Button } from '@mui/material';
+import { red } from '@mui/material/colors';
+import { useDispatch } from 'react-redux';
 
 /**
  * Function to check if the current "element's" contents are wider than allowed
@@ -201,23 +204,92 @@ const columns = [
  * @returns MUI DataGrid containing the XpLog information
  */
 export default function XpLogDataGrid() {
+  const dispatch = useDispatch();
   const userActivities = useSelector(store => store.userActivities)
+  const [logIDS, setLogIDS] = useState([]);
+  const [checkboxShown, setCheckboxShown] = useState(false);
+  // const [logSelected, setLogSelected] = useState(false);
+
+  const deleteLogs = (id) => {
+    dispatch({
+      type: 'DELETE_LOGS',
+      payload: id
+    })
+  }
+
   return (
-    <Box sx={{ height: '74vh', width: '100%' }}>
-      <DataGrid
-        rows={userActivities}
-        columns={columns}
-        rowHeight={49}
-        initialState={{
-          pagination: {
-            paginationModel: {
-              pageSize: 10,
-            },
-          },
+    <>
+      <Box 
+        sx={{
+          display: 'flex',
+          flexDirection: "row",
+          alignItems: 'center',
         }}
-        pageSizeOptions={[5, 10, 25, 50]}
-        disableRowSelectionOnClick
-      />
-    </Box>
+      >
+        <Button
+          sx={{ mb: 1 }}
+          variant='outlined'
+          onClick={() => {
+            setCheckboxShown(!checkboxShown);
+            // setDeleteBoxShown(!checkboxShown);
+          }}
+        >
+            <Typography>
+              Delete Logs
+            </Typography>
+        </Button>
+        {
+          checkboxShown ?
+            <Typography ml={2} mb={1} color={red[300]}>
+              - Select Logs You Wish To Delete
+            </Typography>
+            :
+            ""
+        }
+        {
+          logIDS.length !== 0 && checkboxShown ?
+          <Button 
+            variant='outlined' 
+            color='error' 
+            sx={{mb:1, ml:'auto', mr:0}}
+            onClick = {() => deleteLogs(logIDS)}
+          >
+            Delete
+          </Button>
+          :
+          ''
+        }
+      </Box>
+      <Box sx={{ height: '74vh', width: '100%' }}>
+        <DataGrid
+          rows={userActivities}
+          columns={columns}
+          rowHeight={49}
+          checkboxSelection={checkboxShown}
+          // on log selection, need a delete button to show up and that delete button to send a dispatch to delete selected items.
+          onRowSelectionModelChange={(id) => {
+              // setLogSelected(!logSelected);
+              setLogIDS(id);
+          }}
+          initialState={{
+            pagination: {
+              paginationModel: {
+                pageSize: 10,
+              },
+            },
+          }}
+          pageSizeOptions={[5, 10, 25, 50]}
+          disableRowSelectionOnClick
+        />
+      </Box>
+      {/* {
+        logSelected && checkboxShown ?
+        <Button variant='outlined' color='error'>
+          Delete
+        </Button>
+        :
+        ''
+      } */}
+    </>
   );
 }

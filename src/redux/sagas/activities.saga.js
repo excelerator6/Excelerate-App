@@ -22,9 +22,17 @@ function* getActivities(){
     }
 }
 
+function* deleteLogs(){
+    try {
+        console.log("Here's our log ids to delete:", action.payload)
+    } catch (error) {
+        
+    }
+}
 
 function* activitySaga() {
-    yield takeLatest('LOG_ACTIVITY', logActivity)
-    yield takeLatest('GET_ACTIVITY_LIST', getActivities)
+    yield takeLatest('LOG_ACTIVITY', logActivity);
+    yield takeLatest('GET_ACTIVITY_LIST', getActivities);
+    yield takeLatest('DELETE_LOGS', deleteLogs);
 }
 export default activitySaga;
