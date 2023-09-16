@@ -10,6 +10,15 @@ import { Button } from '@mui/material';
 import { red } from '@mui/material/colors';
 import { useDispatch } from 'react-redux';
 
+
+// * Components for delete confirmation modal
+import DeleteForeverOutlinedIcon from '@mui/icons-material/DeleteForeverOutlined';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
+
 /**
  * Function to check if the current "element's" contents are wider than allowed
  * @param {*} element What is being checked
@@ -205,17 +214,27 @@ const columns = [
  */
 export default function XpLogDataGrid() {
   const dispatch = useDispatch();
+  const [openDialog, setOpenDialog] = useState(false);
   const userActivities = useSelector(store => store.userActivities)
   const [logIDS, setLogIDS] = useState([]);
   const [checkboxShown, setCheckboxShown] = useState(false);
-  // const [logSelected, setLogSelected] = useState(false);
 
-  // ** I need to create a delete modal for log delete confirmation ** \\
+
+  const handleClickOpen = () => {
+      setOpenDialog(!openDialog);
+    }
+
+  const handleClose = () => {
+    setOpenDialog(!openDialog);
+  };
+
+
   const deleteLogs = (id) => {
     dispatch({
       type: 'DELETE_LOGS',
       payload: id
     })
+    setOpenDialog(!openDialog);
   }
 
   return (
@@ -232,7 +251,6 @@ export default function XpLogDataGrid() {
           variant='outlined'
           onClick={() => {
             setCheckboxShown(!checkboxShown);
-            // setDeleteBoxShown(!checkboxShown);
           }}
         >
             <Typography>
@@ -253,7 +271,7 @@ export default function XpLogDataGrid() {
             variant='outlined' 
             color='error' 
             sx={{mb:1, ml:'auto', mr:0}}
-            onClick = {() => deleteLogs(logIDS)}
+            onClick = {() => handleClickOpen()}
           >
             Delete
           </Button>
@@ -283,14 +301,29 @@ export default function XpLogDataGrid() {
           disableRowSelectionOnClick
         />
       </Box>
-      {/* {
-        logSelected && checkboxShown ?
-        <Button variant='outlined' color='error'>
-          Delete
-        </Button>
-        :
-        ''
-      } */}
+
+      {/* This is the delete confirmation modal */}
+      <Dialog
+        open={openDialog}
+        onClose={handleClose}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle id="alert-dialog-title">
+          {"Are you certain you wish to delete these log(s)?"}
+        </DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-description">
+            This cannot be undone.
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose}>Don't Delete</Button>
+          <Button color='error' onClick={() => deleteLogs(logIDS)} autoFocus>
+            Delete
+          </Button>
+        </DialogActions>
+      </Dialog>
     </>
   );
 }
