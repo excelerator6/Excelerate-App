@@ -12,6 +12,8 @@ const {
 router.get('/getSkills', rejectUnauthenticated, async (req, res) => {
   // GET route code here
 
+  // * How can I keep track of whether or not a user has deleted an enterprise skill from their skilltable?  
+
   const userID = req.user.id;
   try {
     // aggregate array of both skill tables
@@ -60,17 +62,21 @@ router.post('/logNewSkill', rejectUnauthenticated, (req, res) => {
 });
 
 
-router.delete('/deleteEnterpriseSkill/:skill', rejectUnauthenticated, async (req, res) => {
-  console.log("Here's the skill we're working with in enterprise:", req.params.skill);
-  const skillID = req.params.skill;
+// Add enterprise skills that users delete to a list, linking that user with that deleted enterprise skill. 
+// Then, when we retrieve the list of skills for a user, we will check the deleted_skills list and omit
+// any "deleted" enterprise skill from being displayed for that user.
+router.post('/deleteEnterpriseSkill/', rejectUnauthenticated, async (req, res) => {
+  const skillID = req.body.enterprise_id;
+  const userID = req.user.id;
 
   let sqlText = `
-    DELETE FROM "skills_enterprise"
-      WHERE "id" = $1;
+    INSERT INTO "deleted_skills" (user_id, skill_id)
+      VALUES ($1, $2);
   `;
 
-  pool.query(sqlText, [skillID])
+  pool.query(sqlText, [userID, skillID])
     .then(dbRes => {
+      console.log('Successfully added new row to the deleted_skills table');
       res.sendStatus(200)
     }).catch(dbErr => {
       console.log('Error connecting to DB in skills.router /deleteEnterpriseSkill', dbErr)

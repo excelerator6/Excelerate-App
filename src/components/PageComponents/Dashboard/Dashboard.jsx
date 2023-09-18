@@ -22,8 +22,6 @@ export default function Dashboard() {
     dispatch({ type: "FETCH_USER_ACTIVITIES" });
   }, []);
 
-  console.log('is this posting twice?');
-
   return (
     <Box sx={{ flexGrow: 1 }}>
       <Grid

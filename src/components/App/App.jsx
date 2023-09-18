@@ -40,6 +40,7 @@ export default function App() {
     dispatch({ type: "FETCH_USER" });
   }, [dispatch]);
 
+
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
       <Router>

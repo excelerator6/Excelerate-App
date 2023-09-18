@@ -243,6 +243,20 @@ VALUES
 	(1, 50), -- Read 5 Book Summaries
 	(1, 51); -- Read 10 Book Summaries 
 
+----------------------------------------------------------------
+----------------------------------------------------------------
+	-- Build deleted skills relational table, allowing users --
+	-- to delete enterprise skills without deleting them from --
+	-- the database entirely --
+----------------------------------------------------------------
+----------------------------------------------------------------
+CREATE TABLE "deleted_skills"
+	(
+		id SERIAL PRIMARY KEY NOT NULL,
+		user_id BIGINT REFERENCES "user"(id) ON DELETE CASCADE NOT NULL,
+		skill_id BIGINT REFERENCES "skills_enterprise"(id) ON DELETE CASCADE NOT NULL
+	);
+
 
 ----------------------------------------------------------------
 ----------------------------------------------------------------

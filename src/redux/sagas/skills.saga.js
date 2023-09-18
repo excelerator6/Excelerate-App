@@ -25,12 +25,13 @@ function* skillToAdd(action) {
 function* deleteSkill(action) {
     try {
         // need to check whether the skill to delete is an enterprise skill or a user-created skill
+        let skillID = Object.values(action.payload)[0];
         // then have two seperate routes, one for each possibility.
         if(Object.keys(action.payload)[0] == 'enterprise_id'){
-            const res = yield axios.delete(`/api/skills/deleteEnterpriseSkill/${Object.values(action.payload)[0]}`);
+            const res = yield axios.post(`/api/skills/deleteEnterpriseSkill`, action.payload);
             console.log("Here's the response:", res)
         } else if (Object.keys(action.payload)[0] == 'user_skill_id') {
-            const res = yield axios.delete(`/api/skills/deleteUserSkill/${Object.values(action.payload)[0]}`);
+            const res = yield axios.delete(`/api/skills/deleteUserSkill/${skillID}`);
         }
     } catch (error) {
         console.log('Error communicating with server to delete skill', error)
