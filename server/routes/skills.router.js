@@ -27,19 +27,12 @@ router.get('/getSkills', rejectUnauthenticated, async (req, res) => {
     const response = await pool.query('SELECT skills_enterprise.id AS enterprise_id, skill_name FROM "skills_enterprise";');
 
 
-    // I need to loop through
-    // const enterpriseSkills = response.rows.filter(skill => {
-    //   for(let deletedSkill of deletedSkills.rows){
-    //     if(deletedSkill.skill_id != skill.enterprise_id){
-    //       return skill;
-    //     }else{return}
-    //   }
-    // })
-
+    // this is the function that filters our enterprise_skills array against our deleted_skills table --- Any successful comparison of ID's get's removed from the array, not to appear on the DOM.
     const enterpriseSkills = response.rows.filter((skill) => {
-      return deletedSkills.rows.indexOf(skill.enterprise_id);
+      // this vvvvv is to extract JUST the ID's of the deleted skills.
+      const deletedSkillValues = deletedSkills.rows.map(skill => Number(skill.skill_id))
+      return deletedSkillValues.indexOf(skill.enterprise_id) < 0;
     })
-    console.log("These are the enterpriseSkills:", enterpriseSkills);
 
 
     // get the user's specific skills
