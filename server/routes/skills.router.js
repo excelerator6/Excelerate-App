@@ -12,21 +12,41 @@ const {
 router.get('/getSkills', rejectUnauthenticated, async (req, res) => {
   // GET route code here
 
-  // * How can I keep track of whether or not a user has deleted an enterprise skill from their skilltable?  
-
   const userID = req.user.id;
   try {
     // aggregate array of both skill tables
     let arr = [];
 
     // get the general skills
+    // * NEED TO EXCLUDE SKILLS THEY'VE DELETED
+    // * CHECK AGAINST deleted_skills TABLE
+    const deletedSkills = await pool.query(`SELECT skill_id FROM "deleted_skills" WHERE user_id = ${userID}`);
+
+    // It would probably be quicker to do a left or right join here with the deleted_skills table, excluding those from the
+    // returned rows.
     const response = await pool.query('SELECT skills_enterprise.id AS enterprise_id, skill_name FROM "skills_enterprise";');
+
+
+    // I need to loop through
+    // const enterpriseSkills = response.rows.filter(skill => {
+    //   for(let deletedSkill of deletedSkills.rows){
+    //     if(deletedSkill.skill_id != skill.enterprise_id){
+    //       return skill;
+    //     }else{return}
+    //   }
+    // })
+
+    const enterpriseSkills = response.rows.filter((skill) => {
+      return deletedSkills.rows.indexOf(skill.enterprise_id);
+    })
+    console.log("These are the enterpriseSkills:", enterpriseSkills);
+
 
     // get the user's specific skills
     const response2 = await pool.query(`SELECT skills_user.id AS user_skill_id, skill_name FROM "skills_user" WHERE skills_user.user_id = $1;`, [userID]);
 
     // push both table responses into singular array, then flatten that array to send client-side
-    arr.push(response.rows, response2.rows);
+    arr.push(enterpriseSkills, response2.rows);
     arr = arr.flat();
     res.send(arr)
   } catch (error) {
@@ -76,7 +96,7 @@ router.post('/deleteEnterpriseSkill/', rejectUnauthenticated, async (req, res) =
 
   pool.query(sqlText, [userID, skillID])
     .then(dbRes => {
-      console.log('Successfully added new row to the deleted_skills table');
+      console.log("Successful addition to deleted skills table:", dbRes);
       res.sendStatus(200)
     }).catch(dbErr => {
       console.log('Error connecting to DB in skills.router /deleteEnterpriseSkill', dbErr)

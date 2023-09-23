@@ -29,7 +29,6 @@ function* deleteSkill(action) {
         // then have two seperate routes, one for each possibility.
         if(Object.keys(action.payload)[0] == 'enterprise_id'){
             const res = yield axios.post(`/api/skills/deleteEnterpriseSkill`, action.payload);
-            console.log("Here's the response:", res)
         } else if (Object.keys(action.payload)[0] == 'user_skill_id') {
             const res = yield axios.delete(`/api/skills/deleteUserSkill/${skillID}`);
         }

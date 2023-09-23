@@ -32,7 +32,7 @@ export default function AlertDialog(skill) {
     dispatch({type: 'GET_SKILLS_LIST'});
     handleClose();
   }
-  console.log(skill);
+
 
   return (
     <div>
