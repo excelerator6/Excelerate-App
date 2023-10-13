@@ -3,8 +3,8 @@ import './LandingPage.css';
 import Carousel from 'react-material-ui-carousel';
 import { Paper } from '@mui/material'
 
-import CarouselImageOne from "../../../images/ExceleratorImage1.png"
-import CarouselImageTwo from "../../../images/ExceleratorImage2.png"
+import CarouselImageOne from "./images/ExceleratorImage1.png"
+import CarouselImageTwo from "./images/ExceleratorImage2.png"
 
 // CUSTOM COMPONENTS
 import RegisterForm from '../LoginAndRegisterPages/RegisterPage/RegisterForm/RegisterForm';
