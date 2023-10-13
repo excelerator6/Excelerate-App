@@ -23,7 +23,7 @@ export default function Dashboard() {
   }, []);
 
   return (
-    <Box sx={{ flexGrow: 1 }}>
+    <Box sx={{ flexGrow: 1, mt: 2 }}>
       <Grid
         container
         spacing={2}

@@ -3,12 +3,14 @@ import './LandingPage.css';
 import Carousel from 'react-material-ui-carousel';
 import { Paper } from '@mui/material'
 
+import CarouselImageOne from "./LandingPageImages/Excelerator_Image_1.png"
+import CarouselImageTwo from "./LandingPageImages/Excelerator_Image_2.png"
+
 // CUSTOM COMPONENTS
 import RegisterForm from '../LoginAndRegisterPages/RegisterPage/RegisterForm/RegisterForm';
 import LoginForm from '../LoginAndRegisterPages/LoginPage/LoginForm/LoginForm'
 
 export default function LandingPage() {
-  const [heading, setHeading] = useState(`Let's EXCEL!`);
   const [showRegisterForm, setShowRegisterForm] = useState(false);
 
   // Function that toggles between whether the login or register form is showing
@@ -26,19 +28,16 @@ export default function LandingPage() {
   }
   // The carousel pictures
   const items = [
-    {src: '/LandingPageImages/Excelerator::Dashboard.png'},
-    {src: '/LandingPageImages/Excelerator::StatsCal.png'},
-    {src: '/LandingPageImages/Excelerator::StatsGraph.png'},
-    {src: '/LandingPageImages/Excelerator::XPLog.png'}
+    {src: `${CarouselImageOne}`},
+    {src: `${CarouselImageTwo}`}
   ]
 
   return (
     <div className="container">
 
-      <div className="grid">
+      <div className="grid" id='landingPage'>
 
         <div className="grid-col grid-col_8" id='carousel'>
-        <h2>{heading}</h2>
           <Carousel
             navButtonsProps={{
               // Change the colors and radius of the actual buttons. THIS STYLES BOTH BUTTONS

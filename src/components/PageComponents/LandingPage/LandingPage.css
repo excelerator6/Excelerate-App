@@ -3,6 +3,8 @@ Grid
 -------------------------------------------------------------------------------- */
 
 .grid {
+  margin-top: 5vh;
+  margin-bottom: -40px;
   display: flex;
   flex: 0 1 auto;
   /* defaults to 'row' */

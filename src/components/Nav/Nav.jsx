@@ -17,7 +17,7 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import MenuIcon from "@mui/icons-material/Menu";
 import Toolbar from "@mui/material/Toolbar";
-import ExceleratorLogo from './images/ExceleratorLogoV2.png'
+import ExceleratorLogo from './images/Excelerator_White_logo.png'
 
 //import Avatars
 import UserAvatar from "../PageComponents/Avatars/UserAvatar";
