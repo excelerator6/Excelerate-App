@@ -8,7 +8,6 @@ import RegisterForm from '../LoginAndRegisterPages/RegisterPage/RegisterForm/Reg
 import LoginForm from '../LoginAndRegisterPages/LoginPage/LoginForm/LoginForm'
 
 export default function LandingPage() {
-  const [heading, setHeading] = useState(`Let's EXCEL!`);
   const [showRegisterForm, setShowRegisterForm] = useState(false);
 
   // Function that toggles between whether the login or register form is showing
@@ -33,10 +32,9 @@ export default function LandingPage() {
   return (
     <div className="container">
 
-      <div className="grid">
+      <div className="grid" id='landingPage'>
 
         <div className="grid-col grid-col_8" id='carousel'>
-        <h2>{heading}</h2>
           <Carousel
             navButtonsProps={{
               // Change the colors and radius of the actual buttons. THIS STYLES BOTH BUTTONS
