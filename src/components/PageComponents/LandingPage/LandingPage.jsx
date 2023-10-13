@@ -3,8 +3,8 @@ import './LandingPage.css';
 import Carousel from 'react-material-ui-carousel';
 import { Paper } from '@mui/material'
 
-// import CarouselImageOne from "./images/Excelerator_Image_1.png"
-// import CarouselImageTwo from "./images/Excelerator_Image_2.png"
+// import CarouselImageOne from "../../../images/Excelerator_Image_1.png"
+// import CarouselImageTwo from "../../../images/Excelerator_Image_2.png"
 
 // CUSTOM COMPONENTS
 import RegisterForm from '../LoginAndRegisterPages/RegisterPage/RegisterForm/RegisterForm';
@@ -28,8 +28,8 @@ export default function LandingPage() {
   }
   // The carousel pictures
   const items = [
-    {src: `./images/Excelerator_Image_1.png`},
-    {src: `./images/Excelerator_Image_2.png`}
+    {src: "/images/Excelerator_Image_1.png"},
+    {src: "/images/Excelerator_Image_2.png"}
   ]
 
   return (
