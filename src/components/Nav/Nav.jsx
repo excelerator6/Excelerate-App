@@ -165,7 +165,7 @@ function Nav(props) {
               <MenuIcon />
             </IconButton>
               <Link to='/home'>
-                <img src="/LandingPageImages/Excelerator_White_logo.png" className="logo"/>
+                <img src="./LandingPageImages/Excelerator_White_logo.png" className="logo"/>
               </Link>
           </Toolbar>
         </AppBar>

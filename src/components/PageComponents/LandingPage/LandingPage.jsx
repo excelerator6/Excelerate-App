@@ -25,8 +25,8 @@ export default function LandingPage() {
   }
   // The carousel pictures
   const items = [
-    {src: '/LandingPageImages/Excelerator_Image_1.png'},
-    {src: '/LandingPageImages/Excelerator_Image_2.png'}
+    {src: './LandingPageImages/Excelerator_Image_1.png'},
+    {src: './LandingPageImages/Excelerator_Image_2.png'}
   ]
 
   return (
