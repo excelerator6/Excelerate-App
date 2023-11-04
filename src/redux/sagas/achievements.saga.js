@@ -6,6 +6,7 @@ import { useSelector } from 'react-redux';
 
 function* fetchAchievements() {
   try {
+    console.log("Checkpoint fetchAchievements in achievements.saga");
     const { data: achievementsData } = yield axios.get('/api/achievements');
     yield put({ type: 'SET_ALL_ACHIEVEMENTS', payload: achievementsData.allAchievements })
     yield put({ type: 'SET_USER_ACHIEVEMENTS', payload: achievementsData.userAchievements })
@@ -16,6 +17,9 @@ function* fetchAchievements() {
 
 function* checkThenPostNewAchievements() {
   try {
+
+    // ******** We got here before crashing this time
+    console.log("Checkpoint checkThenPostNewAchievements in achievements.saga")
     const { data: newestActivity } = yield axios.get('/api/user-activities/newestActivity')
     const activityId = newestActivity.activityId
     switch (activityId) {

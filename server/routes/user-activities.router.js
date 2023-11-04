@@ -6,6 +6,7 @@ const {
 } = require('../modules/authentication-middleware');
 
 router.get('/', rejectUnauthenticated, (req, res) => {
+  console.log("Checkpoint user-activities/ in user-activities.router");
   const userId = req.user.id
   const sqlQuery = `
     SELECT 
@@ -65,6 +66,7 @@ router.get('/', rejectUnauthenticated, (req, res) => {
 
 
 router.get('/userActivityLog', rejectUnauthenticated, (req, res) => {
+  console.log("Checkpoint user-activities/userActivityLog in user-activities.router");
   const userId = req.user.id
   const sqlQuery = `
     SELECT DATE(date_completed), COUNT(1) AS count
@@ -86,6 +88,7 @@ router.get('/userActivityLog', rejectUnauthenticated, (req, res) => {
 
 
 router.get('/totalXpSkillsPoints', rejectUnauthenticated, (req, res) => {
+  console.log("Checkpoint user-activities/totalXpSkillsPoints in user-activities.router");
   const userId = req.user.id
   const sqlQuery = `
     SELECT 
@@ -115,6 +118,11 @@ router.get('/totalXpSkillsPoints', rejectUnauthenticated, (req, res) => {
 });
 
 router.get('/newestActivity', rejectUnauthenticated, async (req, res) => {
+   
+  // ****** We got here somehow in the latest crash test
+  console.log("Checkpoint user-activities/newestActivity in user-activities.router");
+  console.log("What the heck is calling this?");
+
   const userId = req.user.id
   const newestActivityQuery = `
     SELECT

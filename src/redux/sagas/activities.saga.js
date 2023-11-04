@@ -3,17 +3,15 @@ import axios from 'axios';
 
 function* logActivity(action) {
     try {
-        let time = Date.now();
-        console.log("Gonna try timing this request in logActivity saga");
+        console.log("In logActivity function in Activities.saga");
 
         // * Our request gets to here ^^^^ but not to our activity/log route vvvv
 
         const res = yield axios.post('/api/activity/log', action.payload);
+
+        // *** The request that is disrupted DOESN'T get to these next yield puts vvvv
         yield put({type: 'FETCH_USER_ACTIVITIES'})
         yield put({type: 'CHECK_FOR_THEN_POST_NEW_ACHIEVEMENTS'})
-        
-        let end = (Date.now() - time);
-        console.log("Here's the total time it took in logActivity", end);
     } catch (error) {
         console.log("Error communicating with server, couldn't log Activity", error)
     }
@@ -21,6 +19,7 @@ function* logActivity(action) {
 
 function* getActivities(){
     try {
+        console.log("In getActivities function in Activities.saga");
         // get the list of activites from the DB
         const res = yield axios.get('/api/activity/getList');
         // store those activites in a reducer

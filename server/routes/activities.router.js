@@ -7,6 +7,7 @@ const {
 
 
 router.get('/getList', rejectUnauthenticated, (req, res) => {
+  console.log("Checkpoint activities/getList in activities.router");
     pool.query('SELECT * FROM "activities_chart" ORDER BY id;')
         .then(dbRes => {
           res.send(dbRes.rows);
@@ -18,18 +19,20 @@ router.get('/getList', rejectUnauthenticated, (req, res) => {
 
 // *THIS MIGHT BE WHERE THE PROBLEM IS*\\
 // * MIGHT BE NICE TO MAKE IT ASYNCHRONOUS WITH TRY/CATCH * \\
+
 // Route for logging new activity
 router.post('/log', rejectUnauthenticated, (req, res) => {
+  console.log("Checkpoint activities/log in activities.router");
   const date = req.body.date;
   const activity = req.body.activity;
   const source = req.body.source;
   const takeaway = req.body.takeaway;
   const userID = req.user.id;
-
-
-
-  let time = Date.now();
-  console.log("Gonna try timing this request in activities/log");
+  
+  
+  
+  // ********* Something is disrupting the call between the logActivity saga in activites.saga
+  // ********* and this POST route, since it doesn't get hit after a few calls.
 
   // conditional to check whether or not the skill the user is levelling is an enterprise skill or personal user skill
   if(req.body.enterpriseId){
@@ -43,8 +46,6 @@ router.post('/log', rejectUnauthenticated, (req, res) => {
         let sqlValues = [date, req.body.enterpriseId, userID, activity, source, takeaway];
         pool.query(sqlText, sqlValues)
             .then(dbRes => {
-              let end = (Date.now() - time);
-        console.log("Here's the total time it took in activities/log", end);
               res.sendStatus(201)
             }).catch(dbErr => {
               console.log("Error connecting to DB in activites.router /log:", dbErr);
@@ -58,8 +59,6 @@ router.post('/log', rejectUnauthenticated, (req, res) => {
         let sqlValues = [date, req.body.enterpriseId, userID, activity, source];
         pool.query(sqlText, sqlValues)
             .then(dbRes => {
-              let end = (Date.now() - time);
-        console.log("Here's the total time it took in activities/log", end);
               res.sendStatus(201)
             }).catch(dbErr => {
               console.log("Error connecting to DB in activites.router /log:", dbErr);
@@ -75,8 +74,6 @@ router.post('/log', rejectUnauthenticated, (req, res) => {
         let sqlValues = [date, req.body.skillUserId, userID, activity, source, takeaway];
         pool.query(sqlText, sqlValues)
             .then(dbRes => {
-              let end = (Date.now() - time);
-        console.log("Here's the total time it took in activities/log", end);
               res.sendStatus(201)
             }).catch(dbErr => {
               console.log("Error connecting to DB in activites.router /log:", dbErr);
@@ -90,8 +87,6 @@ router.post('/log', rejectUnauthenticated, (req, res) => {
         let sqlValues = [date, req.body.skillUserId, userID, activity, source];
         pool.query(sqlText, sqlValues)
             .then(dbRes => {
-              let end = (Date.now() - time);
-        console.log("Here's the total time it took in activities/log", end);
               res.sendStatus(201)
             }).catch(dbErr => {
               console.log("Error connecting to DB in activites.router /log:", dbErr);

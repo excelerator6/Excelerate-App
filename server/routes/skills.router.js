@@ -12,6 +12,7 @@ const {
 
 // * THIS ROUTE IS SUSPICIOUS IN REQUESTS TIMING OUT * \\
 router.get('/getSkills', rejectUnauthenticated, async (req, res) => {
+  console.log("Checkpoint skills/getSkills in skills.router");
   // GET route code here
   const userID = req.user.id;
   try {

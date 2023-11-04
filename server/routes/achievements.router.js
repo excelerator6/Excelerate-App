@@ -10,6 +10,8 @@ const {
 
 // GET all of the achievements
 router.get('/', rejectUnauthenticated, async (req, res) => {
+
+  console.log('Checkpoint achievements/ in achievements.router');
   const userId = req.user.id
 
   // Get the total XP earned by a user
@@ -112,6 +114,7 @@ router.get('/', rejectUnauthenticated, async (req, res) => {
     }
 
     res.send( achievementsData )
+    console.log('End of checkpoint in achievements')
   } catch ( dbErr ) {
     console.log( 'Error in GET achievements:', dbErr );
     res.sendStatus( 500 )
@@ -120,6 +123,7 @@ router.get('/', rejectUnauthenticated, async (req, res) => {
 
 // Check if user has achievements associated with Videos Watched then post if achieved
 router.post('/videosWatched', rejectUnauthenticated, async (req, res) => {
+  console.log('Checkpoint achievements/videosWatched in achievements.router');
   const userId = req.user.id
   try {
     const connection = await pool.connect();
@@ -197,6 +201,7 @@ router.post('/videosWatched', rejectUnauthenticated, async (req, res) => {
       default: break;
     }
     res.sendStatus(201)
+    console.log('end achievements/videosWatched');
   }
   catch (error) {
     console.log('Error inside POST /videosWatched:', error);
@@ -206,6 +211,7 @@ router.post('/videosWatched', rejectUnauthenticated, async (req, res) => {
 
 // Check if user has achievements associated with Podcasts Finished then post if achieved
 router.post('/podcastsFinished', rejectUnauthenticated, async (req, res) => {
+  console.log('Checkpoint achievements/podcastsFinished in achievements.router');
   const userId = req.user.id
   try {
     const connection = await pool.connect();
@@ -278,6 +284,7 @@ router.post('/podcastsFinished', rejectUnauthenticated, async (req, res) => {
       default: break;
     }
     res.sendStatus(201)
+    console.log('end achievements/videosWatched');
   }
   catch (error) {
     console.log('Error inside POST /videosWatched:', error);
@@ -287,6 +294,7 @@ router.post('/podcastsFinished', rejectUnauthenticated, async (req, res) => {
 
 // Check if user has achievements associated with Audiobooks Read then post if achieved
 router.post('/audiobooksRead', rejectUnauthenticated, async (req, res) => {
+  console.log('Checkpoint achievements/audiobooksRead in achievements.router');
   const userId = req.user.id
   try {
     const connection = await pool.connect();
@@ -360,6 +368,7 @@ router.post('/audiobooksRead', rejectUnauthenticated, async (req, res) => {
       default: break;
     }
     res.sendStatus(201)
+    console.log('end achievements/audiobooksRead');
   }
   catch (error) {
     console.log('Error inside POST /audiobooksRead:', error);
@@ -369,6 +378,7 @@ router.post('/audiobooksRead', rejectUnauthenticated, async (req, res) => {
 
 // Check if user has achievements associated with BooksRead then post if achieved
 router.post('/booksRead', rejectUnauthenticated, async (req, res) => {
+  console.log('Checkpoint achievements/booksRead in achievements.router');
   const userId = req.user.id
   try {
     const connection = await pool.connect();
@@ -444,6 +454,7 @@ router.post('/booksRead', rejectUnauthenticated, async (req, res) => {
       default: break;
     }
     res.sendStatus(201)
+    console.log('end achievements/booksRead checkpoint')
   }
   catch (error) {
     console.log('Error inside POST /booksRead:', error);
@@ -453,6 +464,7 @@ router.post('/booksRead', rejectUnauthenticated, async (req, res) => {
 
 // Check if user has achievements associated with Book Summaries then post if achieved
 router.post('/bookSummaries', rejectUnauthenticated, async (req, res) => {
+  console.log('Checkpoint achievements/bookSummaries in achievements.router');
   const userId = req.user.id
   try {
     const connection = await pool.connect();
@@ -525,6 +537,7 @@ router.post('/bookSummaries', rejectUnauthenticated, async (req, res) => {
       default: break;
     }
     res.sendStatus(201)
+    console.log('end achievements/bookSummaries checkpoint');
   }
   catch (error) {
     console.log('Error inside POST /bookSummaries:', error);
@@ -534,6 +547,7 @@ router.post('/bookSummaries', rejectUnauthenticated, async (req, res) => {
 
 // Check if user has achievements associated with Articles Read then post if achieved
 router.post('/articlesRead', rejectUnauthenticated, async (req, res) => {
+  console.log('Checkpoint achievements/articlesRead in achievements.router');
   const userId = req.user.id
   try {
     const connection = await pool.connect();
@@ -606,6 +620,7 @@ router.post('/articlesRead', rejectUnauthenticated, async (req, res) => {
       default: break;
     }
     res.sendStatus(201)
+    console.log('end achievements/articlesRead checkpoint');
   }
   catch (error) {
     console.log('Error inside POST /articlesRead:', error);
@@ -615,6 +630,7 @@ router.post('/articlesRead', rejectUnauthenticated, async (req, res) => {
 
 // Check if user has achievements associated with Courses Completed then post if achieved
 router.post('/coursesCompleted', rejectUnauthenticated, async (req, res) => {
+  console.log('Checkpoint achievements/coursesCompleted in achievements.router');
   const userId = req.user.id
   try {
     const connection = await pool.connect();
@@ -687,6 +703,7 @@ router.post('/coursesCompleted', rejectUnauthenticated, async (req, res) => {
       default: break;
     }
     res.sendStatus(201)
+    console.log('end achievements/coursesCompleted checkpoint');
   }
   catch (error) {
     console.log('Error inside POST /coursesCompleted:', error);
@@ -696,6 +713,7 @@ router.post('/coursesCompleted', rejectUnauthenticated, async (req, res) => {
 
 // Check if user has achievements associated with Skill Levels then post if achieved
 router.post('/skillLevels', rejectUnauthenticated, async (req, res) => {
+  console.log('Checkpoint achievements/skillLevels in achievements.router');
   const userId = req.user.id
   try {
     const connection = await pool.connect();
@@ -773,6 +791,7 @@ router.post('/skillLevels', rejectUnauthenticated, async (req, res) => {
       default: break;
     }
     res.sendStatus(201)
+    console.log("End achievements/skillLevels checkpoint");
   }
   catch (error) {
     console.log('Error inside POST /skillLevels:', error);
@@ -782,6 +801,7 @@ router.post('/skillLevels', rejectUnauthenticated, async (req, res) => {
 
 // Check if user has achievements associated with Total XP then post if achieved
 router.post('/totalXp', rejectUnauthenticated, async (req, res) => {
+  console.log('Checkpoint achievements/totalXp in achievements.router');
   const userId = req.user.id
   try {
     const connection = await pool.connect();
@@ -847,6 +867,7 @@ router.post('/totalXp', rejectUnauthenticated, async (req, res) => {
       default: break;
     }
     res.sendStatus(201)
+    console.log('End achievements/totalXp checkpoint');
   }
   catch (error) {
     console.log('Error inside POST /totalXp:', error);
