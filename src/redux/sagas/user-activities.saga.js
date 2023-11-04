@@ -2,9 +2,14 @@ import { put, takeLatest } from 'redux-saga/effects';
 import axios from 'axios';
 
 function* fetchUserActivities() {
+  let time = Date.now();
+  console.log("Trying to test the routes, in fetchUserActivities saga user-activities");
+  
   try {
     const { data: userActivities } = yield axios.get('/api/user-activities');
     yield put({ type: 'SET_USER_ACTIVITIES', payload: userActivities })
+    let end = (Date.now() - time);
+    console.log("Here's the total time it took in user-activities saga", end);
   } catch (error) {
     console.log('Error within fetchUserActivities:', error);
   }

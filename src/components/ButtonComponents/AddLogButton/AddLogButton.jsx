@@ -19,7 +19,7 @@ import MenuItem from "@mui/material/MenuItem";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import dayjs from "dayjs";
 
-//Add Skill button
+//Add Skill button component
 import AddSkillButton from "./AddSkillButton/AddSkillButton"
 
 
@@ -160,7 +160,7 @@ export default function AddLogButton() {
               },
             }}
           >
-            <AddIcon /> Add Log
+            <AddIcon /> Add Entry
           </Fab>
         </Box>
 

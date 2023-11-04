@@ -5,6 +5,9 @@ const {
   rejectUnauthenticated,
 } = require('../modules/authentication-middleware');
 
+
+// * THIS ROUTE IS SUSPICIOUS ----- MAY BE CAUSING THE TIMEOUT ERROR * \\ 
+
 // GET all of the achievements
 router.get('/', rejectUnauthenticated, async (req, res) => {
   const userId = req.user.id

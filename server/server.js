@@ -1,9 +1,11 @@
 const express = require('express');
 require('dotenv').config();
 const bodyParser = require('body-parser');
+const responseTime = require("response-time");
 
 
 const app = express();
+app.use(responseTime());
 
 const sessionMiddleware = require('./modules/session-middleware');
 const passport = require('./strategies/user.strategy');

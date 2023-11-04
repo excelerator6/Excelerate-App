@@ -9,17 +9,16 @@ const {
 /**
  * GET route template
  */
+
+// * THIS ROUTE IS SUSPICIOUS IN REQUESTS TIMING OUT * \\
 router.get('/getSkills', rejectUnauthenticated, async (req, res) => {
   // GET route code here
-
   const userID = req.user.id;
   try {
     // aggregate array of both skill tables
     let arr = [];
 
-    // get the general skills
-    // * NEED TO EXCLUDE SKILLS THEY'VE DELETED
-    // * CHECK AGAINST deleted_skills TABLE
+    // get the general skills\
     const deletedSkills = await pool.query(`SELECT skill_id FROM "deleted_skills" WHERE user_id = ${userID}`);
 
     // It would probably be quicker to do a left or right join here with the deleted_skills table, excluding those from the
