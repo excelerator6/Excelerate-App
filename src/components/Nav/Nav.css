@@ -55,3 +55,7 @@
   width: 350px;
   margin: -70px -70px -80px -35px;
 }
+
+a {
+  color:inherit;
+}
