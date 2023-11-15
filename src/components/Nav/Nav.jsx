@@ -112,26 +112,27 @@ function Nav(props) {
 
             <GreyLineDivider />
 
-            <ListItem disablePadding>
+            <Box
+              m={1}
+              display="flex"
+              flexDirection={"column"}
+              justifyContent="center"
+              alignItems="center"
+              position="fixed"
+              bottom="0"
+              left={-75}
+              margin="50px"
+              // marginLeft="63px"
+            >
+              <ListItem disablePadding>
                 <ListItemButton
-                  sx={{textDecoration:"underline", marginLeft:-.5, }}
+                  sx={{textDecoration:"underline", marginRight:7, marginBottom:1 }}
                 >
                   <ListItemIcon></ListItemIcon>
                   <ListItemText primary={<a target="_blank" href="https://www.canva.com/design/DAFx6Ca-WeA/kIpdYjQPe85EMDEd0fRx1w/view?utm_content=DAFx6Ca-WeA&utm_campaign=designshare&utm_medium=link&utm_source=editor#2">How-To Guide</a>}/>
 
                 </ListItemButton>
               </ListItem>
-
-            <Box
-              m={1}
-              display="flex"
-              justifyContent="center"
-              alignItems="center"
-              position="fixed"
-              bottom="0"
-              margin="50px"
-              marginLeft="63px"
-            >
               <LogOutButton 
                 className="btn" 
               />
