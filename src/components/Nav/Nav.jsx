@@ -30,11 +30,6 @@ function Nav(props) {
   const [mobileOpen, setMobileOpen] = useState(false);
   const user = useSelector((store) => store.user);
 
-  const howToGuideLink = <a target="_blank" href="https://www.canva.com/design/DAFx6Ca-WeA/kIpdYjQPe85EMDEd0fRx1w/view?utm_content=DAFx6Ca-WeA&utm_campaign=designshare&utm_medium=link&utm_source=editor#2">How-To-Guide</a>;
-
-  // const openLinkInNewTab = (url) => {
-  //   Window.open()
-  // }
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
@@ -120,7 +115,7 @@ function Nav(props) {
                   sx={{marginTop:7, textDecoration:"underline", marginLeft:-.5, }}
                 >
                   <ListItemIcon></ListItemIcon>
-                  <ListItemText primary={howToGuideLink}/>
+                  <ListItemText primary={<a target="_blank" href="https://www.canva.com/design/DAFx6Ca-WeA/kIpdYjQPe85EMDEd0fRx1w/view?utm_content=DAFx6Ca-WeA&utm_campaign=designshare&utm_medium=link&utm_source=editor#2">How-To Guide</a>}/>
 
                 </ListItemButton>
               </ListItem>
