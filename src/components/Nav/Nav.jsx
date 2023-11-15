@@ -17,6 +17,8 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import MenuIcon from "@mui/icons-material/Menu";
 import Toolbar from "@mui/material/Toolbar";
+
+import SmallerExceleratorLogo from "./Logo/SmallerExceleratorLogo.png";
 import ExceleratorLogo from './Logo/ExceleratorWhiteLogo.png';
 
 //import Avatars
@@ -177,12 +179,12 @@ function Nav(props) {
               aria-label="open drawer"
               edge="start"
               onClick={handleDrawerToggle}
-              sx={{ mr: 2, display: { sm: "none" } }}
+              sx={{ mr: 2, display: { sm: "none" }}}
             >
               <MenuIcon />
             </IconButton>
               <Link to='/home'>
-                <img src={ExceleratorLogo} className="logo"/>
+                <img id="ExceleratorLogo" src={SmallerExceleratorLogo} className="logo"/>
               </Link>
           </Toolbar>
         </AppBar>
