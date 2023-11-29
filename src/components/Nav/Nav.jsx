@@ -124,6 +124,9 @@ function Nav(props) {
               margin="50px"
               // marginLeft="63px"
             >
+                {/* This is the link in the lower-left corner to the How To Guide, right above
+                the Log Out button. It uses the ListItem component, then sets the ListItemText
+                of the ListItemButton to be an <a></a> tag, linking to the guide. */}
               <ListItem disablePadding>
                 <ListItemButton
                   sx={{textDecoration:"underline", marginRight:7, marginBottom:1 }}
