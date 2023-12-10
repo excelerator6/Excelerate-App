@@ -147,7 +147,7 @@ router.get('/newestActivity', rejectUnauthenticated, async (req, res) => {
 router.delete('/deleteLogs/:ids', rejectUnauthenticated, async (req, res) => {
   // gotta remove all commas and apostraphes from array of numbers
   const logIDS = req.params.ids.split(',');
-  console.log('Got our ids', logIDS);
+  // console.log('Got our ids', logIDS);
 
   let sqlText = `
   DELETE FROM "user_activities"

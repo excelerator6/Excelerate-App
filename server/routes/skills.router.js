@@ -41,7 +41,8 @@ router.get('/getSkills', rejectUnauthenticated, async (req, res) => {
     // push both table responses into singular array, then flatten that array to send client-side
     arr.push(enterpriseSkills, response2.rows);
     arr = arr.flat();
-    res.send(arr)
+    console.log("End checkpoint skills/getSkills in skills.router");
+    res.send(arr);
   } catch (error) {
     console.log("Error connecting to DB in getSkills:", error);
   }

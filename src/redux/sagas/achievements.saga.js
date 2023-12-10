@@ -10,6 +10,7 @@ function* fetchAchievements() {
     const { data: achievementsData } = yield axios.get('/api/achievements');
     yield put({ type: 'SET_ALL_ACHIEVEMENTS', payload: achievementsData.allAchievements })
     yield put({ type: 'SET_USER_ACHIEVEMENTS', payload: achievementsData.userAchievements })
+    console.log("END Checkpoint in fetchAchievements saga");
   } catch ( error ) {
     console.log( 'Error within fetchAchievements:', error );
   }
@@ -17,8 +18,6 @@ function* fetchAchievements() {
 
 function* checkThenPostNewAchievements() {
   try {
-
-    // ******** We got here before crashing this time
     console.log("Checkpoint checkThenPostNewAchievements in achievements.saga")
     const { data: newestActivity } = yield axios.get('/api/user-activities/newestActivity')
     const activityId = newestActivity.activityId
@@ -57,7 +56,10 @@ function* checkThenPostNewAchievements() {
         break;
     }
     const checkSkillLevelAchievements = yield axios.post('/api/achievements/skillLevels');
+
+    // ** Ok. It crashed here this time, finishing the process of achievements/skillLevels completely but NOT going through to the totalXP. The server completed the process, then froze and didn't even register a request in the totalXp route. ** \\
     const totalXpAchievements = yield axios.post('/api/achievements/totalXp');
+    console.log("END Checkpoint checkThenPostNewAchievements in achievements.saga")
     yield put({ type: 'FETCH_ACHIEVEMENTS'})
   } catch ( error ) {
     console.log( 'Error within checkThenPostNewAchievements:', error );
