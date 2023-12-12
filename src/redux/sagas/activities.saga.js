@@ -11,6 +11,8 @@ function* logActivity(action) {
 
         // *** The request that is disrupted DOESN'T get to these next yield puts vvvv
         yield put({type: 'FETCH_USER_ACTIVITIES'})
+
+        // *** We have disconneced the achievements router from the rest of the entry flow chart. This should decrease the chance of crashing.
         // yield put({type: 'CHECK_FOR_THEN_POST_NEW_ACHIEVEMENTS'})
     } catch (error) {
         console.log("Error communicating with server, couldn't log Activity", error)

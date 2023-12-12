@@ -66,3 +66,6 @@ typings/
 
 # ignore package-lock as it complicates merging
 package-lock.json
+
+# ignore BUGHUNTING just so my notes aren't public
+BUGHUNTING.md
