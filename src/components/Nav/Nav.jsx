@@ -83,8 +83,11 @@ function Nav(props) {
                 <ListItemText primary="XP LOG" />
               </ListItemButton>
             </ListItem>
-            <GreyLineDivider />
-
+            
+            {/* <GreyLineDivider /> */}
+            {/* 
+            // ** THE NAV BUTTON TO THE STATS PAGE vvvvvvvvv
+            // * --- temporarily disabled
             <ListItem disablePadding>
               <ListItemButton
                 component="a" 
@@ -96,8 +99,10 @@ function Nav(props) {
                 <ListItemText primary="STATS" />
               </ListItemButton>
             </ListItem>
-            <GreyLineDivider />
 
+            // * vvvvvv THE NAV BUTTON TO THE ACHIEVEMENTS PAGE vvvvvv*
+            // * --- temporarily disabled
+            <GreyLineDivider />
             <ListItem disablePadding>
               <ListItemButton
                 component="a" 
@@ -108,7 +113,7 @@ function Nav(props) {
                 <ListItemIcon></ListItemIcon>
                 <ListItemText primary="ACHIEVEMENTS"/>
               </ListItemButton>
-            </ListItem>
+            </ListItem> */}
 
             <GreyLineDivider />
 
