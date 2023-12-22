@@ -21,6 +21,7 @@ import dayjs from "dayjs";
 
 //Add Skill button component
 import AddSkillButton from "./AddSkillButton/AddSkillButton"
+import LevelUpModal from "./LevelUpPopup/LevelUp";
 
 
 //  * Should be refactored out to components, + needs to be formatted nicely
@@ -143,6 +144,9 @@ export default function AddLogButton() {
   if (activitiesList.length > 0 && skillsList.length > 0) {
     return (
       <div>
+        {/* 
+          // * vvvvv Add Entry Button vvvvv
+        */}
         <Box sx={{ "& > :not(style)": { m: 1 } }} onClick={handleClickOpen}>
           <Fab
             id="fab"
@@ -164,7 +168,9 @@ export default function AddLogButton() {
           </Fab>
         </Box>
 
-        {/* dialog box */}
+        {/* 
+          // * vvvvv Add Entry Modal vvvvv
+        */}
         <Dialog
           PaperProps={{ sx: { width: "75%", height: "75%" } }}
           fullWidth
@@ -292,6 +298,20 @@ export default function AddLogButton() {
           </DialogActions>
 
         </Dialog>
+
+        {/*
+          // * IF THE USER LEVELS UP A SKILL, THEN PROC THIS COMPONENT vvvvv
+
+          // * I need to find a way to compare the previous experience with the new experience coming in, to see if the skill has leveled up.
+
+
+          // * 1. I need to add the xp / level key-value pair to the skill that's being submitted, and save that info.
+          // * 2. I need to save the submitted skill to a "global" variable. Then, if it's decided that it levels up, I can use that info in this vvvv component.
+        */}
+        {/* <LevelUpModal 
+          open = {leveledUp}
+          skill = {leveledSkill}
+        /> */}
       </div >
     );
   } else {
