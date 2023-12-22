@@ -23,6 +23,7 @@ import AchievementsPage from "../PageComponents/AchievementsPage/AchievementsPag
 import AvatarsPage from "../PageComponents/Avatars/AvatarsPage/AvatarsPage"
 
 import AddLogButton from "../ButtonComponents/AddLogButton/AddLogButton";
+import LevelUpModal from "../LevelUpPopup/LevelUp.jsx";
 
 //importing to wrap app for the date picker
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
@@ -132,6 +133,11 @@ export default function App() {
           <>
             {// only want the log activity button to show if the user is logged in
               user.id ? <AddLogButton /> : <></>
+            }
+          </>
+          <>
+            {
+              user.id ? <LevelUpModal /> : <></>
             }
           </>
           <Footer />
