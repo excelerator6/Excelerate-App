@@ -22,6 +22,7 @@ import dayjs from "dayjs";
 //Add Skill button component
 import AddSkillButton from "./AddSkillButton/AddSkillButton"
 import LevelUpModal from "./LevelUpPopup/LevelUp";
+import calculateTotalSkillXp from "../../PageComponents/Dashboard/DashboardWidgets/ReusedCalculationFunctions/calculateTotalSkillXp";
 
 
 //  * Should be refactored out to components, + needs to be formatted nicely
@@ -29,6 +30,7 @@ export default function AddLogButton() {
   const dispatch = useDispatch();
   const activitiesList = useSelector((store) => store.activities);
   const skillsList = useSelector((store) => store.skills);
+  const userActivities = useSelector((store) => store.userActivities);
 
   //local state
   const [date, setDate] = useState(dayjs()); //dayjs() is basically Date.now();
@@ -53,7 +55,22 @@ export default function AddLogButton() {
     setOpen(true);
   };
 
-  const handleClose = () => {
+
+  // function for calculating whether or not a skill has leveled up
+  const levelUpCheck = (chosenSkill) => {
+    // * What does this function need to operate? 
+      // * 1. The calculateXP function
+      // - Got it 
+      // * 1. The skills along with their current XP
+      // - Got it, but need to extract it to perform the calculations
+      // * 1. Two global variables (or pieces of state) to put:
+        // * a. Whether or not the LevelUpPopup should be open
+        // * b. The skill & skill level that needs to be congratulated
+    
+
+  }
+
+  const handleClose = (chosenSkill) => {
     // First, turn off the angry red boxes 
     setRequiredSkill(false)
     setRequiredActivity(false)
@@ -68,6 +85,9 @@ export default function AddLogButton() {
 
     // Finally, close the Modal
     setOpen(false);
+    
+    // upon the Add Entry Modal closing, will check if the submitted skill was leveled up.
+    levelUpCheck(chosenSkill);
   };
 
   // Function to handle activity submission ===> sending that to the DB
@@ -90,8 +110,10 @@ export default function AddLogButton() {
         if (skill.skill_name === skills) {
           if (skill.user_skill_id) {
             newActivity.skillUserId = skill.user_skill_id;
+            newActivity.skillName = skill.skill_name;
           } else if (skill.enterprise_id) {
             newActivity.enterpriseId = skill.enterprise_id;
+            newActivity.skillName = skill.skill_name;
           }
         }
       }
@@ -103,7 +125,7 @@ export default function AddLogButton() {
       });
 
       // Close the modal 
-      handleClose();
+      handleClose(newActivity);
     }
     // Else highlight the required fields so the user knows what they still need to do
     else {
@@ -302,14 +324,13 @@ export default function AddLogButton() {
         {/*
           // * IF THE USER LEVELS UP A SKILL, THEN PROC THIS COMPONENT vvvvv
 
-          // * I need to find a way to compare the previous experience with the new experience coming in, to see if the skill has leveled up.
+          // * When the handleClose() func is run, I will have the levelUpCheck() func run. If it returns "true", we will set the global variables "levelUp" (which we will use to set <LevelUpModal /> to "open") and "leveledSkill" (to be passed to <LevelUpModal /> as a prop) to their proper values.
 
 
           // * 1. I need to add the xp / level key-value pair to the skill that's being submitted, and save that info.
           // * 2. I need to save the submitted skill to a "global" variable. Then, if it's decided that it levels up, I can use that info in this vvvv component.
         */}
         {/* <LevelUpModal 
-          open = {leveledUp}
           skill = {leveledSkill}
         /> */}
       </div >
