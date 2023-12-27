@@ -22,7 +22,8 @@ import StatsPage from "../PageComponents/StatsPage/StatsPage";
 import AchievementsPage from "../PageComponents/AchievementsPage/AchievementsPage";
 import AvatarsPage from "../PageComponents/Avatars/AvatarsPage/AvatarsPage"
 
-import AddLogButton from "../ButtonComponents/AddLogButton/AddLogButton";
+import AddLogButton from "../ButtonComponents/AddLogComponent/AddLogButton.jsx";
+import LevelUpModal from "../ButtonComponents/AddLogComponent/LevelUpPopup/LevelUp.jsx";
 
 //importing to wrap app for the date picker
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";

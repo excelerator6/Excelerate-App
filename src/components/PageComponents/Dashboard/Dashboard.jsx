@@ -42,9 +42,13 @@ export default function Dashboard() {
           </Paper>
         </Grid>
         <Grid item xs={8} sm={8} md={4} mr={1} mt={-2}>
+          {/* 
+          
+          // * vvvv YOUR ACTIVITY heatmap widget vvvv
+          // * --- temporarily disabled
           <Paper elevation={6}>
             <HeatmapChart />
-          </Paper>
+          </Paper> */}
           <Paper elevation={6}>
             <ConsumedContent />
           </Paper>
