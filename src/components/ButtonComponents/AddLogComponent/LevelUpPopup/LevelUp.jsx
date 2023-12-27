@@ -23,12 +23,12 @@ export default function LevelUpModal(props) {
                     fullWidth
                     maxWidth="lg"
                     open={open}
-                    
+
                 >
                     <DialogTitle sx={{fontSize: "40px"}}>Congratulations!</DialogTitle>
                     <DialogContent sx={{ p: 1, m: 1, textAlign: "center", margin:"auto" }}>
                         <Typography sx={{fontSize: 30,}}>
-                            Your {skill.skill_name} just leveled up.
+                            Your {skill.skill_name} skill just leveled up.
                         </Typography>
                             <Typography sx={{position:"absolute",left: 0, right: 0, top: "50%", fontSize: 35 }}>
                                 {skillLevel - 1} → {skillLevel}
