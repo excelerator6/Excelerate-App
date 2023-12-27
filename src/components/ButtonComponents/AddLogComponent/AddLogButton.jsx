@@ -61,11 +61,16 @@ export default function AddLogButton() {
     // * What does this function need to operate? 
       // * 1. The calculateXP function
       // - Got it 
-      // * 1. The skills along with their current XP
+      // * 2. The skills along with their current XP
       // - Got it, but need to extract it to perform the calculations
-      // * 1. Two global variables (or pieces of state) to put:
-        // * a. Whether or not the LevelUpPopup should be open
+      // * 3. Two global variables (or pieces of state) to put:
+        // * a. Whether or not the LevelUpPopup should be open (receiving a boolean value from the levelup calculation);
         // * b. The skill & skill level that needs to be congratulated
+
+    // This is basically checking if it's hit the next level (multiple of 10) after including the new XP. We will check this against 
+    let currentXP = Math.floor((calculateTotalSkillXp(chosenSkill, userActivities)) / 10);
+    let nextXP =  Math.floor((calculateTotalSkillXp(chosenSkill, userActivities) + chosenSkill.xp) / 10);
+    
     
 
   }
@@ -110,10 +115,10 @@ export default function AddLogButton() {
         if (skill.skill_name === skills) {
           if (skill.user_skill_id) {
             newActivity.skillUserId = skill.user_skill_id;
-            newActivity.skillName = skill.skill_name;
+            newActivity.skill_name = skill.skill_name;
           } else if (skill.enterprise_id) {
             newActivity.enterpriseId = skill.enterprise_id;
-            newActivity.skillName = skill.skill_name;
+            newActivity.skill_name = skill.skill_name;
           }
         }
       }
